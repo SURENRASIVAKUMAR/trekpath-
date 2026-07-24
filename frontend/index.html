@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trek Path — Premium Travel Experience</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --gold: #FFD700;
+      --gold-light: #FFF8DC;
+      --gold-dim: rgba(255, 215, 0, 0.15);
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 215, 0, 0.25);
+      --accent: #6C63FF;
+      --accent2: #5B52EE;
+      --dark: #0a0a0a;
+      --text: #1a1a2e;
+      --text-light: #555;
+      --bg-section: #f8f9ff;
+      --white: #ffffff;
+      --card-radius: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+      background: #000;
+      cursor: none;
+      transition: opacity 0.5s ease;
+    }
+
+    /* ── CURSOR ─────────────────────────────────── */
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px var(--gold);
+      transition: transform .1s;
+    }
+
+    .cursor-ring {
+      width: 35px;
+      height: 35px;
+      border: 1.5px solid rgba(255, 215, 0, .5);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all .14s ease;
+    }
+
+    /* ── VIDEO BG ────────────────────────────────── */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .video-bg video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+          rgba(0, 0, 0, .45) 0%, rgba(0, 0, 0, .28) 40%,
+          rgba(0, 0, 0, .55) 80%, rgba(0, 0, 0, .80) 100%);
+      z-index: 1;
+    }
+
+    /* ── HEADER ──────────────────────────────────── */
+    .premium-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, .40);
+      backdrop-filter: blur(18px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--glass-border);
+      transition: background .4s;
+    }
+
+    .premium-header.scrolled {
+      background: rgba(0, 0, 0, .88);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 52px;
+      width: 52px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 4px;
+      box-shadow: 0 0 18px rgba(255, 215, 0, .3), 0 2px 12px rgba(0, 0, 0, .4);
+      transition: box-shadow .3s, transform .3s;
+    }
+
+    .logo:hover img {
+      box-shadow: 0 0 28px rgba(255, 215, 0, .6), 0 4px 20px rgba(0, 0, 0, .5);
+      transform: scale(1.06);
+    }
+
+    .logo-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #FFD700, #FFEC8B, #FFD700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 8px rgba(255, 215, 0, .35));
+      line-height: 1;
+    }
+
+    .logo-name span {
+      font-weight: 400;
+      letter-spacing: 2px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav a {
+      color: rgba(255, 255, 255, .75);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: .82rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1px solid transparent;
+      transition: all .3s;
+    }
+
+    .nav a:hover {
+      color: var(--gold);
+      background: var(--gold-dim);
+      border-color: var(--glass-border);
+    }
+
+    /* ── HERO SECTION ────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 130px 20px 80px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 22px;
+      background: var(--gold-dim);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      font-size: .75rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      animation: fadeUp .9s ease both;
+    }
+
+    .badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulseDot 2s ease infinite;
+    }
+
+    @keyframes pulseDot {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(1.6);
+      }
+    }
+
+    .main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 5.8rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 10px;
+      animation: fadeUp .9s ease .15s both;
+      color: white;
+    }
+
+    .title-trek {
+      background: linear-gradient(135deg, #FFD700, #FFEC8B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 25px rgba(255, 215, 0, .4));
+    }
+
+    .title-path {
+      background: linear-gradient(135deg, #fff, rgba(255, 255, 255, .65));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: .85rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      margin-bottom: 28px;
+      animation: fadeUp .9s ease .25s both;
+    }
+
+    /* Hero search bar */
+    .hero-search-wrap {
+      width: 100%;
+      max-width: 660px;
+      margin-bottom: 28px;
+      animation: fadeUp .9s ease .35s both;
+    }
+
+    .hero-search-box {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, .92);
+      border-radius: 50px;
+      padding: 6px 6px 6px 22px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, .3);
+    }
+
+    .hero-search-box i {
+      color: #999;
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+
+    .hero-search-box input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      color: #333;
+      outline: none;
+    }
+
+    .hero-search-box input::placeholder {
+      color: #aaa;
+    }
+
+    .hero-search-box button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 28px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: all .3s;
+    }
+
+    .hero-search-box button:hover {
+      background: var(--accent2);
+      transform: scale(1.04);
+    }
+
+    /* GET STARTED BUTTON */
+    .get-started-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 32px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-bottom: 26px;
+      box-shadow: 0 8px 28px rgba(108, 99, 255, .5);
+      animation: fadeUp .9s ease .45s both;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .get-started-btn:hover {
+      background: var(--accent2);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 38px rgba(108, 99, 255, .6);
+    }
+
+    .get-started-btn .btn-shine {
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      transform: skewX(-20deg);
+      animation: btnShine 2.5s infinite;
+    }
+
+    @keyframes btnShine {
+      0% {
+        left: -75%;
+      }
+
+      60% {
+        left: 125%;
+      }
+
+      100% {
+        left: 125%;
+      }
+    }
+
+    /* Who's joining */
+    .join-label {
+      font-size: .9rem;
+      color: rgba(255, 255, 255, .7);
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      animation: fadeUp .9s ease .55s both;
+    }
+
+    .join-cards {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      animation: fadeUp .9s ease .65s both;
+    }
+
+    .join-card {
+      width: 170px;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 2.5px solid transparent;
+      transition: all .35s cubic-bezier(.175, .885, .32, 1.275);
+    }
+
+    .join-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .join-card-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, .85), transparent);
+      color: white;
+      font-weight: 700;
+      font-size: .8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 18px 12px 12px;
+      text-align: center;
+    }
+
+    .join-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(108, 99, 255, .4);
+    }
+
+    .join-card.active {
+      border-color: var(--gold);
+      box-shadow: 0 10px 30px rgba(255, 215, 0, .35);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── WHITE SECTIONS WRAPPER ──────────────────── */
+    .sections-wrapper {
+      position: relative;
+      z-index: 10;
+      background: var(--bg-section);
+    }
+
+    /* ── SERVICE TABS ────────────────────────────── */
+    .service-tabs {
+      background: white;
+      padding: 0 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      border-bottom: 2px solid #eee;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+      position: sticky;
+      top: 75px;
+      z-index: 500;
+    }
+
+    .svc-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 18px 26px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all .3s;
+      color: #555;
+      font-size: .75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .svc-tab i {
+      font-size: 1.4rem;
+    }
+
+    .svc-tab:hover {
+      color: var(--accent);
+    }
+
+    .svc-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .svc-tab.active i {
+      color: var(--accent);
+    }
+
+    /* ── SECTION COMMON ──────────────────────────── */
+    .section-block {
+      padding: 55px 60px;
+      background: var(--bg-section);
+    }
+
+    .section-block:nth-child(even) {
+      background: white;
+    }
+
+    .sec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .sec-title {
+      font-family: 'Cinzel', serif;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .nav-arrows {
+      display: flex;
+      gap: 10px;
+    }
+
+    .arr-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid #ddd;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      color: #555;
+      transition: all .3s;
+    }
+
+    .arr-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── PACKAGES BY DURATION ────────────────────── */
+    .duration-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .dur-tab {
+      padding: 9px 22px;
+      border-radius: 50px;
+      border: 1.5px solid #ddd;
+      background: white;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: .85rem;
+      cursor: pointer;
+      transition: all .3s;
+      color: #555;
+    }
+
+    .dur-tab.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(108, 99, 255, .35);
+    }
+
+    .dur-tab:hover:not(.active) {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Bento grid for packages */
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr 1fr;
+      grid-template-rows: 180px 180px;
+      gap: 12px;
+    }
+
+    .pkg-card {
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform .35s, box-shadow .35s;
+    }
+
+    .pkg-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+    }
+
+    .pkg-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s;
+    }
+
+    .pkg-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .pkg-card.tall {
+      grid-row: span 2;
+    }
+
+    .pkg-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, .8) 0%, transparent 100%);
+      padding: 18px 16px 14px;
+    }
+
+    .pkg-name {
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .pkg-price {
+      color: rgba(255, 255, 255, .8);
+      font-size: .8rem;
+      margin-top: 3px;
+    }
+
+    /* ── HORIZONTAL SCROLL SECTIONS ─────────────── */
+    .hscroll-track {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+
+    .hscroll-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Season / Event cards */
+    .season-card {
+      flex: 0 0 160px;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform .35s;
+    }
+
+    .season-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .season-card img {
+      width: 160px;
+      height: 130px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .season-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, .75) 0%, transparent 55%);
+    }
+
+    .season-info {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+    }
+
+    .season-country {
+      font-size: .6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .65);
+    }
+
+    .season-name {
+      color: white;
+      font-weight: 700;
+      font-size: .9rem;
+      line-height: 1.2;
+    }
+
+    /* Trending / Visa Free destination cards */
+    .dest-card {
+      flex: 0 0 200px;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform .35s, box-shadow .35s;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .2);
+    }
+
+    .dest-card img {
+      width: 200px;
+      height: 155px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .dest-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, .78) 0%, transparent 55%);
+    }
+
+    .dest-info {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+    }
+
+    .dest-subtitle {
+      font-size: .55rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .dest-name {
+      color: white;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    /* ── WHERE2GO BANNER ─────────────────────────── */
+    .where2go-banner {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 55px 60px;
+      color: white;
+      text-align: center;
+    }
+
+    .where2go-banner h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #FFD700, #FFEC8B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .where2go-banner p {
+      color: rgba(255, 255, 255, .6);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+
+    /* ── STATS ROW (hero) ────────────────────────── */
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      animation: fadeUp .9s ease .75s both;
+      margin-top: 50px;
+    }
+
+    .hstat {
+      text-align: center;
+    }
+
+    .hstat-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .hstat-lbl {
+      font-size: .7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      margin-top: 5px;
+    }
+
+    .hstat-div {
+      width: 1px;
+      height: 38px;
+      background: var(--glass-border);
+    }
+
+    /* ── SCROLL INDICATOR ────────────────────────── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      animation: fadeUp .9s ease 1.1s both;
+    }
+
+    .scroll-text {
+      font-size: .6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .28);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollAnim 2s ease infinite;
+    }
+
+    @keyframes scrollAnim {
+      0% {
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+
+      49% {
+        transform: scaleY(1);
+        transform-origin: top;
+      }
+
+      50% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+      }
+
+      100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+      }
+    }
+
+    /* ── WEATHER WIDGET ──────────────────────────── */
+    .weather-widget {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 18px 22px;
+      z-index: 500;
+      cursor: pointer;
+      transition: transform .3s, border-color .3s;
+    }
+
+    .weather-widget:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+    }
+
+    .weather-city {
+      font-size: .65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .42);
+      margin-bottom: 4px;
+    }
+
+    .weather-temp {
+      font-family: 'Cinzel', serif;
+      font-size: 1.9rem;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .weather-loc {
+      font-size: .65rem;
+      color: rgba(255, 255, 255, .35);
+      margin-top: 4px;
+    }
+
+    /* ── TOAST ───────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 110px;
+      left: 50%;
+      transform: translateX(-50%) translateY(15px);
+      background: rgba(0, 0, 0, .9);
+      border: 1px solid rgba(255, 215, 0, .3);
+      border-radius: 50px;
+      padding: 13px 26px;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      font-size: .82rem;
+      letter-spacing: 1px;
+      z-index: 9000;
+      backdrop-filter: blur(15px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .35s, transform .35s cubic-bezier(.175, .885, .32, 1.275);
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── MODAL ───────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .82);
+      backdrop-filter: blur(14px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 5000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .35s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: rgba(10, 10, 10, .95);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 48px 42px;
+      text-align: center;
+      max-width: 460px;
+      width: 90%;
+      position: relative;
+      transform: scale(.88);
+      transition: transform .4s cubic-bezier(.175, .885, .32, 1.275);
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      font-size: 3.2rem;
+      color: var(--gold);
+      margin-bottom: 18px;
+      filter: drop-shadow(0 0 18px rgba(255, 215, 0, .45));
+    }
+
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      color: var(--gold);
+      margin-bottom: 14px;
+      letter-spacing: 2px;
+    }
+
+    .modal-body {
+      color: rgba(255, 255, 255, .65);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      font-size: .9rem;
+    }
+
+    .offer-list {
+      list-style: none;
+      text-align: left;
+      margin: 14px 0;
+    }
+
+    .offer-list li {
+      padding: 7px 0;
+      color: rgba(255, 255, 255, .78);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .9rem;
+    }
+
+    .offer-list li i {
+      color: var(--gold);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      font-size: .8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .3s, color .3s;
+    }
+
+    .modal-close:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Buttons */
+    .premium-btn {
+      padding: 15px 30px;
+      font-family: 'Raleway', sans-serif;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: transform .35s cubic-bezier(.175, .885, .32, 1.275), box-shadow .35s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #FFEC8B);
+      color: #0a0a0a;
+      box-shadow: 0 10px 28px rgba(255, 215, 0, .28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 38px rgba(255, 215, 0, .48);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, .3);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .55);
+      transform: scale(0);
+      animation: rippleAnim .55s linear;
+      pointer-events: none;
+    }
+
+    @keyframes rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    @keyframes confettiFall {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), 100vh) rotate(var(--rot));
+      }
+    }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    .footer {
+      position: relative;
+      z-index: 10;
+      padding: 35px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--glass-border);
+      background: rgba(0, 0, 0, .65);
+      backdrop-filter: blur(12px);
+    }
+
+    .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+    }
+
+    .footer-copy {
+      font-size: .78rem;
+      color: rgba(255, 255, 255, .3);
+      letter-spacing: 1px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, .38);
+      text-decoration: none;
+      font-size: .78rem;
+      transition: color .3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    /* ── PAGE TRANSITION OVERLAY ─────────────────── */
+    .page-transition {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .page-transition.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .pt-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: 6px;
+      background: linear-gradient(135deg, #FFD700, #FFEC8B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 28px;
+      animation: ptPulse 1s ease infinite alternate;
+    }
+
+    @keyframes ptPulse {
+      from {
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, .3));
+      }
+
+      to {
+        filter: drop-shadow(0 0 22px rgba(255, 215, 0, .8));
+      }
+    }
+
+    .pt-bar-wrap {
+      width: 220px;
+      height: 3px;
+      background: rgba(255, 255, 255, .1);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .pt-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #FFD700, #FFEC8B);
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0.45s ease;
+    }
+
+    .pt-text {
+      font-size: .7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .3);
+      margin-top: 14px;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media(max-width:900px) {
+      .pkg-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+
+      .pkg-card.tall {
+        grid-row: span 1;
+      }
+
+      .service-tabs {
+        padding: 0 20px;
+        overflow-x: auto;
+      }
+
+      .section-block {
+        padding: 40px 20px;
+      }
+
+      .premium-header {
+        padding: 14px 20px;
+      }
+
+      .nav a {
+        display: none;
+      }
+
+      .main-title {
+        font-size: 3.5rem;
+      }
+
+      .join-cards {
+        gap: 10px;
+      }
+
+      .join-card {
+        width: 140px;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        padding: 25px 20px;
+      }
+    }
+
+    @media(max-width:480px) {
+      .main-title {
+        font-size: 2.6rem;
+      }
+
+      .join-cards {
+        flex-wrap: wrap;
+      }
+
+      .pkg-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- PAGE TRANSITION OVERLAY -->
+  <div class="page-transition" id="pageTransition">
+    <div class="pt-logo">TREK<span style="font-weight:400;">PATH</span></div>
+    <div class="pt-bar-wrap">
+      <div class="pt-bar" id="ptBar"></div>
+    </div>
+    <div class="pt-text">Preparing your journey...</div>
+  </div>
+
+  <!-- VIDEO BACKGROUND -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="img/live.mp4" type="video/mp4" />
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="premium-header" id="header">
+    <a href="#" class="logo">
+      <img src="img/logo.png" alt="Trek Path Logo" />
+      <div class="logo-name">TREK<span>PATH</span></div>
+    </a>
+    <nav class="nav" id="mainNav">
+      <a href="#"><i class="fas fa-home"></i> Home</a>
+      <a href="planner.html"><i class="fas fa-map-marked-alt"></i> Planner</a>
+      <a href="features.html"><i class="fas fa-star"></i> Features</a>
+      <a href="testimonials.html"><i class="fas fa-comments"></i> Reviews</a>
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="badge">
+      <div class="dot"></div> Premium Travel Experience
+    </div>
+
+    <h1 class="main-title">
+      <span class="title-trek">CREATE YOUR</span><br>
+      <span class="title-path">SOOPER HIT HOLIDAY</span>
+    </h1>
+    <p class="tagline">Discover · Explore · Conquer</p>
+
+    <!-- Search -->
+    <div class="hero-search-wrap">
+      <div class="hero-search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="heroSearch" placeholder="Search countries, cities, destinations..." />
+        <button onclick="handleHeroSearch()">Search</button>
+      </div>
+    </div>
+
+    <!-- GET STARTED BUTTON — navigates to planner.html -->
+    <button class="get-started-btn" id="getStartedBtn" onclick="goToPlanner()">
+      <span class="btn-shine"></span>
+      GET STARTED &nbsp;<i class="fas fa-arrow-right"></i>
+    </button>
+
+    <p class="join-label">Or pick who's joining</p>
+
+    <!-- Who's joining -->
+    <div class="join-cards" id="joinCards">
+      <div class="join-card" data-type="Couple" onclick="selectJoin(this)">
+        <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=400&q=80" alt="Couple" />
+        <div class="join-card-label">Couple</div>
+      </div>
+      <div class="join-card" data-type="Family" onclick="selectJoin(this)">
+        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191011?w=400&q=80" alt="Family" />
+        <div class="join-card-label">Family</div>
+      </div>
+      <div class="join-card" data-type="Friends" onclick="selectJoin(this)">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80" alt="Friends" />
+        <div class="join-card-label">Friends</div>
+      </div>
+      <div class="join-card" data-type="Solo" onclick="selectJoin(this)">
+        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80" alt="Solo" />
+        <div class="join-card-label">Solo</div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-num" id="hsDest">0</div>
+        <div class="hstat-lbl">Destinations</div>
+      </div>
+      <div class="hstat-div"></div>
+      <div class="hstat">
+        <div class="hstat-num" id="hsTrav">0</div>
+        <div class="hstat-lbl">Travelers</div>
+      </div>
+      <div class="hstat-div"></div>
+      <div class="hstat">
+        <div class="hstat-num" id="hsRat">0</div>
+        <div class="hstat-lbl">Avg Rating</div>
+      </div>
+      <div class="hstat-div"></div>
+      <div class="hstat">
+        <div class="hstat-num" id="hsCoun">0</div>
+        <div class="hstat-lbl">Countries</div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span class="scroll-text">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ========== WHITE SECTIONS ========== -->
+  <div class="sections-wrapper">
+
+    <!-- SERVICE TABS -->
+    <div class="service-tabs" id="serviceTabs">
+      <div class="svc-tab active" onclick="switchSvc(this,'flights')">
+        <i class="fas fa-plane"></i> Flights
+      </div>
+      <div class="svc-tab" onclick="switchSvc(this,'hotels')">
+        <i class="fas fa-hotel"></i> Hotels
+      </div>
+      <div class="svc-tab" onclick="switchSvc(this,'trains')">
+        <i class="fas fa-train"></i> Trains
+      </div>
+      <div class="svc-tab" onclick="switchSvc(this,'buses')">
+        <i class="fas fa-bus"></i> Buses
+      </div>
+      <div class="svc-tab" onclick="switchSvc(this,'cabs')">
+        <i class="fas fa-car"></i> Cabs
+      </div>
+      <div class="svc-tab" onclick="switchSvc(this,'bikes')">
+        <i class="fas fa-motorcycle"></i> Bikes
+      </div>
+      <div class="svc-tab" onclick="switchSvc(this,'cruises')">
+        <i class="fas fa-ship"></i> Cruises
+      </div>
+      <div class="svc-tab" onclick="switchSvc(this,'visa')">
+        <i class="fas fa-globe"></i> Visa
+      </div>
+      <div class="svc-tab" onclick="switchSvc(this,'tours')">
+        <i class="fas fa-map-marked-alt"></i> Tours
+      </div>
+      <div class="svc-tab" onclick="switchSvc(this,'insurance')">
+        <i class="fas fa-shield-alt"></i> Insurance
+      </div>
+    </div>
+
+    <!-- PACKAGES BY DURATION -->
+    <div class="section-block">
+      <div class="sec-header">
+        <div class="sec-title">Packages by Duration</div>
+      </div>
+      <div class="duration-tabs">
+        <button class="dur-tab active" onclick="switchDur(this,'3-5')">3–5 Days</button>
+        <button class="dur-tab" onclick="switchDur(this,'6-9')">6–9 Days</button>
+        <button class="dur-tab" onclick="switchDur(this,'10+')">10+ Days</button>
+      </div>
+      <div class="pkg-grid" id="pkgGrid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <!-- SEASONS & EVENTS -->
+    <div class="section-block">
+      <div class="sec-header">
+        <div class="sec-title">Seasons &amp; Events</div>
+        <div class="nav-arrows">
+          <button class="arr-btn" onclick="scrollTrack('seasons',-1)"><i class="fas fa-chevron-left"></i></button>
+          <button class="arr-btn" onclick="scrollTrack('seasons',1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="hscroll-track" id="seasons">
+        <div class="season-card">
+          <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=400&q=80" alt="Northern Lights" />
+          <div class="season-overlay"></div>
+          <div class="season-info">
+            <div class="season-country">Norway &amp; Finland</div>
+            <div class="season-name">Northern Lights</div>
+          </div>
+        </div>
+        <div class="season-card">
+          <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?w=400&q=80" alt="Cherry Blossom" />
+          <div class="season-overlay"></div>
+          <div class="season-info">
+            <div class="season-country">Japan</div>
+            <div class="season-name">Cherry Blossom</div>
+          </div>
+        </div>
+        <div class="season-card">
+          <img src="https://images.unsplash.com/photo-1518882174711-1de40238921b?w=400&q=80" alt="Wildlife Safari" />
+          <div class="season-overlay"></div>
+          <div class="season-info">
+            <div class="season-country">Kenya</div>
+            <div class="season-name">Wildlife Safari</div>
+          </div>
+        </div>
+        <div class="season-card">
+          <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=400&q=80" alt="Shopping Festival" />
+          <div class="season-overlay"></div>
+          <div class="season-info">
+            <div class="season-country">Dubai</div>
+            <div class="season-name">Shopping Festival</div>
+          </div>
+        </div>
+        <div class="season-card">
+          <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80" alt="Ski Season" />
+          <div class="season-overlay"></div>
+          <div class="season-info">
+            <div class="season-country">Switzerland</div>
+            <div class="season-name">Ski Season</div>
+          </div>
+        </div>
+        <div class="season-card">
+          <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=400&q=80" alt="Oktoberfest" />
+          <div class="season-overlay"></div>
+          <div class="season-info">
+            <div class="season-country">Germany</div>
+            <div class="season-name">Oktoberfest</div>
+          </div>
+        </div>
+        <div class="season-card">
+          <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=400&q=80" alt="Carnival" />
+          <div class="season-overlay"></div>
+          <div class="season-info">
+            <div class="season-country">Brazil</div>
+            <div class="season-name">Carnival</div>
+          </div>
+        </div>
+        <div class="season-card">
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=400&q=80" alt="Tulip Season" />
+          <div class="season-overlay"></div>
+          <div class="season-info">
+            <div class="season-country">Netherlands</div>
+            <div class="season-name">Tulip Season</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRENDING DESTINATIONS -->
+    <div class="section-block">
+      <div class="sec-header">
+        <div class="sec-title">Trending Destinations</div>
+        <div class="nav-arrows">
+          <button class="arr-btn" onclick="scrollTrack('trending',-1)"><i class="fas fa-chevron-left"></i></button>
+          <button class="arr-btn" onclick="scrollTrack('trending',1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="hscroll-track" id="trending">
+        <!-- Will be populated by JS -->
+      </div>
+    </div>
+
+    <!-- VISA FREE DESTINATIONS -->
+    <div class="section-block">
+      <div class="sec-header">
+        <div class="sec-title">Visa Free Destinations</div>
+        <div class="nav-arrows">
+          <button class="arr-btn" onclick="scrollTrack('visafree',-1)"><i class="fas fa-chevron-left"></i></button>
+          <button class="arr-btn" onclick="scrollTrack('visafree',1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="hscroll-track" id="visafree">
+        <div class="dest-card" onclick="showToast('Maldives — Visa Free!','fa-passport')">
+          <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=400&q=80" alt="Maldives" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <div class="dest-subtitle">Create Memories In</div>
+            <div class="dest-name">Maldives</div>
+          </div>
+        </div>
+        <div class="dest-card" onclick="showToast('Seychelles — Visa Free!','fa-passport')">
+          <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=400&q=80" alt="Seychelles" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <div class="dest-subtitle">The Charming Islands</div>
+            <div class="dest-name">Seychelles</div>
+          </div>
+        </div>
+        <div class="dest-card" onclick="showToast('Malaysia — Visa Free!','fa-passport')">
+          <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=400&q=80" alt="Malaysia" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <div class="dest-subtitle">The Hidden Gem of Asia</div>
+            <div class="dest-name">Malaysia</div>
+          </div>
+        </div>
+        <div class="dest-card" onclick="showToast('Thailand — Visa Free!','fa-passport')">
+          <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=400&q=80" alt="Thailand" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <div class="dest-subtitle">The Kingdom Of</div>
+            <div class="dest-name">Thailand</div>
+          </div>
+        </div>
+        <div class="dest-card" onclick="showToast('Mauritius — Visa Free!','fa-passport')">
+          <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&q=80" alt="Mauritius" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <div class="dest-subtitle">The Incredible Island</div>
+            <div class="dest-name">Mauritius</div>
+          </div>
+        </div>
+        <div class="dest-card" onclick="showToast('Nepal — Visa Free!','fa-passport')">
+          <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&q=80" alt="Nepal" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <div class="dest-subtitle">Roof of the World</div>
+            <div class="dest-name">Nepal</div>
+          </div>
+        </div>
+        <div class="dest-card" onclick="showToast('Indonesia — Visa Free!','fa-passport')">
+          <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400&q=80" alt="Indonesia" />
+          <div class="dest-overlay"></div>
+          <div class="dest-info">
+            <div class="dest-subtitle">Tropical Wonder</div>
+            <div class="dest-name">Indonesia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHERE2GO BANNER -->
+    <div class="where2go-banner">
+      <h2>Where2Go by TrekPath — Discover Places &amp; Holidays!</h2>
+      <p>Planning your next vacation? Try one of these exotic and comfortable travel ideas to make your holiday truly
+        unforgettable. Let Trek Path guide your journey.</p>
+    </div>
+
+  </div><!-- end sections-wrapper -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="#" class="footer-logo-img" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <img src="img/logo.png" alt="Trek Path"
+        style="height:40px;width:40px;object-fit:contain;border-radius:10px;background:rgba(255,255,255,0.1);padding:4px;box-shadow:0 0 14px rgba(255,215,0,.3);">
+      <span
+        style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,#FFD700,#FFEC8B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">TREK<span
+          style="font-weight:400;">PATH</span></span>
+    </a>
+    <p class="footer-copy">© 2024 Trek Path. All Rights Reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+  <!-- Weather Widget -->
+  <div class="weather-widget" id="weatherWidget" title="Click to cycle">
+    <div class="weather-city">Current Conditions</div>
+    <div class="weather-temp"><span id="wIcon">🌤️</span><span id="wTemp">24°C</span></div>
+    <div class="weather-loc" id="wLoc">Coimbatore, IN</div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <i class="fas fa-info-circle" id="toastIcon" style="color:var(--gold)"></i>
+    <span id="toastMsg">Welcome!</span>
+  </div>
+
+  <!-- Offer Modal -->
+  <div class="modal-overlay" id="offerModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-icon"><i class="fas fa-gem"></i></div>
+      <h2 class="modal-title">EXCLUSIVE OFFER</h2>
+      <div class="modal-body">
+        <p>Limited time premium membership benefits:</p>
+        <ul class="offer-list">
+          <li><i class="fas fa-check-circle"></i> 25% off your first booking</li>
+          <li><i class="fas fa-check-circle"></i> Free luxury airport transfer</li>
+          <li><i class="fas fa-check-circle"></i> Hotel room upgrade guaranteed</li>
+          <li><i class="fas fa-check-circle"></i> Comprehensive travel insurance</li>
+          <li><i class="fas fa-check-circle"></i> Personal trek guide access</li>
+        </ul>
+      </div>
+      <button class="premium-btn btn-primary" id="claimBtn" style="border:none;margin:0 auto;">
+        <i class="fas fa-arrow-right"></i> Claim Offer Now
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // ── GO TO PLANNER (with animated transition) ──────────────────
+    function goToPlanner() {
+      const overlay = document.getElementById('pageTransition');
+      const bar = document.getElementById('ptBar');
+
+      // Show overlay
+      overlay.classList.add('active');
+
+      // Animate loading bar
+      setTimeout(() => { bar.style.width = '60%'; }, 50);
+      setTimeout(() => { bar.style.width = '85%'; }, 250);
+      setTimeout(() => { bar.style.width = '100%'; }, 420);
+
+      // Navigate after animation
+      setTimeout(() => {
+        window.location.href = 'planner.html';
+      }, 620);
+    }
+
+    // ── PACKAGES DATA ──────────────────────────────
+    const packages = {
+      '3-5': [
+        { name: 'Thailand', price: 'From ₹30,400', img: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=600&q=80', tall: false },
+        { name: 'Dubai', price: 'From ₹37,500', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80', tall: true },
+        { name: 'Bali', price: 'From ₹43,854', img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80', tall: false },
+        { name: 'Maldives', price: 'From ₹1,89,754', img: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80', tall: false },
+        { name: 'Sri Lanka', price: 'From ₹30,000', img: 'https://images.unsplash.com/photo-1562602833-0f4ab2fc46e3?w=600&q=80', tall: false },
+        { name: 'Singapore', price: 'From ₹51,516', img: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600&q=80', tall: false },
+      ],
+      '6-9': [
+        { name: 'Japan', price: 'From ₹85,000', img: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80', tall: false },
+        { name: 'Europe', price: 'From ₹1,20,000', img: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80', tall: true },
+        { name: 'Turkey', price: 'From ₹75,000', img: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&q=80', tall: false },
+        { name: 'Greece', price: 'From ₹95,000', img: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=80', tall: false },
+        { name: 'Vietnam', price: 'From ₹45,000', img: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=600&q=80', tall: false },
+        { name: 'Morocco', price: 'From ₹68,000', img: 'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80', tall: false },
+      ],
+      '10+': [
+        { name: 'Australia', price: 'From ₹1,50,000', img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80', tall: false },
+        { name: 'USA', price: 'From ₹1,80,000', img: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&q=80', tall: true },
+        { name: 'New Zealand', price: 'From ₹1,60,000', img: 'https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=600&q=80', tall: false },
+        { name: 'Canada', price: 'From ₹1,70,000', img: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?w=600&q=80', tall: false },
+        { name: 'Brazil', price: 'From ₹1,40,000', img: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80', tall: false },
+        { name: 'Peru', price: 'From ₹1,25,000', img: 'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&q=80', tall: false },
+      ]
+    };
+
+    let currentDur = '3-5';
+
+    function renderPackages(dur) {
+      const grid = document.getElementById('pkgGrid');
+      grid.innerHTML = '';
+      packages[dur].forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'pkg-card' + (p.tall ? ' tall' : '');
+        card.innerHTML = `
+        <img src="${p.img}" alt="${p.name}" loading="lazy" />
+        <div class="pkg-overlay">
+          <div class="pkg-name">${p.name}</div>
+          <div class="pkg-price">${p.price}</div>
+        </div>`;
+        card.onclick = () => showToast(`${p.name} — ${p.price}`, 'fa-map-marker-alt');
+        grid.appendChild(card);
+      });
+    }
+
+    function switchDur(el, dur) {
+      document.querySelectorAll('.dur-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      currentDur = dur;
+      renderPackages(dur);
+    }
+
+    renderPackages('3-5');
+
+    // ── SERVICE TABS ───────────────────────────────
+    function switchSvc(el, svc) {
+      document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      showToast(svc.charAt(0).toUpperCase() + svc.slice(1) + ' search coming soon!', 'fa-search');
+    }
+
+    // ── HORIZONTAL SCROLL ──────────────────────────
+    function scrollTrack(id, dir) {
+      const el = document.getElementById(id);
+      el.scrollBy({ left: dir * 300, behavior: 'smooth' });
+    }
+
+    // ── JOIN CARDS ─────────────────────────────────
+    function selectJoin(card) {
+      document.querySelectorAll('.join-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      showToast(card.dataset.type + ' holiday packages loading...', 'fa-users');
+    }
+
+    // ── HERO SEARCH ────────────────────────────────
+    function handleHeroSearch() {
+      const v = document.getElementById('heroSearch').value.trim();
+      if (v) showToast('Searching for "' + v + '"...', 'fa-search');
+    }
+    document.getElementById('heroSearch').addEventListener('keypress', e => {
+      if (e.key === 'Enter') handleHeroSearch();
+    });
+
+    // ── CUSTOM CURSOR ──────────────────────────────
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    });
+    (function animR() {
+      rx += (mx - rx) * .12; ry += (my - ry) * .12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animR);
+    })();
+    document.querySelectorAll('a,button,.feature-card,.join-card,.pkg-card,.dest-card,.season-card,.weather-widget').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        dot.style.transform = 'translate(-50%,-50%) scale(2)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+        ring.style.borderColor = 'rgba(255,215,0,.9)';
+      });
+      el.addEventListener('mouseleave', () => {
+        dot.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.borderColor = 'rgba(255,215,0,.5)';
+      });
+    });
+
+    // ── TOAST ──────────────────────────────────────
+    let toastT = null;
+    function showToast(msg, icon = 'fa-info-circle') {
+      const t = document.getElementById('toast');
+      document.getElementById('toastIcon').className = 'fas ' + icon;
+      document.getElementById('toastMsg').textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastT);
+      toastT = setTimeout(() => t.classList.remove('show'), 3200);
+    }
+
+    // ── STATS COUNTER ──────────────────────────────
+    function counter(el, end, suffix, isFloat, dur) {
+      let s = 0; const step = end / (dur / 16);
+      const t = setInterval(() => {
+        s += step;
+        if (s >= end) { el.textContent = (isFloat ? end.toFixed(1) : end) + suffix; clearInterval(t); }
+        else el.textContent = (isFloat ? s.toFixed(1) : Math.floor(s)) + suffix;
+      }, 16);
+    }
+    setTimeout(() => {
+      counter(document.getElementById('hsDest'), 500, '+', false, 2000);
+      counter(document.getElementById('hsTrav'), 12000, '+', false, 2000);
+      counter(document.getElementById('hsRat'), 4.9, '', true, 1600);
+      counter(document.getElementById('hsCoun'), 85, '+', false, 2000);
+    }, 700);
+
+    // ── MODAL ──────────────────────────────────────
+    document.getElementById('modalClose').addEventListener('click', () => document.getElementById('offerModal').classList.remove('active'));
+    document.getElementById('claimBtn').addEventListener('click', () => {
+      document.getElementById('offerModal').classList.remove('active');
+      showToast('Offer claimed! Our team will contact you.', 'fa-check-circle');
+    });
+    document.getElementById('offerModal').addEventListener('click', e => {
+      if (e.target === e.currentTarget) document.getElementById('offerModal').classList.remove('active');
+    });
+
+    // ── CONFETTI ───────────────────────────────────
+    function createConfetti() {
+      const colors = ['#FFD700', '#FFEC8B', '#fff', '#C0C0C0', '#aaa'];
+      for (let i = 0; i < 60; i++) {
+        const el = document.createElement('div');
+        const sz = Math.random() * 8 + 3;
+        el.style.cssText = `position:fixed;width:${sz}px;height:${sz}px;background:${colors[Math.floor(Math.random() * colors.length)]};border-radius:${Math.random() > .5 ? '50%' : '2px'};top:-20px;left:${Math.random() * 100}vw;z-index:6000;pointer-events:none;--dx:${(Math.random() - .5) * 300}px;--rot:${Math.random() * 720}deg;animation:confettiFall ${Math.random() * 2.5 + 2}s cubic-bezier(.215,.61,.355,1) forwards;animation-delay:${Math.random() * .4}s;`;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
+      }
+    }
+
+    // ── RIPPLE ─────────────────────────────────────
+    document.querySelectorAll('.premium-btn,.get-started-btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        const r = document.createElement('span');
+        const d = Math.max(this.clientWidth, this.clientHeight);
+        r.classList.add('ripple'); r.style.width = r.style.height = d + 'px';
+        r.style.left = (e.clientX - this.getBoundingClientRect().left - d / 2) + 'px';
+        r.style.top = (e.clientY - this.getBoundingClientRect().top - d / 2) + 'px';
+        this.appendChild(r); setTimeout(() => r.remove(), 600);
+      });
+    });
+
+    // ── WEATHER ────────────────────────────────────
+    const weathers = [
+      { icon: '🌤️', temp: '24°C', loc: 'Coimbatore, IN' },
+      { icon: '❄️', temp: '-5°C', loc: 'Iceland' },
+      { icon: '☀️', temp: '32°C', loc: 'Bali, ID' },
+      { icon: '⛅', temp: '18°C', loc: 'Santorini, GR' },
+      { icon: '🌧️', temp: '15°C', loc: 'Kyoto, JP' },
+      { icon: '🌨️', temp: '-2°C', loc: 'Patagonia, AR' },
+    ];
+    let wi = 0;
+    function cycleW() {
+      wi = (wi + 1) % weathers.length;
+      document.getElementById('wIcon').textContent = weathers[wi].icon;
+      document.getElementById('wTemp').textContent = weathers[wi].temp;
+      document.getElementById('wLoc').textContent = weathers[wi].loc;
+    }
+    setInterval(cycleW, 4500);
+    document.getElementById('weatherWidget').addEventListener('click', () => { cycleW(); showToast('Weather updated!', 'fa-cloud-sun'); });
+
+    // ── HEADER SCROLL ──────────────────────────────
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ── AUTH STATE INJECTION ───────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      const nav = document.getElementById('mainNav');
+      const token = localStorage.getItem('trekpath_token');
+      const userStr = localStorage.getItem('trekpath_user');
+      
+      if (token && userStr) {
+        const user = JSON.parse(userStr);
+        if (user.role === 'admin') {
+          nav.insertAdjacentHTML('beforeend', '<a href="admin.html"><i class="fas fa-cogs"></i> Admin</a>');
+        } else {
+          nav.insertAdjacentHTML('beforeend', '<a href="dashboard.html"><i class="fas fa-user-circle"></i> Dashboard</a>');
+        }
+      } else {
+        nav.insertAdjacentHTML('beforeend', '<a href="login.html"><i class="fas fa-user"></i> Login</a>');
+      }
+
+      // Fetch dynamic destinations
+      fetch('http://localhost:5000/api/destinations')
+        .then(res => res.json())
+        .then(data => {
+          const trendingContainer = document.getElementById('trending');
+          trendingContainer.innerHTML = ''; // clear
+
+          if(data.length === 0) {
+            trendingContainer.innerHTML = '<p style="color:var(--muted); padding:20px;">No destinations available yet.</p>';
+            return;
+          }
+
+          data.forEach(dest => {
+            const destDiv = document.createElement('div');
+            destDiv.className = 'dest-card';
+            destDiv.onclick = () => showToast(`${dest.name} tours coming soon!`, 'fa-globe');
+            destDiv.innerHTML = `
+              <img src="${dest.image_url}" alt="${dest.name}" />
+              <div class="dest-overlay"></div>
+              <div class="dest-info">
+                <div class="dest-subtitle">${dest.description ? dest.description.substring(0,25) + '...' : 'Explore now'}</div>
+                <div class="dest-name">${dest.name}</div>
+              </div>
+            `;
+            trendingContainer.appendChild(destDiv);
+          });
+        })
+        .catch(err => console.error('Failed to fetch destinations:', err));
+    });
+
+    // ── WELCOME ────────────────────────────────────
+    setTimeout(() => showToast('Welcome to Trek Path! 🏔️', 'fa-mountain'), 2200);
+  </script>
+</body>
+
+</html>

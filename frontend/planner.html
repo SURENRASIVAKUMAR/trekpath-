@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trek Path — Plan Your Journey</title>
+
+  <!-- Bootstrap loaded FIRST so our styles win over it -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Same fonts as index.html -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+  <link rel="stylesheet" href="dashboard.css?v=2.1" />
+
+  <style>
+    /* ============================================================
+       CSS VARIABLES — identical to index.html
+    ============================================================ */
+    :root {
+      --gold:         #FFD700;
+      --gold-light:   #FFF8DC;
+      --gold-dim:     rgba(255,215,0,0.13);
+      --glass:        rgba(255,255,255,0.07);
+      --glass-border: rgba(255,215,0,0.22);
+      --accent:       #6C63FF;
+      --accent2:      #5B52EE;
+      --muted:        rgba(255,255,255,0.45);
+      --card-radius:  16px;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      /* Background: same pure black as index.html body,
+         the page content cards sit over it just like the
+         white sections sit over the video on index.html */
+      background: #0a0a0a !important;
+      color: #fff !important;
+      overflow-x: hidden;
+      cursor: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    body.ready { opacity: 1; }
+    /* Override any Bootstrap background resets */
+    html { background: #0a0a0a !important; }
+
+    /* ============================================================
+       SLEEK MODERN CURSOR
+    ============================================================ */
+    .cursor-sleek {
+      width: 10px; height: 10px;
+      background: var(--gold); border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 999999;
+      transform: translate(-50%,-50%);
+      box-shadow: 0 0 15px var(--gold);
+      transition: width 0.2s, height 0.2s, transform 0.1s ease-out;
+      mix-blend-mode: difference;
+    }
+    .cursor-sleek.hovering {
+      width: 40px; height: 40px;
+      background: rgba(255,215,0,0.2);
+      border: 1px solid var(--gold);
+    }
+
+    /* ============================================================
+       PAGE TRANSITION OVERLAY — ported from index.html
+       (fires when navigating away to another page)
+    ============================================================ */
+    .page-transition {
+      position: fixed; inset: 0; z-index: 99999;
+      background: #000;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .page-transition.active { opacity: 1; pointer-events: all; }
+    .pt-logo {
+      font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 900;
+      letter-spacing: 6px;
+      background: linear-gradient(135deg,#FFD700,#FFEC8B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 28px;
+      animation: ptPulse 1s ease infinite alternate;
+    }
+    @keyframes ptPulse {
+      from { filter: drop-shadow(0 0 8px rgba(255,215,0,.3)); }
+      to   { filter: drop-shadow(0 0 22px rgba(255,215,0,.8)); }
+    }
+    .pt-bar-wrap {
+      width: 220px; height: 3px;
+      background: rgba(255,255,255,.1); border-radius: 99px; overflow: hidden;
+    }
+    .pt-bar {
+      height: 100%;
+      background: linear-gradient(90deg,#FFD700,#FFEC8B);
+      border-radius: 99px; width: 0%;
+      transition: width 0.45s ease;
+    }
+    .pt-text {
+      font-size: .7rem; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,.3); margin-top: 14px;
+    }
+
+    /* ============================================================
+       TOAST NOTIFICATION — ported from index.html
+    ============================================================ */
+    .toast {
+      position: fixed; bottom: 110px; left: 50%;
+      transform: translateX(-50%) translateY(15px);
+      background: rgba(0,0,0,.9); border: 1px solid rgba(255,215,0,.3);
+      border-radius: 50px; padding: 13px 26px; color: white;
+      font-family: 'Raleway', sans-serif; font-size: .82rem; letter-spacing: 1px;
+      z-index: 9000; backdrop-filter: blur(15px);
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s, transform .35s cubic-bezier(.175,.885,.32,1.275);
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ============================================================
+       RIPPLE EFFECT — ported from index.html
+    ============================================================ */
+    .ripple {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,.45);
+      transform: scale(0);
+      animation: rippleAnim .55s linear;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+    /* ============================================================
+       FADE-UP ENTRANCE ANIMATION — ported from index.html
+    ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up-1 { animation: fadeUp .8s ease .1s both; }
+    .fade-up-2 { animation: fadeUp .8s ease .25s both; }
+    .fade-up-3 { animation: fadeUp .8s ease .4s both; }
+    .fade-up-4 { animation: fadeUp .8s ease .55s both; }
+    .fade-up-5 { animation: fadeUp .8s ease .7s both; }
+
+    /* ============================================================
+       HEADER — identical style to index.html
+    ============================================================ */
+    .premium-header {
+      position: fixed; top: 0; width: 100%;
+      padding: 18px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0,0,0,.55); backdrop-filter: blur(18px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--glass-border);
+      transition: background .4s;
+    }
+    .premium-header.scrolled { background: rgba(0,0,0,.92); }
+
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .logo img {
+      height: 48px; width: 48px; object-fit: contain;
+      border-radius: 12px; background: rgba(255,255,255,.10); padding: 4px;
+      box-shadow: 0 0 18px rgba(255,215,0,.3), 0 2px 12px rgba(0,0,0,.4);
+      transition: box-shadow .3s, transform .3s;
+    }
+    .logo:hover img {
+      box-shadow: 0 0 28px rgba(255,215,0,.6), 0 4px 20px rgba(0,0,0,.5);
+      transform: scale(1.06);
+    }
+    .logo-name {
+      font-family: 'Cinzel', serif; font-size: 1.55rem; font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg,#FFD700,#FFEC8B,#FFD700);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 8px rgba(255,215,0,.35));
+    }
+    .logo-name span { font-weight: 400; letter-spacing: 2px; }
+
+    .nav { display: flex; align-items: center; gap: 6px; }
+    .nav a {
+      color: rgba(255,255,255,.75); text-decoration: none;
+      font-weight: 500; font-size: .82rem; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 8px 16px;
+      border-radius: 30px; border: 1px solid transparent;
+      transition: all .3s;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--gold); background: var(--gold-dim);
+      border-color: var(--glass-border);
+    }
+
+    /* ============================================================
+       PAGE HERO BAND
+    ============================================================ */
+    .page-hero {
+      padding: 148px 24px 48px;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 22px; background: var(--gold-dim);
+      border: 1px solid var(--glass-border); border-radius: 50px;
+      font-size: .72rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 22px;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px; background: var(--gold); border-radius: 50%;
+      animation: pulseDot 2s ease infinite;
+    }
+    @keyframes pulseDot {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.4; transform:scale(1.6); }
+    }
+    .page-hero h1 {
+      font-family: 'Cinzel', serif; font-size: clamp(2rem,5vw,3.4rem);
+      font-weight: 900; line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .h1-gold {
+      background: linear-gradient(135deg,#FFD700,#FFEC8B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; filter: drop-shadow(0 0 18px rgba(255,215,0,.35));
+    }
+    .page-hero p {
+      color: var(--muted); font-size: .95rem; letter-spacing: .5px;
+    }
+
+    /* ============================================================
+       TRUST PILLS
+    ============================================================ */
+    .trust-bar {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 10px; padding: 0 24px 40px;
+      position: relative; z-index: 1;
+    }
+    .trust-pill {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 50px; padding: 8px 20px;
+      font-size: .78rem; color: rgba(255,255,255,.6);
+      letter-spacing: .5px;
+    }
+    .trust-pill i { color: var(--gold); font-size: .75rem; }
+
+    /* ============================================================
+       MAIN LAYOUT
+    ============================================================ */
+    .page-body {
+      max-width: 940px; margin: 0 auto;
+      padding: 0 20px 70px;
+      position: relative; z-index: 1;
+    }
+
+    /* ============================================================
+       FORM CARD — glass card like index.html modals
+    ============================================================ */
+    .form-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 44px 48px;
+      margin-bottom: 36px;
+      backdrop-filter: blur(10px);
+    }
+
+    /* ============================================================
+       STEP INDICATOR
+    ============================================================ */
+    .step-track {
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 44px;
+    }
+    .step-node {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .step-circle {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,.07);
+      border: 1.5px solid rgba(255,215,0,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-size: .9rem; font-weight: 700;
+      color: rgba(255,255,255,.4);
+      transition: all .35s;
+    }
+    .step-node.active .step-circle {
+      background: var(--gold); color: #111;
+      border-color: var(--gold);
+      box-shadow: 0 0 18px rgba(255,215,0,.45);
+    }
+    .step-node.done .step-circle {
+      background: rgba(255,215,0,.15); color: var(--gold);
+      border-color: rgba(255,215,0,.45);
+    }
+    .step-label {
+      font-size: .68rem; color: rgba(255,255,255,.38);
+      font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .step-node.active .step-label { color: var(--gold); }
+    .step-connector {
+      width: 90px; height: 1px;
+      background: rgba(255,215,0,.15);
+      margin: 0 6px; margin-bottom: 28px; flex-shrink: 0;
+      transition: background .4s;
+    }
+    .step-connector.filled { background: rgba(255,215,0,.45); }
+
+    /* ============================================================
+       CARD SECTION TITLE
+    ============================================================ */
+    .card-title {
+      font-family: 'Cinzel', serif; font-size: .88rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    /* ============================================================
+       FORM FIELDS
+    ============================================================ */
+    .form-label {
+      font-size: .72rem; font-weight: 700;
+      color: rgba(255,255,255,.45);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .form-label i { color: var(--gold); }
+
+    .form-control, .form-select {
+      width: 100%;
+      background: rgba(255,255,255,.07) !important;
+      border: 1px solid rgba(255,255,255,.12) !important;
+      color: #fff !important; padding: 12px 16px;
+      border-radius: 12px; font-size: .88rem;
+      font-family: 'Raleway', sans-serif;
+      transition: border-color .25s, background .25s;
+      outline: none;
+    }
+    .form-control::placeholder { color: rgba(255,255,255,.28); }
+    .form-control:focus, .form-select:focus {
+      border-color: rgba(255,215,0,.45) !important;
+      background: rgba(255,255,255,.10) !important;
+      box-shadow: none !important;
+      color: #fff !important;
+    }
+    .form-select option { background: #1a1a2e; color: #fff; }
+
+    textarea.form-control { resize: vertical; min-height: 90px; }
+
+    /* ============================================================
+       PREFERENCE CARDS
+    ============================================================ */
+    .pref-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
+    }
+    .pref-card {
+      border: 1px solid rgba(255,255,255,.1); border-radius: 14px;
+      padding: 16px 10px;
+      display: flex; flex-direction: column; align-items: center; gap: 9px;
+      cursor: pointer; user-select: none;
+      background: rgba(255,255,255,.04);
+      transition: border-color .25s, background .25s;
+    }
+    .pref-card input[type="checkbox"] { display: none; }
+    .pref-card i { font-size: 1.3rem; color: rgba(255,255,255,.35); transition: color .25s; }
+    .pref-card span { font-size: .72rem; color: rgba(255,255,255,.4); font-weight: 600;
+      text-transform: uppercase; letter-spacing: .8px; transition: color .25s; }
+    .pref-card.selected {
+      border-color: rgba(255,215,0,.5);
+      background: rgba(255,215,0,.08);
+    }
+    .pref-card.selected i, .pref-card.selected span { color: var(--gold); }
+
+    /* ============================================================
+       BUTTONS — same style as index.html .premium-btn
+    ============================================================ */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 14px 34px;
+      background: linear-gradient(135deg,var(--gold),#FFEC8B);
+      color: #0a0a0a; border: none; border-radius: 50px;
+      font-family: 'Raleway', sans-serif; font-weight: 700;
+      font-size: .82rem; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; position: relative; overflow: hidden;
+      box-shadow: 0 10px 28px rgba(255,215,0,.28);
+      transition: transform .35s cubic-bezier(.175,.885,.32,1.275), box-shadow .35s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 38px rgba(255,215,0,.48);
+    }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 14px 30px;
+      background: transparent; color: rgba(255,255,255,.7);
+      border: 1px solid rgba(255,255,255,.25); border-radius: 50px;
+      font-family: 'Raleway', sans-serif; font-weight: 600;
+      font-size: .82rem; letter-spacing: 1.5px; text-transform: uppercase;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: transform .35s cubic-bezier(.175,.885,.32,1.275),
+                  border-color .3s, color .3s;
+    }
+    .btn-ghost:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold); color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    /* ============================================================
+       JOURNEY PREVIEW BOX
+    ============================================================ */
+    .preview-box {
+      background: rgba(255,215,0,.06);
+      border: 1px solid rgba(255,215,0,.2);
+      border-radius: 16px; padding: 22px 24px; margin-top: 28px;
+      display: none;
+      animation: fadeUp .6s ease both;
+    }
+    .preview-box h6 {
+      font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+    }
+    .preview-grid {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(155px,1fr)); gap: 16px;
+    }
+    .preview-item { display: flex; gap: 10px; align-items: flex-start; }
+    .preview-item i { color: var(--gold); margin-top: 2px; font-size: .85rem; }
+    .preview-item small { color: rgba(255,255,255,.38); font-size: .65rem;
+      display: block; text-transform: uppercase; letter-spacing: 1px; }
+    .preview-item strong { font-size: .88rem; }
+
+    /* ============================================================
+       WHY SECTION
+    ============================================================ */
+    .section-label {
+      font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 14px;
+    }
+    .why-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,215,0,.14);
+      border-radius: var(--card-radius); padding: 24px 18px;
+      transition: background .25s, transform .3s, border-color .3s;
+      cursor: default;
+    }
+    .why-card:hover {
+      background: rgba(255,255,255,.09);
+      transform: translateY(-4px);
+      border-color: rgba(255,215,0,.32);
+    }
+    .why-icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: rgba(255,215,0,.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .why-icon i { color: var(--gold); font-size: 1.1rem; }
+    .why-card h6 {
+      font-size: .88rem; font-weight: 700; color: #fff; margin-bottom: 6px;
+      letter-spacing: .5px;
+    }
+    .why-card p {
+      font-size: .78rem; color: rgba(255,255,255,.42); line-height: 1.65; margin: 0;
+    }
+
+    /* ============================================================
+       FOOTER — identical to index.html
+    ============================================================ */
+    .footer {
+      position: relative; z-index: 1; padding: 30px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--glass-border);
+      background: rgba(0,0,0,.55); backdrop-filter: blur(12px);
+    }
+    .footer-logo {
+      font-family: 'Cinzel', serif; font-size: 1.1rem;
+      font-weight: 900; letter-spacing: 3px;
+      background: linear-gradient(135deg,#FFD700,#FFEC8B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.28); letter-spacing: 1px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a {
+      color: rgba(255,255,255,.35); text-decoration: none;
+      font-size: .78rem; transition: color .3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media(max-width:900px) {
+      .premium-header { padding: 14px 20px; }
+      .form-card { padding: 28px 20px; }
+      .pref-grid { grid-template-columns: repeat(2,1fr); }
+      .step-connector { width: 44px; }
+    }
+    @media(max-width:600px) {
+      .nav a { display: none; }
+      .page-hero h1 { font-size: 1.9rem; }
+      .footer { flex-direction: column; gap: 12px; padding: 24px 20px; text-align: center; }
+    }
+
+    /* ============================================================
+       ITINERARY TIMELINE
+    ============================================================ */
+    .itinerary-timeline {
+      position: relative;
+      padding-left: 30px;
+      margin: 0 auto;
+      max-width: 600px;
+      border-left: 2px solid rgba(255,215,0,.3);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -37px;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 10px rgba(255,215,0,.6);
+      border: 2px solid #0a0a0a;
+    }
+    .tl-day {
+      font-family: 'Cinzel', serif;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: inline-block;
+      background: rgba(255,215,0,.1);
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .tl-content {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,215,0,.15);
+      border-radius: 12px;
+      padding: 16px 20px;
+      transition: transform .3s, border-color .3s;
+    }
+    .tl-content:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,215,0,.4);
+    }
+    .tl-content h5 {
+      color: #fff;
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: .5px;
+    }
+    .tl-content p {
+      color: rgba(255,255,255,.5);
+      font-size: .82rem;
+      margin: 0;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── SLEEK CURSOR ── -->
+  <div class="cursor-sleek" id="cursorSleek"></div>
+
+  <!-- ── PAGE TRANSITION OVERLAY (from index.html) ── -->
+  <div class="page-transition" id="pageTransition">
+    <div class="pt-logo">TREK<span style="font-weight:400">PATH</span></div>
+    <div class="pt-bar-wrap"><div class="pt-bar" id="ptBar"></div></div>
+    <div class="pt-text">Preparing your journey…</div>
+  </div>
+
+  <!-- ── TOAST (from index.html) ── -->
+  <div class="toast" id="toast">
+    <i class="fas fa-info-circle" id="toastIcon" style="color:var(--gold)"></i>
+    <span id="toastMsg"></span>
+  </div>
+
+  <!-- ── HEADER (identical to index.html) ── -->
+  <header class="premium-header" id="header">
+    <a href="index.html" class="logo">
+      <i class="fas fa-route" style="color:var(--gold); font-size:1.8rem; text-shadow:0 0 10px var(--gold);"></i>
+      <div class="logo-name" style="color:#fff;">TREK<span style="color:var(--gold);">PATH</span></div>
+    </a>
+    <nav class="nav">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="planner.html" class="active"><i class="fas fa-map-marked-alt"></i> Planner</a>
+      <a href="features.html" id="featuresLink"><i class="fas fa-star"></i> Features</a>
+      <a href="testimonials.html"><i class="fas fa-comments"></i> Reviews</a>
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+  </header>
+
+  <!-- ── PAGE HERO ── -->
+  <div class="page-hero">
+    <div class="hero-badge fade-up-1"><div class="dot"></div> Plan Your Experience</div>
+    <h1 class="fade-up-2">
+      <span class="h1-gold">CRAFT YOUR</span><br>
+      PERFECT JOURNEY
+    </h1>
+    <p class="fade-up-3">Fill in your details and we'll build a personalised trip just for you.</p>
+  </div>
+
+  <!-- ── TRUST BAR ── -->
+  <div class="trust-bar fade-up-4">
+    <div class="trust-pill"><i class="fas fa-shield-alt"></i> Secure Booking</div>
+    <div class="trust-pill"><i class="fas fa-headset"></i> 24 / 7 Support</div>
+    <div class="trust-pill"><i class="fas fa-globe"></i> 100+ Destinations</div>
+    <div class="trust-pill"><i class="fas fa-star"></i> 4.9 / 5 Rated</div>
+    <div class="trust-pill"><i class="fas fa-undo-alt"></i> Free Cancellation</div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <div class="page-body fade-up-5">
+
+    <!-- FORM CARD -->
+    <div class="form-card" id="formCard">
+
+      <!-- Step Indicator -->
+      <div class="step-track">
+        <div class="step-node active" id="stepNode1">
+          <div class="step-circle">1</div>
+          <div class="step-label">Personal</div>
+        </div>
+        <div class="step-connector" id="conn1"></div>
+        <div class="step-node" id="stepNode2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Destination</div>
+        </div>
+        <div class="step-connector" id="conn2"></div>
+        <div class="step-node" id="stepNode3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Dates & Budget</div>
+        </div>
+      </div>
+
+      <form id="travelForm" novalidate>
+
+        <!-- ══ STEP 1 ══ -->
+        <div class="form-step" id="formStep1">
+          <div class="card-title"><i class="fas fa-user"></i> Your Details</div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" class="form-control" id="fullname" placeholder="Enter your full name" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="your.email@example.com" />
+              </div>
+            </div>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-phone"></i> Phone Number</label>
+                <input type="tel" class="form-control" id="phone" placeholder="+91 00000 00000" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-users"></i> Number of Travelers</label>
+                <select class="form-select" id="travelers">
+                  <option value="1">1 Traveler</option>
+                  <option value="2" selected>2 Travelers</option>
+                  <option value="3">3 Travelers</option>
+                  <option value="4">4 Travelers</option>
+                  <option value="5+">5+ Travelers</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-suitcase"></i> Trip Type</label>
+                <select class="form-select" id="travelType">
+                  <option value="">Select trip type</option>
+                  <option value="leisure">Leisure / Vacation</option>
+                  <option value="honeymoon">Honeymoon</option>
+                  <option value="family">Family Trip</option>
+                  <option value="business">Business + Leisure</option>
+                  <option value="solo">Solo Adventure</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-language"></i> Preferred Language</label>
+                <select class="form-select" id="language">
+                  <option value="en">English</option>
+                  <option value="hi">Hindi</option>
+                  <option value="fr">French</option>
+                  <option value="es">Spanish</option>
+                  <option value="de">German</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end mt-3">
+            <button type="button" class="btn-primary ripple-btn next-step" data-next="2">
+              Continue &nbsp;<i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ══ STEP 2 ══ -->
+        <div class="form-step" id="formStep2" style="display:none">
+          <div class="card-title"><i class="fas fa-map-marker-alt"></i> Destination & Interests</div>
+          <div class="mb-4">
+            <label class="form-label"><i class="fas fa-map-marker-alt"></i> Where would you like to go?</label>
+            <select class="form-select" id="destination">
+              <option value="" disabled selected>Choose your destination</option>
+              <option value="paris">Paris, France</option>
+              <option value="tokyo">Tokyo, Japan</option>
+              <option value="newyork">New York, USA</option>
+              <option value="sydney">Sydney, Australia</option>
+              <option value="capetown">Cape Town, South Africa</option>
+              <option value="bali">Bali, Indonesia</option>
+              <option value="rome">Rome, Italy</option>
+              <option value="dubai">Dubai, UAE</option>
+              <option value="singapore">Singapore</option>
+              <option value="london">London, UK</option>
+              <option value="maldives">Maldives</option>
+              <option value="switzerland">Switzerland</option>
+            </select>
+          </div>
+
+          <label class="form-label mb-3">
+            <i class="fas fa-heart"></i> Travel Interests
+            <span style="color:rgba(255,255,255,.28);font-size:.68rem;text-transform:none;letter-spacing:0;margin-left:6px">(select all that apply)</span>
+          </label>
+          <div class="pref-grid mb-4">
+            <label class="pref-card"><input type="checkbox" id="beach">   <i class="fas fa-umbrella-beach"></i><span>Beach</span></label>
+            <label class="pref-card"><input type="checkbox" id="mountains"><i class="fas fa-mountain"></i>       <span>Mountains</span></label>
+            <label class="pref-card"><input type="checkbox" id="city">    <i class="fas fa-city"></i>            <span>City</span></label>
+            <label class="pref-card"><input type="checkbox" id="adventure"><i class="fas fa-hiking"></i>         <span>Adventure</span></label>
+            <label class="pref-card"><input type="checkbox" id="culinary"><i class="fas fa-utensils"></i>        <span>Culinary</span></label>
+            <label class="pref-card"><input type="checkbox" id="cultural"><i class="fas fa-landmark"></i>        <span>Cultural</span></label>
+            <label class="pref-card"><input type="checkbox" id="wellness"><i class="fas fa-spa"></i>             <span>Wellness</span></label>
+            <label class="pref-card"><input type="checkbox" id="wildlife"><i class="fas fa-paw"></i>             <span>Wildlife</span></label>
+          </div>
+
+          <div class="d-flex justify-content-between mt-2">
+            <button type="button" class="btn-ghost ripple-btn prev-step"><i class="fas fa-arrow-left"></i> &nbsp;Back</button>
+            <button type="button" class="btn-primary ripple-btn next-step" data-next="3">Continue &nbsp;<i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- ══ STEP 3 ══ -->
+        <div class="form-step" id="formStep3" style="display:none">
+          <div class="card-title"><i class="fas fa-calendar-alt"></i> Dates, Budget & Stay</div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-calendar-plus"></i> Departure Date</label>
+                <input type="date" class="form-control" id="startdate" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-calendar-minus"></i> Return Date</label>
+                <input type="date" class="form-control" id="enddate" />
+              </div>
+            </div>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-wallet"></i> Budget Range</label>
+                <select class="form-select" id="budget">
+                  <option value="economy">Economy (₹30,000 – ₹80,000)</option>
+                  <option value="standard" selected>Standard (₹80,000 – ₹1,50,000)</option>
+                  <option value="premium">Premium (₹1,50,000 – ₹3,00,000)</option>
+                  <option value="luxury">Luxury (₹3,00,000+)</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label"><i class="fas fa-hotel"></i> Accommodation</label>
+                <select class="form-select" id="accommodation">
+                  <option value="hostel">Hostel / Budget</option>
+                  <option value="hotel" selected>Hotel (3–4 Star)</option>
+                  <option value="boutique">Boutique Hotel</option>
+                  <option value="resort">Luxury Resort</option>
+                  <option value="villa">Private Villa / Airbnb</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><i class="fas fa-sticky-note"></i> Special Requests</label>
+            <textarea class="form-control" id="notes"
+              placeholder="Dietary requirements, accessibility needs, special occasions…"></textarea>
+          </div>
+
+          <!-- Journey Preview -->
+          <div class="preview-box" id="travelPreview">
+            <h6><i class="fas fa-route" style="margin-right:8px"></i>Journey Summary</h6>
+            <div class="preview-grid">
+              <div class="preview-item"><i class="fas fa-user"></i>
+                <div><small>Traveler</small><strong id="previewName">—</strong></div></div>
+              <div class="preview-item"><i class="fas fa-map-marker-alt"></i>
+                <div><small>Destination</small><strong id="previewDestination">—</strong></div></div>
+              <div class="preview-item"><i class="fas fa-calendar"></i>
+                <div><small>Duration</small><strong id="previewDates">—</strong></div></div>
+              <div class="preview-item"><i class="fas fa-users"></i>
+                <div><small>Group Size</small><strong id="previewTravelers">—</strong></div></div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn-ghost ripple-btn prev-step"><i class="fas fa-arrow-left"></i> &nbsp;Back</button>
+            <button type="submit" class="btn-primary ripple-btn" id="submitBtn">
+              <i class="fas fa-paper-plane"></i> &nbsp;Submit Plan
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div><!-- /form-card -->
+
+    <!-- WHY TREKPATH -->
+    <p class="section-label">Why Choose TrekPath</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-tags"></i></div>
+        <h6>Best Price Guarantee</h6>
+        <p>We match any lower price you find — no questions asked.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-undo-alt"></i></div>
+        <h6>Free Cancellation</h6>
+        <p>Cancel up to 48 hours before departure at zero cost.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-user-tie"></i></div>
+        <h6>Expert Local Guides</h6>
+        <p>Itineraries curated by in-destination travel experts.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-lock"></i></div>
+        <h6>Secure Payments</h6>
+        <p>All transactions are encrypted and fully protected.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-headset"></i></div>
+        <h6>24 / 7 Support</h6>
+        <p>Our travel experts are on call any time you need help.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-route"></i></div>
+        <h6>Custom Itineraries</h6>
+        <p>Every trip is uniquely tailored to your style and pace.</p>
+      </div>
+    </div>
+
+  </div><!-- /page-body -->
+
+  <!-- ── FOOTER (identical to index.html) ── -->
+  <footer class="footer">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <img src="img/logo.png" alt="Trek Path"
+        style="height:38px;width:38px;object-fit:contain;border-radius:10px;
+               background:rgba(255,255,255,0.1);padding:4px;
+               box-shadow:0 0 14px rgba(255,215,0,.3)">
+      <span class="footer-logo">TREK<span style="font-weight:400">PATH</span></span>
+    </a>
+    <p class="footer-copy">© 2024 Trek Path. All Rights Reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+
+  <script>
+  // ── 1. BODY FADE-IN ──────────────────────────────────────────────
+  window.addEventListener('load', () => document.body.classList.add('ready'));
+
+  // ── SLEEK MODERN CURSOR ───────────────────────────────────────
+  const sleek = document.getElementById('cursorSleek');
+
+  document.addEventListener('mousemove', e => {
+    if(sleek) {
+      sleek.style.left = e.clientX + 'px';
+      sleek.style.top = e.clientY + 'px';
+    }
+  });
+
+  // Cursor grow on interactive elements
+  document.querySelectorAll('a, button, .why-card, .pref-card, select, input, textarea, .item-img-wrap, .map-marker').forEach(el => {
+    el.addEventListener('mouseenter', () => sleek && sleek.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => sleek && sleek.classList.remove('hovering'));
+  });
+
+  // ── 3. TOAST (from index.html) ───────────────────────────────────
+  let toastTimer = null;
+  function showToast(msg, icon='fa-info-circle') {
+    const t = document.getElementById('toast');
+    document.getElementById('toastIcon').className = 'fas ' + icon;
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+  }
+
+  // ── 4. RIPPLE ON BUTTONS (from index.html) ───────────────────────
+  document.querySelectorAll('.ripple-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const r = document.createElement('span');
+      const d = Math.max(this.clientWidth, this.clientHeight);
+      r.classList.add('ripple');
+      r.style.width  = r.style.height = d + 'px';
+      r.style.left   = (e.clientX - this.getBoundingClientRect().left - d/2) + 'px';
+      r.style.top    = (e.clientY - this.getBoundingClientRect().top  - d/2) + 'px';
+      this.appendChild(r);
+      setTimeout(() => r.remove(), 600);
+    });
+  });
+
+  // ── 5. PAGE TRANSITION on nav links (from index.html) ────────────
+  function navigateTo(url) {
+    const overlay = document.getElementById('pageTransition');
+    const bar     = document.getElementById('ptBar');
+    overlay.classList.add('active');
+    setTimeout(() => { bar.style.width = '60%'; }, 50);
+    setTimeout(() => { bar.style.width = '85%'; }, 250);
+    setTimeout(() => { bar.style.width = '100%'; }, 420);
+    setTimeout(() => { window.location.href = url; }, 620);
+  }
+
+  // Apply page transition to all nav & footer links
+  document.querySelectorAll('.nav a, .footer-links a, .logo').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href === '#' || href === window.location.pathname) return;
+      e.preventDefault();
+      navigateTo(href);
+    });
+  });
+
+  // Features link specifically redirects to features.html
+  document.getElementById('featuresLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    navigateTo('features.html');
+  });
+
+  // ── 6. HEADER SCROLL DARKEN (from index.html) ────────────────────
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── 7. FORM STEP LOGIC ───────────────────────────────────────────
+  let currentStep = 1;
+
+  function gotoStep(next) {
+    if (!validateStep(currentStep)) return;
+
+    document.querySelectorAll('.step-node').forEach((node, i) => {
+      node.classList.remove('active', 'done');
+      if (i + 1 < next)  node.classList.add('done');
+      if (i + 1 === next) node.classList.add('active');
+    });
+    document.getElementById('conn1').classList.toggle('filled', next > 1);
+    document.getElementById('conn2').classList.toggle('filled', next > 2);
+
+    document.querySelectorAll('.form-step').forEach((s, i) => {
+      s.style.display = (i + 1 === next) ? 'block' : 'none';
+    });
+
+    currentStep = next;
+    if (currentStep === 3) updatePreview();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── 8. VALIDATION ────────────────────────────────────────────────
+  function validateStep(step) {
+    if (step === 1) {
+      const name  = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (name.length < 2) {
+        flashError('fullname', 'Please enter your full name');
+        showToast('Please enter your full name', 'fa-exclamation-circle');
+        return false;
+      }
+      if (!email.includes('@') || !email.includes('.')) {
+        flashError('email', 'Please enter a valid email');
+        showToast('Please enter a valid email address', 'fa-exclamation-circle');
+        return false;
+      }
+    }
+    if (step === 2) {
+      const dest = document.getElementById('destination').value;
+      if (!dest) {
+        flashError('destination', 'Please select a destination');
+        showToast('Please select a destination', 'fa-exclamation-circle');
+        return false;
+      }
+    }
+    if (step === 3) {
+      const s = document.getElementById('startdate').value;
+      const e = document.getElementById('enddate').value;
+      if (!s) { flashError('startdate','Please select a departure date'); showToast('Select a departure date','fa-exclamation-circle'); return false; }
+      if (!e) { flashError('enddate','Please select a return date');    showToast('Select a return date','fa-exclamation-circle');    return false; }
+      if (new Date(s) >= new Date(e)) {
+        flashError('enddate','Return date must be after departure');
+        showToast('Return date must be after departure','fa-exclamation-circle');
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function flashError(id, msg) {
+    const el = document.getElementById(id);
+    el.style.borderColor = 'rgba(255,90,90,.7)';
+    const prev = el.parentNode.querySelector('.err-msg');
+    if (prev) prev.remove();
+    const d = document.createElement('div');
+    d.className = 'err-msg';
+    d.style.cssText = 'color:#ff8080;font-size:.72rem;margin-top:5px;font-family:Raleway,sans-serif;';
+    d.textContent = msg;
+    el.parentNode.appendChild(d);
+    setTimeout(() => { el.style.borderColor = ''; if (d.parentNode) d.remove(); }, 3000);
+  }
+
+  // ── 9. JOURNEY PREVIEW ───────────────────────────────────────────
+  function updatePreview() {
+    const preview = document.getElementById('travelPreview');
+    const name    = document.getElementById('fullname').value;
+    const dest    = document.getElementById('destination');
+    const s       = document.getElementById('startdate').value;
+    const e       = document.getElementById('enddate').value;
+
+    if (name || dest.value) preview.style.display = 'block';
+
+    document.getElementById('previewName').textContent        = name || '—';
+    document.getElementById('previewDestination').textContent = dest.selectedOptions[0]?.text || '—';
+    document.getElementById('previewTravelers').textContent   = document.getElementById('travelers').value + ' person(s)';
+
+    if (s && e) {
+      const days = Math.round((new Date(e) - new Date(s)) / 86400000);
+      document.getElementById('previewDates').textContent =
+        new Date(s).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + ' – ' +
+        new Date(e).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) +
+        ' (' + days + ' day' + (days !== 1 ? 's' : '') + ')';
+    }
+  }
+
+  // ── 10. PREF CARD TOGGLE ─────────────────────────────────────────
+  document.querySelectorAll('.pref-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const cb = card.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      card.classList.toggle('selected', cb.checked);
+    });
+  });
+
+  // ── 11. BUTTON WIRING ────────────────────────────────────────────
+  document.querySelectorAll('.next-step').forEach(btn => {
+    btn.addEventListener('click', () => gotoStep(parseInt(btn.dataset.next)));
+  });
+  document.querySelectorAll('.prev-step').forEach(btn => {
+    btn.addEventListener('click', () => gotoStep(currentStep - 1));
+  });
+
+  ['fullname','destination','startdate','enddate','travelers'].forEach(id => {
+    document.getElementById(id).addEventListener('change', () => {
+      if (currentStep === 3) updatePreview();
+    });
+  });
+
+  // Date min constraints
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('startdate').min = today;
+  document.getElementById('startdate').addEventListener('change', function() {
+    document.getElementById('enddate').min = this.value;
+  });
+
+  // ── 12. FORM SUBMIT — with page transition to features.html ──────
+  document.getElementById('travelForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if (!validateStep(3)) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> &nbsp;Processing…';
+    btn.disabled = true;
+
+    showToast('Planning your journey…', 'fa-paper-plane');
+
+    const fullname = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const travelers = document.getElementById('travelers').value;
+    const travelType = document.getElementById('travelType').value;
+    const language = document.getElementById('language').value;
+    const destination = document.getElementById('destination').value;
+    const startdate = document.getElementById('startdate').value;
+    const enddate = document.getElementById('enddate').value;
+    const budget = document.getElementById('budget').value;
+    const accommodation = document.getElementById('accommodation').value;
+    const notes = document.getElementById('notes').value.trim();
+
+    const interests = [];
+    ['beach','mountains','city','adventure','culinary','cultural','wellness','wildlife'].forEach(id => {
+      if (document.getElementById(id).checked) interests.push(id);
+    });
+
+    const token = localStorage.getItem('trekpath_token');
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    fetch('http://localhost:5000/api/planner', {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({
+        fullname, email, phone, travelers, travelType, language,
+        destination, interests, startdate, enddate, budget, accommodation, notes
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) throw new Error(data.error);
+
+      // Render Premium Dashboard
+      if (typeof renderPremiumDashboard === 'function') {
+        renderPremiumDashboard(data, destination, startdate, enddate, travelers, budget);
+      } else {
+        console.warn('Dashboard script not loaded!');
+      }
+
+      showToast('Journey planned successfully!', 'fa-check-circle');
+    })
+    .catch(err => {
+      console.error(err);
+      btn.innerHTML = 'Submit Plan';
+      btn.disabled = false;
+      let msg = err.message;
+      if(msg === 'Failed to fetch') msg = 'Cannot connect to backend server. Is it running?';
+      showToast('Error: ' + msg, 'fa-exclamation-triangle');
+    });
+  });
+
+  // ── 13. WELCOME TOAST ────────────────────────────────────────────
+  setTimeout(() => showToast('Welcome! Plan your dream trip ✈️', 'fa-plane'), 1400);
+  </script>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="dashboard.js?v=2.4"></script>
+</body>
+</html>
