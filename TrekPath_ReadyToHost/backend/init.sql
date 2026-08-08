@@ -37,7 +37,19 @@ CREATE TABLE IF NOT EXISTS planners (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert some dummy data for initial testing
-INSERT INTO testimonials (name, rating, review) VALUES 
-('Alice Smith', 5, 'The Trek Path experience was absolutely magical! Highly recommended.'),
-('Bob Johnson', 4, 'Great views and a well-organized trip. The guides were very helpful.');
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert some dummy data for initial testing only if table is empty
+INSERT INTO testimonials (name, rating, review)
+SELECT 'Alice Smith', 5, 'The Trek Path experience was absolutely magical! Highly recommended.'
+WHERE NOT EXISTS (SELECT 1 FROM testimonials);
+
+INSERT INTO testimonials (name, rating, review)
+SELECT 'Bob Johnson', 4, 'Great views and a well-organized trip. The guides were very helpful.'
+WHERE NOT EXISTS (SELECT 1 FROM testimonials);

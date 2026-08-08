@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trek Path — My Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --gold: #FFD700;
+      --glass: rgba(255,255,255,0.07);
+      --glass-border: rgba(255,215,0,0.22);
+    }
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: #0a0a0a !important;
+      color: #fff !important;
+      min-height: 100vh;
+    }
+    .premium-header {
+      padding: 18px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0,0,0,.92); border-bottom: 1px solid var(--glass-border);
+    }
+    .logo-name {
+      font-family: 'Cinzel', serif; font-size: 1.55rem; font-weight: 900;
+      background: linear-gradient(135deg,#FFD700,#FFEC8B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .page-hero { padding: 100px 24px 50px; text-align: center; }
+    .page-hero h1 { font-family: 'Cinzel', serif; color: var(--gold); }
+    
+    .card-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; padding: 20px;}
+    .trip-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px; padding: 20px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .trip-card h4 { color: var(--gold); font-family: 'Cinzel', serif; }
+    .btn-primary {
+      padding: 10px 20px; background: linear-gradient(135deg,var(--gold),#FFEC8B);
+      color: #000; border: none; border-radius: 50px; text-decoration: none; font-weight: 700;
+    }
+    .nav { display: flex; gap: 15px; }
+    .nav a { color: #fff; text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem;}
+    .nav a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <header class="premium-header">
+    <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none; background: transparent !important; border: none !important; padding: 0 !important; box-shadow: none !important;">
+      <style>
+        .global-trek-logo {
+          width: 70px !important;
+          height: 70px !important;
+          object-fit: contain !important;
+          transform: none !important;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+          border-radius: 0 !important;
+          mix-blend-mode: screen !important;
+          filter: brightness(1.2) drop-shadow(0 0 4px rgba(255, 255, 255, 0.4)) !important;
+        }
+        .global-logo-clip {
+          width: 70px !important; 
+          height: 70px !important;
+          overflow: visible !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+        }
+      </style>
+      <div class="global-logo-clip">
+        <img src="img/logo.png" alt="Trek Path Logo" class="global-trek-logo" />
+      </div>
+      <div class="logo-name" style="font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; background: linear-gradient(135deg, #FFD700, #FFEC8B, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.35)); line-height: 1; margin: 0; padding: 0; border: none;">Trek <span style="font-weight: 400; letter-spacing: 2px; color: #FFD700;">Path</span></div>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="planner.html">Planner</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <div class="page-hero">
+    <h1>Welcome, <span id="userName">Traveler</span></h1>
+    <p>Your saved itineraries and adventures.</p>
+  </div>
+
+  <div class="card-list" id="tripsList">
+    <p style="text-align:center; color:rgba(255,255,255,0.5);">Loading your trips...</p>
+  </div>
+
+  <script>
+    const API_BASE = window.location.port === '5000' || window.location.port === '' ? '/api' : 'http://localhost:5000/api';
+    const token = localStorage.getItem('trekpath_user_token');
+    const uName = localStorage.getItem('trekpath_user_name');
+
+    if (!token) {
+      window.location.href = 'login.html';
+    }
+
+    if (uName) document.getElementById('userName').innerText = uName;
+
+    fetch(`${API_BASE}/user/planners`, {
+      headers: { 'Authorization': \`Bearer \${token}\` }
+    })
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById('tripsList');
+      list.innerHTML = '';
+      if (!data || data.length === 0) {
+        list.innerHTML = '<p style="text-align:center;">You have no saved trips yet. <br><br><a href="planner.html" class="btn-primary">Plan a Trip</a></p>';
+        return;
+      }
+
+      data.forEach(trip => {
+        const d = new Date(trip.created_at).toLocaleDateString();
+        list.innerHTML += \`
+          <div class="trip-card">
+            <div>
+              <h4>\${trip.destination.toUpperCase()}</h4>
+              <p style="margin:5px 0 0; font-size:0.9rem; color:#ccc;">
+                <i class="fas fa-calendar"></i> \${trip.start_date ? new Date(trip.start_date).toLocaleDateString() : 'TBD'} &nbsp;|&nbsp; 
+                <i class="fas fa-users"></i> \${trip.travelers} Travelers
+              </p>
+              <small style="color:rgba(255,255,255,0.4)">Planned on: \${d}</small>
+            </div>
+            <div>
+              <a href="booking.html?tour=\${trip.destination}&date=\${trip.start_date ? new Date(trip.start_date).toLocaleDateString() : ''}&guests=\${trip.travelers}" class="btn-primary">View / Book</a>
+            </div>
+          </div>
+        \`;
+      });
+    })
+    .catch(err => {
+      document.getElementById('tripsList').innerHTML = '<p style="text-align:center; color:red;">Error loading trips.</p>';
+    });
+
+    function logout() {
+      localStorage.removeItem('trekpath_user_token');
+      localStorage.removeItem('trekpath_user_name');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

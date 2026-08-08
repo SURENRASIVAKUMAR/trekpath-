@@ -2,7 +2,7 @@
 
 const globalData = {
   newyork: {
-    heroImg: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1200&q=80',
+    heroImg: 'https://picsum.photos/id/827/800/600',
     centerLat: 40.7128, centerLng: -74.0060,
     currency: { from: 'USD', symbol: '$', rate: '83.50', tip: 'Most places accept cards. Keep some $1 bills for tips.' },
     weather: [
@@ -19,76 +19,82 @@ const globalData = {
     itinerary: [
       {
         dayLabel: 'Day 1: Arrival & Midtown Magic',
+        subtitle: 'Kick off your New York adventure with iconic sights and local flavors.',
+        totalTime: '7 hrs', estCost: '72',
         activities: [
-          { time: '08:00 AM', place: 'Ess-a-Bagel', duration: '1 hr', dist: '-', transport: 'Walk', cost: '1200', icon: 'fa-coffee' },
-          { time: '09:30 AM', place: 'Empire State Building', duration: '2.5 hrs', dist: '1.2 km', transport: 'Walk', cost: '3500', icon: 'fa-building' },
-          { time: '01:00 PM', place: 'Katz\'s Deli', duration: '1.5 hrs', dist: '3.5 km', transport: 'Subway', cost: '2500', icon: 'fa-utensils' },
-          { time: '03:00 PM', place: 'Times Square', duration: '2 hrs', dist: '4.0 km', transport: 'Subway', cost: '0', icon: 'fa-camera' }
+          { time: '08:00 AM', place: 'Ess-a-Bagel', desc: 'Start your day with an authentic NYC bagel.', duration: '1 hr', dist: '0.4 km', transport: 'Walk', cost: '12.00', icon: 'fa-coffee', img: 'https://picsum.photos/id/492/800/600', lat: 40.7554, lng: -73.9686 },
+          { time: '09:30 AM', place: 'Empire State Building', desc: 'Experience breathtaking views from the iconic landmark.', duration: '2.5 hrs', dist: '1.2 km', transport: 'Walk', cost: '35.00', icon: 'fa-building', img: 'https://picsum.photos/id/375/800/600', lat: 40.7484, lng: -73.9857 },
+          { time: '01:00 PM', place: 'Katz\'s Deli', desc: 'Enjoy the world-famous pastrami sandwich.', duration: '1.5 hrs', dist: '2.5 km', transport: 'Subway', cost: '25.00', icon: 'fa-utensils', img: 'https://picsum.photos/id/260/800/600', lat: 40.7222, lng: -73.9874 },
+          { time: '03:00 PM', place: 'Times Square', desc: 'Soak in the lights, energy and vibrant atmosphere.', duration: '2 hrs', dist: '4.0 km', transport: 'Subway', cost: '0.00', icon: 'fa-camera', img: 'https://picsum.photos/id/115/800/600', lat: 40.7580, lng: -73.9855 }
         ]
       },
       {
         dayLabel: 'Day 2: Downtown & Brooklyn Bridges',
+        subtitle: 'Explore historic neighborhoods and stunning waterfront views.',
+        totalTime: '8 hrs', estCost: '68',
         activities: [
-          { time: '09:00 AM', place: '9/11 Memorial & Museum', duration: '3 hrs', dist: '-', transport: 'Subway', cost: '2800', icon: 'fa-landmark' },
-          { time: '12:30 PM', place: 'Los Tacos No.1', duration: '1 hr', dist: '2.0 km', transport: 'Walk', cost: '1500', icon: 'fa-utensils' },
-          { time: '02:00 PM', place: 'Brooklyn Bridge Walk', duration: '2 hrs', dist: '3.0 km', transport: 'Walk', cost: '0', icon: 'fa-walking' },
-          { time: '05:00 PM', place: 'Juliana\'s Pizza (Brooklyn)', duration: '1.5 hrs', dist: '1.0 km', transport: 'Walk', cost: '3000', icon: 'fa-pizza-slice' }
+          { time: '08:30 AM', place: 'Blue Bottle Coffee', desc: 'Begin with a perfect brew in a cozy café.', duration: '1 hr', dist: '0.3 km', transport: 'Walk', cost: '8.00', icon: 'fa-coffee', img: 'https://picsum.photos/id/384/800/600', lat: 40.7100, lng: -74.0080 },
+          { time: '10:00 AM', place: 'Brooklyn Bridge Walk', desc: 'Walk across the historic Brooklyn Bridge.', duration: '1.5 hrs', dist: '1.8 km', transport: 'Walk', cost: '0.00', icon: 'fa-walking', img: 'https://picsum.photos/id/549/800/600', lat: 40.7061, lng: -73.9969 },
+          { time: '12:00 PM', place: 'Juliana\'s Pizza', desc: 'Famous Brooklyn pizza stop.', duration: '1 hr', dist: '0.5 km', transport: 'Walk', cost: '20.00', icon: 'fa-pizza-slice', img: 'https://picsum.photos/id/975/800/600', lat: 40.7027, lng: -73.9934 },
+          { time: '02:00 PM', place: '9/11 Memorial & Museum', desc: 'A moving tribute to history and resilience.', duration: '2 hrs', dist: '1.0 km', transport: 'Walk', cost: '28.00', icon: 'fa-landmark', img: 'https://picsum.photos/id/569/800/600', lat: 40.7115, lng: -74.0133 }
         ]
       },
       {
         dayLabel: 'Day 3: Art & Central Park',
+        subtitle: 'Experience classic culture and nature in the city.',
+        totalTime: '8 hrs', estCost: '120',
         activities: [
-          { time: '10:00 AM', place: 'The Metropolitan Museum of Art', duration: '4 hrs', dist: '-', transport: 'Subway', cost: '2500', icon: 'fa-palette' },
-          { time: '02:00 PM', place: 'Central Park Picnic', duration: '2 hrs', dist: '0.5 km', transport: 'Walk', cost: '1500', icon: 'fa-tree' },
-          { time: '05:00 PM', place: 'The Plaza Hotel (High Tea)', duration: '2 hrs', dist: '1.5 km', transport: 'Cab', cost: '8000', icon: 'fa-mug-hot' }
+          { time: '10:00 AM', place: 'The Metropolitan Museum of Art', desc: 'Explore one of the world\'s largest art museums.', duration: '4 hrs', dist: '-', transport: 'Subway', cost: '25.00', icon: 'fa-palette', img: 'https://picsum.photos/id/612/800/600', lat: 40.7794, lng: -73.9632 },
+          { time: '02:00 PM', place: 'Central Park Picnic', desc: 'Relax and enjoy a scenic picnic.', duration: '2 hrs', dist: '0.5 km', transport: 'Walk', cost: '15.00', icon: 'fa-tree', img: 'https://picsum.photos/id/924/800/600', lat: 40.7812, lng: -73.9665 },
+          { time: '05:00 PM', place: 'The Plaza Hotel (High Tea)', desc: 'Indulge in an iconic high tea experience.', duration: '2 hrs', dist: '1.5 km', transport: 'Cab', cost: '80.00', icon: 'fa-mug-hot', img: 'https://picsum.photos/id/476/800/600', lat: 40.7644, lng: -73.9744 }
         ]
       }
     ],
     hotels: [
-      { name: 'The Plaza Hotel', price: '45000', rating: '4.9', lat: 40.7644, lng: -73.9744, img: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=400&q=80', distance: '100m to Central Park', desc: 'Luxury stay overlooking Central Park. Features Spa, Fine Dining, and historic architecture.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Deluxe, Suite, Royal', amenities: ['Free WiFi', 'Pool', 'Spa', 'Gym', 'Valet'], gallery: ['https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80','https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80','https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80'] },
-      { name: 'YOTEL New York', price: '15000', rating: '4.5', lat: 40.7590, lng: -73.9934, img: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=400&q=80', distance: '300m to Times Square', desc: 'Modern cabins in Times Square. Perfect for solo travelers or couples on a budget.', checkIn: '03:00 PM', checkOut: '11:00 AM', rooms: 'Premium Queen, VIP View', amenities: ['Smart TV', 'Terrace', 'Gym', 'Robot Luggage'], gallery: ['https://images.unsplash.com/photo-1542314831-c6a420325142?w=800&q=80','https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&q=80','https://images.unsplash.com/photo-1541123356219-284ebe98ae3b?w=800&q=80'] },
-      { name: 'The Standard High Line', price: '28000', rating: '4.7', lat: 40.7409, lng: -74.0078, img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=400&q=80', distance: 'Meatpacking District', desc: 'Boutique hotel with panoramic views of the Hudson River and High Line.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'Standard Queen, King, Corner Suite', amenities: ['Rooftop Bar', 'Free WiFi', 'Gym', 'Pet Friendly'], gallery: ['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80','https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?w=800&q=80','https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=800&q=80'] },
-      { name: '1 Hotel Brooklyn Bridge', price: '35000', rating: '4.8', lat: 40.7020, lng: -73.9950, img: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=400&q=80', distance: 'Brooklyn Bridge Park', desc: 'Eco-luxury waterfront hotel featuring unparalleled views of the Manhattan skyline.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'King, Double, Riverhouse Suite', amenities: ['Rooftop Pool', 'Spa', 'Organic Cafe', 'Free WiFi'], gallery: ['https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80','https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800&q=80','https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80'] },
-      { name: 'Arlo SoHo', price: '20000', rating: '4.4', lat: 40.7243, lng: -74.0072, img: 'https://images.unsplash.com/photo-1517840901100-8179e982acb7?auto=format&fit=crop&w=400&q=80', distance: 'SoHo', desc: 'Micro-hotel offering smartly designed rooms and vibrant communal spaces.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'City King, Courtyard Queen', amenities: ['Courtyard', 'Bar', 'Free Bikes', 'Free WiFi'], gallery: ['https://images.unsplash.com/photo-1517840901100-8179e982acb7?w=800&q=80','https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80','https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80'] },
-      { name: 'The Beekman', price: '40000', rating: '4.8', lat: 40.7114, lng: -74.0069, img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=400&q=80', distance: 'Financial District', desc: 'Historic 19th-century luxury hotel with a stunning nine-story atrium.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Superior King, Studio, Premium Suite', amenities: ['Fine Dining', 'Bar', 'Gym', 'Free WiFi'], gallery: ['https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80','https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80','https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'] },
-      { name: 'Lotte New York Palace', price: '50000', rating: '4.9', lat: 40.7580, lng: -73.9749, img: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=400&q=80', distance: 'Midtown East', desc: 'Grand luxury hotel combining historic mansions with a modern high-rise tower.', checkIn: '04:00 PM', checkOut: '11:00 AM', rooms: 'Superior, Tower Room, Suite', amenities: ['Spa', 'Room Service', 'Bar', 'Free WiFi'], gallery: ['https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80','https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80','https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=800&q=80'] },
-      { name: 'Pod 51 Hotel', price: '12000', rating: '4.3', lat: 40.7562, lng: -73.9687, img: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=400&q=80', distance: 'Midtown East', desc: 'Budget-friendly micro hotel with colorful decor and a rooftop deck.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Bunk Bed, Queen, Studio', amenities: ['Rooftop Deck', 'Cafe', 'Free WiFi'], gallery: ['https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&q=80','https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?w=800&q=80','https://images.unsplash.com/photo-1541123356219-284ebe98ae3b?w=800&q=80'] },
-      { name: 'Crosby Street Hotel', price: '55000', rating: '4.9', lat: 40.7233, lng: -73.9975, img: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=400&q=80', distance: 'SoHo', desc: 'Vibrant, art-filled luxury boutique hotel set on a quiet cobblestone street.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Superior, Luxury, Suite', amenities: ['Cinema', 'Sculpture Garden', 'Gym', 'Free WiFi'], gallery: ['https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80','https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80','https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80'] },
-      { name: 'Moxy NYC Times Square', price: '18000', rating: '4.4', lat: 40.7523, lng: -73.9880, img: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=400&q=80', distance: 'Times Square', desc: 'Energetic, millennial-focused hotel with a massive rooftop bar and mini-golf.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'King, Double Double, Bunk', amenities: ['Magic Hour Rooftop', 'Bar', 'Gym', 'Free WiFi'], gallery: ['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80','https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80','https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=800&q=80'] },
-      { name: 'The Langham', price: '48000', rating: '4.8', lat: 40.7501, lng: -73.9837, img: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=400&q=80', distance: 'Fifth Avenue', desc: 'Refined modern luxury with oversized rooms and Michelin-starred dining.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Superior, Executive, Penthouse', amenities: ['Spa', 'Michelin Dining', 'Gym', 'Valet'], gallery: ['https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80','https://images.unsplash.com/photo-1511895426328-dc8714191011?w=800&q=80','https://images.unsplash.com/photo-1517840901100-8179e982acb7?w=800&q=80'] },
-      { name: 'Row NYC Hotel', price: '14000', rating: '4.0', lat: 40.7589, lng: -73.9870, img: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=400&q=80', distance: 'Times Square', desc: 'Hip, artsy hotel in the heart of the theater district with a food hall.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'Standard, Premium, Suite', amenities: ['Food Hall', 'Gym', 'Lounge', 'Free WiFi'], gallery: ['https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80','https://images.unsplash.com/photo-1541123356219-284ebe98ae3b?w=800&q=80','https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&q=80'] }
+      { name: 'The Plaza Hotel', price: '45000', rating: '4.9', lat: 40.7644, lng: -73.9744, img: 'https://picsum.photos/id/635/800/600', distance: '100m to Central Park', desc: 'Luxury stay overlooking Central Park. Features Spa, Fine Dining, and historic architecture.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Deluxe, Suite, Royal', amenities: ['Free WiFi', 'Pool', 'Spa', 'Gym', 'Valet'], gallery: ['https://picsum.photos/id/241/800/600','https://picsum.photos/id/628/800/600','https://picsum.photos/id/40/800/600'] },
+      { name: 'YOTEL New York', price: '15000', rating: '4.5', lat: 40.7590, lng: -73.9934, img: 'https://picsum.photos/id/233/800/600', distance: '300m to Times Square', desc: 'Modern cabins in Times Square. Perfect for solo travelers or couples on a budget.', checkIn: '03:00 PM', checkOut: '11:00 AM', rooms: 'Premium Queen, VIP View', amenities: ['Smart TV', 'Terrace', 'Gym', 'Robot Luggage'], gallery: ['https://picsum.photos/id/130/800/600','https://picsum.photos/id/142/800/600','https://picsum.photos/id/306/800/600'] },
+      { name: 'The Standard High Line', price: '28000', rating: '4.7', lat: 40.7409, lng: -74.0078, img: 'https://picsum.photos/id/73/800/600', distance: 'Meatpacking District', desc: 'Boutique hotel with panoramic views of the Hudson River and High Line.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'Standard Queen, King, Corner Suite', amenities: ['Rooftop Bar', 'Free WiFi', 'Gym', 'Pet Friendly'], gallery: ['https://picsum.photos/id/371/800/600','https://picsum.photos/id/13/800/600','https://picsum.photos/id/903/800/600'] },
+      { name: '1 Hotel Brooklyn Bridge', price: '35000', rating: '4.8', lat: 40.7020, lng: -73.9950, img: 'https://picsum.photos/id/133/800/600', distance: 'Brooklyn Bridge Park', desc: 'Eco-luxury waterfront hotel featuring unparalleled views of the Manhattan skyline.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'King, Double, Riverhouse Suite', amenities: ['Rooftop Pool', 'Spa', 'Organic Cafe', 'Free WiFi'], gallery: ['https://picsum.photos/id/492/800/600','https://picsum.photos/id/870/800/600','https://picsum.photos/id/897/800/600'] },
+      { name: 'Arlo SoHo', price: '20000', rating: '4.4', lat: 40.7243, lng: -74.0072, img: 'https://picsum.photos/id/144/800/600', distance: 'SoHo', desc: 'Micro-hotel offering smartly designed rooms and vibrant communal spaces.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'City King, Courtyard Queen', amenities: ['Courtyard', 'Bar', 'Free Bikes', 'Free WiFi'], gallery: ['https://picsum.photos/id/848/800/600','https://picsum.photos/id/744/800/600','https://picsum.photos/id/240/800/600'] },
+      { name: 'The Beekman', price: '40000', rating: '4.8', lat: 40.7114, lng: -74.0069, img: 'https://picsum.photos/id/213/800/600', distance: 'Financial District', desc: 'Historic 19th-century luxury hotel with a stunning nine-story atrium.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Superior King, Studio, Premium Suite', amenities: ['Fine Dining', 'Bar', 'Gym', 'Free WiFi'], gallery: ['https://picsum.photos/id/35/800/600','https://picsum.photos/id/937/800/600','https://picsum.photos/id/709/800/600'] },
+      { name: 'Lotte New York Palace', price: '50000', rating: '4.9', lat: 40.7580, lng: -73.9749, img: 'https://picsum.photos/id/190/800/600', distance: 'Midtown East', desc: 'Grand luxury hotel combining historic mansions with a modern high-rise tower.', checkIn: '04:00 PM', checkOut: '11:00 AM', rooms: 'Superior, Tower Room, Suite', amenities: ['Spa', 'Room Service', 'Bar', 'Free WiFi'], gallery: ['https://picsum.photos/id/243/800/600','https://picsum.photos/id/892/800/600','https://picsum.photos/id/79/800/600'] },
+      { name: 'Pod 51 Hotel', price: '12000', rating: '4.3', lat: 40.7562, lng: -73.9687, img: 'https://picsum.photos/id/225/800/600', distance: 'Midtown East', desc: 'Budget-friendly micro hotel with colorful decor and a rooftop deck.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Bunk Bed, Queen, Studio', amenities: ['Rooftop Deck', 'Cafe', 'Free WiFi'], gallery: ['https://picsum.photos/id/352/800/600','https://picsum.photos/id/538/800/600','https://picsum.photos/id/898/800/600'] },
+      { name: 'Crosby Street Hotel', price: '55000', rating: '4.9', lat: 40.7233, lng: -73.9975, img: 'https://picsum.photos/id/397/800/600', distance: 'SoHo', desc: 'Vibrant, art-filled luxury boutique hotel set on a quiet cobblestone street.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Superior, Luxury, Suite', amenities: ['Cinema', 'Sculpture Garden', 'Gym', 'Free WiFi'], gallery: ['https://picsum.photos/id/927/800/600','https://picsum.photos/id/646/800/600','https://picsum.photos/id/589/800/600'] },
+      { name: 'Moxy NYC Times Square', price: '18000', rating: '4.4', lat: 40.7523, lng: -73.9880, img: 'https://picsum.photos/id/714/800/600', distance: 'Times Square', desc: 'Energetic, millennial-focused hotel with a massive rooftop bar and mini-golf.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'King, Double Double, Bunk', amenities: ['Magic Hour Rooftop', 'Bar', 'Gym', 'Free WiFi'], gallery: ['https://picsum.photos/id/641/800/600','https://picsum.photos/id/312/800/600','https://picsum.photos/id/131/800/600'] },
+      { name: 'The Langham', price: '48000', rating: '4.8', lat: 40.7501, lng: -73.9837, img: 'https://picsum.photos/id/92/800/600', distance: 'Fifth Avenue', desc: 'Refined modern luxury with oversized rooms and Michelin-starred dining.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Superior, Executive, Penthouse', amenities: ['Spa', 'Michelin Dining', 'Gym', 'Valet'], gallery: ['https://picsum.photos/id/706/800/600','https://picsum.photos/id/19/800/600','https://picsum.photos/id/390/800/600'] },
+      { name: 'Row NYC Hotel', price: '14000', rating: '4.0', lat: 40.7589, lng: -73.9870, img: 'https://picsum.photos/id/114/800/600', distance: 'Times Square', desc: 'Hip, artsy hotel in the heart of the theater district with a food hall.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'Standard, Premium, Suite', amenities: ['Food Hall', 'Gym', 'Lounge', 'Free WiFi'], gallery: ['https://picsum.photos/id/304/800/600','https://picsum.photos/id/888/800/600','https://picsum.photos/id/491/800/600'] }
     ],
     restaurants: [
-      { name: 'Le Bernardin', type: 'Fine Dining', lat: 40.7614, lng: -73.9816, img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80', locText: 'Near Times Square', travel: '10 min walk', timing: '12:00 PM - 10:30 PM', cost: '15000', tags: ['Fine Dining', 'Seafood'], menu: [{ name: 'Caviar Tasting', desc: 'Imperial Ossetra with classic garnish', price: '$120', tags: ['GF'] }, { name: 'Poached Halibut', desc: 'With wild mushroom consommé', price: '$65', tags: ['GF', 'Halal'] }], reviews: '"Best seafood in NY." - FoodCrit' },
-      { name: 'Katz\'s Delicatessen', type: 'Iconic Deli', lat: 40.7222, lng: -73.9874, img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80', locText: 'Lower East Side', travel: '15 min cab', timing: '08:00 AM - 11:00 PM', cost: '2500', tags: ['Casual', 'Meat'], menu: [{ name: 'Pastrami Sandwich', desc: 'Legendary hand-carved pastrami on rye', price: '$25', tags: [] }, { name: 'Matzo Ball Soup', desc: 'Classic Jewish comfort food', price: '$10', tags: [] }], reviews: '"A historic must-visit." - NYT' },
-      { name: 'Peter Luger Steak House', type: 'Steakhouse', lat: 40.7099, lng: -73.9625, img: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=400&q=80', locText: 'Brooklyn', travel: '20 min subway', timing: '11:45 AM - 09:45 PM', cost: '12000', tags: ['Steak', 'Iconic'], menu: [{ name: 'Steak for Two', desc: 'Dry-aged porterhouse', price: '$115', tags: ['GF'] }, { name: 'Thick Cut Bacon', desc: 'Extra thick sizzling bacon', price: '$8', tags: [] }], reviews: '"Best steak in the world." - Critic' },
-      { name: 'Balthazar', type: 'French Brasserie', lat: 40.7226, lng: -73.9981, img: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=400&q=80', locText: 'SoHo', travel: '15 min subway', timing: '08:00 AM - 11:00 PM', cost: '5000', tags: ['French', 'Bustling'], menu: [{ name: 'Steak Frites', desc: 'Classic steak with French fries', price: '$42', tags: [] }, { name: 'Onion Soup', desc: 'Traditional French onion soup', price: '$18', tags: [] }], reviews: '"A slice of Paris in NY." - Foodie' },
-      { name: 'Halal Guys', type: 'Street Food', lat: 40.7618, lng: -73.9793, img: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?auto=format&fit=crop&w=400&q=80', locText: 'Midtown (53rd & 6th)', travel: '10 min walk', timing: '10:00 AM - 04:00 AM', cost: '1000', tags: ['Street Food', 'Halal'], menu: [{ name: 'Chicken & Gyro Platter', desc: 'Over rice with white sauce', price: '$10', tags: ['Halal'] }], reviews: '"Legendary street cart." - Local' },
-      { name: 'Carmine\'s', type: 'Italian Family Style', lat: 40.7575, lng: -73.9868, img: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=400&q=80', locText: 'Times Square', travel: '5 min walk', timing: '11:30 AM - 11:00 PM', cost: '4000', tags: ['Italian', 'Groups'], menu: [{ name: 'Penne Alla Vodka', desc: 'Massive family portion', price: '$35', tags: ['Vegetarian'] }, { name: 'Chicken Parm', desc: 'Crispy chicken with mozzarella', price: '$40', tags: [] }], reviews: '"Huge portions, great flavor." - Eater' },
-      { name: 'Ippudo NY', type: 'Ramen', lat: 40.7309, lng: -73.9904, img: 'https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=400&q=80', locText: 'East Village', travel: '15 min subway', timing: '11:00 AM - 10:00 PM', cost: '2000', tags: ['Japanese', 'Noodles'], menu: [{ name: 'Akamaru Modern', desc: 'Tonkotsu broth with special garlic oil', price: '$18', tags: [] }, { name: 'Pork Buns', desc: 'Steamed buns with pork chashu', price: '$9', tags: [] }], reviews: '"Best ramen hands down." - Yelp' },
-      { name: 'Joe\'s Pizza', type: 'Pizzeria', lat: 40.7305, lng: -74.0021, img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80', locText: 'Greenwich Village', travel: '15 min subway', timing: '10:00 AM - 04:00 AM', cost: '500', tags: ['Pizza', 'Casual'], menu: [{ name: 'Cheese Slice', desc: 'Classic NY style cheese slice', price: '$4', tags: ['Vegetarian'] }], reviews: '"The quintessential NY slice." - Timeout' },
-      { name: 'Gramercy Tavern', type: 'New American', lat: 40.7386, lng: -73.9882, img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=400&q=80', locText: 'Flatiron', travel: '10 min subway', timing: '12:00 PM - 10:00 PM', cost: '10000', tags: ['Fine Dining', 'American'], menu: [{ name: 'Tasting Menu', desc: 'Seasonal ingredients', price: '$150', tags: [] }], reviews: '"Impeccable service and food." - Zagat' },
-      { name: 'Los Tacos No.1', type: 'Mexican', lat: 40.7423, lng: -74.0060, img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80', locText: 'Chelsea Market', travel: '20 min walk', timing: '11:00 AM - 10:00 PM', cost: '1500', tags: ['Tacos', 'Fast Casual'], menu: [{ name: 'Adobada Taco', desc: 'Marinated pork taco', price: '$4.50', tags: [] }, { name: 'Carne Asada', desc: 'Grilled steak taco', price: '$5', tags: ['GF'] }], reviews: '"Most authentic tacos in NY." - Local' },
-      { name: 'Veselka', type: 'Ukrainian Diner', lat: 40.7289, lng: -73.9870, img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=400&q=80', locText: 'East Village', travel: '15 min subway', timing: '08:00 AM - 11:00 PM', cost: '2000', tags: ['Diner', 'Comfort'], menu: [{ name: 'Pierogi', desc: 'Potato and cheese dumplings', price: '$12', tags: ['Vegetarian'] }, { name: 'Borscht', desc: 'Classic beet soup', price: '$9', tags: [] }], reviews: '"Late night comfort food haven." - Eater' },
-      { name: 'Eleven Madison Park', type: 'Fine Dining', lat: 40.7416, lng: -73.9872, img: 'https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=400&q=80', locText: 'Flatiron', travel: '10 min subway', timing: '05:30 PM - 10:00 PM', cost: '30000', tags: ['Fine Dining', 'Vegan'], menu: [{ name: 'Plant-based Tasting', desc: 'Multi-course vegan journey', price: '$335', tags: ['Vegan'] }], reviews: '"A culinary masterpiece." - NYT' }
+      { name: 'Le Bernardin', type: 'Fine Dining', lat: 40.7614, lng: -73.9816, img: 'https://picsum.photos/id/344/800/600', locText: 'Near Times Square', travel: '10 min walk', timing: '12:00 PM - 10:30 PM', cost: '15000', tags: ['Fine Dining', 'Seafood'], menu: [{ name: 'Caviar Tasting', desc: 'Imperial Ossetra with classic garnish', price: '$120', tags: ['GF'] }, { name: 'Poached Halibut', desc: 'With wild mushroom consommé', price: '$65', tags: ['GF', 'Halal'] }], reviews: '"Best seafood in NY." - FoodCrit' },
+      { name: 'Katz\'s Delicatessen', type: 'Iconic Deli', lat: 40.7222, lng: -73.9874, img: 'https://picsum.photos/id/828/800/600', locText: 'Lower East Side', travel: '15 min cab', timing: '08:00 AM - 11:00 PM', cost: '2500', tags: ['Casual', 'Meat'], menu: [{ name: 'Pastrami Sandwich', desc: 'Legendary hand-carved pastrami on rye', price: '$25', tags: [] }, { name: 'Matzo Ball Soup', desc: 'Classic Jewish comfort food', price: '$10', tags: [] }], reviews: '"A historic must-visit." - NYT' },
+      { name: 'Peter Luger Steak House', type: 'Steakhouse', lat: 40.7099, lng: -73.9625, img: 'https://picsum.photos/id/590/800/600', locText: 'Brooklyn', travel: '20 min subway', timing: '11:45 AM - 09:45 PM', cost: '12000', tags: ['Steak', 'Iconic'], menu: [{ name: 'Steak for Two', desc: 'Dry-aged porterhouse', price: '$115', tags: ['GF'] }, { name: 'Thick Cut Bacon', desc: 'Extra thick sizzling bacon', price: '$8', tags: [] }], reviews: '"Best steak in the world." - Critic' },
+      { name: 'Balthazar', type: 'French Brasserie', lat: 40.7226, lng: -73.9981, img: 'https://picsum.photos/id/988/800/600', locText: 'SoHo', travel: '15 min subway', timing: '08:00 AM - 11:00 PM', cost: '5000', tags: ['French', 'Bustling'], menu: [{ name: 'Steak Frites', desc: 'Classic steak with French fries', price: '$42', tags: [] }, { name: 'Onion Soup', desc: 'Traditional French onion soup', price: '$18', tags: [] }], reviews: '"A slice of Paris in NY." - Foodie' },
+      { name: 'Halal Guys', type: 'Street Food', lat: 40.7618, lng: -73.9793, img: 'https://picsum.photos/id/837/800/600', locText: 'Midtown (53rd & 6th)', travel: '10 min walk', timing: '10:00 AM - 04:00 AM', cost: '1000', tags: ['Street Food', 'Halal'], menu: [{ name: 'Chicken & Gyro Platter', desc: 'Over rice with white sauce', price: '$10', tags: ['Halal'] }], reviews: '"Legendary street cart." - Local' },
+      { name: 'Carmine\'s', type: 'Italian Family Style', lat: 40.7575, lng: -73.9868, img: 'https://picsum.photos/id/214/800/600', locText: 'Times Square', travel: '5 min walk', timing: '11:30 AM - 11:00 PM', cost: '4000', tags: ['Italian', 'Groups'], menu: [{ name: 'Penne Alla Vodka', desc: 'Massive family portion', price: '$35', tags: ['Vegetarian'] }, { name: 'Chicken Parm', desc: 'Crispy chicken with mozzarella', price: '$40', tags: [] }], reviews: '"Huge portions, great flavor." - Eater' },
+      { name: 'Ippudo NY', type: 'Ramen', lat: 40.7309, lng: -73.9904, img: 'https://picsum.photos/id/136/800/600', locText: 'East Village', travel: '15 min subway', timing: '11:00 AM - 10:00 PM', cost: '2000', tags: ['Japanese', 'Noodles'], menu: [{ name: 'Akamaru Modern', desc: 'Tonkotsu broth with special garlic oil', price: '$18', tags: [] }, { name: 'Pork Buns', desc: 'Steamed buns with pork chashu', price: '$9', tags: [] }], reviews: '"Best ramen hands down." - Yelp' },
+      { name: 'Joe\'s Pizza', type: 'Pizzeria', lat: 40.7305, lng: -74.0021, img: 'https://picsum.photos/id/198/800/600', locText: 'Greenwich Village', travel: '15 min subway', timing: '10:00 AM - 04:00 AM', cost: '500', tags: ['Pizza', 'Casual'], menu: [{ name: 'Cheese Slice', desc: 'Classic NY style cheese slice', price: '$4', tags: ['Vegetarian'] }], reviews: '"The quintessential NY slice." - Timeout' },
+      { name: 'Gramercy Tavern', type: 'New American', lat: 40.7386, lng: -73.9882, img: 'https://picsum.photos/id/45/800/600', locText: 'Flatiron', travel: '10 min subway', timing: '12:00 PM - 10:00 PM', cost: '10000', tags: ['Fine Dining', 'American'], menu: [{ name: 'Tasting Menu', desc: 'Seasonal ingredients', price: '$150', tags: [] }], reviews: '"Impeccable service and food." - Zagat' },
+      { name: 'Los Tacos No.1', type: 'Mexican', lat: 40.7423, lng: -74.0060, img: 'https://picsum.photos/id/635/800/600', locText: 'Chelsea Market', travel: '20 min walk', timing: '11:00 AM - 10:00 PM', cost: '1500', tags: ['Tacos', 'Fast Casual'], menu: [{ name: 'Adobada Taco', desc: 'Marinated pork taco', price: '$4.50', tags: [] }, { name: 'Carne Asada', desc: 'Grilled steak taco', price: '$5', tags: ['GF'] }], reviews: '"Most authentic tacos in NY." - Local' },
+      { name: 'Veselka', type: 'Ukrainian Diner', lat: 40.7289, lng: -73.9870, img: 'https://picsum.photos/id/815/800/600', locText: 'East Village', travel: '15 min subway', timing: '08:00 AM - 11:00 PM', cost: '2000', tags: ['Diner', 'Comfort'], menu: [{ name: 'Pierogi', desc: 'Potato and cheese dumplings', price: '$12', tags: ['Vegetarian'] }, { name: 'Borscht', desc: 'Classic beet soup', price: '$9', tags: [] }], reviews: '"Late night comfort food haven." - Eater' },
+      { name: 'Eleven Madison Park', type: 'Fine Dining', lat: 40.7416, lng: -73.9872, img: 'https://picsum.photos/id/244/800/600', locText: 'Flatiron', travel: '10 min subway', timing: '05:30 PM - 10:00 PM', cost: '30000', tags: ['Fine Dining', 'Vegan'], menu: [{ name: 'Plant-based Tasting', desc: 'Multi-course vegan journey', price: '$335', tags: ['Vegan'] }], reviews: '"A culinary masterpiece." - NYT' }
     ],
     places: [
-      { name: 'Statue of Liberty', img: 'https://images.unsplash.com/photo-1605130284535-11dd9eedc58a?auto=format&fit=crop&w=400&q=80', desc: 'Iconic monument representing freedom and democracy.', fee: '2000', loc: 'Battery Park', lat: 40.6892, lng: -74.0445, crowd: 'high', tour: '10:00 AM' },
-      { name: 'Central Park', img: 'https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?auto=format&fit=crop&w=400&q=80', desc: 'Massive urban park offering lakes, trails, and a zoo.', fee: '0', loc: 'Manhattan', lat: 40.7812, lng: -73.9665, crowd: 'low', tour: 'Free' },
-      { name: 'Empire State Building', img: 'https://images.unsplash.com/photo-1518882174711-1de40238921b?auto=format&fit=crop&w=400&q=80', desc: 'Famous Art Deco skyscraper with 360-degree views of the city.', fee: '3500', loc: 'Midtown', lat: 40.7484, lng: -73.9857, crowd: 'high', tour: '04:00 PM' },
-      { name: 'The Metropolitan Museum of Art', img: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=400&q=80', desc: 'One of the world\'s largest and finest art museums.', fee: '2500', loc: 'Upper East Side', lat: 40.7794, lng: -73.9632, crowd: 'high', tour: '11:00 AM' },
-      { name: 'Times Square', img: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=400&q=80', desc: 'Bustling intersection renowned for its neon lights and billboards.', fee: '0', loc: 'Midtown', lat: 40.7580, lng: -73.9855, crowd: 'high', tour: 'Free' },
-      { name: 'Brooklyn Bridge', img: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=400&q=80', desc: 'Historic suspension bridge connecting Manhattan and Brooklyn.', fee: '0', loc: 'Lower Manhattan', lat: 40.7061, lng: -73.9969, crowd: 'medium', tour: 'Free' },
-      { name: 'The High Line', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=400&q=80', desc: 'Elevated linear park built on a historic freight rail line.', fee: '0', loc: 'Chelsea', lat: 40.7480, lng: -74.0048, crowd: 'medium', tour: 'Free' },
-      { name: 'One World Observatory', img: 'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=400&q=80', desc: 'Observation deck at the top of the tallest building in the Western Hemisphere.', fee: '3800', loc: 'Financial District', lat: 40.7130, lng: -74.0131, crowd: 'high', tour: '02:00 PM' },
-      { name: 'Museum of Modern Art (MoMA)', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=400&q=80', desc: 'Leading museum showcasing contemporary and modern art.', fee: '2000', loc: 'Midtown', lat: 40.7614, lng: -73.9776, crowd: 'medium', tour: '01:00 PM' },
-      { name: 'Grand Central Terminal', img: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=400&q=80', desc: 'Iconic beaux-arts train station with a celestial ceiling.', fee: '0', loc: 'Midtown', lat: 40.7527, lng: -73.9772, crowd: 'high', tour: 'Free' },
-      { name: 'Top of the Rock', img: 'https://images.unsplash.com/photo-1542314831-c6a420325142?auto=format&fit=crop&w=400&q=80', desc: 'Observation deck offering spectacular skyline views, including the Empire State Building.', fee: '3400', loc: 'Rockefeller Center', lat: 40.7593, lng: -73.9794, crowd: 'medium', tour: '05:00 PM (Sunset)' },
-      { name: '9/11 Memorial & Museum', img: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=400&q=80', desc: 'Memorial and museum honoring the victims of the September 11 attacks.', fee: '2800', loc: 'Financial District', lat: 40.7115, lng: -74.0133, crowd: 'high', tour: '10:00 AM' }
+      { name: 'Statue of Liberty', img: 'https://picsum.photos/id/757/800/600', desc: 'Iconic monument representing freedom and democracy.', fee: '2000', loc: 'Battery Park', lat: 40.6892, lng: -74.0445, crowd: 'high', tour: '10:00 AM' },
+      { name: 'Central Park', img: 'https://picsum.photos/id/85/800/600', desc: 'Massive urban park offering lakes, trails, and a zoo.', fee: '0', loc: 'Manhattan', lat: 40.7812, lng: -73.9665, crowd: 'low', tour: 'Free' },
+      { name: 'Empire State Building', img: 'https://picsum.photos/id/914/800/600', desc: 'Famous Art Deco skyscraper with 360-degree views of the city.', fee: '3500', loc: 'Midtown', lat: 40.7484, lng: -73.9857, crowd: 'high', tour: '04:00 PM' },
+      { name: 'The Metropolitan Museum of Art', img: 'https://picsum.photos/id/659/800/600', desc: 'One of the world\'s largest and finest art museums.', fee: '2500', loc: 'Upper East Side', lat: 40.7794, lng: -73.9632, crowd: 'high', tour: '11:00 AM' },
+      { name: 'Times Square', img: 'https://picsum.photos/id/763/800/600', desc: 'Bustling intersection renowned for its neon lights and billboards.', fee: '0', loc: 'Midtown', lat: 40.7580, lng: -73.9855, crowd: 'high', tour: 'Free' },
+      { name: 'Brooklyn Bridge', img: 'https://picsum.photos/id/540/800/600', desc: 'Historic suspension bridge connecting Manhattan and Brooklyn.', fee: '0', loc: 'Lower Manhattan', lat: 40.7061, lng: -73.9969, crowd: 'medium', tour: 'Free' },
+      { name: 'The High Line', img: 'https://picsum.photos/id/951/800/600', desc: 'Elevated linear park built on a historic freight rail line.', fee: '0', loc: 'Chelsea', lat: 40.7480, lng: -74.0048, crowd: 'medium', tour: 'Free' },
+      { name: 'One World Observatory', img: 'https://picsum.photos/id/763/800/600', desc: 'Observation deck at the top of the tallest building in the Western Hemisphere.', fee: '3800', loc: 'Financial District', lat: 40.7130, lng: -74.0131, crowd: 'high', tour: '02:00 PM' },
+      { name: 'Museum of Modern Art (MoMA)', img: 'https://picsum.photos/id/482/800/600', desc: 'Leading museum showcasing contemporary and modern art.', fee: '2000', loc: 'Midtown', lat: 40.7614, lng: -73.9776, crowd: 'medium', tour: '01:00 PM' },
+      { name: 'Grand Central Terminal', img: 'https://picsum.photos/id/657/800/600', desc: 'Iconic beaux-arts train station with a celestial ceiling.', fee: '0', loc: 'Midtown', lat: 40.7527, lng: -73.9772, crowd: 'high', tour: 'Free' },
+      { name: 'Top of the Rock', img: 'https://picsum.photos/id/340/800/600', desc: 'Observation deck offering spectacular skyline views, including the Empire State Building.', fee: '3400', loc: 'Rockefeller Center', lat: 40.7593, lng: -73.9794, crowd: 'medium', tour: '05:00 PM (Sunset)' },
+      { name: '9/11 Memorial & Museum', img: 'https://picsum.photos/id/942/800/600', desc: 'Memorial and museum honoring the victims of the September 11 attacks.', fee: '2800', loc: 'Financial District', lat: 40.7115, lng: -74.0133, crowd: 'high', tour: '10:00 AM' }
     ]
   },
   paris: {
-    heroImg: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80',
+    heroImg: 'https://picsum.photos/id/445/800/600',
     centerLat: 48.8566, centerLng: 2.3522,
     currency: { from: 'EUR', symbol: '€', rate: '90.50', tip: 'Service is often included, but rounding up the bill is polite.' },
     weather: [
@@ -105,27 +111,29 @@ const globalData = {
     itinerary: [
       {
         dayLabel: 'Day 1: Heart of Paris',
+        subtitle: 'Experience classic Parisian landmarks.',
+        totalTime: '4.5 hrs', estCost: '35',
         activities: [
-          { time: '09:00 AM', place: 'Louvre Museum', duration: '3 hrs', dist: '2 km', transport: 'Metro', cost: '1500', icon: 'fa-landmark' },
-          { time: '12:30 PM', place: 'Cafe de Flore', duration: '1.5 hrs', dist: '1.5 km', transport: 'Walk', cost: '2000', icon: 'fa-coffee' }
+          { time: '09:00 AM', place: 'Louvre Museum', desc: 'World famous art museum.', duration: '3 hrs', dist: '2 km', transport: 'Metro', cost: '15.00', icon: 'fa-landmark', img: 'https://picsum.photos/id/620/800/600', lat: 48.8606, lng: 2.3376 },
+          { time: '12:30 PM', place: 'Cafe de Flore', desc: 'Historic cafe in St. Germain.', duration: '1.5 hrs', dist: '1.5 km', transport: 'Walk', cost: '20.00', icon: 'fa-coffee', img: 'https://picsum.photos/id/258/800/600', lat: 48.8541, lng: 2.3326 }
         ]
       }
     ],
     hotels: [
       { name: 'Ritz Paris', price: '90000', rating: '5.0', lat: 48.8683, lng: 2.3284,
-        img: 'https://images.unsplash.com/photo-1542314831-c6a420325142?auto=format&fit=crop&w=400&q=80', distance: 'Place Vendôme', 
+        img: 'https://picsum.photos/id/841/800/600', distance: 'Place Vendôme', 
         desc: 'Legendary hotel with exquisite decor, fine dining, and unmatched luxury.',
         checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Deluxe, Grand Suite',
         amenities: ['Spa', 'Michelin Star Dining', 'Indoor Pool', 'Butler'],
-        gallery: ['https://images.unsplash.com/photo-1542314831-c6a420325142?w=800&q=80','https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80','https://images.unsplash.com/photo-1590490359683-658d3d23f972?w=800&q=80'] }
+        gallery: ['https://picsum.photos/id/481/800/600','https://picsum.photos/id/178/800/600','https://picsum.photos/id/533/800/600'] }
     ],
     restaurants: [
-      { name: 'Le Jules Verne', type: 'Fine Dining', lat: 48.8584, lng: 2.2945, img: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=400&q=80', 
+      { name: 'Le Jules Verne', type: 'Fine Dining', lat: 48.8584, lng: 2.2945, img: 'https://picsum.photos/id/992/800/600', 
         locText: 'Eiffel Tower', travel: 'Elevator', timing: '12:00 PM - 9:30 PM', cost: '25000', tags: ['Fine Dining', 'Romantic'],
         menu: [{name: 'Lobster Souffle', desc:'Tender lobster with rich cream sauce', price:'€110', tags:['GF']}], reviews: '"Dining in the clouds." - Guide' }
     ],
     places: [
-      { name: 'Eiffel Tower', img: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=400&q=80', desc: 'Iron Lady of Paris.', fee: '2500', loc: 'Champ de Mars', lat: 48.8584, lng: 2.2945, crowd: 'high', tour: '06:00 PM' }
+      { name: 'Eiffel Tower', img: 'https://picsum.photos/id/750/800/600', desc: 'Iron Lady of Paris.', fee: '2500', loc: 'Champ de Mars', lat: 48.8584, lng: 2.2945, crowd: 'high', tour: '06:00 PM' }
     ]
   }
 };
@@ -161,6 +169,19 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
   allocatedBudget = 0;
   customItinerary = [];
   globalCostBreakdown = { flights: totalBudgetLimit*0.2, hotels: 0, food: 0, activities: 0 }; // Allocate 20% to flight estimate automatically
+
+  // Fix layout constraints for full screen
+  const pageBody = document.querySelector('.page-body');
+  if (pageBody) {
+    pageBody.style.maxWidth = '100%';
+    pageBody.style.padding = '0';
+  }
+  const formCard = document.getElementById('formCard');
+  if (formCard) {
+    formCard.style.padding = '0';
+    formCard.style.background = 'transparent';
+    formCard.style.border = 'none';
+  }
 
   // Build Hotels HTML
   let hotelsHtml = currentLocData.hotels.map((h, i) => `
@@ -220,34 +241,59 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
             <div class="crowd-bar ${p.crowd==='high'?'high':''}" style="height:90%;"><span>12p</span></div>
             <div class="crowd-bar ${p.crowd==='low'?'low':''}" style="height:30%;"><span>4p</span></div>
           </div>
-          <div style="display:flex; gap:10px; margin:10px 0;">
-            <button class="item-btn" onclick="routeTo(${p.lat}, ${p.lng}, '${p.name}')">Map Route</button>
-            <button class="item-btn" onclick="alert('Mock booking initiated for ${p.tour}')"><i class="fas fa-ticket-alt"></i> ${p.tour}</button>
+          <div style="display:flex; gap:5px; margin:10px 0;">
+            <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem;" onclick="routeTo(${p.lat}, ${p.lng}, '${p.name.replace(/'/g, "\\'")}')">Route</button>
+            <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem; background: var(--gold-dim); border-color: var(--gold); color: var(--gold);" onclick="showPhotoSpots(${p.lat}, ${p.lng}, '${p.name.replace(/'/g, "\\'")}')"><i class="fas fa-camera"></i> Spots</button>
+            <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem;" onclick="window.location.href='booking.html'"><i class="fas fa-ticket-alt"></i> Book</button>
           </div>
-          <button class="item-btn" style="border-color:#6C63FF; color:#6C63FF;" onclick="addToCustom('activities', 'Activity', '${p.name}', ${p.fee})"><i class="fas fa-plus"></i> Add to Itinerary</button>
+          <button class="item-btn" style="border-color:#6C63FF; color:#6C63FF; width:100%;" onclick="addToCustom('activities', 'Activity', '${p.name.replace(/'/g, "\\'")}', ${p.fee})"><i class="fas fa-plus"></i> Add to Itinerary</button>
         </div>
       </div>
   `).join('');
 
   // Build Itinerary
-  let itinHtml = currentLocData.itinerary.map((day, idx) => `
-    <div class="day-block">
-      <div class="day-title">${day.dayLabel} <button class="btn-sm" style="float:right;" onclick="animateRouteDay(${idx})"><i class="fas fa-route"></i> Animate Route</button></div>
-      ${day.activities.map(act => `
-        <div class="it-card">
-          <div class="it-time">${act.time}</div>
-          <div class="it-icon"><i class="fas ${act.icon}"></i></div>
-          <div class="it-details">
-            <h4>${act.place}</h4>
-            <p><i class="fas fa-hourglass-half"></i> ${act.duration} &nbsp;|&nbsp; <i class="fas fa-car"></i> ${act.transport} (${act.dist})</p>
-            <div class="it-meta">
-              <span>Cost: ₹${parseInt(act.cost).toLocaleString()}</span>
-            </div>
+  const curr = currentLocData.currency.symbol;
+  let itinHtml = `<div class="itinerary-timeline-container">` + currentLocData.itinerary.map((day, idx) => `
+    <div class="day-wrapper">
+      <div class="timeline-node">
+        <span style="font-size: 0.6rem; letter-spacing: 1px;">DAY</span>
+        <strong style="font-size: 1.2rem;">${(idx+1).toString().padStart(2, '0')}</strong>
+      </div>
+      <div class="day-card">
+        <div class="day-card-header">
+          <div class="day-card-titles">
+            <h3 class="day-card-title">${day.dayLabel.toUpperCase()}</h3>
+            <p class="day-card-subtitle">${day.subtitle || ''}</p>
+          </div>
+          <div class="day-card-stats">
+            <div class="stat-item"><i class="far fa-clock"></i> <div><small>Total Time</small><br><strong>${day.totalTime || '-'}</strong></div></div>
+            <div class="stat-item"><i class="fas fa-wallet"></i> <div><small>Est. Cost</small><br><strong>${curr}${day.estCost || '0'}</strong></div></div>
+            <button class="btn-sm expand-btn" onclick="animateRouteDay(${idx})" title="Animate Route" style="background:transparent; border:none; color:var(--gold); font-size:1.2rem; cursor:pointer;"><i class="fas fa-chevron-down"></i></button>
           </div>
         </div>
-      `).join('')}
+        <div class="day-card-body">
+          ${day.activities.map((act, actIdx) => {
+            const timeParts = act.time.split(' ');
+            const t1 = timeParts[0] + ' ' + (timeParts[1] ? timeParts[1].charAt(0) : '');
+            const t2 = timeParts[1] || '';
+            return `
+            <div class="it-item" onclick="highlightLocationOnMap(${act.lat || 0}, ${act.lng || 0}, '${act.place.replace(/'/g, "\\'")}')">
+              <div class="it-time"><span>${t1}</span><small>${t2}</small></div>
+              <div class="it-icon-wrap"><div class="it-icon"><i class="fas ${act.icon}"></i></div></div>
+              <div class="it-details">
+                <h4>${act.place}</h4>
+                <p class="it-desc">${act.desc || ''}</p>
+                <p class="it-meta-row"><i class="fas fa-hourglass-half"></i> ${act.duration} &nbsp;|&nbsp; <i class="fas fa-walking"></i> ${act.transport} (${act.dist})</p>
+              </div>
+              <div class="it-cost">Cost: ${curr}${parseInt(act.cost).toLocaleString()}</div>
+              ${act.img ? `<div class="it-thumb"><img src="${act.img}" alt="${act.place}"></div>` : ''}
+            </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
     </div>
-  `).join('');
+  `).join('') + `</div>`;
 
   // HTML Structure Injection
   const dashHtml = `
@@ -259,7 +305,7 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
           <button class="util-btn" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> Export PDF</button>
           <button class="util-btn" onclick="openCompareModal('${destinationKey}')"><i class="fas fa-exchange-alt"></i> Compare Trips</button>
           <button class="util-btn" onclick="simulateOfflineDownload(event)"><i class="fas fa-download"></i> Offline Map</button>
-          <button class="util-btn" onclick="alert('Metro Map overlay mocked!')"><i class="fas fa-subway"></i> Transport</button>
+          <button class="util-btn" onclick="showToast('Metro Map overlay mocked!', 'fa-subway')"><i class="fas fa-subway"></i> Transport</button>
         </div>
         <div>
           <div id="google_translate_element" style="display:inline-block;"></div>
@@ -267,6 +313,7 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
         </div>
       </div>
 
+      <div id="downloadableContent" style="width:100%;">
       <div class="dash-hero" id="itineraryHeader">
         <img src="${currentLocData.heroImg}" class="dash-hero-img" alt="Destination">
         <div class="dash-hero-content">
@@ -320,20 +367,39 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
             <!-- Carbon Footprint Estimator -->
             <div class="split-cost" style="justify-content:space-between; font-size:0.8rem;">
               <span style="color:#ccc;"><i class="fas fa-leaf" style="color:#2ecc71;"></i> Est. Footprint: <strong id="co2Print">0.5t</strong> CO2</span>
-              <button class="btn-sm" style="background:#2ecc71;" onclick="alert('Redirecting to Carbon Offset partners...')">Offset</button>
+              <button class="btn-sm" style="background:#2ecc71;" onclick="showToast('Redirecting to Carbon Offset partners...', 'fa-leaf')">Offset</button>
             </div>
           </div>
         </div>
 
-        <div class="widget-box" style="border-color:#6C63FF;">
-          <div class="widget-head" style="color:#6C63FF;"><i class="fas fa-list-check"></i> Custom Itinerary</div>
-          <div id="customItineraryList" style="max-height: 220px; overflow-y: auto; font-size:0.85rem; color:#ccc;">
-            <p>Your custom itinerary is empty. Add hotels and places to build your trip.</p>
+        <div class="widget-box readiness-widget" style="border-color:#2ecc71; position:relative; overflow:hidden;">
+          <div class="widget-head" style="color:#2ecc71;"><i class="fas fa-rocket"></i> Trip Readiness</div>
+          <div class="readiness-content" style="margin-top:15px;">
+             <div class="progress-bar-wrap" style="height:8px; background:rgba(255,255,255,0.1); border-radius:4px; margin-bottom:15px; overflow:hidden;">
+               <div class="progress-bar-fill" style="height:100%; width:0%; background:#2ecc71; border-radius:4px; transition:width 1.5s ease-in-out;"></div>
+             </div>
+             <ul class="checklist-animated" style="list-style:none; padding:0; margin:0; font-size:0.9rem; color:#ccc;">
+               <li style="margin-bottom:8px; display:flex; align-items:center; gap:10px;"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> Flights Booked</li>
+               <li style="margin-bottom:8px; display:flex; align-items:center; gap:10px;"><i class="fas fa-check-circle" style="color:#2ecc71;"></i> Hotel Confirmed</li>
+               <li class="pending" style="margin-bottom:8px; display:flex; align-items:center; gap:10px; opacity:0.6;"><i class="far fa-circle"></i> Packing Complete</li>
+               <li class="pending" style="margin-bottom:8px; display:flex; align-items:center; gap:10px; opacity:0.6;"><i class="far fa-circle"></i> Travel Insurance</li>
+             </ul>
           </div>
+          <!-- Simple CSS animation triggered via JS later or purely CSS -->
+          <style>
+            .readiness-widget:hover .progress-bar-fill { width: 50% !important; }
+            .readiness-widget .progress-bar-fill { animation: fillProgress 2s forwards ease-out 0.5s; }
+            @keyframes fillProgress { to { width: 50%; } }
+            .checklist-animated li { animation: slideInFade 0.5s forwards ease-out; opacity:0; transform:translateX(10px); }
+            .checklist-animated li:nth-child(1) { animation-delay: 0.2s; }
+            .checklist-animated li:nth-child(2) { animation-delay: 0.4s; }
+            .checklist-animated li:nth-child(3) { animation-delay: 0.6s; opacity: 0; }
+            .checklist-animated li:nth-child(4) { animation-delay: 0.8s; opacity: 0; }
+            @keyframes slideInFade { to { opacity:1; transform:translateX(0); } }
+            .checklist-animated li.pending { animation: slideInFadePending 0.5s forwards ease-out; }
+          </style>
         </div>
       </div>
-
-      <div id="downloadableContent" style="width:100%;">
         
         <div class="dash-section">
           <div class="section-head"><i class="fas fa-calendar-alt"></i><h3>Suggested Day-by-Day Itinerary</h3></div>
@@ -382,7 +448,7 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
               <i class="fas fa-camera"></i><h3>Must Visit Attractions</h3>
             </div>
             <div style="display:flex; gap:10px;">
-              <button class="util-btn" onclick="alert('Photo spots overlaid on Map!')"><i class="fas fa-camera-retro"></i> Photo Spots</button>
+              <button class="util-btn" onclick="showToast('Click \'Spots\' on any attraction below to explore photo locations!', 'fa-camera-retro')"><i class="fas fa-camera-retro"></i> Photo Spots</button>
               <button class="util-btn" onclick="scrollH('hScrollPlaces', -300)"><i class="fas fa-chevron-left"></i></button>
               <button class="util-btn" onclick="scrollH('hScrollPlaces', 300)"><i class="fas fa-chevron-right"></i></button>
             </div>
@@ -467,6 +533,25 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
     <div id="hotelModal" class="feature-modal"></div>
     <div id="menuModal" class="feature-modal"></div>
     <div id="placeModal" class="feature-modal"></div>
+
+    <!-- AI Travel Concierge Widget -->
+    <div id="aiConciergeBtn" class="ai-btn" onclick="toggleAiChat()">
+      <i class="fas fa-sparkles"></i>
+    </div>
+    
+    <div id="aiChatWindow" class="ai-chat-window">
+      <div class="ai-chat-header">
+        <div><i class="fas fa-robot"></i> AI Travel Concierge</div>
+        <button class="ai-close-btn" onclick="toggleAiChat()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="ai-chat-body" id="aiChatBody">
+        <div class="ai-msg">Hello! I'm your premium AI travel assistant. How can I help you plan your trip to ${destinationKey ? destinationKey.toUpperCase() : 'your destination'}?</div>
+      </div>
+      <div class="ai-chat-input">
+        <input type="text" id="aiInput" placeholder="Ask about places, phrases, tips..." onkeypress="handleAiKeyPress(event)">
+        <button class="ai-send-btn" onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
   `;
 
   document.getElementById('formCard').innerHTML = dashHtml;
@@ -530,14 +615,18 @@ function showHotelModal(index) {
   if(document.getElementById('placeModal')) document.getElementById('placeModal').classList.remove('active');
   const h = currentLocData.hotels[index];
   const container = document.getElementById('hotelModal');
+  
+  // Prepare gallery images string for the onclick function
+  const gStr = encodeURIComponent(JSON.stringify(h.gallery));
+
   container.innerHTML = `
     <div class="f-modal-content">
       <button class="f-modal-close" onclick="document.getElementById('hotelModal').classList.remove('active')"><i class="fas fa-times"></i></button>
       <h3 style="color:var(--gold); margin-top:0;">${h.name} - 360° Room Viewer & Details</h3>
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:20px;">
-        <img src="${h.gallery[0]}" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-        <img src="${h.gallery[1]}" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
-        <img src="${h.gallery[2]}" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+        <img src="${h.gallery[0]}" style="width:100%; height:200px; object-fit:cover; border-radius:8px; cursor:pointer;" onclick="openGlobalGallery(decodeURIComponent('${gStr}'), 0)">
+        <img src="${h.gallery[1]}" style="width:100%; height:200px; object-fit:cover; border-radius:8px; cursor:pointer;" onclick="openGlobalGallery(decodeURIComponent('${gStr}'), 1)">
+        <img src="${h.gallery[2]}" style="width:100%; height:200px; object-fit:cover; border-radius:8px; cursor:pointer;" onclick="openGlobalGallery(decodeURIComponent('${gStr}'), 2)">
       </div>
       <div style="margin-top:20px; color:#ccc;">
         <p><strong>Price:</strong> ₹${parseInt(h.price).toLocaleString()} &nbsp; | &nbsp; <strong>Rating:</strong> <i class="fas fa-star" style="color:#FFD700;"></i> ${h.rating}</p>
@@ -546,7 +635,7 @@ function showHotelModal(index) {
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin:15px 0;">
           ${h.amenities.map(a => `<span style="background:var(--gold); color:#000; padding:4px 10px; border-radius:20px; font-size:0.8rem;">${a}</span>`).join('')}
         </div>
-        <button class="util-btn" style="background:var(--gold); color:#000; margin-top:10px; width:100%; font-size:1.1rem; padding:12px;" onclick="addToCustom('hotels', 'Hotel', '${h.name}', ${h.price}); alert('Hotel added to plan!');"><i class="fas fa-check-circle"></i> Book Room & Add to Plan</button>
+        <button class="util-btn" style="background:var(--gold); color:#000; margin-top:10px; width:100%; font-size:1.1rem; padding:12px;" onclick="addToCustom('hotels', 'Hotel', '${h.name}', ${h.price}); showToast('Hotel added to plan!', 'fa-check'); setTimeout(() => window.location.href='booking.html?tour=' + encodeURIComponent('${h.name}'), 1500);"><i class="fas fa-check-circle"></i> Book Room & Add to Plan</button>
         ${getNearbyPlacesHtml(h.lat, h.lng, h.name)}
       </div>
     </div>
@@ -580,7 +669,7 @@ function showMenuModal(index) {
         ${menuList}
       </div>
 
-      <button class="util-btn" style="background:var(--gold); color:#000; margin-top:25px; width:100%; font-size:1.1rem; padding:12px;" onclick="addToCustom('food', 'Dining', '${r.name}', ${r.cost}); alert('Table Reserved & Added!');"><i class="fas fa-calendar-check"></i> Reserve Table</button>
+      <button class="util-btn" style="background:var(--gold); color:#000; margin-top:25px; width:100%; font-size:1.1rem; padding:12px;" onclick="addToCustom('food', 'Dining', '${r.name}', ${r.cost}); showToast('Table Reserved & Added!', 'fa-calendar-check'); setTimeout(() => window.location.href='booking.html?tour=' + encodeURIComponent('${r.name}'), 1500);"><i class="fas fa-calendar-check"></i> Reserve Table</button>
       ${getNearbyPlacesHtml(r.lat, r.lng, r.name)}
     </div>
   `;
@@ -598,20 +687,77 @@ function showPlaceModal(index) {
       <button class="f-modal-close" onclick="document.getElementById('placeModal').classList.remove('active')"><i class="fas fa-times"></i></button>
       <h3 style="color:var(--gold); margin-top:0;">${p.name} - Attraction Details</h3>
       <div style="margin-top:15px;">
-        <img src="${p.img}" style="width:100%; height:300px; object-fit:cover; border-radius:12px; margin-bottom:15px;">
+        <img src="${p.img}" style="width:100%; height:300px; object-fit:cover; border-radius:12px; margin-bottom:15px; cursor:pointer;" onclick="openGlobalGallery(encodeURIComponent(JSON.stringify(['${p.img}'])), 0)">
         <p><strong>Location:</strong> ${p.loc} &nbsp; | &nbsp; <strong>Entry Fee:</strong> ₹${p.fee}</p>
         <p>${p.desc}</p>
         <div style="display:flex; justify-content:space-between; color:#aaa; margin-top:15px;">
           <span><i class="fas fa-clock"></i> Recommended: ${p.tour}</span>
           <span><i class="fas fa-users"></i> Crowd: ${p.crowd.toUpperCase()}</span>
         </div>
-        <button class="util-btn" style="background:var(--gold); color:#000; margin-top:20px; width:100%; font-size:1.1rem; padding:12px;" onclick="addToCustom('activities', 'Activity', '${p.name}', ${p.fee}); alert('Activity added to plan!');"><i class="fas fa-ticket-alt"></i> Book Tickets & Add to Plan</button>
+        <button class="util-btn" style="background:var(--gold); color:#000; margin-top:20px; width:100%; font-size:1.1rem; padding:12px;" onclick="addToCustom('activities', 'Activity', '${p.name}', ${p.fee}); showToast('Activity added to plan!', 'fa-ticket-alt'); setTimeout(() => window.location.href='booking.html?tour=' + encodeURIComponent('${p.name}'), 1500);"><i class="fas fa-ticket-alt"></i> Book Tickets & Add to Plan</button>
         ${getNearbyPlacesHtml(p.lat, p.lng, p.name)}
       </div>
     </div>
   `;
   container.classList.add('active');
 }
+
+/* ── GLOBAL IMAGE GALLERY ── */
+let currentGalleryImages = [];
+let currentGalleryIndex = 0;
+
+function openGlobalGallery(encodedArr, index) {
+  try {
+    currentGalleryImages = JSON.parse(decodeURIComponent(encodedArr));
+    currentGalleryIndex = parseInt(index) || 0;
+    
+    let galleryContainer = document.getElementById('globalGalleryModal');
+    if (!galleryContainer) {
+      galleryContainer = document.createElement('div');
+      galleryContainer.id = 'globalGalleryModal';
+      galleryContainer.className = 'f-modal';
+      document.body.appendChild(galleryContainer);
+    }
+    
+    updateGalleryView();
+  } catch(e) {
+    console.error("Gallery failed to open", e);
+  }
+}
+
+function updateGalleryView() {
+  const container = document.getElementById('globalGalleryModal');
+  const imgUrl = currentGalleryImages[currentGalleryIndex];
+  
+  container.innerHTML = `
+    <div style="position:fixed; inset:0; background:rgba(0,0,0,0.95); display:flex; justify-content:center; align-items:center; z-index:99999; flex-direction:column;">
+      <button onclick="document.getElementById('globalGalleryModal').classList.remove('active')" style="position:absolute; top:30px; right:30px; background:transparent; border:none; color:white; font-size:2rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+      
+      <div style="position:relative; width:90%; max-width:1000px; display:flex; justify-content:center; align-items:center;">
+        ${currentGalleryImages.length > 1 ? `<button onclick="prevGalleryImg(event)" style="position:absolute; left:-50px; background:rgba(255,255,255,0.1); border:none; color:white; font-size:2rem; width:50px; height:50px; border-radius:50%; cursor:pointer;"><i class="fas fa-chevron-left"></i></button>` : ''}
+        
+        <img src="${imgUrl}" style="max-width:100%; max-height:80vh; object-fit:contain; box-shadow:0 0 30px rgba(0,0,0,0.8); border: 2px solid var(--gold);">
+        
+        ${currentGalleryImages.length > 1 ? `<button onclick="nextGalleryImg(event)" style="position:absolute; right:-50px; background:rgba(255,255,255,0.1); border:none; color:white; font-size:2rem; width:50px; height:50px; border-radius:50%; cursor:pointer;"><i class="fas fa-chevron-right"></i></button>` : ''}
+      </div>
+      
+      ${currentGalleryImages.length > 1 ? `<div style="color:#aaa; margin-top:20px; font-size:1.2rem; font-weight:bold;">${currentGalleryIndex + 1} / ${currentGalleryImages.length}</div>` : ''}
+    </div>
+  `;
+  container.classList.add('active');
+}
+
+window.nextGalleryImg = function(e) {
+  if (e) e.stopPropagation();
+  currentGalleryIndex = (currentGalleryIndex + 1) % currentGalleryImages.length;
+  updateGalleryView();
+};
+
+window.prevGalleryImg = function(e) {
+  if (e) e.stopPropagation();
+  currentGalleryIndex = (currentGalleryIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+  updateGalleryView();
+};
 
 
 /* ── CUSTOM ITINERARY, BUDGET & PIE CHART ── */
@@ -686,18 +832,20 @@ function updateCustomUI() {
   }
   
   const list = document.getElementById('customItineraryList');
-  if(customItinerary.length === 0) {
-    list.innerHTML = '<p>Your custom itinerary is empty. Add hotels and places to build your trip.</p>';
-  } else {
-    list.innerHTML = customItinerary.map((item, i) => `
-      <div style="display:flex; justify-content:space-between; margin-bottom:8px; background:rgba(255,255,255,0.05); padding:6px 10px; border-radius:6px;">
-        <div><strong style="color:var(--gold);">${item.type}:</strong> ${item.name}</div>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <span>₹${item.cost.toLocaleString()}</span>
-          <i class="fas fa-trash" style="cursor:pointer; color:#ff8080;" onclick="removeFromCustom(${i})"></i>
+  if(list) {
+    if(customItinerary.length === 0) {
+      list.innerHTML = '<p>Your custom itinerary is empty. Add hotels and places to build your trip.</p>';
+    } else {
+      list.innerHTML = customItinerary.map((item, i) => `
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; background:rgba(255,255,255,0.05); padding:6px 10px; border-radius:6px;">
+          <div><strong style="color:var(--gold);">${item.type}:</strong> ${item.name}</div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <span>₹${item.cost.toLocaleString()}</span>
+            <i class="fas fa-trash" style="cursor:pointer; color:#ff8080;" onclick="removeFromCustom(${i})"></i>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `).join('');
+    }
   }
 }
 
@@ -780,6 +928,7 @@ function initRealMap() {
 function routeTo(lat, lng, name) {
   if (!mapInstance) return;
   if (routingControl) mapInstance.removeControl(routingControl);
+  if (window.photoSpotLayer) mapInstance.removeLayer(window.photoSpotLayer);
   
   document.getElementById('realMap').scrollIntoView({behavior: 'smooth', block: 'center'});
 
@@ -793,12 +942,57 @@ function routeTo(lat, lng, name) {
   }).addTo(mapInstance);
 }
 
+function showPhotoSpots(lat, lng, name) {
+  if (!mapInstance) return;
+  
+  if (routingControl) mapInstance.removeControl(routingControl);
+  if (window.photoSpotLayer) mapInstance.removeLayer(window.photoSpotLayer);
+  
+  document.getElementById('realMap').scrollIntoView({behavior: 'smooth', block: 'center'});
+  
+  // Zoom into the specific location to show roads and landmarks clearly
+  mapInstance.setView([lat, lng], 17);
+  
+  window.photoSpotLayer = L.layerGroup().addTo(mapInstance);
+  
+  const cameraIcon = L.divIcon({
+    html: '<div style="background-color: #FFD700; color: #000; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255, 215, 0, 0.9); border: 2px solid #fff;"><i class="fas fa-camera"></i></div>',
+    className: 'custom-camera-icon',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16]
+  });
+
+  // Main location marker
+  L.marker([lat, lng]).addTo(window.photoSpotLayer)
+    .bindPopup(`<b>${name}</b><br>Main Attraction`).openPopup();
+    
+  // Mock photo spots around the attraction
+  const spots = [
+    { offsetLat: 0.0012, offsetLng: 0.0015, title: 'Panoramic Viewpoint', desc: 'Capture the whole scene from this elevated spot.' },
+    { offsetLat: -0.0010, offsetLng: -0.0012, title: 'Historic Angle', desc: 'Great framing with historical architecture.' },
+    { offsetLat: 0.0008, offsetLng: -0.0015, title: 'Street Level Portrait', desc: 'Perfect lighting for portraits.' },
+    { offsetLat: -0.0005, offsetLng: 0.0014, title: 'Scenic Landscape Shot', desc: 'Wide open views for landscape photography.' }
+  ];
+  
+  spots.forEach((spot) => {
+    L.marker([lat + spot.offsetLat, lng + spot.offsetLng], { icon: cameraIcon }).addTo(window.photoSpotLayer)
+      .bindPopup(`<div style="text-align:center;"><b>${spot.title}</b><br><span style="font-size:0.8rem;color:#555;">${spot.desc}</span><br><br><span style="color:#6C63FF;font-weight:bold;">Great photo spot near ${name}</span></div>`);
+  });
+  
+  if (typeof showToast === 'function') {
+    showToast(`Showing photo spots for ${name}`, 'fa-camera');
+  }
+}
+
 function animateRouteDay(dayIndex) {
   if (!mapInstance) return;
   if (routingControl) mapInstance.removeControl(routingControl);
   
   const activities = currentLocData.itinerary[dayIndex].activities;
-  if(!activities || activities.length < 2) return alert('Not enough activities to route this day.');
+  if(!activities || activities.length < 2) {
+    if (typeof showToast === 'function') showToast('Not enough activities to route this day.', 'fa-exclamation-triangle');
+    return;
+  }
 
   document.getElementById('realMap').scrollIntoView({behavior: 'smooth', block: 'center'});
 
@@ -814,7 +1008,10 @@ function animateRouteDay(dayIndex) {
     lineOptions: { styles: [{color: '#6C63FF', weight: 5, className: 'animated-route'}] },
     createMarker: function() { return null; }
   }).addTo(mapInstance);
-  alert('Day Route Animated! (Mock Waypoints used)');
+  
+  if (typeof showToast === 'function') {
+    showToast('Day Route Animated! (Mock Waypoints used)', 'fa-route');
+  }
 }
 
 /* ── UTILITIES ── */
@@ -827,16 +1024,40 @@ function filterCards(val) {
     card.style.display = title.includes(lower) ? 'inline-block' : 'none';
   });
 }
+function highlightLocationOnMap(lat, lng, name) {
+  if (!mapInstance) return;
+  if (routingControl) mapInstance.removeControl(routingControl);
+  
+  document.getElementById('realMap').scrollIntoView({behavior: 'smooth', block: 'center'});
+  
+  mapInstance.flyTo([lat, lng], 16, { animate: true, duration: 1.5 });
+  
+  // Clear previous highlighted markers (if any custom logic needed, or just add one)
+  L.marker([lat, lng]).addTo(mapInstance)
+    .bindPopup(`<div style="text-align:center;"><b>${name}</b><br><span style="color:var(--gold);">Itinerary Stop</span></div>`).openPopup();
+    
+  if (typeof showToast === 'function') {
+    showToast(`Navigating to ${name}`, 'fa-map-marker-alt');
+  }
+}
+
 function downloadPDF() {
   const element = document.getElementById('downloadableContent');
+  
+  // Apply print styles temporarily
+  document.body.classList.add('pdf-export-mode');
+  
   const opt = { 
-    margin: 0.5, 
-    filename: 'My_Trip_Itinerary.pdf', 
+    margin: 0.3, 
+    filename: 'My_Premium_Itinerary.pdf', 
     image: { type: 'jpeg', quality: 0.98 }, 
-    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#1E1E1E', letterRendering: true }, 
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } 
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 1200 }, 
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } 
   };
-  html2pdf().set(opt).from(element).save();
+  
+  html2pdf().set(opt).from(element).save().then(() => {
+    document.body.classList.remove('pdf-export-mode');
+  });
 }
 function simulateOfflineDownload(event) {
   const btn = event.currentTarget;
@@ -844,7 +1065,9 @@ function simulateOfflineDownload(event) {
   setTimeout(() => { btn.innerHTML = '<i class="fas fa-check"></i> Map Saved'; }, 1500);
 }
 function playMockAudio() {
-  alert('Playing audio guide: "Welcome to this historic monument. Built centuries ago..."');
+  if (typeof showToast === 'function') {
+    showToast('Playing audio guide...', 'fa-headphones');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -856,5 +1079,61 @@ document.addEventListener('DOMContentLoaded', () => {
       el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
     });
   }
+
+  /* ── AI TRAVEL CONCIERGE LOGIC ── */
+  window.toggleAiChat = function() {
+    const chat = document.getElementById('aiChatWindow');
+    if (chat) chat.classList.toggle('active');
+  };
+  window.handleAiKeyPress = function(e) {
+    if (e.key === 'Enter') window.sendAiMessage();
+  };
+  window.sendAiMessage = function() {
+    const input = document.getElementById('aiInput');
+    const body = document.getElementById('aiChatBody');
+    if (!input || !input.value.trim()) return;
+    
+    const userMsg = document.createElement('div');
+    userMsg.className = 'ai-msg user';
+    userMsg.innerText = input.value;
+    body.appendChild(userMsg);
+    
+    const query = input.value;
+    input.value = '';
+    body.scrollTop = body.scrollHeight;
+    
+    const typing = document.createElement('div');
+    typing.className = 'ai-msg typing';
+    typing.innerHTML = '<i class="fas fa-ellipsis-h fa-fade"></i>';
+    body.appendChild(typing);
+    
+    setTimeout(() => {
+      body.removeChild(typing);
+      const aiMsg = document.createElement('div');
+      aiMsg.className = 'ai-msg';
+      if (query.toLowerCase().includes('weather')) {
+        aiMsg.innerText = "The weather looks great for your trip! Expect mostly sunny days.";
+      } else if (query.toLowerCase().includes('translate')) {
+        aiMsg.innerText = "Sure! 'Thank you' is 'Merci' in French, or 'Arigato' in Japanese.";
+      } else {
+        aiMsg.innerText = "That's a great question! Our premium concierges are reviewing your itinerary and will have an answer shortly.";
+      }
+      body.appendChild(aiMsg);
+      body.scrollTop = body.scrollHeight;
+    }, 1200);
+  };
+
+  /* ── TOAST NOTIFICATION UTILITY ── */
+  window.showToast = function(msg, iconClass = 'fa-info-circle') {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    const toastIcon = document.getElementById('toastIcon');
+    if (!toast || !toastMsg) return;
+    toastMsg.innerText = msg;
+    if (toastIcon) toastIcon.className = `fas ${iconClass}`;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  };
+
   document.body.classList.add('ready');
 });

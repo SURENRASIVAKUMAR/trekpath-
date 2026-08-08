@@ -1296,7 +1296,41 @@
 
   <!-- PAGE TRANSITION OVERLAY -->
   <div class="page-transition" id="pageTransition">
-    <div class="pt-logo">TREK<span style="font-weight:400;">PATH</span></div>
+    <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none; background: transparent !important; border: none !important; padding: 0 !important; box-shadow: none !important;">
+      <style>
+        .global-trek-logo {
+          width: 70px !important;
+          height: 70px !important;
+          object-fit: contain !important;
+          transform: none !important;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+          border-radius: 0 !important;
+          mix-blend-mode: screen !important;
+          filter: brightness(1.2) drop-shadow(0 0 4px rgba(255, 255, 255, 0.4)) !important;
+        }
+        .global-logo-clip {
+          width: 70px !important; 
+          height: 70px !important;
+          overflow: visible !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+        }
+      </style>
+      <div class="global-logo-clip">
+        <img src="img/logo.png" alt="Trek Path Logo" class="global-trek-logo" />
+      </div>
+      <div class="logo-name" style="font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; background: linear-gradient(135deg, #FFD700, #FFEC8B, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.35)); line-height: 1; margin: 0; padding: 0; border: none;">Trek <span style="font-weight: 400; letter-spacing: 2px; color: #FFD700;">Path</span></div>
+    </a>
     <div class="pt-bar-wrap">
       <div class="pt-bar" id="ptBar"></div>
     </div>
@@ -1313,9 +1347,40 @@
 
   <!-- HEADER -->
   <header class="premium-header" id="header">
-    <a href="#" class="logo">
-      <img src="img/logo.png" alt="Trek Path Logo" />
-      <div class="logo-name">TREK<span>PATH</span></div>
+    <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none; background: transparent !important; border: none !important; padding: 0 !important; box-shadow: none !important;">
+      <style>
+        .global-trek-logo {
+          width: 70px !important;
+          height: 70px !important;
+          object-fit: contain !important;
+          transform: none !important;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+          border-radius: 0 !important;
+          mix-blend-mode: screen !important;
+          filter: brightness(1.2) drop-shadow(0 0 4px rgba(255, 255, 255, 0.4)) !important;
+        }
+        .global-logo-clip {
+          width: 70px !important; 
+          height: 70px !important;
+          overflow: visible !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+        }
+      </style>
+      <div class="global-logo-clip">
+        <img src="img/logo.png" alt="Trek Path Logo" class="global-trek-logo" />
+      </div>
+      <div class="logo-name" style="font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; background: linear-gradient(135deg, #FFD700, #FFEC8B, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.35)); line-height: 1; margin: 0; padding: 0; border: none;">Trek <span style="font-weight: 400; letter-spacing: 2px; color: #FFD700;">Path</span></div>
     </a>
     <nav class="nav" id="mainNav">
       <a href="#"><i class="fas fa-home"></i> Home</a>
@@ -1358,19 +1423,19 @@
     <!-- Who's joining -->
     <div class="join-cards" id="joinCards">
       <div class="join-card" data-type="Couple" onclick="selectJoin(this)">
-        <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=400&q=80" alt="Couple" />
+        <img src="img/join_couple.png" alt="Couple" />
         <div class="join-card-label">Couple</div>
       </div>
       <div class="join-card" data-type="Family" onclick="selectJoin(this)">
-        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191011?w=400&q=80" alt="Family" />
+        <img src="img/join_family.png" alt="Family" />
         <div class="join-card-label">Family</div>
       </div>
       <div class="join-card" data-type="Friends" onclick="selectJoin(this)">
-        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80" alt="Friends" />
+        <img src="img/join_friends.png" alt="Friends" />
         <div class="join-card-label">Friends</div>
       </div>
       <div class="join-card" data-type="Solo" onclick="selectJoin(this)">
-        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80" alt="Solo" />
+        <img src="img/join_solo.png" alt="Solo" />
         <div class="join-card-label">Solo</div>
       </div>
     </div>
@@ -1467,7 +1532,7 @@
       </div>
       <div class="hscroll-track" id="seasons">
         <div class="season-card">
-          <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=400&q=80" alt="Northern Lights" />
+          <img src="https://picsum.photos/id/285/800/600" alt="Northern Lights" />
           <div class="season-overlay"></div>
           <div class="season-info">
             <div class="season-country">Norway &amp; Finland</div>
@@ -1475,7 +1540,7 @@
           </div>
         </div>
         <div class="season-card">
-          <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?w=400&q=80" alt="Cherry Blossom" />
+          <img src="https://picsum.photos/id/2/800/600" alt="Cherry Blossom" />
           <div class="season-overlay"></div>
           <div class="season-info">
             <div class="season-country">Japan</div>
@@ -1483,7 +1548,7 @@
           </div>
         </div>
         <div class="season-card">
-          <img src="https://images.unsplash.com/photo-1518882174711-1de40238921b?w=400&q=80" alt="Wildlife Safari" />
+          <img src="https://picsum.photos/id/727/800/600" alt="Wildlife Safari" />
           <div class="season-overlay"></div>
           <div class="season-info">
             <div class="season-country">Kenya</div>
@@ -1491,7 +1556,7 @@
           </div>
         </div>
         <div class="season-card">
-          <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=400&q=80" alt="Shopping Festival" />
+          <img src="https://picsum.photos/id/895/800/600" alt="Shopping Festival" />
           <div class="season-overlay"></div>
           <div class="season-info">
             <div class="season-country">Dubai</div>
@@ -1499,7 +1564,7 @@
           </div>
         </div>
         <div class="season-card">
-          <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80" alt="Ski Season" />
+          <img src="https://picsum.photos/id/361/800/600" alt="Ski Season" />
           <div class="season-overlay"></div>
           <div class="season-info">
             <div class="season-country">Switzerland</div>
@@ -1507,7 +1572,7 @@
           </div>
         </div>
         <div class="season-card">
-          <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=400&q=80" alt="Oktoberfest" />
+          <img src="https://picsum.photos/id/82/800/600" alt="Oktoberfest" />
           <div class="season-overlay"></div>
           <div class="season-info">
             <div class="season-country">Germany</div>
@@ -1515,7 +1580,7 @@
           </div>
         </div>
         <div class="season-card">
-          <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=400&q=80" alt="Carnival" />
+          <img src="https://picsum.photos/id/332/800/600" alt="Carnival" />
           <div class="season-overlay"></div>
           <div class="season-info">
             <div class="season-country">Brazil</div>
@@ -1523,7 +1588,7 @@
           </div>
         </div>
         <div class="season-card">
-          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=400&q=80" alt="Tulip Season" />
+          <img src="https://picsum.photos/id/428/800/600" alt="Tulip Season" />
           <div class="season-overlay"></div>
           <div class="season-info">
             <div class="season-country">Netherlands</div>
@@ -1558,7 +1623,7 @@
       </div>
       <div class="hscroll-track" id="visafree">
         <div class="dest-card" onclick="showToast('Maldives — Visa Free!','fa-passport')">
-          <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=400&q=80" alt="Maldives" />
+          <img src="https://picsum.photos/id/990/800/600" alt="Maldives" />
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-subtitle">Create Memories In</div>
@@ -1566,7 +1631,7 @@
           </div>
         </div>
         <div class="dest-card" onclick="showToast('Seychelles — Visa Free!','fa-passport')">
-          <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=400&q=80" alt="Seychelles" />
+          <img src="https://picsum.photos/id/301/800/600" alt="Seychelles" />
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-subtitle">The Charming Islands</div>
@@ -1574,7 +1639,7 @@
           </div>
         </div>
         <div class="dest-card" onclick="showToast('Malaysia — Visa Free!','fa-passport')">
-          <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=400&q=80" alt="Malaysia" />
+          <img src="https://picsum.photos/id/923/800/600" alt="Malaysia" />
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-subtitle">The Hidden Gem of Asia</div>
@@ -1582,7 +1647,7 @@
           </div>
         </div>
         <div class="dest-card" onclick="showToast('Thailand — Visa Free!','fa-passport')">
-          <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=400&q=80" alt="Thailand" />
+          <img src="https://picsum.photos/id/290/800/600" alt="Thailand" />
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-subtitle">The Kingdom Of</div>
@@ -1590,7 +1655,7 @@
           </div>
         </div>
         <div class="dest-card" onclick="showToast('Mauritius — Visa Free!','fa-passport')">
-          <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&q=80" alt="Mauritius" />
+          <img src="https://picsum.photos/id/263/800/600" alt="Mauritius" />
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-subtitle">The Incredible Island</div>
@@ -1598,7 +1663,7 @@
           </div>
         </div>
         <div class="dest-card" onclick="showToast('Nepal — Visa Free!','fa-passport')">
-          <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&q=80" alt="Nepal" />
+          <img src="https://picsum.photos/id/80/800/600" alt="Nepal" />
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-subtitle">Roof of the World</div>
@@ -1606,7 +1671,7 @@
           </div>
         </div>
         <div class="dest-card" onclick="showToast('Indonesia — Visa Free!','fa-passport')">
-          <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400&q=80" alt="Indonesia" />
+          <img src="https://picsum.photos/id/977/800/600" alt="Indonesia" />
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-subtitle">Tropical Wonder</div>
@@ -1627,12 +1692,40 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <a href="#" class="footer-logo-img" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-      <img src="img/logo.png" alt="Trek Path"
-        style="height:40px;width:40px;object-fit:contain;border-radius:10px;background:rgba(255,255,255,0.1);padding:4px;box-shadow:0 0 14px rgba(255,215,0,.3);">
-      <span
-        style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,#FFD700,#FFEC8B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">TREK<span
-          style="font-weight:400;">PATH</span></span>
+    <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none; background: transparent !important; border: none !important; padding: 0 !important; box-shadow: none !important;">
+      <style>
+        .global-trek-logo {
+          width: 70px !important;
+          height: 70px !important;
+          object-fit: contain !important;
+          transform: none !important;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+          border-radius: 0 !important;
+          mix-blend-mode: screen !important;
+          filter: brightness(1.2) drop-shadow(0 0 4px rgba(255, 255, 255, 0.4)) !important;
+        }
+        .global-logo-clip {
+          width: 70px !important; 
+          height: 70px !important;
+          overflow: visible !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+        }
+      </style>
+      <div class="global-logo-clip">
+        <img src="img/logo.png" alt="Trek Path Logo" class="global-trek-logo" />
+      </div>
+      <div class="logo-name" style="font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; background: linear-gradient(135deg, #FFD700, #FFEC8B, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.35)); line-height: 1; margin: 0; padding: 0; border: none;">Trek <span style="font-weight: 400; letter-spacing: 2px; color: #FFD700;">Path</span></div>
     </a>
     <p class="footer-copy">© 2024 Trek Path. All Rights Reserved.</p>
     <div class="footer-links">
@@ -1700,28 +1793,28 @@
     // ── PACKAGES DATA ──────────────────────────────
     const packages = {
       '3-5': [
-        { name: 'Thailand', price: 'From ₹30,400', img: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=600&q=80', tall: false },
-        { name: 'Dubai', price: 'From ₹37,500', img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80', tall: true },
-        { name: 'Bali', price: 'From ₹43,854', img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80', tall: false },
-        { name: 'Maldives', price: 'From ₹1,89,754', img: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80', tall: false },
-        { name: 'Sri Lanka', price: 'From ₹30,000', img: 'https://images.unsplash.com/photo-1562602833-0f4ab2fc46e3?w=600&q=80', tall: false },
-        { name: 'Singapore', price: 'From ₹51,516', img: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600&q=80', tall: false },
+        { name: 'Thailand', price: 'From ₹30,400', img: 'https://picsum.photos/id/461/800/600', tall: false },
+        { name: 'Dubai', price: 'From ₹37,500', img: 'https://picsum.photos/id/788/800/600', tall: true },
+        { name: 'Bali', price: 'From ₹43,854', img: 'https://picsum.photos/id/42/800/600', tall: false },
+        { name: 'Maldives', price: 'From ₹1,89,754', img: 'https://picsum.photos/id/91/800/600', tall: false },
+        { name: 'Sri Lanka', price: 'From ₹30,000', img: 'https://picsum.photos/id/603/800/600', tall: false },
+        { name: 'Singapore', price: 'From ₹51,516', img: 'https://picsum.photos/id/535/800/600', tall: false },
       ],
       '6-9': [
-        { name: 'Japan', price: 'From ₹85,000', img: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80', tall: false },
-        { name: 'Europe', price: 'From ₹1,20,000', img: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80', tall: true },
-        { name: 'Turkey', price: 'From ₹75,000', img: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&q=80', tall: false },
-        { name: 'Greece', price: 'From ₹95,000', img: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=80', tall: false },
-        { name: 'Vietnam', price: 'From ₹45,000', img: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=600&q=80', tall: false },
-        { name: 'Morocco', price: 'From ₹68,000', img: 'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80', tall: false },
+        { name: 'Japan', price: 'From ₹85,000', img: 'https://picsum.photos/id/877/800/600', tall: false },
+        { name: 'Europe', price: 'From ₹1,20,000', img: 'https://picsum.photos/id/28/800/600', tall: true },
+        { name: 'Turkey', price: 'From ₹75,000', img: 'https://picsum.photos/id/675/800/600', tall: false },
+        { name: 'Greece', price: 'From ₹95,000', img: 'https://picsum.photos/id/691/800/600', tall: false },
+        { name: 'Vietnam', price: 'From ₹45,000', img: 'https://picsum.photos/id/663/800/600', tall: false },
+        { name: 'Morocco', price: 'From ₹68,000', img: 'https://picsum.photos/id/929/800/600', tall: false },
       ],
       '10+': [
-        { name: 'Australia', price: 'From ₹1,50,000', img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80', tall: false },
-        { name: 'USA', price: 'From ₹1,80,000', img: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&q=80', tall: true },
-        { name: 'New Zealand', price: 'From ₹1,60,000', img: 'https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=600&q=80', tall: false },
-        { name: 'Canada', price: 'From ₹1,70,000', img: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?w=600&q=80', tall: false },
-        { name: 'Brazil', price: 'From ₹1,40,000', img: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80', tall: false },
-        { name: 'Peru', price: 'From ₹1,25,000', img: 'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&q=80', tall: false },
+        { name: 'Australia', price: 'From ₹1,50,000', img: 'https://picsum.photos/id/878/800/600', tall: false },
+        { name: 'USA', price: 'From ₹1,80,000', img: 'https://picsum.photos/id/275/800/600', tall: true },
+        { name: 'New Zealand', price: 'From ₹1,60,000', img: 'https://picsum.photos/id/538/800/600', tall: false },
+        { name: 'Canada', price: 'From ₹1,70,000', img: 'https://picsum.photos/id/35/800/600', tall: false },
+        { name: 'Brazil', price: 'From ₹1,40,000', img: 'https://picsum.photos/id/578/800/600', tall: false },
+        { name: 'Peru', price: 'From ₹1,25,000', img: 'https://picsum.photos/id/971/800/600', tall: false },
       ]
     };
 

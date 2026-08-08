@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trek Path — Premium Features</title>
+
+  <!-- Bootstrap first so our styles override -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Same fonts as index.html -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* ============================================================
+       CSS VARIABLES — identical to index.html
+    ============================================================ */
+    :root {
+      --gold:         #FFD700;
+      --gold-light:   #FFF8DC;
+      --gold-dim:     rgba(255,215,0,0.13);
+      --glass:        rgba(255,255,255,0.07);
+      --glass-border: rgba(255,215,0,0.22);
+      --accent:       #6C63FF;
+      --accent2:      #5B52EE;
+      --muted:        rgba(255,255,255,0.45);
+      --card-radius:  16px;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; background:#0a0a0a !important; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: #0a0a0a !important;
+      color: #fff !important;
+      overflow-x: hidden;
+      cursor: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      min-height: 100vh;
+    }
+    body.ready { opacity: 1; }
+
+    /* ============================================================
+       CUSTOM GOLD CURSOR — from index.html
+    ============================================================ */
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--gold); border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      box-shadow: 0 0 10px var(--gold);
+      transition: transform .1s;
+    }
+    .cursor-ring {
+      width: 35px; height: 35px;
+      border: 1.5px solid rgba(255,215,0,.5); border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: all .14s ease;
+    }
+
+    /* ============================================================
+       PAGE TRANSITION OVERLAY — from index.html
+    ============================================================ */
+    .page-transition {
+      position: fixed; inset: 0; z-index: 99999;
+      background: #000;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .page-transition.active { opacity: 1; pointer-events: all; }
+    .pt-logo {
+      font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 900;
+      letter-spacing: 6px;
+      background: linear-gradient(135deg,#FFD700,#FFEC8B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 28px;
+      animation: ptPulse 1s ease infinite alternate;
+    }
+    @keyframes ptPulse {
+      from { filter: drop-shadow(0 0 8px rgba(255,215,0,.3)); }
+      to   { filter: drop-shadow(0 0 22px rgba(255,215,0,.8)); }
+    }
+    .pt-bar-wrap {
+      width: 220px; height: 3px;
+      background: rgba(255,255,255,.1); border-radius: 99px; overflow: hidden;
+    }
+    .pt-bar {
+      height: 100%; background: linear-gradient(90deg,#FFD700,#FFEC8B);
+      border-radius: 99px; width: 0%; transition: width 0.45s ease;
+    }
+    .pt-text {
+      font-size: .7rem; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,.3); margin-top: 14px;
+    }
+
+    /* ============================================================
+       TOAST — from index.html
+    ============================================================ */
+    .toast-box {
+      position: fixed; bottom: 110px; left: 50%;
+      transform: translateX(-50%) translateY(15px);
+      background: rgba(0,0,0,.9); border: 1px solid rgba(255,215,0,.3);
+      border-radius: 50px; padding: 13px 26px; color: white;
+      font-family: 'Raleway', sans-serif; font-size: .82rem; letter-spacing: 1px;
+      z-index: 9000; backdrop-filter: blur(15px);
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s, transform .35s cubic-bezier(.175,.885,.32,1.275);
+      white-space: nowrap;
+    }
+    .toast-box.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ============================================================
+       RIPPLE — from index.html
+    ============================================================ */
+    .ripple {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,.4);
+      transform: scale(0);
+      animation: rippleAnim .55s linear;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+    /* ============================================================
+       FADE-UP — from index.html
+    ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up-1 { animation: fadeUp .8s ease .1s both; }
+    .fade-up-2 { animation: fadeUp .8s ease .25s both; }
+    .fade-up-3 { animation: fadeUp .8s ease .4s both; }
+    .fade-up-4 { animation: fadeUp .8s ease .55s both; }
+
+    /* ============================================================
+       PULSING DOT BADGE — from index.html
+    ============================================================ */
+    @keyframes pulseDot {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.4; transform:scale(1.6); }
+    }
+
+    /* ============================================================
+       HEADER — identical to index.html
+    ============================================================ */
+    .premium-header {
+      position: fixed; top: 0; width: 100%;
+      padding: 18px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0,0,0,.55); backdrop-filter: blur(18px);
+      z-index: 1000; border-bottom: 1px solid var(--glass-border);
+      transition: background .4s;
+    }
+    .premium-header.scrolled { background: rgba(0,0,0,.92); }
+
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo img {
+      height: 48px; width: 48px; object-fit: contain;
+      border-radius: 12px; background: rgba(255,255,255,.10); padding: 4px;
+      box-shadow: 0 0 18px rgba(255,215,0,.3), 0 2px 12px rgba(0,0,0,.4);
+      transition: box-shadow .3s, transform .3s;
+    }
+    .logo:hover img {
+      box-shadow: 0 0 28px rgba(255,215,0,.6), 0 4px 20px rgba(0,0,0,.5);
+      transform: scale(1.06);
+    }
+    .logo-name {
+      font-family: 'Cinzel', serif; font-size: 1.55rem; font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg,#FFD700,#FFEC8B,#FFD700);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 8px rgba(255,215,0,.35));
+    }
+    .logo-name span { font-weight: 400; letter-spacing: 2px; }
+
+    .nav { display: flex; align-items: center; gap: 6px; }
+    .nav a {
+      color: rgba(255,255,255,.75); text-decoration: none;
+      font-weight: 500; font-size: .82rem; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 8px 16px;
+      border-radius: 30px; border: 1px solid transparent; transition: all .3s;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--gold); background: var(--gold-dim);
+      border-color: var(--glass-border);
+    }
+
+    /* ============================================================
+       PAGE HERO
+    ============================================================ */
+    .page-hero {
+      padding: 148px 24px 50px;
+      text-align: center; position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 22px; background: var(--gold-dim);
+      border: 1px solid var(--glass-border); border-radius: 50px;
+      font-size: .72rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 22px;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px; background: var(--gold); border-radius: 50%;
+      animation: pulseDot 2s ease infinite;
+    }
+    .page-hero h1 {
+      font-family: 'Cinzel', serif; font-size: clamp(2rem,5vw,3.4rem);
+      font-weight: 900; line-height: 1.1; margin-bottom: 16px;
+    }
+    .h1-gold {
+      background: linear-gradient(135deg,#FFD700,#FFEC8B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; filter: drop-shadow(0 0 18px rgba(255,215,0,.35));
+    }
+    .page-hero p {
+      color: var(--muted); font-size: .95rem;
+      max-width: 620px; margin: 0 auto; line-height: 1.7;
+    }
+
+    /* ============================================================
+       STATS ROW
+    ============================================================ */
+    .stats-row {
+      display: flex; justify-content: center; align-items: center;
+      gap: 40px; flex-wrap: wrap;
+      padding: 0 20px 50px; position: relative; z-index: 1;
+    }
+    .stat-block { text-align: center; }
+    .stat-num {
+      font-family: 'Cinzel', serif; font-size: 2.4rem; font-weight: 700;
+      color: var(--gold); line-height: 1;
+      filter: drop-shadow(0 0 10px rgba(255,215,0,.3));
+    }
+    .stat-lbl {
+      font-size: .68rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); margin-top: 6px;
+    }
+    .stat-div { width: 1px; height: 38px; background: var(--glass-border); }
+
+    /* ============================================================
+       SEARCH & FILTER
+    ============================================================ */
+    .search-section {
+      max-width: 720px; margin: 0 auto 44px;
+      padding: 0 20px; position: relative; z-index: 1;
+    }
+    .search-wrap {
+      position: relative; margin-bottom: 22px;
+    }
+    .search-input {
+      width: 100%; padding: 16px 52px 16px 22px;
+      background: rgba(255,255,255,.07) !important;
+      border: 1px solid var(--glass-border) !important;
+      border-radius: 50px; color: #fff !important;
+      font-family: 'Raleway', sans-serif; font-size: .95rem;
+      transition: border-color .3s, background .3s;
+      outline: none;
+    }
+    .search-input::placeholder { color: rgba(255,255,255,.3); }
+    .search-input:focus {
+      border-color: var(--gold) !important;
+      background: rgba(255,255,255,.10) !important;
+    }
+    .search-icon {
+      position: absolute; right: 20px; top: 50%;
+      transform: translateY(-50%); color: var(--gold); font-size: 1rem;
+    }
+    .filter-tags {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    }
+    .filter-tag {
+      background: var(--glass); color: var(--muted);
+      padding: 8px 20px; border-radius: 50px;
+      border: 1px solid var(--glass-border);
+      cursor: pointer; font-size: .78rem; font-weight: 600;
+      letter-spacing: .8px; text-transform: uppercase;
+      transition: all .3s; font-family: 'Raleway', sans-serif;
+      position: relative; overflow: hidden;
+    }
+    .filter-tag:hover, .filter-tag.active {
+      background: var(--gold); color: #111;
+      border-color: var(--gold);
+    }
+
+    /* ============================================================
+       FEATURES GRID
+    ============================================================ */
+    .features-wrap {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 20px 60px; position: relative; z-index: 1;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    /* Feature Card */
+    .feature-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px; padding: 28px;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: transform .35s cubic-bezier(.175,.885,.32,1.275),
+                  border-color .3s, box-shadow .3s;
+      animation: fadeUp .7s ease both;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+      opacity: 0; transition: opacity .3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,215,0,.5);
+      box-shadow: 0 20px 40px rgba(0,0,0,.4);
+    }
+    .feature-card:hover::before { opacity: 1; }
+
+    .card-header-row {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+    }
+    .card-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: rgba(255,215,0,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: var(--gold); flex-shrink: 0;
+      transition: background .3s;
+    }
+    .feature-card:hover .card-icon { background: rgba(255,215,0,.18); }
+
+    .card-title {
+      font-family: 'Cinzel', serif; font-size: .92rem; font-weight: 700;
+      letter-spacing: 1px; color: var(--gold); margin: 0;
+    }
+    .card-desc {
+      font-size: .78rem; color: var(--muted); margin-top: 4px; line-height: 1.5;
+    }
+
+    .features-list { list-style: none; padding: 0; margin: 0; }
+    .feature-item {
+      color: rgba(255,255,255,.55); padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display: flex; align-items: center; gap: 10px;
+      font-size: .82rem;
+      transition: color .25s, padding-left .25s;
+    }
+    .feature-item:last-child { border-bottom: none; }
+    .feature-item i { color: var(--gold); font-size: .8rem; flex-shrink: 0; }
+    .feature-card:hover .feature-item { color: rgba(255,255,255,.75); }
+
+    .more-tag {
+      color: var(--gold) !important;
+      font-weight: 600; font-size: .78rem;
+      letter-spacing: .5px;
+    }
+
+    /* NEW badge */
+    .new-badge {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--accent); color: #fff;
+      font-size: .6rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 20px;
+    }
+
+    /* ============================================================
+       MODAL — dark glass style matching index.html modals
+    ============================================================ */
+    .feature-modal {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.82); backdrop-filter: blur(14px);
+      display: none; justify-content: center; align-items: center;
+      z-index: 5000; padding: 20px;
+    }
+    .feature-modal.active { display: flex; }
+    .modal-box {
+      background: rgba(10,10,10,.96);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px; padding: 48px 42px;
+      max-width: 760px; width: 100%;
+      max-height: 85vh; overflow-y: auto;
+      position: relative;
+      transform: scale(.88);
+      transition: transform .4s cubic-bezier(.175,.885,.32,1.275);
+    }
+    .feature-modal.active .modal-box { transform: scale(1); }
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      color: #fff; cursor: pointer; font-size: .9rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .3s, color .3s;
+    }
+    .modal-close:hover { border-color: var(--gold); color: var(--gold); }
+
+    .modal-title {
+      font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700;
+      color: var(--gold); letter-spacing: 2px;
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 14px;
+    }
+    .modal-desc {
+      color: rgba(255,255,255,.55); font-size: .9rem; line-height: 1.7;
+      margin-bottom: 30px;
+    }
+    .modal-grid {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+      gap: 16px;
+    }
+    .detail-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,215,0,.12);
+      border-radius: 14px; padding: 18px;
+      transition: border-color .3s, transform .3s;
+      opacity: 0; transform: translateY(20px);
+    }
+    .detail-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity .4s ease, transform .4s ease, border-color .3s, box-shadow .3s;
+    }
+    .detail-card:hover {
+      border-color: rgba(255,215,0,.4);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.3);
+    }
+    .detail-card h5 {
+      font-size: .85rem; font-weight: 700; color: #fff;
+      display: flex; align-items: center; gap: 10px; margin: 0;
+    }
+    .detail-card h5 i { color: var(--gold); font-size: .85rem; }
+
+    /* ============================================================
+       IMAGE SECTIONS SHARED
+    ============================================================ */
+    .img-section, .spotlight-section, .gallery-section {
+      position: relative; z-index: 1;
+      padding: 70px 0;
+    }
+    .img-section-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    }
+    .sec-head {
+      text-align: center; margin-bottom: 48px;
+    }
+    .sec-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 20px; background: var(--gold-dim);
+      border: 1px solid var(--glass-border); border-radius: 50px;
+      font-size: .7rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+    }
+    .sec-badge .dot {
+      width: 6px; height: 6px; background: var(--gold); border-radius: 50%;
+      animation: pulseDot 2s ease infinite;
+    }
+    .sec-title {
+      font-family: 'Cinzel', serif; font-size: clamp(1.6rem,3.5vw,2.6rem);
+      font-weight: 900; color: #fff; margin-bottom: 12px; letter-spacing: 1px;
+    }
+    .gold-text {
+      background: linear-gradient(135deg,#FFD700,#FFEC8B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .sec-sub {
+      color: var(--muted); font-size: .88rem; max-width: 520px; margin: 0 auto;
+    }
+
+    /* ── DESTINATION SHOWCASE ── */
+    .dest-showcase {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      grid-template-rows: 240px 240px;
+      gap: 14px;
+    }
+    .dest-img-card {
+      border-radius: 18px; overflow: hidden;
+      position: relative; cursor: pointer;
+      transition: transform .4s cubic-bezier(.175,.885,.32,1.275), box-shadow .4s;
+    }
+    .dest-img-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 24px 50px rgba(0,0,0,.6);
+    }
+    .dest-img-card.tall-card { grid-row: span 2; }
+    .dest-img-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .5s ease;
+    }
+    .dest-img-card:hover img { transform: scale(1.07); }
+    .dest-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.1) 55%, transparent 100%);
+    }
+    .dest-info {
+      position: absolute; bottom: 18px; left: 18px; right: 18px;
+    }
+    .dest-country {
+      font-size: .62rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(255,255,255,.55); display: block; margin-bottom: 4px;
+    }
+    .dest-name {
+      font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700;
+      color: #fff; margin: 0 0 10px; letter-spacing: 1px;
+    }
+    .dest-tags-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .dtag {
+      font-size: .65rem; font-weight: 600; letter-spacing: .5px;
+      background: rgba(255,215,0,.15); border: 1px solid rgba(255,215,0,.35);
+      color: var(--gold); padding: 4px 10px; border-radius: 20px;
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    /* ── FEATURE SPOTLIGHT ── */
+    .spotlight-section { background: rgba(255,255,255,.02); }
+    .spotlight-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+      margin-bottom: 80px;
+    }
+    .spotlight-row:last-child { margin-bottom: 0; }
+    .spotlight-row.reverse { direction: rtl; }
+    .spotlight-row.reverse > * { direction: ltr; }
+
+    .spotlight-img {
+      border-radius: 20px; overflow: hidden;
+      position: relative; aspect-ratio: 4/3;
+    }
+    .spotlight-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .6s ease;
+    }
+    .spotlight-img:hover img { transform: scale(1.05); }
+    .spotlight-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg,rgba(108,99,255,.12),rgba(255,215,0,.06));
+      border: 1px solid var(--glass-border);
+      border-radius: 20px; pointer-events: none;
+    }
+
+    .spot-label {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .7rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .spot-title {
+      font-family: 'Cinzel', serif; font-size: clamp(1.4rem,2.5vw,2rem);
+      font-weight: 900; color: #fff; line-height: 1.2;
+      margin-bottom: 18px; letter-spacing: .5px;
+    }
+    .spot-desc {
+      color: var(--muted); font-size: .88rem; line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .spot-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .spot-list li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: .84rem; color: rgba(255,255,255,.7);
+    }
+    .spot-list li i { color: var(--gold); font-size: .8rem; flex-shrink: 0; }
+
+    /* ── GALLERY STRIP ── */
+    .gallery-section { padding-bottom: 0; }
+    .gallery-strip {
+      display: flex; gap: 10px;
+      overflow-x: auto; padding: 0 24px 30px;
+      scroll-behavior: smooth; scrollbar-width: none;
+      margin-top: 0;
+    }
+    .gallery-strip::-webkit-scrollbar { display: none; }
+    .gal-item {
+      flex: 0 0 220px; height: 300px;
+      border-radius: 16px; overflow: hidden;
+      position: relative; cursor: pointer;
+      transition: transform .35s, box-shadow .35s, flex .4s ease;
+    }
+    .gal-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 44px rgba(0,0,0,.6);
+      flex: 0 0 280px;
+    }
+    .gal-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .5s ease;
+    }
+    .gal-item:hover img { transform: scale(1.08); }
+    .gal-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 50%);
+      display: flex; align-items: flex-end; padding: 18px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .gal-item:hover .gal-overlay { opacity: 1; }
+    .gal-overlay span {
+      font-family: 'Cinzel', serif; font-size: .88rem; font-weight: 700;
+      color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    /* Responsive for image sections */
+    @media(max-width:900px) {
+      .dest-showcase {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 200px 200px;
+      }
+      .dest-img-card.tall-card { grid-row: span 1; }
+      .spotlight-row { grid-template-columns: 1fr; gap: 30px; }
+      .spotlight-row.reverse { direction: ltr; }
+      .gal-item { flex: 0 0 170px; height: 240px; }
+    }
+    @media(max-width:600px) {
+      .dest-showcase { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .dest-img-card { height: 220px; }
+      .gal-item { flex: 0 0 150px; height: 200px; }
+    }
+
+    /* ============================================================
+       HIGHLIGHT STRIP
+    ============================================================ */
+    .highlight-strip {
+      max-width: 1200px; margin: 0 auto 56px;
+      padding: 0 20px; position: relative; z-index: 1;
+    }
+    .strip-label {
+      font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .strip-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 14px;
+    }
+    .strip-card {
+      background: rgba(255,215,0,.05);
+      border: 1px solid rgba(255,215,0,.15);
+      border-radius: 16px; padding: 22px 18px;
+      display: flex; align-items: flex-start; gap: 14px;
+      transition: background .25s, transform .3s;
+    }
+    .strip-card:hover { background: rgba(255,215,0,.09); transform: translateY(-4px); }
+    .strip-card i { color: var(--gold); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+    .strip-card h6 { font-size: .86rem; font-weight: 700; color: #fff; margin: 0 0 4px; }
+    .strip-card p { font-size: .76rem; color: var(--muted); margin: 0; line-height: 1.55; }
+
+    /* ============================================================
+       NEW — CTA BANNER
+    ============================================================ */
+    .cta-banner {
+      max-width: 1200px; margin: 0 auto 60px;
+      padding: 0 20px; position: relative; z-index: 1;
+    }
+    .cta-inner {
+      background: linear-gradient(135deg, rgba(108,99,255,.18) 0%, rgba(255,215,0,.08) 100%);
+      border: 1px solid var(--glass-border); border-radius: 22px;
+      padding: 50px 40px; text-align: center;
+    }
+    .cta-inner h2 {
+      font-family: 'Cinzel', serif; font-size: clamp(1.4rem,3vw,2.2rem);
+      font-weight: 900; color: #fff; margin-bottom: 12px; letter-spacing: 2px;
+    }
+    .cta-inner h2 span { color: var(--gold); }
+    .cta-inner p { color: var(--muted); font-size: .9rem; margin-bottom: 28px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 14px 36px;
+      background: linear-gradient(135deg,var(--gold),#FFEC8B);
+      color: #111; border: none; border-radius: 50px;
+      font-family: 'Raleway', sans-serif; font-weight: 700;
+      font-size: .82rem; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; position: relative; overflow: hidden;
+      box-shadow: 0 10px 28px rgba(255,215,0,.28);
+      transition: transform .35s cubic-bezier(.175,.885,.32,1.275), box-shadow .35s;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 38px rgba(255,215,0,.48);
+      color: #111;
+    }
+
+    /* ============================================================
+       FOOTER — identical to index.html
+    ============================================================ */
+    .footer {
+      position: relative; z-index: 1; padding: 30px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--glass-border);
+      background: rgba(0,0,0,.55); backdrop-filter: blur(12px);
+    }
+    .footer-logo {
+      font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg,#FFD700,#FFEC8B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.28); letter-spacing: 1px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a {
+      color: rgba(255,255,255,.35); text-decoration: none;
+      font-size: .78rem; transition: color .3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media(max-width:900px) {
+      .premium-header { padding: 14px 20px; }
+      .stats-row { gap: 20px; }
+    }
+    @media(max-width:600px) {
+      .nav a { display: none; }
+      .footer { flex-direction: column; gap: 12px; padding: 24px 20px; text-align: center; }
+      .modal-box { padding: 30px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- GOLD CURSOR -->
+  <div class="cursor-dot"  id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- PAGE TRANSITION -->
+  <div class="page-transition" id="pageTransition">
+    <div class="pt-logo">TREK<span style="font-weight:400">PATH</span></div>
+    <div class="pt-bar-wrap"><div class="pt-bar" id="ptBar"></div></div>
+    <div class="pt-text">Loading features…</div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast-box" id="toastBox">
+    <i class="fas fa-info-circle" id="toastIcon" style="color:var(--gold)"></i>
+    <span id="toastMsg"></span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="premium-header" id="header">
+    <a href="index.html" class="logo">
+      <img src="img/logo.png" alt="Trek Path Logo" />
+      <div class="logo-name">TREK<span>PATH</span></div>
+    </a>
+    <nav class="nav">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="planner.html"><i class="fas fa-map-marked-alt"></i> Planner</a>
+      <a href="features.html" class="active"><i class="fas fa-star"></i> Features</a>
+      <a href="testimonials.html"><i class="fas fa-comments"></i> Reviews</a>
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+  </header>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="hero-badge fade-up-1"><div class="dot"></div> 150+ Powerful Tools</div>
+    <h1 class="fade-up-2">
+      <span class="h1-gold">PREMIUM</span><br>TRAVEL FEATURES
+    </h1>
+    <p class="fade-up-3">Discover every tool you need — from smart planning to exclusive benefits — all in one place.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row fade-up-4">
+    <div class="stat-block">
+      <div class="stat-num" id="statFeatures">0</div>
+      <div class="stat-lbl">Premium Features</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-block">
+      <div class="stat-num" id="statCategories">0</div>
+      <div class="stat-lbl">Categories</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-block">
+      <div class="stat-num" id="statUsers">0</div>
+      <div class="stat-lbl">Happy Travelers</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-block">
+      <div class="stat-num" id="statCountries">0</div>
+      <div class="stat-lbl">Countries Covered</div>
+    </div>
+  </div>
+
+  <!-- SEARCH & FILTER -->
+  <section class="search-section fade-up-4">
+    <div class="search-wrap">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search features…" />
+      <i class="fas fa-search search-icon"></i>
+    </div>
+    <div class="filter-tags" id="filterTags">
+      <span class="filter-tag active ripple-btn" data-filter="all">All Features</span>
+      <span class="filter-tag ripple-btn" data-filter="planning">Planning</span>
+      <span class="filter-tag ripple-btn" data-filter="budget">Budget</span>
+      <span class="filter-tag ripple-btn" data-filter="safety">Safety</span>
+      <span class="filter-tag ripple-btn" data-filter="experience">Experience</span>
+      <span class="filter-tag ripple-btn" data-filter="tech">Technology</span>
+      <span class="filter-tag ripple-btn" data-filter="support">Support</span>
+    </div>
+  </section>
+
+  <!-- FEATURES GRID -->
+  <div class="features-wrap">
+    <div class="features-grid" id="featuresGrid"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       DESTINATION SHOWCASE — image cards with hover overlay
+  ═══════════════════════════════════════════════════════ -->
+  <div class="img-section">
+    <div class="img-section-inner">
+      <div class="sec-head">
+        <div class="sec-badge"><div class="dot"></div> Top Destinations</div>
+        <h2 class="sec-title">Explore <span class="gold-text">The World</span></h2>
+        <p class="sec-sub">Hand-picked destinations supported by every TrekPath feature</p>
+      </div>
+      <div class="dest-showcase">
+        <div class="dest-img-card tall-card">
+          <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=700&q=80" alt="Istanbul" loading="lazy" />
+          <div class="dest-grad"></div>
+          <div class="dest-info">
+            <span class="dest-country">Turkey</span>
+            <h3 class="dest-name">Istanbul</h3>
+            <div class="dest-tags-row">
+              <span class="dtag"><i class="fas fa-landmark"></i> Cultural</span>
+              <span class="dtag"><i class="fas fa-utensils"></i> Culinary</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-img-card">
+          <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80" alt="Bali" loading="lazy" />
+          <div class="dest-grad"></div>
+          <div class="dest-info">
+            <span class="dest-country">Indonesia</span>
+            <h3 class="dest-name">Bali</h3>
+            <div class="dest-tags-row">
+              <span class="dtag"><i class="fas fa-umbrella-beach"></i> Beach</span>
+              <span class="dtag"><i class="fas fa-spa"></i> Wellness</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-img-card">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Switzerland" loading="lazy" />
+          <div class="dest-grad"></div>
+          <div class="dest-info">
+            <span class="dest-country">Switzerland</span>
+            <h3 class="dest-name">The Alps</h3>
+            <div class="dest-tags-row">
+              <span class="dtag"><i class="fas fa-mountain"></i> Mountains</span>
+              <span class="dtag"><i class="fas fa-hiking"></i> Adventure</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-img-card">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="Dubai" loading="lazy" />
+          <div class="dest-grad"></div>
+          <div class="dest-info">
+            <span class="dest-country">UAE</span>
+            <h3 class="dest-name">Dubai</h3>
+            <div class="dest-tags-row">
+              <span class="dtag"><i class="fas fa-city"></i> City</span>
+              <span class="dtag"><i class="fas fa-shopping-bag"></i> Shopping</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-img-card">
+          <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=80" alt="Santorini" loading="lazy" />
+          <div class="dest-grad"></div>
+          <div class="dest-info">
+            <span class="dest-country">Greece</span>
+            <h3 class="dest-name">Santorini</h3>
+            <div class="dest-tags-row">
+              <span class="dtag"><i class="fas fa-umbrella-beach"></i> Beach</span>
+              <span class="dtag"><i class="fas fa-camera"></i> Photography</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FEATURE SPOTLIGHT — alternating split image + text
+  ═══════════════════════════════════════════════════════ -->
+  <div class="spotlight-section">
+    <div class="img-section-inner">
+      <div class="sec-head">
+        <div class="sec-badge"><div class="dot"></div> Feature Spotlight</div>
+        <h2 class="sec-title">Built For <span class="gold-text">Real Travelers</span></h2>
+        <p class="sec-sub">See how TrekPath features work in the real world</p>
+      </div>
+
+      <!-- Spotlight 1 — image left -->
+      <div class="spotlight-row">
+        <div class="spotlight-img">
+          <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=80" alt="Smart Planning" loading="lazy" />
+          <div class="spotlight-img-overlay"></div>
+        </div>
+        <div class="spotlight-text">
+          <span class="spot-label"><i class="fas fa-brain"></i> AI Planning</span>
+          <h3 class="spot-title">Your Itinerary,<br><span class="gold-text">Built in Seconds</span></h3>
+          <p class="spot-desc">Describe your dream trip in plain language and our AI builds a day-by-day plan — flights, hotels, activities — optimised for your budget and travel style.</p>
+          <ul class="spot-list">
+            <li><i class="fas fa-check-circle"></i> Natural language input</li>
+            <li><i class="fas fa-check-circle"></i> Budget-aware suggestions</li>
+            <li><i class="fas fa-check-circle"></i> One-tap booking from the plan</li>
+            <li><i class="fas fa-check-circle"></i> Instant re-route on disruptions</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Spotlight 2 — image right -->
+      <div class="spotlight-row reverse">
+        <div class="spotlight-img">
+          <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80" alt="Real-time Safety" loading="lazy" />
+          <div class="spotlight-img-overlay"></div>
+        </div>
+        <div class="spotlight-text">
+          <span class="spot-label"><i class="fas fa-shield-alt"></i> Safety Shield</span>
+          <h3 class="spot-title">Travel Safer,<br><span class="gold-text">Wherever You Go</span></h3>
+          <p class="spot-desc">Real-time alerts, emergency contacts, and live safety scores for every destination keep you informed and protected throughout your journey.</p>
+          <ul class="spot-list">
+            <li><i class="fas fa-check-circle"></i> Live travel advisories</li>
+            <li><i class="fas fa-check-circle"></i> Emergency SOS in 190+ countries</li>
+            <li><i class="fas fa-check-circle"></i> Nearest hospital & pharmacy finder</li>
+            <li><i class="fas fa-check-circle"></i> Crowd-sourced safety ratings</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Spotlight 3 — image left -->
+      <div class="spotlight-row">
+        <div class="spotlight-img">
+          <img src="https://images.unsplash.com/photo-1556742031-c6961e8560b0?w=800&q=80" alt="Budget Tools" loading="lazy" />
+          <div class="spotlight-img-overlay"></div>
+        </div>
+        <div class="spotlight-text">
+          <span class="spot-label"><i class="fas fa-wallet"></i> Budget Management</span>
+          <h3 class="spot-title">Every Rupee,<br><span class="gold-text">Accounted For</span></h3>
+          <p class="spot-desc">Track spending in any currency, split bills with travel companions, and get smart alerts before you go over budget — so you can enjoy the trip without worry.</p>
+          <ul class="spot-list">
+            <li><i class="fas fa-check-circle"></i> Multi-currency expense tracker</li>
+            <li><i class="fas fa-check-circle"></i> Group bill splitter</li>
+            <li><i class="fas fa-check-circle"></i> Live exchange rates</li>
+            <li><i class="fas fa-check-circle"></i> Over-budget smart alerts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PHOTO GALLERY STRIP — scrollable travel photography
+  ═══════════════════════════════════════════════════════ -->
+  <div class="gallery-section">
+    <div class="img-section-inner">
+      <div class="sec-head">
+        <div class="sec-badge"><div class="dot"></div> Traveler Gallery</div>
+        <h2 class="sec-title">Moments from the <span class="gold-text">Community</span></h2>
+        <p class="sec-sub">Real photos shared by TrekPath travelers around the globe</p>
+      </div>
+    </div>
+    <div class="gallery-strip" id="galleryStrip">
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=500&q=80" alt="Vietnam" loading="lazy" /><div class="gal-overlay"><span>Vietnam</span></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=500&q=80" alt="Europe" loading="lazy" /><div class="gal-overlay"><span>Europe</span></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=500&q=80" alt="Nepal" loading="lazy" /><div class="gal-overlay"><span>Nepal</span></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500&q=80" alt="Thailand" loading="lazy" /><div class="gal-overlay"><span>Thailand</span></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=500&q=80" alt="Maldives" loading="lazy" /><div class="gal-overlay"><span>Maldives</span></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=500&q=80" alt="Seychelles" loading="lazy" /><div class="gal-overlay"><span>Seychelles</span></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=500&q=80" alt="Iceland" loading="lazy" /><div class="gal-overlay"><span>Iceland</span></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=500&q=80" alt="Brazil" loading="lazy" /><div class="gal-overlay"><span>Brazil</span></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=500&q=80" alt="New Zealand" loading="lazy" /><div class="gal-overlay"><span>New Zealand</span></div></div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHT STRIP — new section -->
+  <div class="highlight-strip">
+    <p class="strip-label">What Makes Us Different</p>
+    <div class="strip-grid">
+      <div class="strip-card">
+        <i class="fas fa-brain"></i>
+        <div><h6>AI-Powered Planning</h6><p>Our engine learns your travel style and refines recommendations over time.</p></div>
+      </div>
+      <div class="strip-card">
+        <i class="fas fa-wifi"></i>
+        <div><h6>Offline Access</h6><p>Full itinerary, maps, and phrasebook available without internet.</p></div>
+      </div>
+      <div class="strip-card">
+        <i class="fas fa-bell"></i>
+        <div><h6>Smart Alerts</h6><p>Price drops, gate changes, weather warnings — delivered in real time.</p></div>
+      </div>
+      <div class="strip-card">
+        <i class="fas fa-sync-alt"></i>
+        <div><h6>Multi-Device Sync</h6><p>Start planning on desktop, continue on mobile — everything stays in sync.</p></div>
+      </div>
+      <div class="strip-card">
+        <i class="fas fa-lock"></i>
+        <div><h6>End-to-End Encryption</h6><p>Your passport details and bookings are protected with bank-grade security.</p></div>
+      </div>
+      <div class="strip-card">
+        <i class="fas fa-chart-line"></i>
+        <div><h6>Trip Analytics</h6><p>Spending breakdowns, time-use reports, and personalised travel insights.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BANNER — new section -->
+  <div class="cta-banner">
+    <div class="cta-inner">
+      <h2>Ready to Plan Your <span>Dream Trip?</span></h2>
+      <p>Join over 50,000 travelers who plan smarter with TrekPath.</p>
+      <a href="planner.html" class="btn-primary ripple-btn">
+        <i class="fas fa-map-marked-alt"></i> Start Planning Now
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <img src="img/logo.png" alt="Trek Path"
+        style="height:38px;width:38px;object-fit:contain;border-radius:10px;
+               background:rgba(255,255,255,0.1);padding:4px;
+               box-shadow:0 0 14px rgba(255,215,0,.3)">
+      <span class="footer-logo">TREK<span style="font-weight:400">PATH</span></span>
+    </a>
+    <p class="footer-copy">© 2024 Trek Path. All Rights Reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+
+  <!-- FEATURE MODAL -->
+  <div class="feature-modal" id="featureModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModal">✕</button>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-grid" id="modalGrid"></div>
+    </div>
+  </div>
+
+  <script>
+  // ── DATA ─────────────────────────────────────────────────────────
+  const featuresData = [
+    {
+      id:1, category:'Smart Destination Selector', icon:'fa-compass',
+      description:'AI-powered tools to find your perfect destination based on preferences, season, and budget.',
+      features:['AI-powered destination recommendations','Interactive destination spinner / wheel','Personalised location suggestions','Filter by season, budget, interests','Surprise me — random destination picker'],
+      tags:['planning','tech'], isNew:false
+    },
+    {
+      id:2, category:'Budget Management', icon:'fa-wallet',
+      description:'Complete financial management for stress-free travel budgeting and expense tracking.',
+      features:['Real-time expense tracker','Currency converter with live rates','Price comparison for flights & hotels','Daily spending limits & alerts','Split bill calculator','Budget forecasting','Receipt scanner & organiser'],
+      tags:['budget'], isNew:false
+    },
+    {
+      id:3, category:'Weather Intelligence', icon:'fa-cloud-sun',
+      description:'Stay prepared with comprehensive weather information and climate guidance.',
+      features:['14-day weather forecasts','Real-time weather alerts','Seasonal climate guides','Packing suggestions based on weather','Hurricane / storm warnings','Sunrise & sunset times','UV index & air quality index'],
+      tags:['planning'], isNew:false
+    },
+    {
+      id:4, category:'24 / 7 Support', icon:'fa-headset',
+      description:'Round-the-clock assistance for peace of mind during your travels.',
+      features:['Live chat with travel experts','Emergency assistance hotline','Local contact numbers worldwide','Medical emergency support','Lost document assistance','Translation services','Real-time flight delay alerts'],
+      tags:['support','safety'], isNew:false
+    },
+    {
+      id:5, category:'Travel Community', icon:'fa-users',
+      description:'Connect with fellow travelers, share experiences, and get authentic local insights.',
+      features:['User reviews & ratings','Photo sharing platform','Traveler Q&A forum','Group trip planning','Local meetup suggestions','Experience sharing feed','Buddy finder for solo travelers'],
+      tags:['experience'], isNew:false
+    },
+    {
+      id:6, category:'Itinerary Planner', icon:'fa-calendar-alt',
+      description:'Intelligent scheduling tools to create the perfect daily travel plan.',
+      features:['Drag-and-drop day planner','Automated schedule optimiser','Multi-city trip organiser','Time-zone aware scheduling','Activity duration calculator','Travel time estimator','Printable itinerary creator'],
+      tags:['planning','tech'], isNew:false
+    },
+    {
+      id:7, category:'Booking Integration', icon:'fa-plane',
+      description:'Seamless booking experience for all your travel needs in one place.',
+      features:['One-click flight booking','Hotel reservation system','Activity & tour bookings','Restaurant reservations','Transportation bookings','Package deal finder','Price drop alerts'],
+      tags:['tech'], isNew:false
+    },
+    {
+      id:8, category:'Document Organiser', icon:'fa-passport',
+      description:'Keep all your important travel documents secure and easily accessible.',
+      features:['Digital passport storage','Boarding pass wallet','Hotel confirmation keeper','Travel insurance tracker','Visa requirement checker','Emergency document backup','Important contact storage'],
+      tags:['safety','planning'], isNew:false
+    },
+    {
+      id:9, category:'Local Experiences', icon:'fa-map-marked-alt',
+      description:'Discover authentic local experiences and hidden gems off the tourist trail.',
+      features:['Hidden gem discoverer','Local cuisine guide','Cultural event calendar','Off-the-beaten-path spots','Photography location finder','Shopping district guides','Free attraction finder'],
+      tags:['experience'], isNew:false
+    },
+    {
+      id:10, category:'Safety Shield', icon:'fa-shield-alt',
+      description:'Comprehensive safety tools to ensure secure and worry-free travel.',
+      features:['Safe neighbourhood indicators','Emergency service locator','Travel advisory updates','Health facility finder','Crime rate information','Natural disaster alerts','Safety check-in reminders'],
+      tags:['safety'], isNew:false
+    },
+    {
+      id:11, category:'Transportation Hub', icon:'fa-car',
+      description:'Smart transportation solutions for getting around any city efficiently.',
+      features:['Public transport guides','Taxi fare estimator','Car rental comparison','Parking location finder','Route optimisation','Real-time traffic updates','Walking tour creator'],
+      tags:['planning'], isNew:false
+    },
+    {
+      id:12, category:'Language Assistance', icon:'fa-language',
+      description:'Overcome language barriers with smart translation and communication tools.',
+      features:['Offline phrasebook','Real-time translation','Menu translator','Sign language guide','Local slang dictionary','Pronunciation helper','Cultural etiquette tips'],
+      tags:['experience','tech'], isNew:false
+    },
+    {
+      id:13, category:'AI Trip Concierge', icon:'fa-robot',
+      description:'Your personal AI travel assistant — available 24/7 for questions, ideas, and real-time help.',
+      features:['Natural language trip planning','Smart hotel & restaurant picks','Instant re-routing on disruptions','Personalised activity suggestions','Voice command support','Context-aware recommendations','Continuous learning from your trips'],
+      tags:['tech','planning'], isNew:true
+    },
+    {
+      id:14, category:'Loyalty & Rewards', icon:'fa-gem',
+      description:'Earn points on every booking and redeem them for exclusive travel upgrades.',
+      features:['Points on every booking','Tier-based membership perks','Partner reward redemptions','Room & seat upgrade tokens','Exclusive member-only deals','Birthday bonus points','Refer a friend rewards'],
+      tags:['experience'], isNew:true
+    },
+    {
+      id:15, category:'Health & Wellness', icon:'fa-heartbeat',
+      description:'Stay healthy on the road with medical guidance, fitness options, and wellness resources.',
+      features:['Nearby clinic & hospital finder','Vaccination requirement checker','Travel health advice by destination','Gym & spa locator','Meditation & jet-lag guides','Healthy food restaurant finder','Travel insurance health rider info'],
+      tags:['safety','experience'], isNew:true
+    },
+  ];
+
+  // ── RENDER CARDS ─────────────────────────────────────────────────
+  function renderCards(data) {
+    const grid = document.getElementById('featuresGrid');
+    grid.innerHTML = '';
+    data.forEach((f, idx) => {
+      const card = document.createElement('div');
+      card.className = 'feature-card';
+      card.dataset.tags = f.tags.join(' ');
+      card.style.animationDelay = (idx * 0.07) + 's';
+
+      const preview = f.features.slice(0,3);
+      const extra   = f.features.length - 3;
+
+      card.innerHTML = `
+        ${f.isNew ? '<span class="new-badge">New</span>' : ''}
+        <div class="card-header-row">
+          <div class="card-icon"><i class="fas ${f.icon}"></i></div>
+          <div>
+            <p class="card-title">${f.category}</p>
+            <p class="card-desc">${f.description.slice(0,72)}…</p>
+          </div>
+        </div>
+        <ul class="features-list">
+          ${preview.map(item => `
+            <li class="feature-item"><i class="fas fa-check-circle"></i> ${item}</li>`).join('')}
+          <li class="feature-item more-tag">
+            <i class="fas fa-plus-circle"></i> ${extra} more features…
+          </li>
+        </ul>`;
+
+      card.addEventListener('click', () => openModal(f));
+      grid.appendChild(card);
+    });
+  }
+
+  // ── MODAL ────────────────────────────────────────────────────────
+  function openModal(f) {
+    document.getElementById('modalTitle').innerHTML =
+      `<i class="fas ${f.icon}"></i> ${f.category}`;
+    document.getElementById('modalDesc').textContent = f.description;
+
+    const grid = document.getElementById('modalGrid');
+    grid.innerHTML = f.features.map(item => `
+      <div class="detail-card">
+        <h5><i class="fas fa-check-circle"></i> ${item}</h5>
+      </div>`).join('');
+
+    document.getElementById('featureModal').classList.add('active');
+
+    // Stagger animate cards
+    setTimeout(() => {
+      document.querySelectorAll('.detail-card').forEach((c,i) => {
+        setTimeout(() => c.classList.add('visible'), i * 80);
+      });
+    }, 50);
+
+    showToast('Exploring: ' + f.category, 'fa-star');
+  }
+
+  function closeModal() {
+    document.getElementById('featureModal').classList.remove('active');
+    document.querySelectorAll('.detail-card').forEach(c => c.classList.remove('visible'));
+  }
+
+  document.getElementById('closeModal').addEventListener('click', closeModal);
+  document.getElementById('featureModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('featureModal')) closeModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+    if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+      e.preventDefault(); document.getElementById('searchInput').focus();
+    }
+  });
+
+  // ── SEARCH & FILTER ──────────────────────────────────────────────
+  let activeFilter = 'all';
+
+  document.querySelectorAll('.filter-tag').forEach(tag => {
+    tag.addEventListener('click', function() {
+      document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      activeFilter = this.dataset.filter;
+      applyFilter();
+      showToast('Filter: ' + this.textContent.trim(), 'fa-filter');
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('input', applyFilter);
+
+  function applyFilter() {
+    const term = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = featuresData.filter(f => {
+      const matchTag  = activeFilter === 'all' || f.tags.includes(activeFilter);
+      const matchText = !term ||
+        f.category.toLowerCase().includes(term) ||
+        f.features.some(x => x.toLowerCase().includes(term)) ||
+        f.description.toLowerCase().includes(term);
+      return matchTag && matchText;
+    });
+    renderCards(filtered);
+  }
+
+  // ── STATS COUNTER ─────────────────────────────────────────────────
+  function counter(el, end, suffix='', dur=2000) {
+    let s = 0; const step = end / (dur / 16);
+    const t = setInterval(() => {
+      s += step;
+      if (s >= end) { el.textContent = end + suffix; clearInterval(t); }
+      else el.textContent = Math.floor(s) + suffix;
+    }, 16);
+  }
+
+  // ── CUSTOM GOLD CURSOR ───────────────────────────────────────────
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    dot.style.left=mx+'px'; dot.style.top=my+'px';
+  });
+  (function animRing(){
+    rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  })();
+  function attachCursor(els) {
+    els.forEach(el => {
+      el.addEventListener('mouseenter',()=>{
+        dot.style.transform='translate(-50%,-50%) scale(2)';
+        ring.style.transform='translate(-50%,-50%) scale(1.5)';
+        ring.style.borderColor='rgba(255,215,0,.9)';
+      });
+      el.addEventListener('mouseleave',()=>{
+        dot.style.transform='translate(-50%,-50%) scale(1)';
+        ring.style.transform='translate(-50%,-50%) scale(1)';
+        ring.style.borderColor='rgba(255,215,0,.5)';
+      });
+    });
+  }
+  attachCursor(document.querySelectorAll('a,button,.filter-tag,.strip-card,.cta-inner'));
+
+  // ── PAGE TRANSITION ───────────────────────────────────────────────
+  function navigateTo(url) {
+    const overlay = document.getElementById('pageTransition');
+    const bar     = document.getElementById('ptBar');
+    overlay.classList.add('active');
+    setTimeout(()=>{ bar.style.width='60%'; },50);
+    setTimeout(()=>{ bar.style.width='85%'; },250);
+    setTimeout(()=>{ bar.style.width='100%'; },420);
+    setTimeout(()=>{ window.location.href=url; },620);
+  }
+  document.querySelectorAll('.nav a, .footer-links a, .logo, .btn-primary').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href==='#' || href===window.location.pathname) return;
+      e.preventDefault(); navigateTo(href);
+    });
+  });
+
+  // ── TOAST ─────────────────────────────────────────────────────────
+  let toastT = null;
+  function showToast(msg, icon='fa-info-circle') {
+    const t = document.getElementById('toastBox');
+    document.getElementById('toastIcon').className = 'fas ' + icon;
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastT);
+    toastT = setTimeout(()=>t.classList.remove('show'), 3200);
+  }
+
+  // ── RIPPLE ────────────────────────────────────────────────────────
+  document.querySelectorAll('.ripple-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const r = document.createElement('span');
+      const d = Math.max(this.clientWidth, this.clientHeight);
+      r.classList.add('ripple');
+      r.style.width  = r.style.height = d+'px';
+      r.style.left   = (e.clientX - this.getBoundingClientRect().left - d/2)+'px';
+      r.style.top    = (e.clientY - this.getBoundingClientRect().top  - d/2)+'px';
+      this.appendChild(r);
+      setTimeout(()=>r.remove(), 600);
+    });
+  });
+
+  // ── HEADER SCROLL ────────────────────────────────────────────────
+  window.addEventListener('scroll',()=>{
+    document.getElementById('header').classList.toggle('scrolled',window.scrollY>50);
+  });
+
+  // ── INIT ─────────────────────────────────────────────────────────
+  window.addEventListener('load', () => {
+    document.body.classList.add('ready');
+
+    renderCards(featuresData);
+
+    // Re-attach cursor to dynamically created cards
+    setTimeout(()=>{
+      attachCursor(document.querySelectorAll('.feature-card, .dest-img-card, .gal-item, .spotlight-img'));
+    }, 200);
+
+    // Stats counters
+    const totalFeatures = featuresData.reduce((s,f)=>s+f.features.length,0);
+    counter(document.getElementById('statFeatures'), totalFeatures);
+    counter(document.getElementById('statCategories'), featuresData.length, '', 1500);
+    counter(document.getElementById('statUsers'), 52000, '+', 2500);
+    counter(document.getElementById('statCountries'), 85, '+', 2000);
+
+    // Welcome toast
+    setTimeout(()=>showToast('Explore 150+ travel features!','fa-star'), 1200);
+  });
+  </script>
+
+</body>
+</html>
