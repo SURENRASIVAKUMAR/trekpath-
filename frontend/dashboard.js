@@ -386,18 +386,7 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
              </ul>
           </div>
           <!-- Simple CSS animation triggered via JS later or purely CSS -->
-          <style>
-            .readiness-widget:hover .progress-bar-fill { width: 50% !important; }
-            .readiness-widget .progress-bar-fill { animation: fillProgress 2s forwards ease-out 0.5s; }
-            @keyframes fillProgress { to { width: 50%; } }
-            .checklist-animated li { animation: slideInFade 0.5s forwards ease-out; opacity:0; transform:translateX(10px); }
-            .checklist-animated li:nth-child(1) { animation-delay: 0.2s; }
-            .checklist-animated li:nth-child(2) { animation-delay: 0.4s; }
-            .checklist-animated li:nth-child(3) { animation-delay: 0.6s; opacity: 0; }
-            .checklist-animated li:nth-child(4) { animation-delay: 0.8s; opacity: 0; }
-            @keyframes slideInFade { to { opacity:1; transform:translateX(0); } }
-            .checklist-animated li.pending { animation: slideInFadePending 0.5s forwards ease-out; }
-          </style>
+          <style>\n        #pdf-export-container * { box-sizing: border-box; }\n        #pdf-export-container { color: #1a202c; font-size: 14px; }\n        \n        .pdf-sidebar { width: 380px; background: #062c2a; color: #fff; display: flex; flex-direction: column; position: relative; z-index: 2; box-shadow: 4px 0 20px rgba(0,0,0,0.1); }\n        .pdf-hero { height: 35%; background: url('${currentLocData.heroImg}') center/cover; position: relative; border-bottom: 4px solid #f1c40f; }\n        .pdf-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 40%, rgba(0,0,0,0) 100%); }\n        .pdf-hero-content { position: relative; z-index: 2; padding: 40px 30px; text-align: center; }\n        .pdf-logo { display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 800; font-size: 28px; color: #062c2a; margin-bottom: 25px; letter-spacing: 1px; }\n        .pdf-logo i { background: #062c2a; color: #fff; padding: 12px; border-radius: 50%; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }\n        .pdf-script { font-family: 'Dancing Script', cursive; font-size: 42px; color: #062c2a; line-height: 1.1; margin-bottom: 15px; }\n        .pdf-subscript { font-size: 16px; color: #062c2a; font-weight: 700; letter-spacing: 0.5px; }\n        \n        .pdf-sb-body { padding: 40px 35px; display: flex; flex-direction: column; flex: 1; justify-content: flex-start; }\n        .pdf-dest-title { font-size: 38px; font-weight: 800; text-align: left; letter-spacing: 2px; margin-bottom: 8px; margin-top: 0; text-transform: uppercase; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }\n        .pdf-dest-subtitle { font-size: 18px; text-align: left; color: #a4c9c5; margin-bottom: 50px; letter-spacing: 2px; font-weight: 600; }\n        \n        .pdf-meta-grid { display: flex; flex-direction: column; gap: 25px; }\n        .pdf-meta-item { display: flex; gap: 20px; align-items: center; }\n        .pdf-meta-icon { font-size: 24px; color: #fff; opacity: 0.9; width: 30px; text-align: center; }\n        .pdf-meta-text { display: flex; flex-direction: column; }\n        .pdf-meta-text label { display: block; font-size: 12px; font-weight: 800; margin-bottom: 4px; color: #a4c9c5; text-transform: uppercase; letter-spacing: 1px; }\n        .pdf-meta-text span { font-size: 16px; font-weight: 700; color: #fff; line-height: 1.4; word-wrap: break-word; white-space: normal; }\n        \n        .pdf-main { flex: 1; display: flex; flex-direction: column; background: #fafbfc; position: relative; }\n        .pdf-header { height: 70px; background: #062c2a; display: flex; justify-content: space-between; align-items: center; padding: 0 45px; color: #fff; border-bottom: 4px solid #f1c40f; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }\n        .pdf-header-left { font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 12px; letter-spacing: 1px; }\n        .pdf-header-left i { background: #fff; color: #062c2a; padding: 6px; border-radius: 50%; font-size: 13px; }\n        .pdf-header-right { font-weight: 700; font-size: 16px; letter-spacing: 1.5px; display: flex; align-items: center; gap: 8px; }\n        \n        .pdf-content { padding: 40px 45px; flex: 1; display: flex; gap: 40px; }\n        \n        .pdf-col-left { flex: 1.2; display: flex; flex-direction: column; gap: 25px; }\n        .pdf-col-right { flex: 1; display: flex; flex-direction: column; gap: 25px; }\n        \n        .pdf-sec-title { display: flex; align-items: center; gap: 15px; font-size: 17px; font-weight: 800; color: #062c2a; margin-bottom: 20px; text-transform: uppercase; justify-content: center; position: relative; letter-spacing: 1.5px; }\n        .pdf-sec-title::before, .pdf-sec-title::after { content: ''; flex: 1; height: 1px; background: #cbd5e1; margin: 0 15px; }\n        .pdf-sec-title.no-lines::before, .pdf-sec-title.no-lines::after { display: none; }\n        .pdf-sec-title i { font-size: 20px; color: #062c2a; }\n        \n        .pdf-day-grid { display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 20px; }\n        .pdf-day-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; }\n        .pdf-day-header { background: #062c2a; color: #fff; padding: 10px 25px; font-size: 13px; font-weight: 800; border-radius: 0 30px 30px 0; display: inline-block; margin-top: 15px; margin-bottom: 20px; letter-spacing: 1.5px; box-shadow: 2px 4px 10px rgba(6,44,42,0.2); text-transform: uppercase; }\n        .pdf-day-body { padding: 0 25px 25px 25px; display: flex; flex-direction: column; gap: 20px; flex: 1; }\n        .pdf-act { display: flex; gap: 18px; align-items: flex-start; }\n        .pdf-act-icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #f39c12; background: #fff8e1; box-shadow: 0 2px 8px rgba(243,156,18,0.2); }\n        .pdf-act-time { font-size: 12px; font-weight: 800; color: #062c2a; width: 60px; text-align: right; line-height: 1.4; padding-top: 4px; flex-shrink: 0; }\n        .pdf-act-desc { flex: 1; border-left: 2px solid #f1f5f9; padding-left: 18px; }\n        .pdf-act-desc strong { display: block; font-size: 15px; color: #1e293b; margin-bottom: 5px; font-weight: 700; }\n        .pdf-act-desc p { font-size: 13px; color: #64748b; margin: 0; line-height: 1.6; }\n        \n        .pdf-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; font-size: 13px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }\n        .pdf-table th { background: #062c2a; color: #fff; text-align: left; padding: 16px 25px; font-weight: 700; letter-spacing: 1.5px; font-size: 12px; text-transform: uppercase; }\n        .pdf-table td { padding: 16px 25px; border-bottom: 1px solid #f1f5f9; color: #475569; }\n        .pdf-table tr:last-child td { border-bottom: none; }\n        .pdf-table .total-row td { background: #f8fafc; font-weight: 800; color: #062c2a; font-size: 15px; border-top: 2px solid #062c2a; }\n        \n        .pdf-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 15px; }\n        .pdf-card-img { width: 180px; flex-shrink: 0; object-fit: cover; }\n        .pdf-card-body { padding: 22px 25px; flex: 1; display: flex; flex-direction: column; justify-content: center; }\n        .pdf-card-title { font-size: 17px; font-weight: 800; color: #062c2a; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }\n        .pdf-card-title span { color: #f1c40f; font-size: 13px; letter-spacing: 2px; }\n        .pdf-card-grid { display: grid; grid-template-columns: 100px 1fr; gap: 10px; font-size: 13px; }\n        .pdf-card-grid strong { color: #64748b; font-weight: 700; }\n        .pdf-card-grid span { color: #1e293b; font-weight: 600; }\n        \n        .pdf-places-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px; }\n        .pdf-place-card { display: flex; flex-direction: column; align-items: center; text-align: center; }\n        .pdf-place-card img { width: 100%; height: 90px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }\n        .pdf-place-card .pdf-place-name { font-size: 13px; font-weight: 700; color: #1e293b; }\n        \n        .pdf-footer-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 35px; margin-top: auto; border-top: 2px dashed #cbd5e1; padding-top: 30px; margin-bottom: 30px; }\n        \n        .pdf-notes { font-size: 13px; color: #475569; line-height: 1.8; }\n        .pdf-notes ul { list-style: none; padding: 0; margin: 0; }\n        .pdf-notes li { position: relative; padding-left: 28px; margin-bottom: 10px; font-weight: 600; }\n        .pdf-notes li::before { content: '✔'; position: absolute; left: 0; color: #062c2a; font-weight: 800; font-size: 14px; top: 1px; }\n        \n        .pdf-tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 15px; }\n        .pdf-tip-item { display: flex; gap: 15px; align-items: center; }\n        .pdf-tip-icon { width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; background: #eaf3f2; color: #062c2a; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }\n        .pdf-tip-text label { display: block; font-size: 12px; font-weight: 800; color: #062c2a; margin-bottom: 4px; }\n        .pdf-tip-text span { font-size: 12px; color: #64748b; font-weight: 600; }\n        \n        .pdf-footer-art { text-align: center; position: relative; margin-top: auto; padding-top: 30px; margin-bottom: 20px; }\n        .pdf-footer-art h2 { font-family: 'Dancing Script', cursive; font-size: 42px; color: #062c2a; margin: 0 0 12px 0; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }\n        .pdf-footer-art p { font-size: 15px; color: #64748b; margin: 0; font-weight: 600; letter-spacing: 0.5px; }\n        \n        .pdf-bottom-bar { background: #062c2a; color: #fff; display: flex; justify-content: space-between; padding: 18px 45px; font-size: 13px; font-weight: 700; position: absolute; bottom: 0; width: 100%; box-sizing: border-box; letter-spacing: 1.5px; }\n      </style>
         </div>
       </div>
         
@@ -1041,22 +1030,355 @@ function highlightLocationOnMap(lat, lng, name) {
   }
 }
 
-function downloadPDF() {
-  const element = document.getElementById('downloadableContent');
+function downloadPDF() {\n  const loaderHtml = '<div id="pdf-loader-overlay" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:999999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; font-family:\\'Inter\\', sans-serif; opacity:0; transition:opacity 0.3s ease;">' +\n    '<i class="fas fa-circle-notch fa-spin" style="font-size:3rem; color:#f1c40f; margin-bottom:20px;"></i>' +\n    '<h2 style="margin:0; font-weight:700; font-size:24px; letter-spacing:1px; animation: pulse 1.5s infinite;">Crafting Your Itinerary...</h2>' +\n    '<p style="color:#aaa; font-size:14px; margin-top:10px;">Please wait while we prepare your premium document.</p>' +\n    '</div>' +\n    '<style>@keyframes pulse { 0% { opacity:1; } 50% { opacity:0.6; } 100% { opacity:1; } }</style>';\n  \n  let loader = document.getElementById('pdf-loader-overlay');\n  if (!loader) {\n    const wrapper = document.createElement('div');\n    wrapper.innerHTML = loaderHtml;\n    document.body.appendChild(wrapper.firstElementChild);\n    document.body.appendChild(wrapper.lastElementChild);\n    loader = document.getElementById('pdf-loader-overlay');\n  }\n  \n  loader.style.display = 'flex';\n  setTimeout(() => loader.style.opacity = '1', 10);\n
+  if (typeof showToast === 'function') showToast('Generating your Premium PDF...', 'fa-file-pdf');
   
-  // Apply print styles temporarily
-  document.body.classList.add('pdf-export-mode');
+  const destName = (typeof destinationKey !== 'undefined' && destinationKey) ? destinationKey.toUpperCase() : 'GOA';
+  const hotel = currentLocData.hotels[0] || { name: 'Sea Breeze Resort', rating: '5.0', distance: 'Baga, Goa', checkIn: '02:00 PM', checkOut: '11:00 AM', rooms: 'Deluxe Room', img: 'https://picsum.photos/id/1015/800/600' };
+  const flightCost = Math.round(globalCostBreakdown.flights) || 8500;
+  const hotelCost = Math.round(globalCostBreakdown.hotels) || 6000;
+  const foodCost = Math.round(globalCostBreakdown.food) || 4500;
+  const actCost = Math.round(globalCostBreakdown.activities) || 3500;
+  const otherCost = 2000;
+  const totalCost = flightCost + hotelCost + foodCost + actCost + otherCost;
+
+  let itineraryHtml = '';
+  const daysToRender = Math.min(currentLocData.itinerary.length, 4);
+  const fakeDates = ['20 May 2025', '21 May 2025', '22 May 2025', '23 May 2025'];
   
-  const opt = { 
-    margin: 0.3, 
-    filename: 'My_Premium_Itinerary.pdf', 
-    image: { type: 'jpeg', quality: 0.98 }, 
-    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 1200 }, 
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } 
+  for(let i=0; i<daysToRender; i++) {
+    const day = currentLocData.itinerary[i];
+    let actsHtml = '';
+    for(let j=0; j<Math.min(day.activities.length, 4); j++) {
+      const act = day.activities[j];
+      const timeParts = act.time.split(' ');
+      const t1 = timeParts[0] || '';
+      const t2 = timeParts[1] || '';
+      
+      actsHtml += `
+        <div class="pdf-act">
+          <div class="pdf-act-icon"><i class="fas ${act.icon}"></i></div>
+          <div class="pdf-act-time">${t1}<br>${t2}</div>
+          <div class="pdf-act-desc">
+            <strong>${act.place}</strong>
+            <p>${act.desc}</p>
+          </div>
+        </div>
+      `;
+    }
+    
+    itineraryHtml += `
+      <div class="pdf-day-card">
+        <div class="pdf-day-header">DAY ${i+1} - ${fakeDates[i] || ''}</div>
+        <div class="pdf-day-body">
+          ${actsHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  let placesHtml = '';
+  for(let i=0; i<Math.min(currentLocData.places.length, 4); i++) {
+    const p = currentLocData.places[i];
+    placesHtml += `
+      <div class="pdf-place-card">
+        <img src="${p.img}" alt="${p.name}">
+        <div class="pdf-place-name">${p.name}</div>
+      </div>
+    `;
+  }
+
+  const htmlContent = `
+    <div id="pdf-export-container" style="width: 1400px; height: 990px; background: #fff; font-family: 'Raleway', sans-serif; display: flex; box-sizing: border-box; overflow: hidden; position: relative;">
+      
+      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+      
+      <style>
+        #pdf-export-container * { box-sizing: border-box; }
+        #pdf-export-container { color: #333; }
+        .pdf-sidebar { width: 340px; background: #033f38; color: #fff; display: flex; flex-direction: column; position: relative; z-index: 2; }
+        .pdf-hero { height: 42%; background: url('${currentLocData.heroImg}') center/cover; position: relative; }
+        .pdf-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 35%, rgba(255,255,255,0) 100%); }
+        .pdf-hero-content { position: relative; z-index: 2; padding: 30px; text-align: center; }
+        .pdf-logo { display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 800; font-size: 26px; color: #033f38; margin-bottom: 25px; }
+        .pdf-logo i { background: #033f38; color: #fff; padding: 10px; border-radius: 50%; font-size: 18px; }
+        .pdf-script { font-family: 'Dancing Script', cursive; font-size: 38px; color: #033f38; line-height: 1.2; margin-bottom: 12px; }
+        .pdf-subscript { font-size: 15px; color: #033f38; font-weight: 700; letter-spacing: 0.5px; }
+        
+        .pdf-sb-body { padding: 30px; display: flex; flex-direction: column; flex: 1; border-top: 4px solid #f1c40f; }
+        .pdf-dest-title { font-size: 34px; font-weight: 800; text-align: center; letter-spacing: 2px; margin-bottom: 5px; margin-top: 15px; text-transform: uppercase; }
+        .pdf-dest-subtitle { font-size: 16px; text-align: center; color: #a4c9c5; margin-bottom: 45px; letter-spacing: 1px; }
+        
+        .pdf-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 15px; }
+        .pdf-meta-item { display: flex; gap: 14px; align-items: flex-start; }
+        .pdf-meta-icon { font-size: 24px; color: #fff; margin-top: 2px; opacity: 0.9; }
+        .pdf-meta-text label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px; color: #a4c9c5; text-transform: uppercase; letter-spacing: 1px; }
+        .pdf-meta-text span { font-size: 14px; font-weight: 600; color: #fff; }
+        
+        .pdf-main { flex: 1; display: flex; flex-direction: column; background: #ffffff; position: relative; }
+        .pdf-header { height: 55px; background: #033f38; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; color: #fff; border-bottom: 3px solid #f1c40f; }
+        .pdf-header-left { font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+        .pdf-header-left i { background: #fff; color: #033f38; padding: 5px; border-radius: 50%; font-size: 12px; }
+        .pdf-header-right { font-weight: 600; font-size: 15px; letter-spacing: 1px; }
+        
+        .pdf-content { padding: 25px 35px; flex: 1; display: flex; gap: 30px; }
+        
+        .pdf-col-left { flex: 1.35; display: flex; flex-direction: column; gap: 15px; }
+        .pdf-col-right { flex: 0.9; display: flex; flex-direction: column; gap: 15px; }
+        
+        .pdf-sec-title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 800; color: #033f38; margin-bottom: 15px; text-transform: uppercase; justify-content: center; position: relative; letter-spacing: 1px; }
+        .pdf-sec-title::before, .pdf-sec-title::after { content: ''; flex: 1; height: 1px; background: #d0e0df; margin: 0 10px; }
+        .pdf-sec-title.no-lines::before, .pdf-sec-title.no-lines::after { display: none; }
+        .pdf-sec-title i { font-size: 18px; color: #033f38; }
+        
+        .pdf-day-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 10px; }
+        .pdf-day-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .pdf-day-header { background: #033f38; color: #fff; padding: 7px 18px; font-size: 12px; font-weight: 700; border-radius: 0 20px 20px 0; display: inline-block; margin-top: 12px; margin-bottom: 15px; letter-spacing: 1px; box-shadow: 2px 2px 8px rgba(3,63,56,0.3); }
+        .pdf-day-body { padding: 0 18px 18px 18px; display: flex; flex-direction: column; gap: 15px; }
+        .pdf-act { display: flex; gap: 12px; align-items: flex-start; }
+        .pdf-act-icon { width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #f39c12; background: #fdf5e6; }
+        .pdf-act-time { font-size: 11px; font-weight: 700; color: #033f38; width: 50px; text-align: right; line-height: 1.3; padding-top: 3px; flex-shrink: 0; }
+        .pdf-act-desc { flex: 1; border-left: 1px solid #eee; padding-left: 12px; }
+        .pdf-act-desc strong { display: block; font-size: 13px; color: #222; margin-bottom: 4px; }
+        .pdf-act-desc p { font-size: 11px; color: #666; margin: 0; line-height: 1.4; }
+        
+        .pdf-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e8e8e8; border-radius: 10px; overflow: hidden; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .pdf-table th { background: #033f38; color: #fff; text-align: left; padding: 12px 18px; font-weight: 600; letter-spacing: 1px; font-size: 11px; text-transform: uppercase; }
+        .pdf-table td { padding: 12px 18px; border-bottom: 1px solid #f0f0f0; color: #444; }
+        .pdf-table tr:last-child td { border-bottom: none; }
+        .pdf-table .total-row td { background: #f0f7f6; font-weight: 800; color: #033f38; font-size: 13px; border-top: 2px solid #033f38; }
+        
+        .pdf-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 10px; overflow: hidden; display: flex; box-shadow: 0 4px 10px rgba(0,0,0,0.03); margin-bottom: 5px; }
+        .pdf-card-img { width: 150px; flex-shrink: 0; object-fit: cover; }
+        .pdf-card-body { padding: 15px 18px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .pdf-card-title { font-size: 15px; font-weight: 800; color: #033f38; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .pdf-card-title span { color: #f1c40f; font-size: 12px; letter-spacing: 2px; }
+        .pdf-card-grid { display: grid; grid-template-columns: 85px 1fr; gap: 6px; font-size: 11px; }
+        .pdf-card-grid strong { color: #666; font-weight: 600; }
+        .pdf-card-grid span { color: #222; font-weight: 500; }
+        
+        .pdf-places-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .pdf-place-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .pdf-place-card img { width: 100%; height: 70px; object-fit: cover; border-radius: 8px; margin-bottom: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .pdf-place-card .pdf-place-name { font-size: 11px; font-weight: 700; color: #333; }
+        
+        .pdf-footer-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 30px; margin-top: 5px; }
+        
+        .pdf-notes { font-size: 12px; color: #444; line-height: 1.8; }
+        .pdf-notes ul { list-style: none; padding: 0; margin: 0; }
+        .pdf-notes li { position: relative; padding-left: 22px; margin-bottom: 6px; font-weight: 500; }
+        .pdf-notes li::before { content: '✔'; position: absolute; left: 0; color: #033f38; font-weight: 800; font-size: 12px; top: 1px; }
+        
+        .pdf-tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; }
+        .pdf-tip-item { display: flex; gap: 12px; align-items: center; }
+        .pdf-tip-icon { width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; background: #e6f2f0; color: #033f38; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+        .pdf-tip-text label { display: block; font-size: 11px; font-weight: 800; color: #033f38; margin-bottom: 2px; }
+        .pdf-tip-text span { font-size: 11px; color: #555; font-weight: 500; }
+        
+        .pdf-footer-art { text-align: center; position: relative; margin-top: auto; padding-top: 15px; }
+        .pdf-footer-art h2 { font-family: 'Dancing Script', cursive; font-size: 34px; color: #033f38; margin: 0 0 8px 0; font-weight: 700; }
+        .pdf-footer-art p { font-size: 13px; color: #555; margin: 0; font-weight: 500; letter-spacing: 0.5px; }
+        
+        .pdf-bottom-bar { background: #033f38; color: #fff; display: flex; justify-content: space-between; padding: 12px 40px; font-size: 11px; font-weight: 600; position: absolute; bottom: 0; width: 100%; box-sizing: border-box; letter-spacing: 1px; }
+      </style>
+      
+      <div class="pdf-sidebar">
+        <div class="pdf-hero">
+          <div class="pdf-hero-content">
+            <div class="pdf-logo">
+              <i class="fas fa-mountain"></i> TrekPath
+            </div>
+            <div class="pdf-script">Your Journey,<br>Perfectly Planned!</div>
+            <div class="pdf-subscript">Let's make memories together.</div>
+          </div>
+        </div>
+        <div class="pdf-sb-body">
+          <div class="pdf-dest-title">${destName} ESCAPE</div>
+          <div class="pdf-dest-subtitle">4 Days / 3 Nights</div>
+          
+          <div class="pdf-meta-grid">
+            <div class="pdf-meta-item">
+              <i class="fas fa-map-marker-alt pdf-meta-icon"></i>
+              <div class="pdf-meta-text"><label>Destination</label><span>${destName}, ${currentLocData.currency.from === 'USD' ? 'USA' : 'France'}</span></div>
+            </div>
+            <div class="pdf-meta-item">
+              <i class="fas fa-suitcase-rolling pdf-meta-icon"></i>
+              <div class="pdf-meta-text"><label>Trip Type</label><span>Leisure</span></div>
+            </div>
+            <div class="pdf-meta-item">
+              <i class="far fa-calendar-alt pdf-meta-icon"></i>
+              <div class="pdf-meta-text"><label>Travel Dates</label><span>20 May 2025 - 23 May 2025</span></div>
+            </div>
+            <div class="pdf-meta-item">
+              <i class="fas fa-wallet pdf-meta-icon"></i>
+              <div class="pdf-meta-text"><label>Budget</label><span>₹ ${totalCost.toLocaleString()} (Estimated)</span></div>
+            </div>
+            <div class="pdf-meta-item">
+              <i class="fas fa-user-friends pdf-meta-icon"></i>
+              <div class="pdf-meta-text"><label>Travelers</label><span>${numTravelers || 2} Adults</span></div>
+            </div>
+            <div class="pdf-meta-item">
+              <i class="far fa-clock pdf-meta-icon"></i>
+              <div class="pdf-meta-text"><label>Generated On</label><span>${new Date().toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'})}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pdf-main">
+        <div class="pdf-header">
+          <div class="pdf-header-left"><i class="fas fa-mountain"></i> TrekPath</div>
+          <div class="pdf-header-right">Trip to ${destName} <i class="fas fa-map-marker-alt" style="margin-left: 6px; color: #f1c40f;"></i></div>
+        </div>
+        
+        <div class="pdf-content">
+          <div class="pdf-col-left">
+            <div class="pdf-sec-title"><i class="far fa-calendar-alt"></i> DAY-WISE ITINERARY</div>
+            
+            <div class="pdf-day-grid">
+              ${itineraryHtml}
+            </div>
+            
+            <div class="pdf-footer-grid">
+              <div>
+                <div class="pdf-sec-title no-lines" style="justify-content: flex-start; font-size: 14px;"><i class="fas fa-clipboard-list"></i> IMPORTANT NOTES</div>
+                <div class="pdf-notes">
+                  <ul>
+                    <li>Carry valid ID proof.</li>
+                    <li>Keep weather-appropriate clothes.</li>
+                    <li>Don't forget sunscreen, sunglasses and medicines.</li>
+                    <li>Book water sports in licensed centers only.</li>
+                    <li>Respect local culture and keep the beaches clean.</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div>
+                <div class="pdf-sec-title no-lines" style="justify-content: flex-start; font-size: 14px;"><i class="far fa-lightbulb"></i> TRAVEL TIPS</div>
+                <div class="pdf-tips-grid">
+                  <div class="pdf-tip-item">
+                    <div class="pdf-tip-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="pdf-tip-text"><label>Best Time to Visit</label><span>November to February</span></div>
+                  </div>
+                  <div class="pdf-tip-item">
+                    <div class="pdf-tip-icon"><i class="fas fa-cloud-sun"></i></div>
+                    <div class="pdf-tip-text"><label>Weather</label><span>Sunny & Pleasant (25°C - 32°C)</span></div>
+                  </div>
+                  <div class="pdf-tip-item">
+                    <div class="pdf-tip-icon"><i class="fas fa-language"></i></div>
+                    <div class="pdf-tip-text"><label>Local Language</label><span>Konkani, English, Hindi</span></div>
+                  </div>
+                  <div class="pdf-tip-item">
+                    <div class="pdf-tip-icon"><i class="fas fa-clock"></i></div>
+                    <div class="pdf-tip-text"><label>Time Zone</label><span>IST (UTC +5:30)</span></div>
+                  </div>
+                  <div class="pdf-tip-item">
+                    <div class="pdf-tip-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="pdf-tip-text"><label>Currency</label><span>Indian Rupee (₹)</span></div>
+                  </div>
+                  <div class="pdf-tip-item">
+                    <div class="pdf-tip-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="pdf-tip-text"><label>Emergency</label><span>Dial 112</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          <div class="pdf-col-right">
+            <div class="pdf-sec-title"><i class="fas fa-wallet"></i> BUDGET SUMMARY</div>
+            <table class="pdf-table">
+              <tr><th>Category</th><th>Details</th><th style="text-align:right;">Estimated Cost (₹)</th></tr>
+              <tr><td>Transportation</td><td>Flights + Local Travel</td><td style="text-align:right;">${flightCost.toLocaleString()}</td></tr>
+              <tr><td>Accommodation</td><td>3 Nights Stay</td><td style="text-align:right;">${hotelCost.toLocaleString()}</td></tr>
+              <tr><td>Food</td><td>Breakfast + Lunch + Dinner</td><td style="text-align:right;">${foodCost.toLocaleString()}</td></tr>
+              <tr><td>Activities</td><td>Water Sports + Sightseeing</td><td style="text-align:right;">${actCost.toLocaleString()}</td></tr>
+              <tr><td>Other Expenses</td><td>Shopping + Miscellaneous</td><td style="text-align:right;">${otherCost.toLocaleString()}</td></tr>
+              <tr class="total-row"><td>TOTAL ESTIMATED COST</td><td></td><td style="text-align:right;">₹ ${totalCost.toLocaleString()}</td></tr>
+            </table>
+            
+            <div class="pdf-sec-title" style="margin-top: 15px;"><i class="fas fa-hotel"></i> ACCOMMODATION DETAILS</div>
+            <div class="pdf-card">
+              <img src="${hotel.img}" class="pdf-card-img" alt="${hotel.name}">
+              <div class="pdf-card-body">
+                <div class="pdf-card-title">${hotel.name} <span><i class="fas fa-star"></i>${hotel.rating}</span></div>
+                <div class="pdf-card-grid">
+                  <strong>Location</strong> <span>${hotel.distance.substring(0, 20)}</span>
+                  <strong>Check-in</strong> <span>20 May 2025</span>
+                  <strong>Check-out</strong> <span>23 May 2025</span>
+                  <strong>Nights</strong> <span>3 Nights</span>
+                  <strong>Room Type</strong> <span>${hotel.rooms.split(',')[0]}</span>
+                  <strong>Total Cost</strong> <span>₹ ${hotelCost.toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="pdf-sec-title" style="margin-top: 15px;"><i class="fas fa-car"></i> TRANSPORT DETAILS</div>
+            <div class="pdf-card" style="margin-bottom: 0;">
+              <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop" class="pdf-card-img" alt="Flight" onerror="this.src='https://picsum.photos/id/1039/400/300'">
+              <div class="pdf-card-body" style="padding: 12px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="font-size: 12px; font-weight: 800; color: #033f38; margin-bottom: 8px;">Flight (Round Trip)</div>
+                  <div class="pdf-card-grid">
+                    <strong>From</strong> <span>Chennai (MAA)</span>
+                    <strong>To</strong> <span>${destName} (GOI)</span>
+                    <strong>Departure</strong> <span>20 May 2025, 07:10 AM</span>
+                    <strong>Return</strong> <span>23 May 2025, 06:40 PM</span>
+                    <strong>Airline</strong> <span>IndiGo</span>
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">
+                  <div style="display: flex; gap: 10px; align-items: center;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: #e6f2f0; display: flex; align-items: center; justify-content: center; color: #033f38; font-size: 14px;"><i class="fas fa-taxi"></i></div>
+                    <div style="font-size: 11px;"><strong>Local Transport</strong><br><span style="color:#666;">Taxi & Bike Rental</span></div>
+                  </div>
+                  <div style="font-size: 11px; text-align: right;"><strong>Estimated Cost</strong><br>₹ 2,500</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="pdf-sec-title" style="margin-top: 15px;"><i class="fas fa-camera"></i> PLACES TO VISIT</div>
+            <div class="pdf-places-grid">
+              ${placesHtml}
+            </div>
+            
+            <div class="pdf-footer-art">
+              <h2>Have a Safe & Happy Journey!</h2>
+              <p>Make memories that last a lifetime.</p>
+            </div>
+            
+          </div>
+        </div>
+        
+        <div class="pdf-bottom-bar">
+          <div><i class="fas fa-mountain" style="margin-right: 5px;"></i> TrekPath • Explore • Plan • Travel</div>
+          <div style="display: flex; gap: 20px;">
+            <div style="width: 20px; height: 20px; background: #fff; color: #033f38; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const container = document.createElement('div');
+  container.innerHTML = htmlContent;
+  container.style.position = 'absolute';
+  container.style.left = '-9999px';
+  container.style.top = '-9999px';
+  document.body.appendChild(container);
+
+  const opt = {
+    margin: 0,
+    filename: `TrekPath_${destName}_Planner.pdf`,
+    image: { type: 'jpeg', quality: 1.0 },
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', scrollY: 0 },
+    jsPDF: { unit: 'px', format: [1400, 990], orientation: 'landscape' }
   };
-  
-  html2pdf().set(opt).from(element).save().then(() => {
-    document.body.classList.remove('pdf-export-mode');
+
+  html2pdf().set(opt).from(container.firstElementChild).save().then(() => {
+    document.body.removeChild(container);\n    if(loader) {\n      loader.style.opacity = '0';\n      setTimeout(() => loader.style.display = 'none', 300);\n    }\n    if (typeof showToast === 'function') showToast('PDF Downloaded!', 'fa-check-circle');
   });
 }
 function simulateOfflineDownload(event) {
