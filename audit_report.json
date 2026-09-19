@@ -1,0 +1,11 @@
+[
+  "Broken link in frontend\\contact.html: tel:+916382212334",
+  "Broken link in frontend\\index.html: ${p.img}",
+  "Broken link in frontend\\index.html: ${dest.image_url}",
+  "Broken link in frontend\\testimonials.html: ${r.avatar || ",
+  "Broken link in TrekPath_ReadyToHost\\frontend\\contact.html: tel:+916382212334",
+  "Broken link in TrekPath_ReadyToHost\\frontend\\index.html: ${p.img}",
+  "Broken link in TrekPath_ReadyToHost\\frontend\\index.html: dashboard.html",
+  "Broken link in TrekPath_ReadyToHost\\frontend\\index.html: ${dest.image_url}",
+  "Broken link in TrekPath_ReadyToHost\\frontend\\testimonials.html: ${r.avatar || "
+]

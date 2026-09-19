@@ -386,7 +386,96 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
              </ul>
           </div>
           <!-- Simple CSS animation triggered via JS later or purely CSS -->
-          <style>\n        #pdf-export-container * { box-sizing: border-box; }\n        #pdf-export-container { color: #1a202c; font-size: 14px; }\n        \n        .pdf-sidebar { width: 380px; background: #062c2a; color: #fff; display: flex; flex-direction: column; position: relative; z-index: 2; box-shadow: 4px 0 20px rgba(0,0,0,0.1); }\n        .pdf-hero { height: 35%; background: url('${currentLocData.heroImg}') center/cover; position: relative; border-bottom: 4px solid #f1c40f; }\n        .pdf-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 40%, rgba(0,0,0,0) 100%); }\n        .pdf-hero-content { position: relative; z-index: 2; padding: 40px 30px; text-align: center; }\n        .pdf-logo { display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 800; font-size: 28px; color: #062c2a; margin-bottom: 25px; letter-spacing: 1px; }\n        .pdf-logo i { background: #062c2a; color: #fff; padding: 12px; border-radius: 50%; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }\n        .pdf-script { font-family: 'Dancing Script', cursive; font-size: 42px; color: #062c2a; line-height: 1.1; margin-bottom: 15px; }\n        .pdf-subscript { font-size: 16px; color: #062c2a; font-weight: 700; letter-spacing: 0.5px; }\n        \n        .pdf-sb-body { padding: 40px 35px; display: flex; flex-direction: column; flex: 1; justify-content: flex-start; }\n        .pdf-dest-title { font-size: 38px; font-weight: 800; text-align: left; letter-spacing: 2px; margin-bottom: 8px; margin-top: 0; text-transform: uppercase; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }\n        .pdf-dest-subtitle { font-size: 18px; text-align: left; color: #a4c9c5; margin-bottom: 50px; letter-spacing: 2px; font-weight: 600; }\n        \n        .pdf-meta-grid { display: flex; flex-direction: column; gap: 25px; }\n        .pdf-meta-item { display: flex; gap: 20px; align-items: center; }\n        .pdf-meta-icon { font-size: 24px; color: #fff; opacity: 0.9; width: 30px; text-align: center; }\n        .pdf-meta-text { display: flex; flex-direction: column; }\n        .pdf-meta-text label { display: block; font-size: 12px; font-weight: 800; margin-bottom: 4px; color: #a4c9c5; text-transform: uppercase; letter-spacing: 1px; }\n        .pdf-meta-text span { font-size: 16px; font-weight: 700; color: #fff; line-height: 1.4; word-wrap: break-word; white-space: normal; }\n        \n        .pdf-main { flex: 1; display: flex; flex-direction: column; background: #fafbfc; position: relative; }\n        .pdf-header { height: 70px; background: #062c2a; display: flex; justify-content: space-between; align-items: center; padding: 0 45px; color: #fff; border-bottom: 4px solid #f1c40f; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }\n        .pdf-header-left { font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 12px; letter-spacing: 1px; }\n        .pdf-header-left i { background: #fff; color: #062c2a; padding: 6px; border-radius: 50%; font-size: 13px; }\n        .pdf-header-right { font-weight: 700; font-size: 16px; letter-spacing: 1.5px; display: flex; align-items: center; gap: 8px; }\n        \n        .pdf-content { padding: 40px 45px; flex: 1; display: flex; gap: 40px; }\n        \n        .pdf-col-left { flex: 1.2; display: flex; flex-direction: column; gap: 25px; }\n        .pdf-col-right { flex: 1; display: flex; flex-direction: column; gap: 25px; }\n        \n        .pdf-sec-title { display: flex; align-items: center; gap: 15px; font-size: 17px; font-weight: 800; color: #062c2a; margin-bottom: 20px; text-transform: uppercase; justify-content: center; position: relative; letter-spacing: 1.5px; }\n        .pdf-sec-title::before, .pdf-sec-title::after { content: ''; flex: 1; height: 1px; background: #cbd5e1; margin: 0 15px; }\n        .pdf-sec-title.no-lines::before, .pdf-sec-title.no-lines::after { display: none; }\n        .pdf-sec-title i { font-size: 20px; color: #062c2a; }\n        \n        .pdf-day-grid { display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 20px; }\n        .pdf-day-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; }\n        .pdf-day-header { background: #062c2a; color: #fff; padding: 10px 25px; font-size: 13px; font-weight: 800; border-radius: 0 30px 30px 0; display: inline-block; margin-top: 15px; margin-bottom: 20px; letter-spacing: 1.5px; box-shadow: 2px 4px 10px rgba(6,44,42,0.2); text-transform: uppercase; }\n        .pdf-day-body { padding: 0 25px 25px 25px; display: flex; flex-direction: column; gap: 20px; flex: 1; }\n        .pdf-act { display: flex; gap: 18px; align-items: flex-start; }\n        .pdf-act-icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #f39c12; background: #fff8e1; box-shadow: 0 2px 8px rgba(243,156,18,0.2); }\n        .pdf-act-time { font-size: 12px; font-weight: 800; color: #062c2a; width: 60px; text-align: right; line-height: 1.4; padding-top: 4px; flex-shrink: 0; }\n        .pdf-act-desc { flex: 1; border-left: 2px solid #f1f5f9; padding-left: 18px; }\n        .pdf-act-desc strong { display: block; font-size: 15px; color: #1e293b; margin-bottom: 5px; font-weight: 700; }\n        .pdf-act-desc p { font-size: 13px; color: #64748b; margin: 0; line-height: 1.6; }\n        \n        .pdf-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; font-size: 13px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }\n        .pdf-table th { background: #062c2a; color: #fff; text-align: left; padding: 16px 25px; font-weight: 700; letter-spacing: 1.5px; font-size: 12px; text-transform: uppercase; }\n        .pdf-table td { padding: 16px 25px; border-bottom: 1px solid #f1f5f9; color: #475569; }\n        .pdf-table tr:last-child td { border-bottom: none; }\n        .pdf-table .total-row td { background: #f8fafc; font-weight: 800; color: #062c2a; font-size: 15px; border-top: 2px solid #062c2a; }\n        \n        .pdf-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 15px; }\n        .pdf-card-img { width: 180px; flex-shrink: 0; object-fit: cover; }\n        .pdf-card-body { padding: 22px 25px; flex: 1; display: flex; flex-direction: column; justify-content: center; }\n        .pdf-card-title { font-size: 17px; font-weight: 800; color: #062c2a; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }\n        .pdf-card-title span { color: #f1c40f; font-size: 13px; letter-spacing: 2px; }\n        .pdf-card-grid { display: grid; grid-template-columns: 100px 1fr; gap: 10px; font-size: 13px; }\n        .pdf-card-grid strong { color: #64748b; font-weight: 700; }\n        .pdf-card-grid span { color: #1e293b; font-weight: 600; }\n        \n        .pdf-places-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px; }\n        .pdf-place-card { display: flex; flex-direction: column; align-items: center; text-align: center; }\n        .pdf-place-card img { width: 100%; height: 90px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }\n        .pdf-place-card .pdf-place-name { font-size: 13px; font-weight: 700; color: #1e293b; }\n        \n        .pdf-footer-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 35px; margin-top: auto; border-top: 2px dashed #cbd5e1; padding-top: 30px; margin-bottom: 30px; }\n        \n        .pdf-notes { font-size: 13px; color: #475569; line-height: 1.8; }\n        .pdf-notes ul { list-style: none; padding: 0; margin: 0; }\n        .pdf-notes li { position: relative; padding-left: 28px; margin-bottom: 10px; font-weight: 600; }\n        .pdf-notes li::before { content: '✔'; position: absolute; left: 0; color: #062c2a; font-weight: 800; font-size: 14px; top: 1px; }\n        \n        .pdf-tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 15px; }\n        .pdf-tip-item { display: flex; gap: 15px; align-items: center; }\n        .pdf-tip-icon { width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; background: #eaf3f2; color: #062c2a; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }\n        .pdf-tip-text label { display: block; font-size: 12px; font-weight: 800; color: #062c2a; margin-bottom: 4px; }\n        .pdf-tip-text span { font-size: 12px; color: #64748b; font-weight: 600; }\n        \n        .pdf-footer-art { text-align: center; position: relative; margin-top: auto; padding-top: 30px; margin-bottom: 20px; }\n        .pdf-footer-art h2 { font-family: 'Dancing Script', cursive; font-size: 42px; color: #062c2a; margin: 0 0 12px 0; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }\n        .pdf-footer-art p { font-size: 15px; color: #64748b; margin: 0; font-weight: 600; letter-spacing: 0.5px; }\n        \n        .pdf-bottom-bar { background: #062c2a; color: #fff; display: flex; justify-content: space-between; padding: 18px 45px; font-size: 13px; font-weight: 700; position: absolute; bottom: 0; width: 100%; box-sizing: border-box; letter-spacing: 1.5px; }\n      </style>
+          <style>
+        #pdf-export-container * { box-sizing: border-box; }
+        #pdf-export-container { color: #1a202c; font-size: 14px; }
+        
+        .pdf-sidebar { width: 380px; background: #062c2a; color: #fff; display: flex; flex-direction: column; position: relative; z-index: 2; box-shadow: 4px 0 20px rgba(0,0,0,0.1); }
+        .pdf-hero { height: 35%; background: url('${currentLocData.heroImg}') center/cover; position: relative; border-bottom: 4px solid #f1c40f; }
+        .pdf-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 40%, rgba(0,0,0,0) 100%); }
+        .pdf-hero-content { position: relative; z-index: 2; padding: 40px 30px; text-align: center; }
+        .pdf-logo { display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 800; font-size: 28px; color: #062c2a; margin-bottom: 25px; letter-spacing: 1px; }
+        .pdf-logo i { background: #062c2a; color: #fff; padding: 12px; border-radius: 50%; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .pdf-script { font-family: 'Dancing Script', cursive; font-size: 42px; color: #062c2a; line-height: 1.1; margin-bottom: 15px; }
+        .pdf-subscript { font-size: 16px; color: #062c2a; font-weight: 700; letter-spacing: 0.5px; }
+        
+        .pdf-sb-body { padding: 40px 35px; display: flex; flex-direction: column; flex: 1; justify-content: flex-start; }
+        .pdf-dest-title { font-size: 38px; font-weight: 800; text-align: left; letter-spacing: 2px; margin-bottom: 8px; margin-top: 0; text-transform: uppercase; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .pdf-dest-subtitle { font-size: 18px; text-align: left; color: #a4c9c5; margin-bottom: 50px; letter-spacing: 2px; font-weight: 600; }
+        
+        .pdf-meta-grid { display: flex; flex-direction: column; gap: 25px; }
+        .pdf-meta-item { display: flex; gap: 20px; align-items: center; }
+        .pdf-meta-icon { font-size: 24px; color: #fff; opacity: 0.9; width: 30px; text-align: center; }
+        .pdf-meta-text { display: flex; flex-direction: column; }
+        .pdf-meta-text label { display: block; font-size: 12px; font-weight: 800; margin-bottom: 4px; color: #a4c9c5; text-transform: uppercase; letter-spacing: 1px; }
+        .pdf-meta-text span { font-size: 16px; font-weight: 700; color: #fff; line-height: 1.4; word-wrap: break-word; white-space: normal; }
+        
+        .pdf-main { flex: 1; display: flex; flex-direction: column; background: #fafbfc; position: relative; }
+        .pdf-header { height: 70px; background: #062c2a; display: flex; justify-content: space-between; align-items: center; padding: 0 45px; color: #fff; border-bottom: 4px solid #f1c40f; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .pdf-header-left { font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 12px; letter-spacing: 1px; }
+        .pdf-header-left i { background: #fff; color: #062c2a; padding: 6px; border-radius: 50%; font-size: 13px; }
+        .pdf-header-right { font-weight: 700; font-size: 16px; letter-spacing: 1.5px; display: flex; align-items: center; gap: 8px; }
+        
+        .pdf-content { padding: 40px 45px; flex: 1; display: flex; gap: 40px; }
+        
+        .pdf-col-left { flex: 1.2; display: flex; flex-direction: column; gap: 25px; }
+        .pdf-col-right { flex: 1; display: flex; flex-direction: column; gap: 25px; }
+        
+        .pdf-sec-title { display: flex; align-items: center; gap: 15px; font-size: 17px; font-weight: 800; color: #062c2a; margin-bottom: 20px; text-transform: uppercase; justify-content: center; position: relative; letter-spacing: 1.5px; }
+        .pdf-sec-title::before, .pdf-sec-title::after { content: ''; flex: 1; height: 1px; background: #cbd5e1; margin: 0 15px; }
+        .pdf-sec-title.no-lines::before, .pdf-sec-title.no-lines::after { display: none; }
+        .pdf-sec-title i { font-size: 20px; color: #062c2a; }
+        
+        .pdf-day-grid { display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 20px; }
+        .pdf-day-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
+        .pdf-day-header { background: #062c2a; color: #fff; padding: 10px 25px; font-size: 13px; font-weight: 800; border-radius: 0 30px 30px 0; display: inline-block; margin-top: 15px; margin-bottom: 20px; letter-spacing: 1.5px; box-shadow: 2px 4px 10px rgba(6,44,42,0.2); text-transform: uppercase; }
+        .pdf-day-body { padding: 0 25px 25px 25px; display: flex; flex-direction: column; gap: 20px; flex: 1; }
+        .pdf-act { display: flex; gap: 18px; align-items: flex-start; }
+        .pdf-act-icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #f39c12; background: #fff8e1; box-shadow: 0 2px 8px rgba(243,156,18,0.2); }
+        .pdf-act-time { font-size: 12px; font-weight: 800; color: #062c2a; width: 60px; text-align: right; line-height: 1.4; padding-top: 4px; flex-shrink: 0; }
+        .pdf-act-desc { flex: 1; border-left: 2px solid #f1f5f9; padding-left: 18px; }
+        .pdf-act-desc strong { display: block; font-size: 15px; color: #1e293b; margin-bottom: 5px; font-weight: 700; }
+        .pdf-act-desc p { font-size: 13px; color: #64748b; margin: 0; line-height: 1.6; }
+        
+        .pdf-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; font-size: 13px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .pdf-table th { background: #062c2a; color: #fff; text-align: left; padding: 16px 25px; font-weight: 700; letter-spacing: 1.5px; font-size: 12px; text-transform: uppercase; }
+        .pdf-table td { padding: 16px 25px; border-bottom: 1px solid #f1f5f9; color: #475569; }
+        .pdf-table tr:last-child td { border-bottom: none; }
+        .pdf-table .total-row td { background: #f8fafc; font-weight: 800; color: #062c2a; font-size: 15px; border-top: 2px solid #062c2a; }
+        
+        .pdf-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 15px; }
+        .pdf-card-img { width: 180px; flex-shrink: 0; object-fit: cover; }
+        .pdf-card-body { padding: 22px 25px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .pdf-card-title { font-size: 17px; font-weight: 800; color: #062c2a; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .pdf-card-title span { color: #f1c40f; font-size: 13px; letter-spacing: 2px; }
+        .pdf-card-grid { display: grid; grid-template-columns: 100px 1fr; gap: 10px; font-size: 13px; }
+        .pdf-card-grid strong { color: #64748b; font-weight: 700; }
+        .pdf-card-grid span { color: #1e293b; font-weight: 600; }
+        
+        .pdf-places-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px; }
+        .pdf-place-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .pdf-place-card img { width: 100%; height: 90px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .pdf-place-card .pdf-place-name { font-size: 13px; font-weight: 700; color: #1e293b; }
+        
+        .pdf-footer-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 35px; margin-top: auto; border-top: 2px dashed #cbd5e1; padding-top: 30px; margin-bottom: 30px; }
+        
+        .pdf-notes { font-size: 13px; color: #475569; line-height: 1.8; }
+        .pdf-notes ul { list-style: none; padding: 0; margin: 0; }
+        .pdf-notes li { position: relative; padding-left: 28px; margin-bottom: 10px; font-weight: 600; }
+        .pdf-notes li::before { content: '✔'; position: absolute; left: 0; color: #062c2a; font-weight: 800; font-size: 14px; top: 1px; }
+        
+        .pdf-tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 15px; }
+        .pdf-tip-item { display: flex; gap: 15px; align-items: center; }
+        .pdf-tip-icon { width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; background: #eaf3f2; color: #062c2a; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .pdf-tip-text label { display: block; font-size: 12px; font-weight: 800; color: #062c2a; margin-bottom: 4px; }
+        .pdf-tip-text span { font-size: 12px; color: #64748b; font-weight: 600; }
+        
+        .pdf-footer-art { text-align: center; position: relative; margin-top: auto; padding-top: 30px; margin-bottom: 20px; }
+        .pdf-footer-art h2 { font-family: 'Dancing Script', cursive; font-size: 42px; color: #062c2a; margin: 0 0 12px 0; font-weight: 700; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .pdf-footer-art p { font-size: 15px; color: #64748b; margin: 0; font-weight: 600; letter-spacing: 0.5px; }
+        
+        .pdf-bottom-bar { background: #062c2a; color: #fff; display: flex; justify-content: space-between; padding: 18px 45px; font-size: 13px; font-weight: 700; position: absolute; bottom: 0; width: 100%; box-sizing: border-box; letter-spacing: 1.5px; }
+      </style>
         </div>
       </div>
         
@@ -1030,7 +1119,26 @@ function highlightLocationOnMap(lat, lng, name) {
   }
 }
 
-function downloadPDF() {\n  const loaderHtml = '<div id="pdf-loader-overlay" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:999999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; font-family:\\'Inter\\', sans-serif; opacity:0; transition:opacity 0.3s ease;">' +\n    '<i class="fas fa-circle-notch fa-spin" style="font-size:3rem; color:#f1c40f; margin-bottom:20px;"></i>' +\n    '<h2 style="margin:0; font-weight:700; font-size:24px; letter-spacing:1px; animation: pulse 1.5s infinite;">Crafting Your Itinerary...</h2>' +\n    '<p style="color:#aaa; font-size:14px; margin-top:10px;">Please wait while we prepare your premium document.</p>' +\n    '</div>' +\n    '<style>@keyframes pulse { 0% { opacity:1; } 50% { opacity:0.6; } 100% { opacity:1; } }</style>';\n  \n  let loader = document.getElementById('pdf-loader-overlay');\n  if (!loader) {\n    const wrapper = document.createElement('div');\n    wrapper.innerHTML = loaderHtml;\n    document.body.appendChild(wrapper.firstElementChild);\n    document.body.appendChild(wrapper.lastElementChild);\n    loader = document.getElementById('pdf-loader-overlay');\n  }\n  \n  loader.style.display = 'flex';\n  setTimeout(() => loader.style.opacity = '1', 10);\n
+function downloadPDF() {
+  const loaderHtml = '<div id="pdf-loader-overlay" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:999999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; font-family:\'Inter\', sans-serif; opacity:0; transition:opacity 0.3s ease;">' +
+    '<i class="fas fa-circle-notch fa-spin" style="font-size:3rem; color:#f1c40f; margin-bottom:20px;"></i>' +
+    '<h2 style="margin:0; font-weight:700; font-size:24px; letter-spacing:1px; animation: pulse 1.5s infinite;">Crafting Your Itinerary...</h2>' +
+    '<p style="color:#aaa; font-size:14px; margin-top:10px;">Please wait while we prepare your premium document.</p>' +
+    '</div>' +
+    '<style>@keyframes pulse { 0% { opacity:1; } 50% { opacity:0.6; } 100% { opacity:1; } }</style>';
+  
+  let loader = document.getElementById('pdf-loader-overlay');
+  if (!loader) {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = loaderHtml;
+    document.body.appendChild(wrapper.firstElementChild);
+    document.body.appendChild(wrapper.lastElementChild);
+    loader = document.getElementById('pdf-loader-overlay');
+  }
+  
+  loader.style.display = 'flex';
+  setTimeout(() => loader.style.opacity = '1', 10);
+
   if (typeof showToast === 'function') showToast('Generating your Premium PDF...', 'fa-file-pdf');
   
   const destName = (typeof destinationKey !== 'undefined' && destinationKey) ? destinationKey.toUpperCase() : 'GOA';
@@ -1378,7 +1486,12 @@ function downloadPDF() {\n  const loaderHtml = '<div id="pdf-loader-overlay" sty
   };
 
   html2pdf().set(opt).from(container.firstElementChild).save().then(() => {
-    document.body.removeChild(container);\n    if(loader) {\n      loader.style.opacity = '0';\n      setTimeout(() => loader.style.display = 'none', 300);\n    }\n    if (typeof showToast === 'function') showToast('PDF Downloaded!', 'fa-check-circle');
+    document.body.removeChild(container);
+    if(loader) {
+      loader.style.opacity = '0';
+      setTimeout(() => loader.style.display = 'none', 300);
+    }
+    if (typeof showToast === 'function') showToast('PDF Downloaded!', 'fa-check-circle');
   });
 }
 function simulateOfflineDownload(event) {
