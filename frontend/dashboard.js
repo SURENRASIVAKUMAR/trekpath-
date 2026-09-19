@@ -13597,7 +13597,7 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
           <div style="display:flex; gap:5px; margin:10px 0;">
             <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem;" onclick="routeTo(${p.lat}, ${p.lng}, '${p.name.replace(/'/g, "\\'")}')">Route</button>
             <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem; background: var(--gold-dim); border-color: var(--gold); color: var(--gold);" onclick="showPhotoSpots(${p.lat}, ${p.lng}, '${p.name.replace(/'/g, "\\'")}')"><i class="fas fa-camera"></i> Spots</button>
-            <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem;" onclick="window.location.href='booking.html?tour=' + encodeURIComponent('${p.name.replace(/'/g, \"\\\\'\")}')"><i class="fas fa-ticket-alt"></i> Book</button>
+            <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem;" onclick="window.location.href='booking.html?tour=${encodeURIComponent(p.name)}'"><i class="fas fa-ticket-alt"></i> Book</button>
           </div>
           <button class="item-btn" style="border-color:#6C63FF; color:#6C63FF; width:100%;" onclick="addToCustom('activities', 'Activity', '${p.name.replace(/'/g, "\\'")}', ${p.fee})"><i class="fas fa-plus"></i> Add to Itinerary</button>
         </div>
