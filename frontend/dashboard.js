@@ -1,139 +1,13492 @@
 // dashboard.js - Final Polish UI Update with 20 Advanced Features
 
 const globalData = {
-  newyork: {
-    heroImg: 'https://picsum.photos/id/827/800/600',
-    centerLat: 40.7128, centerLng: -74.0060,
-    currency: { from: 'USD', symbol: '$', rate: '83.50', tip: 'Most places accept cards. Keep some $1 bills for tips.' },
-    weather: [
-      { day: 'Mon', temp: '22°C', icon: 'sunny', desc: 'fa-sun', state: 'sunny' },
-      { day: 'Tue', temp: '24°C', icon: 'cloudy', desc: 'fa-cloud', state: 'cloudy' },
-      { day: 'Wed', temp: '19°C', icon: 'rainy', desc: 'fa-cloud-showers-heavy', state: 'rainy' },
-      { day: 'Thu', temp: '21°C', icon: 'cloudy', desc: 'fa-cloud-sun', state: 'cloudy' },
-      { day: 'Fri', temp: '25°C', icon: 'sunny', desc: 'fa-sun', state: 'sunny' }
+  "paris": {
+    "heroImg": "https://picsum.photos/seed/hero_paris/800/600",
+    "centerLat": 48.8566,
+    "centerLng": 2.3522,
+    "currency": {
+      "from": "EUR",
+      "symbol": "€",
+      "rate": 90.5,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
     ],
-    packing: ['Comfortable Walking Shoes', 'Light Jacket', 'Power Bank', 'Umbrella', 'Metro Card Holder'],
-    events: 'Upcoming: Tribeca Film Festival | Free Summer Concerts in Central Park | Broadway Week 2-for-1 Tickets',
-    etiquette: 'Tipping is standard at 18-22%. Stand on the right side of escalators. Fast walking is expected.',
-    flightTrend: { status: 'Cheaper than usual', desc: 'Prices are down 12% this month.', icon: 'fa-arrow-down' },
-    itinerary: [
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Paris: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
       {
-        dayLabel: 'Day 1: Arrival & Midtown Magic',
-        subtitle: 'Kick off your New York adventure with iconic sights and local flavors.',
-        totalTime: '7 hrs', estCost: '72',
-        activities: [
-          { time: '08:00 AM', place: 'Ess-a-Bagel', desc: 'Start your day with an authentic NYC bagel.', duration: '1 hr', dist: '0.4 km', transport: 'Walk', cost: '12.00', icon: 'fa-coffee', img: 'https://picsum.photos/id/492/800/600', lat: 40.7554, lng: -73.9686 },
-          { time: '09:30 AM', place: 'Empire State Building', desc: 'Experience breathtaking views from the iconic landmark.', duration: '2.5 hrs', dist: '1.2 km', transport: 'Walk', cost: '35.00', icon: 'fa-building', img: 'https://picsum.photos/id/375/800/600', lat: 40.7484, lng: -73.9857 },
-          { time: '01:00 PM', place: 'Katz\'s Deli', desc: 'Enjoy the world-famous pastrami sandwich.', duration: '1.5 hrs', dist: '2.5 km', transport: 'Subway', cost: '25.00', icon: 'fa-utensils', img: 'https://picsum.photos/id/260/800/600', lat: 40.7222, lng: -73.9874 },
-          { time: '03:00 PM', place: 'Times Square', desc: 'Soak in the lights, energy and vibrant atmosphere.', duration: '2 hrs', dist: '4.0 km', transport: 'Subway', cost: '0.00', icon: 'fa-camera', img: 'https://picsum.photos/id/115/800/600', lat: 40.7580, lng: -73.9855 }
-        ]
-      },
-      {
-        dayLabel: 'Day 2: Downtown & Brooklyn Bridges',
-        subtitle: 'Explore historic neighborhoods and stunning waterfront views.',
-        totalTime: '8 hrs', estCost: '68',
-        activities: [
-          { time: '08:30 AM', place: 'Blue Bottle Coffee', desc: 'Begin with a perfect brew in a cozy café.', duration: '1 hr', dist: '0.3 km', transport: 'Walk', cost: '8.00', icon: 'fa-coffee', img: 'https://picsum.photos/id/384/800/600', lat: 40.7100, lng: -74.0080 },
-          { time: '10:00 AM', place: 'Brooklyn Bridge Walk', desc: 'Walk across the historic Brooklyn Bridge.', duration: '1.5 hrs', dist: '1.8 km', transport: 'Walk', cost: '0.00', icon: 'fa-walking', img: 'https://picsum.photos/id/549/800/600', lat: 40.7061, lng: -73.9969 },
-          { time: '12:00 PM', place: 'Juliana\'s Pizza', desc: 'Famous Brooklyn pizza stop.', duration: '1 hr', dist: '0.5 km', transport: 'Walk', cost: '20.00', icon: 'fa-pizza-slice', img: 'https://picsum.photos/id/975/800/600', lat: 40.7027, lng: -73.9934 },
-          { time: '02:00 PM', place: '9/11 Memorial & Museum', desc: 'A moving tribute to history and resilience.', duration: '2 hrs', dist: '1.0 km', transport: 'Walk', cost: '28.00', icon: 'fa-landmark', img: 'https://picsum.photos/id/569/800/600', lat: 40.7115, lng: -74.0133 }
-        ]
-      },
-      {
-        dayLabel: 'Day 3: Art & Central Park',
-        subtitle: 'Experience classic culture and nature in the city.',
-        totalTime: '8 hrs', estCost: '120',
-        activities: [
-          { time: '10:00 AM', place: 'The Metropolitan Museum of Art', desc: 'Explore one of the world\'s largest art museums.', duration: '4 hrs', dist: '-', transport: 'Subway', cost: '25.00', icon: 'fa-palette', img: 'https://picsum.photos/id/612/800/600', lat: 40.7794, lng: -73.9632 },
-          { time: '02:00 PM', place: 'Central Park Picnic', desc: 'Relax and enjoy a scenic picnic.', duration: '2 hrs', dist: '0.5 km', transport: 'Walk', cost: '15.00', icon: 'fa-tree', img: 'https://picsum.photos/id/924/800/600', lat: 40.7812, lng: -73.9665 },
-          { time: '05:00 PM', place: 'The Plaza Hotel (High Tea)', desc: 'Indulge in an iconic high tea experience.', duration: '2 hrs', dist: '1.5 km', transport: 'Cab', cost: '80.00', icon: 'fa-mug-hot', img: 'https://picsum.photos/id/476/800/600', lat: 40.7644, lng: -73.9744 }
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Paris adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Paris National Lake",
+            "desc": "A highly recommended lake providing unique insights into Paris's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "7.41",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_paris_0/800/600",
+            "lat": 48.85195167217595,
+            "lng": 2.3404467597388736
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Paris Street",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "46.86",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_paris_0/800/600",
+            "lat": 48.86172554450387,
+            "lng": 2.3687304434201146
+          }
         ]
       }
     ],
-    hotels: [
-      { name: 'The Plaza Hotel', price: '45000', rating: '4.9', lat: 40.7644, lng: -73.9744, img: 'https://picsum.photos/id/635/800/600', distance: '100m to Central Park', desc: 'Luxury stay overlooking Central Park. Features Spa, Fine Dining, and historic architecture.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Deluxe, Suite, Royal', amenities: ['Free WiFi', 'Pool', 'Spa', 'Gym', 'Valet'], gallery: ['https://picsum.photos/id/241/800/600','https://picsum.photos/id/628/800/600','https://picsum.photos/id/40/800/600'] },
-      { name: 'YOTEL New York', price: '15000', rating: '4.5', lat: 40.7590, lng: -73.9934, img: 'https://picsum.photos/id/233/800/600', distance: '300m to Times Square', desc: 'Modern cabins in Times Square. Perfect for solo travelers or couples on a budget.', checkIn: '03:00 PM', checkOut: '11:00 AM', rooms: 'Premium Queen, VIP View', amenities: ['Smart TV', 'Terrace', 'Gym', 'Robot Luggage'], gallery: ['https://picsum.photos/id/130/800/600','https://picsum.photos/id/142/800/600','https://picsum.photos/id/306/800/600'] },
-      { name: 'The Standard High Line', price: '28000', rating: '4.7', lat: 40.7409, lng: -74.0078, img: 'https://picsum.photos/id/73/800/600', distance: 'Meatpacking District', desc: 'Boutique hotel with panoramic views of the Hudson River and High Line.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'Standard Queen, King, Corner Suite', amenities: ['Rooftop Bar', 'Free WiFi', 'Gym', 'Pet Friendly'], gallery: ['https://picsum.photos/id/371/800/600','https://picsum.photos/id/13/800/600','https://picsum.photos/id/903/800/600'] },
-      { name: '1 Hotel Brooklyn Bridge', price: '35000', rating: '4.8', lat: 40.7020, lng: -73.9950, img: 'https://picsum.photos/id/133/800/600', distance: 'Brooklyn Bridge Park', desc: 'Eco-luxury waterfront hotel featuring unparalleled views of the Manhattan skyline.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'King, Double, Riverhouse Suite', amenities: ['Rooftop Pool', 'Spa', 'Organic Cafe', 'Free WiFi'], gallery: ['https://picsum.photos/id/492/800/600','https://picsum.photos/id/870/800/600','https://picsum.photos/id/897/800/600'] },
-      { name: 'Arlo SoHo', price: '20000', rating: '4.4', lat: 40.7243, lng: -74.0072, img: 'https://picsum.photos/id/144/800/600', distance: 'SoHo', desc: 'Micro-hotel offering smartly designed rooms and vibrant communal spaces.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'City King, Courtyard Queen', amenities: ['Courtyard', 'Bar', 'Free Bikes', 'Free WiFi'], gallery: ['https://picsum.photos/id/848/800/600','https://picsum.photos/id/744/800/600','https://picsum.photos/id/240/800/600'] },
-      { name: 'The Beekman', price: '40000', rating: '4.8', lat: 40.7114, lng: -74.0069, img: 'https://picsum.photos/id/213/800/600', distance: 'Financial District', desc: 'Historic 19th-century luxury hotel with a stunning nine-story atrium.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Superior King, Studio, Premium Suite', amenities: ['Fine Dining', 'Bar', 'Gym', 'Free WiFi'], gallery: ['https://picsum.photos/id/35/800/600','https://picsum.photos/id/937/800/600','https://picsum.photos/id/709/800/600'] },
-      { name: 'Lotte New York Palace', price: '50000', rating: '4.9', lat: 40.7580, lng: -73.9749, img: 'https://picsum.photos/id/190/800/600', distance: 'Midtown East', desc: 'Grand luxury hotel combining historic mansions with a modern high-rise tower.', checkIn: '04:00 PM', checkOut: '11:00 AM', rooms: 'Superior, Tower Room, Suite', amenities: ['Spa', 'Room Service', 'Bar', 'Free WiFi'], gallery: ['https://picsum.photos/id/243/800/600','https://picsum.photos/id/892/800/600','https://picsum.photos/id/79/800/600'] },
-      { name: 'Pod 51 Hotel', price: '12000', rating: '4.3', lat: 40.7562, lng: -73.9687, img: 'https://picsum.photos/id/225/800/600', distance: 'Midtown East', desc: 'Budget-friendly micro hotel with colorful decor and a rooftop deck.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Bunk Bed, Queen, Studio', amenities: ['Rooftop Deck', 'Cafe', 'Free WiFi'], gallery: ['https://picsum.photos/id/352/800/600','https://picsum.photos/id/538/800/600','https://picsum.photos/id/898/800/600'] },
-      { name: 'Crosby Street Hotel', price: '55000', rating: '4.9', lat: 40.7233, lng: -73.9975, img: 'https://picsum.photos/id/397/800/600', distance: 'SoHo', desc: 'Vibrant, art-filled luxury boutique hotel set on a quiet cobblestone street.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Superior, Luxury, Suite', amenities: ['Cinema', 'Sculpture Garden', 'Gym', 'Free WiFi'], gallery: ['https://picsum.photos/id/927/800/600','https://picsum.photos/id/646/800/600','https://picsum.photos/id/589/800/600'] },
-      { name: 'Moxy NYC Times Square', price: '18000', rating: '4.4', lat: 40.7523, lng: -73.9880, img: 'https://picsum.photos/id/714/800/600', distance: 'Times Square', desc: 'Energetic, millennial-focused hotel with a massive rooftop bar and mini-golf.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'King, Double Double, Bunk', amenities: ['Magic Hour Rooftop', 'Bar', 'Gym', 'Free WiFi'], gallery: ['https://picsum.photos/id/641/800/600','https://picsum.photos/id/312/800/600','https://picsum.photos/id/131/800/600'] },
-      { name: 'The Langham', price: '48000', rating: '4.8', lat: 40.7501, lng: -73.9837, img: 'https://picsum.photos/id/92/800/600', distance: 'Fifth Avenue', desc: 'Refined modern luxury with oversized rooms and Michelin-starred dining.', checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Superior, Executive, Penthouse', amenities: ['Spa', 'Michelin Dining', 'Gym', 'Valet'], gallery: ['https://picsum.photos/id/706/800/600','https://picsum.photos/id/19/800/600','https://picsum.photos/id/390/800/600'] },
-      { name: 'Row NYC Hotel', price: '14000', rating: '4.0', lat: 40.7589, lng: -73.9870, img: 'https://picsum.photos/id/114/800/600', distance: 'Times Square', desc: 'Hip, artsy hotel in the heart of the theater district with a food hall.', checkIn: '04:00 PM', checkOut: '12:00 PM', rooms: 'Standard, Premium, Suite', amenities: ['Food Hall', 'Gym', 'Lounge', 'Free WiFi'], gallery: ['https://picsum.photos/id/304/800/600','https://picsum.photos/id/888/800/600','https://picsum.photos/id/491/800/600'] }
+    "hotels": [
+      {
+        "name": "The Ritz Paris",
+        "price": "16002",
+        "rating": "4.9",
+        "lat": 48.85599789421568,
+        "lng": 2.379104833133741,
+        "img": "https://picsum.photos/seed/hotel_paris_0/800/600",
+        "distance": "4.4 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Paris",
+        "price": "32745",
+        "rating": "4.5",
+        "lat": 48.88107937715097,
+        "lng": 2.3235227013380917,
+        "img": "https://picsum.photos/seed/hotel_paris_1/800/600",
+        "distance": "3.1 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Paris",
+        "price": "29058",
+        "rating": "4.0",
+        "lat": 48.86009979341096,
+        "lng": 2.339512238345487,
+        "img": "https://picsum.photos/seed/hotel_paris_2/800/600",
+        "distance": "0.3 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Paris",
+        "price": "36514",
+        "rating": "4.8",
+        "lat": 48.82669545164229,
+        "lng": 2.344422118174042,
+        "img": "https://picsum.photos/seed/hotel_paris_3/800/600",
+        "distance": "3.2 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Paris",
+        "price": "20052",
+        "rating": "4.7",
+        "lat": 48.855049512391616,
+        "lng": 2.344924423903903,
+        "img": "https://picsum.photos/seed/hotel_paris_4/800/600",
+        "distance": "3.7 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Paris",
+        "price": "12335",
+        "rating": "4.2",
+        "lat": 48.82862614814291,
+        "lng": 2.366030213950051,
+        "img": "https://picsum.photos/seed/hotel_paris_5/800/600",
+        "distance": "2.8 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Paris",
+        "price": "28514",
+        "rating": "4.3",
+        "lat": 48.839185793972916,
+        "lng": 2.350589521331657,
+        "img": "https://picsum.photos/seed/hotel_paris_6/800/600",
+        "distance": "4.5 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Paris",
+        "price": "46133",
+        "rating": "4.8",
+        "lat": 48.859966473815405,
+        "lng": 2.323950856157958,
+        "img": "https://picsum.photos/seed/hotel_paris_7/800/600",
+        "distance": "1.0 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Paris",
+        "price": "24068",
+        "rating": "5.0",
+        "lat": 48.85492155612692,
+        "lng": 2.3539357382289694,
+        "img": "https://picsum.photos/seed/hotel_paris_8/800/600",
+        "distance": "1.8 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Paris",
+        "price": "26677",
+        "rating": "4.8",
+        "lat": 48.877196121416674,
+        "lng": 2.3584461144177835,
+        "img": "https://picsum.photos/seed/hotel_paris_9/800/600",
+        "distance": "2.1 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Paris",
+        "price": "49213",
+        "rating": "4.8",
+        "lat": 48.8384372219667,
+        "lng": 2.3225531888098714,
+        "img": "https://picsum.photos/seed/hotel_paris_10/800/600",
+        "distance": "0.5 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Paris",
+        "price": "10661",
+        "rating": "4.9",
+        "lat": 48.86039318257278,
+        "lng": 2.3492645616897616,
+        "img": "https://picsum.photos/seed/hotel_paris_11/800/600",
+        "distance": "2.7 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Paris",
+        "price": "19813",
+        "rating": "4.7",
+        "lat": 48.84318632396423,
+        "lng": 2.3406451616090336,
+        "img": "https://picsum.photos/seed/hotel_paris_12/800/600",
+        "distance": "2.5 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Paris",
+        "price": "39782",
+        "rating": "4.5",
+        "lat": 48.841071546204844,
+        "lng": 2.36192975192349,
+        "img": "https://picsum.photos/seed/hotel_paris_13/800/600",
+        "distance": "3.4 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Paris",
+        "price": "17120",
+        "rating": "4.7",
+        "lat": 48.84105568975742,
+        "lng": 2.334082104670427,
+        "img": "https://picsum.photos/seed/hotel_paris_14/800/600",
+        "distance": "0.9 km to center",
+        "desc": "Luxurious stay located in the heart of Paris. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_paris_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_paris_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_paris_14_bath/800/600"
+        ]
+      }
     ],
-    restaurants: [
-      { name: 'Le Bernardin', type: 'Fine Dining', lat: 40.7614, lng: -73.9816, img: 'https://picsum.photos/id/344/800/600', locText: 'Near Times Square', travel: '10 min walk', timing: '12:00 PM - 10:30 PM', cost: '15000', tags: ['Fine Dining', 'Seafood'], menu: [{ name: 'Caviar Tasting', desc: 'Imperial Ossetra with classic garnish', price: '$120', tags: ['GF'] }, { name: 'Poached Halibut', desc: 'With wild mushroom consommé', price: '$65', tags: ['GF', 'Halal'] }], reviews: '"Best seafood in NY." - FoodCrit' },
-      { name: 'Katz\'s Delicatessen', type: 'Iconic Deli', lat: 40.7222, lng: -73.9874, img: 'https://picsum.photos/id/828/800/600', locText: 'Lower East Side', travel: '15 min cab', timing: '08:00 AM - 11:00 PM', cost: '2500', tags: ['Casual', 'Meat'], menu: [{ name: 'Pastrami Sandwich', desc: 'Legendary hand-carved pastrami on rye', price: '$25', tags: [] }, { name: 'Matzo Ball Soup', desc: 'Classic Jewish comfort food', price: '$10', tags: [] }], reviews: '"A historic must-visit." - NYT' },
-      { name: 'Peter Luger Steak House', type: 'Steakhouse', lat: 40.7099, lng: -73.9625, img: 'https://picsum.photos/id/590/800/600', locText: 'Brooklyn', travel: '20 min subway', timing: '11:45 AM - 09:45 PM', cost: '12000', tags: ['Steak', 'Iconic'], menu: [{ name: 'Steak for Two', desc: 'Dry-aged porterhouse', price: '$115', tags: ['GF'] }, { name: 'Thick Cut Bacon', desc: 'Extra thick sizzling bacon', price: '$8', tags: [] }], reviews: '"Best steak in the world." - Critic' },
-      { name: 'Balthazar', type: 'French Brasserie', lat: 40.7226, lng: -73.9981, img: 'https://picsum.photos/id/988/800/600', locText: 'SoHo', travel: '15 min subway', timing: '08:00 AM - 11:00 PM', cost: '5000', tags: ['French', 'Bustling'], menu: [{ name: 'Steak Frites', desc: 'Classic steak with French fries', price: '$42', tags: [] }, { name: 'Onion Soup', desc: 'Traditional French onion soup', price: '$18', tags: [] }], reviews: '"A slice of Paris in NY." - Foodie' },
-      { name: 'Halal Guys', type: 'Street Food', lat: 40.7618, lng: -73.9793, img: 'https://picsum.photos/id/837/800/600', locText: 'Midtown (53rd & 6th)', travel: '10 min walk', timing: '10:00 AM - 04:00 AM', cost: '1000', tags: ['Street Food', 'Halal'], menu: [{ name: 'Chicken & Gyro Platter', desc: 'Over rice with white sauce', price: '$10', tags: ['Halal'] }], reviews: '"Legendary street cart." - Local' },
-      { name: 'Carmine\'s', type: 'Italian Family Style', lat: 40.7575, lng: -73.9868, img: 'https://picsum.photos/id/214/800/600', locText: 'Times Square', travel: '5 min walk', timing: '11:30 AM - 11:00 PM', cost: '4000', tags: ['Italian', 'Groups'], menu: [{ name: 'Penne Alla Vodka', desc: 'Massive family portion', price: '$35', tags: ['Vegetarian'] }, { name: 'Chicken Parm', desc: 'Crispy chicken with mozzarella', price: '$40', tags: [] }], reviews: '"Huge portions, great flavor." - Eater' },
-      { name: 'Ippudo NY', type: 'Ramen', lat: 40.7309, lng: -73.9904, img: 'https://picsum.photos/id/136/800/600', locText: 'East Village', travel: '15 min subway', timing: '11:00 AM - 10:00 PM', cost: '2000', tags: ['Japanese', 'Noodles'], menu: [{ name: 'Akamaru Modern', desc: 'Tonkotsu broth with special garlic oil', price: '$18', tags: [] }, { name: 'Pork Buns', desc: 'Steamed buns with pork chashu', price: '$9', tags: [] }], reviews: '"Best ramen hands down." - Yelp' },
-      { name: 'Joe\'s Pizza', type: 'Pizzeria', lat: 40.7305, lng: -74.0021, img: 'https://picsum.photos/id/198/800/600', locText: 'Greenwich Village', travel: '15 min subway', timing: '10:00 AM - 04:00 AM', cost: '500', tags: ['Pizza', 'Casual'], menu: [{ name: 'Cheese Slice', desc: 'Classic NY style cheese slice', price: '$4', tags: ['Vegetarian'] }], reviews: '"The quintessential NY slice." - Timeout' },
-      { name: 'Gramercy Tavern', type: 'New American', lat: 40.7386, lng: -73.9882, img: 'https://picsum.photos/id/45/800/600', locText: 'Flatiron', travel: '10 min subway', timing: '12:00 PM - 10:00 PM', cost: '10000', tags: ['Fine Dining', 'American'], menu: [{ name: 'Tasting Menu', desc: 'Seasonal ingredients', price: '$150', tags: [] }], reviews: '"Impeccable service and food." - Zagat' },
-      { name: 'Los Tacos No.1', type: 'Mexican', lat: 40.7423, lng: -74.0060, img: 'https://picsum.photos/id/635/800/600', locText: 'Chelsea Market', travel: '20 min walk', timing: '11:00 AM - 10:00 PM', cost: '1500', tags: ['Tacos', 'Fast Casual'], menu: [{ name: 'Adobada Taco', desc: 'Marinated pork taco', price: '$4.50', tags: [] }, { name: 'Carne Asada', desc: 'Grilled steak taco', price: '$5', tags: ['GF'] }], reviews: '"Most authentic tacos in NY." - Local' },
-      { name: 'Veselka', type: 'Ukrainian Diner', lat: 40.7289, lng: -73.9870, img: 'https://picsum.photos/id/815/800/600', locText: 'East Village', travel: '15 min subway', timing: '08:00 AM - 11:00 PM', cost: '2000', tags: ['Diner', 'Comfort'], menu: [{ name: 'Pierogi', desc: 'Potato and cheese dumplings', price: '$12', tags: ['Vegetarian'] }, { name: 'Borscht', desc: 'Classic beet soup', price: '$9', tags: [] }], reviews: '"Late night comfort food haven." - Eater' },
-      { name: 'Eleven Madison Park', type: 'Fine Dining', lat: 40.7416, lng: -73.9872, img: 'https://picsum.photos/id/244/800/600', locText: 'Flatiron', travel: '10 min subway', timing: '05:30 PM - 10:00 PM', cost: '30000', tags: ['Fine Dining', 'Vegan'], menu: [{ name: 'Plant-based Tasting', desc: 'Multi-course vegan journey', price: '$335', tags: ['Vegan'] }], reviews: '"A culinary masterpiece." - NYT' }
+    "restaurants": [
+      {
+        "name": "Le Paris Street",
+        "type": "Street Food",
+        "lat": 48.86172554450387,
+        "lng": 2.3687304434201146,
+        "img": "https://picsum.photos/seed/rest_paris_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4686",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Paris Street",
+        "type": "Street Food",
+        "lat": 48.83410900759066,
+        "lng": 2.3735065725051605,
+        "img": "https://picsum.photos/seed/rest_paris_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4370",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Paris Street",
+        "type": "Street Food",
+        "lat": 48.873862094247535,
+        "lng": 2.375032429978457,
+        "img": "https://picsum.photos/seed/rest_paris_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11958",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Paris Street",
+        "type": "Street Food",
+        "lat": 48.82670157120172,
+        "lng": 2.35722273622694,
+        "img": "https://picsum.photos/seed/rest_paris_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4852",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Paris Halal",
+        "type": "Halal",
+        "lat": 48.86527250211253,
+        "lng": 2.3568879825746425,
+        "img": "https://picsum.photos/seed/rest_paris_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2613",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Paris Street",
+        "type": "Street Food",
+        "lat": 48.85907299710806,
+        "lng": 2.3771157078415337,
+        "img": "https://picsum.photos/seed/rest_paris_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5026",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Paris Street",
+        "type": "Street Food",
+        "lat": 48.85916196003376,
+        "lng": 2.3585611151857764,
+        "img": "https://picsum.photos/seed/rest_paris_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7537",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Paris Fine",
+        "type": "Fine Dining",
+        "lat": 48.86233287753842,
+        "lng": 2.3726540807830916,
+        "img": "https://picsum.photos/seed/rest_paris_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10158",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Paris Fine",
+        "type": "Fine Dining",
+        "lat": 48.832194064229284,
+        "lng": 2.3561324784954345,
+        "img": "https://picsum.photos/seed/rest_paris_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8113",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Paris Fine",
+        "type": "Fine Dining",
+        "lat": 48.83343553172927,
+        "lng": 2.3758064677105173,
+        "img": "https://picsum.photos/seed/rest_paris_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8901",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Paris Casual",
+        "type": "Casual",
+        "lat": 48.84712409846909,
+        "lng": 2.3319979651095393,
+        "img": "https://picsum.photos/seed/rest_paris_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10936",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Paris Vegan",
+        "type": "Vegan",
+        "lat": 48.87636690855014,
+        "lng": 2.347313246619192,
+        "img": "https://picsum.photos/seed/rest_paris_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3809",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Paris Vegan",
+        "type": "Vegan",
+        "lat": 48.86612762053166,
+        "lng": 2.36130184473216,
+        "img": "https://picsum.photos/seed/rest_paris_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4444",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Paris Seafood",
+        "type": "Seafood",
+        "lat": 48.871934436139156,
+        "lng": 2.3722771223488803,
+        "img": "https://picsum.photos/seed/rest_paris_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8596",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Paris Fine",
+        "type": "Fine Dining",
+        "lat": 48.842827123638976,
+        "lng": 2.346068209348224,
+        "img": "https://picsum.photos/seed/rest_paris_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9833",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Paris Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
     ],
-    places: [
-      { name: 'Statue of Liberty', img: 'https://picsum.photos/id/757/800/600', desc: 'Iconic monument representing freedom and democracy.', fee: '2000', loc: 'Battery Park', lat: 40.6892, lng: -74.0445, crowd: 'high', tour: '10:00 AM' },
-      { name: 'Central Park', img: 'https://picsum.photos/id/85/800/600', desc: 'Massive urban park offering lakes, trails, and a zoo.', fee: '0', loc: 'Manhattan', lat: 40.7812, lng: -73.9665, crowd: 'low', tour: 'Free' },
-      { name: 'Empire State Building', img: 'https://picsum.photos/id/914/800/600', desc: 'Famous Art Deco skyscraper with 360-degree views of the city.', fee: '3500', loc: 'Midtown', lat: 40.7484, lng: -73.9857, crowd: 'high', tour: '04:00 PM' },
-      { name: 'The Metropolitan Museum of Art', img: 'https://picsum.photos/id/659/800/600', desc: 'One of the world\'s largest and finest art museums.', fee: '2500', loc: 'Upper East Side', lat: 40.7794, lng: -73.9632, crowd: 'high', tour: '11:00 AM' },
-      { name: 'Times Square', img: 'https://picsum.photos/id/763/800/600', desc: 'Bustling intersection renowned for its neon lights and billboards.', fee: '0', loc: 'Midtown', lat: 40.7580, lng: -73.9855, crowd: 'high', tour: 'Free' },
-      { name: 'Brooklyn Bridge', img: 'https://picsum.photos/id/540/800/600', desc: 'Historic suspension bridge connecting Manhattan and Brooklyn.', fee: '0', loc: 'Lower Manhattan', lat: 40.7061, lng: -73.9969, crowd: 'medium', tour: 'Free' },
-      { name: 'The High Line', img: 'https://picsum.photos/id/951/800/600', desc: 'Elevated linear park built on a historic freight rail line.', fee: '0', loc: 'Chelsea', lat: 40.7480, lng: -74.0048, crowd: 'medium', tour: 'Free' },
-      { name: 'One World Observatory', img: 'https://picsum.photos/id/763/800/600', desc: 'Observation deck at the top of the tallest building in the Western Hemisphere.', fee: '3800', loc: 'Financial District', lat: 40.7130, lng: -74.0131, crowd: 'high', tour: '02:00 PM' },
-      { name: 'Museum of Modern Art (MoMA)', img: 'https://picsum.photos/id/482/800/600', desc: 'Leading museum showcasing contemporary and modern art.', fee: '2000', loc: 'Midtown', lat: 40.7614, lng: -73.9776, crowd: 'medium', tour: '01:00 PM' },
-      { name: 'Grand Central Terminal', img: 'https://picsum.photos/id/657/800/600', desc: 'Iconic beaux-arts train station with a celestial ceiling.', fee: '0', loc: 'Midtown', lat: 40.7527, lng: -73.9772, crowd: 'high', tour: 'Free' },
-      { name: 'Top of the Rock', img: 'https://picsum.photos/id/340/800/600', desc: 'Observation deck offering spectacular skyline views, including the Empire State Building.', fee: '3400', loc: 'Rockefeller Center', lat: 40.7593, lng: -73.9794, crowd: 'medium', tour: '05:00 PM (Sunset)' },
-      { name: '9/11 Memorial & Museum', img: 'https://picsum.photos/id/942/800/600', desc: 'Memorial and museum honoring the victims of the September 11 attacks.', fee: '2800', loc: 'Financial District', lat: 40.7115, lng: -74.0133, crowd: 'high', tour: '10:00 AM' }
+    "places": [
+      {
+        "name": "Paris National Lake",
+        "img": "https://picsum.photos/seed/place_paris_0/800/600",
+        "desc": "A highly recommended lake providing unique insights into Paris's culture and beauty.",
+        "fee": "741",
+        "loc": "Downtown",
+        "lat": 48.85195167217595,
+        "lng": 2.3404467597388736,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Viewpoint",
+        "img": "https://picsum.photos/seed/place_paris_1/800/600",
+        "desc": "A highly recommended viewpoint providing unique insights into Paris's culture and beauty.",
+        "fee": "1600",
+        "loc": "Downtown",
+        "lat": 48.84704987520076,
+        "lng": 2.3578230778671054,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Monument",
+        "img": "https://picsum.photos/seed/place_paris_2/800/600",
+        "desc": "A highly recommended monument providing unique insights into Paris's culture and beauty.",
+        "fee": "2698",
+        "loc": "Downtown",
+        "lat": 48.85180548121763,
+        "lng": 2.346824141579344,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Viewpoint",
+        "img": "https://picsum.photos/seed/place_paris_3/800/600",
+        "desc": "A highly recommended viewpoint providing unique insights into Paris's culture and beauty.",
+        "fee": "2308",
+        "loc": "Downtown",
+        "lat": 48.83950396222722,
+        "lng": 2.3265711711307904,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Lake",
+        "img": "https://picsum.photos/seed/place_paris_4/800/600",
+        "desc": "A highly recommended lake providing unique insights into Paris's culture and beauty.",
+        "fee": "572",
+        "loc": "Downtown",
+        "lat": 48.8300850864541,
+        "lng": 2.378851130091187,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Museum",
+        "img": "https://picsum.photos/seed/place_paris_5/800/600",
+        "desc": "A highly recommended museum providing unique insights into Paris's culture and beauty.",
+        "fee": "1757",
+        "loc": "Downtown",
+        "lat": 48.86750419618112,
+        "lng": 2.3247319629470713,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Gallery",
+        "img": "https://picsum.photos/seed/place_paris_6/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Paris's culture and beauty.",
+        "fee": "660",
+        "loc": "Downtown",
+        "lat": 48.83860833102516,
+        "lng": 2.3381077342990837,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Viewpoint",
+        "img": "https://picsum.photos/seed/place_paris_7/800/600",
+        "desc": "A highly recommended viewpoint providing unique insights into Paris's culture and beauty.",
+        "fee": "2246",
+        "loc": "Downtown",
+        "lat": 48.871464435284594,
+        "lng": 2.3368872660192546,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Gallery",
+        "img": "https://picsum.photos/seed/place_paris_8/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Paris's culture and beauty.",
+        "fee": "2377",
+        "loc": "Downtown",
+        "lat": 48.8588304928843,
+        "lng": 2.3283354498228195,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Beach",
+        "img": "https://picsum.photos/seed/place_paris_9/800/600",
+        "desc": "A highly recommended beach providing unique insights into Paris's culture and beauty.",
+        "fee": "1365",
+        "loc": "Downtown",
+        "lat": 48.827139291647846,
+        "lng": 2.333054355438826,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Palace",
+        "img": "https://picsum.photos/seed/place_paris_10/800/600",
+        "desc": "A highly recommended palace providing unique insights into Paris's culture and beauty.",
+        "fee": "2910",
+        "loc": "Downtown",
+        "lat": 48.83243938552289,
+        "lng": 2.377797728798565,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Square",
+        "img": "https://picsum.photos/seed/place_paris_11/800/600",
+        "desc": "A highly recommended square providing unique insights into Paris's culture and beauty.",
+        "fee": "3027",
+        "loc": "Downtown",
+        "lat": 48.844290710414455,
+        "lng": 2.355368925031398,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Gallery",
+        "img": "https://picsum.photos/seed/place_paris_12/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Paris's culture and beauty.",
+        "fee": "550",
+        "loc": "Downtown",
+        "lat": 48.85413483181527,
+        "lng": 2.3702642958150837,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Tower",
+        "img": "https://picsum.photos/seed/place_paris_13/800/600",
+        "desc": "A highly recommended tower providing unique insights into Paris's culture and beauty.",
+        "fee": "1181",
+        "loc": "Downtown",
+        "lat": 48.83457724624421,
+        "lng": 2.362623303515689,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Paris National Lake",
+        "img": "https://picsum.photos/seed/place_paris_14/800/600",
+        "desc": "A highly recommended lake providing unique insights into Paris's culture and beauty.",
+        "fee": "3119",
+        "loc": "Downtown",
+        "lat": 48.8631720546886,
+        "lng": 2.3233104410471506,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      }
     ]
   },
-  paris: {
-    heroImg: 'https://picsum.photos/id/445/800/600',
-    centerLat: 48.8566, centerLng: 2.3522,
-    currency: { from: 'EUR', symbol: '€', rate: '90.50', tip: 'Service is often included, but rounding up the bill is polite.' },
-    weather: [
-      { day: 'Mon', temp: '18°C', icon: 'sunny', desc: 'fa-sun', state: 'sunny' },
-      { day: 'Tue', temp: '16°C', icon: 'cloudy', desc: 'fa-cloud', state: 'cloudy' },
-      { day: 'Wed', temp: '15°C', icon: 'rainy', desc: 'fa-cloud-showers-heavy', state: 'rainy' },
-      { day: 'Thu', temp: '19°C', icon: 'sunny', desc: 'fa-sun', state: 'sunny' },
-      { day: 'Fri', temp: '20°C', icon: 'sunny', desc: 'fa-sun', state: 'sunny' }
-    ],
-    packing: ['Chic Layers', 'Walking Shoes', 'Universal Adapter', 'Crossbody Bag', 'Travel Scarf'],
-    events: 'Upcoming: Nuit Blanche Art Festival | Paris Fashion Week Preview | Jazz at Saint-Germain-des-Prés',
-    etiquette: 'Always say "Bonjour" when entering a shop. Keep your voice low in public transport.',
-    flightTrend: { status: 'Expected to rise', desc: 'Prices are trending upward. Book soon.', icon: 'fa-arrow-up' },
-    itinerary: [
+  "tokyo": {
+    "heroImg": "https://picsum.photos/seed/hero_tokyo/800/600",
+    "centerLat": 35.6762,
+    "centerLng": 139.6503,
+    "currency": {
+      "from": "JPY",
+      "symbol": "¥",
+      "rate": 0.55,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
       {
-        dayLabel: 'Day 1: Heart of Paris',
-        subtitle: 'Experience classic Parisian landmarks.',
-        totalTime: '4.5 hrs', estCost: '35',
-        activities: [
-          { time: '09:00 AM', place: 'Louvre Museum', desc: 'World famous art museum.', duration: '3 hrs', dist: '2 km', transport: 'Metro', cost: '15.00', icon: 'fa-landmark', img: 'https://picsum.photos/id/620/800/600', lat: 48.8606, lng: 2.3376 },
-          { time: '12:30 PM', place: 'Cafe de Flore', desc: 'Historic cafe in St. Germain.', duration: '1.5 hrs', dist: '1.5 km', transport: 'Walk', cost: '20.00', icon: 'fa-coffee', img: 'https://picsum.photos/id/258/800/600', lat: 48.8541, lng: 2.3326 }
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Tokyo: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Tokyo adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Tokyo National Beach",
+            "desc": "A highly recommended beach providing unique insights into Tokyo's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "28.57",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_tokyo_0/800/600",
+            "lat": 35.66681345311651,
+            "lng": 139.66511822708583
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Tokyo Vegan",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "59.74",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_tokyo_0/800/600",
+            "lat": 35.705138142680255,
+            "lng": 139.67396756256363
+          }
         ]
       }
     ],
-    hotels: [
-      { name: 'Ritz Paris', price: '90000', rating: '5.0', lat: 48.8683, lng: 2.3284,
-        img: 'https://picsum.photos/id/841/800/600', distance: 'Place Vendôme', 
-        desc: 'Legendary hotel with exquisite decor, fine dining, and unmatched luxury.',
-        checkIn: '03:00 PM', checkOut: '12:00 PM', rooms: 'Deluxe, Grand Suite',
-        amenities: ['Spa', 'Michelin Star Dining', 'Indoor Pool', 'Butler'],
-        gallery: ['https://picsum.photos/id/481/800/600','https://picsum.photos/id/178/800/600','https://picsum.photos/id/533/800/600'] }
+    "hotels": [
+      {
+        "name": "The Ritz Tokyo",
+        "price": "31011",
+        "rating": "4.0",
+        "lat": 35.674628227976854,
+        "lng": 139.64024917504238,
+        "img": "https://picsum.photos/seed/hotel_tokyo_0/800/600",
+        "distance": "3.4 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Tokyo",
+        "price": "44131",
+        "rating": "5.0",
+        "lat": 35.689446665824335,
+        "lng": 139.63160840171682,
+        "img": "https://picsum.photos/seed/hotel_tokyo_1/800/600",
+        "distance": "4.4 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Tokyo",
+        "price": "44119",
+        "rating": "4.8",
+        "lat": 35.64898577936194,
+        "lng": 139.6424985092836,
+        "img": "https://picsum.photos/seed/hotel_tokyo_2/800/600",
+        "distance": "0.0 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Tokyo",
+        "price": "30803",
+        "rating": "4.7",
+        "lat": 35.67693268177388,
+        "lng": 139.62363611405658,
+        "img": "https://picsum.photos/seed/hotel_tokyo_3/800/600",
+        "distance": "4.6 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Tokyo",
+        "price": "24175",
+        "rating": "4.8",
+        "lat": 35.70117523344479,
+        "lng": 139.64249850791523,
+        "img": "https://picsum.photos/seed/hotel_tokyo_4/800/600",
+        "distance": "3.5 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Tokyo",
+        "price": "44829",
+        "rating": "4.4",
+        "lat": 35.68403033247405,
+        "lng": 139.63583408390386,
+        "img": "https://picsum.photos/seed/hotel_tokyo_5/800/600",
+        "distance": "0.8 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Tokyo",
+        "price": "38723",
+        "rating": "4.7",
+        "lat": 35.66067958993531,
+        "lng": 139.672885851918,
+        "img": "https://picsum.photos/seed/hotel_tokyo_6/800/600",
+        "distance": "0.6 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Tokyo",
+        "price": "39691",
+        "rating": "4.1",
+        "lat": 35.688453976047356,
+        "lng": 139.6252571066987,
+        "img": "https://picsum.photos/seed/hotel_tokyo_7/800/600",
+        "distance": "1.9 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Tokyo",
+        "price": "16058",
+        "rating": "4.7",
+        "lat": 35.675951470526996,
+        "lng": 139.67675999140496,
+        "img": "https://picsum.photos/seed/hotel_tokyo_8/800/600",
+        "distance": "1.4 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Tokyo",
+        "price": "40905",
+        "rating": "4.3",
+        "lat": 35.69026077089503,
+        "lng": 139.6252052325863,
+        "img": "https://picsum.photos/seed/hotel_tokyo_9/800/600",
+        "distance": "3.7 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Tokyo",
+        "price": "45848",
+        "rating": "4.0",
+        "lat": 35.6610073372873,
+        "lng": 139.66673230866007,
+        "img": "https://picsum.photos/seed/hotel_tokyo_10/800/600",
+        "distance": "3.9 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Tokyo",
+        "price": "32420",
+        "rating": "4.9",
+        "lat": 35.656029873291175,
+        "lng": 139.63946869417398,
+        "img": "https://picsum.photos/seed/hotel_tokyo_11/800/600",
+        "distance": "0.1 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Tokyo",
+        "price": "48957",
+        "rating": "4.2",
+        "lat": 35.64643948811687,
+        "lng": 139.63028305434293,
+        "img": "https://picsum.photos/seed/hotel_tokyo_12/800/600",
+        "distance": "2.4 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Tokyo",
+        "price": "17846",
+        "rating": "4.3",
+        "lat": 35.68369405506182,
+        "lng": 139.65683181193515,
+        "img": "https://picsum.photos/seed/hotel_tokyo_13/800/600",
+        "distance": "0.6 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Tokyo",
+        "price": "45814",
+        "rating": "4.4",
+        "lat": 35.65005206168471,
+        "lng": 139.67363847947823,
+        "img": "https://picsum.photos/seed/hotel_tokyo_14/800/600",
+        "distance": "0.2 km to center",
+        "desc": "Luxurious stay located in the heart of Tokyo. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_tokyo_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_tokyo_14_bath/800/600"
+        ]
+      }
     ],
-    restaurants: [
-      { name: 'Le Jules Verne', type: 'Fine Dining', lat: 48.8584, lng: 2.2945, img: 'https://picsum.photos/id/992/800/600', 
-        locText: 'Eiffel Tower', travel: 'Elevator', timing: '12:00 PM - 9:30 PM', cost: '25000', tags: ['Fine Dining', 'Romantic'],
-        menu: [{name: 'Lobster Souffle', desc:'Tender lobster with rich cream sauce', price:'€110', tags:['GF']}], reviews: '"Dining in the clouds." - Guide' }
+    "restaurants": [
+      {
+        "name": "Le Tokyo Vegan",
+        "type": "Vegan",
+        "lat": 35.705138142680255,
+        "lng": 139.67396756256363,
+        "img": "https://picsum.photos/seed/rest_tokyo_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5974",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Tokyo Family",
+        "type": "Family Style",
+        "lat": 35.694474576420426,
+        "lng": 139.62153004444357,
+        "img": "https://picsum.photos/seed/rest_tokyo_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9289",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Tokyo Halal",
+        "type": "Halal",
+        "lat": 35.67913950498542,
+        "lng": 139.63470501483314,
+        "img": "https://picsum.photos/seed/rest_tokyo_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9311",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Tokyo Local",
+        "type": "Local Cuisine",
+        "lat": 35.70512001243005,
+        "lng": 139.6511404738789,
+        "img": "https://picsum.photos/seed/rest_tokyo_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2512",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Tokyo Halal",
+        "type": "Halal",
+        "lat": 35.683740672082514,
+        "lng": 139.66837676822135,
+        "img": "https://picsum.photos/seed/rest_tokyo_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5953",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Tokyo Street",
+        "type": "Street Food",
+        "lat": 35.6521876633446,
+        "lng": 139.67790439064734,
+        "img": "https://picsum.photos/seed/rest_tokyo_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4093",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Tokyo Steakhouse",
+        "type": "Steakhouse",
+        "lat": 35.705300770056986,
+        "lng": 139.62129779466161,
+        "img": "https://picsum.photos/seed/rest_tokyo_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10215",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Tokyo Family",
+        "type": "Family Style",
+        "lat": 35.680064166300035,
+        "lng": 139.67934223484266,
+        "img": "https://picsum.photos/seed/rest_tokyo_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8916",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Tokyo Halal",
+        "type": "Halal",
+        "lat": 35.674770027310316,
+        "lng": 139.64139039950282,
+        "img": "https://picsum.photos/seed/rest_tokyo_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5586",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Tokyo Family",
+        "type": "Family Style",
+        "lat": 35.678346151646664,
+        "lng": 139.6538657312856,
+        "img": "https://picsum.photos/seed/rest_tokyo_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8244",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Tokyo Fine",
+        "type": "Fine Dining",
+        "lat": 35.682805090285385,
+        "lng": 139.62968097361323,
+        "img": "https://picsum.photos/seed/rest_tokyo_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5723",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Tokyo Local",
+        "type": "Local Cuisine",
+        "lat": 35.66330040579974,
+        "lng": 139.62441996620305,
+        "img": "https://picsum.photos/seed/rest_tokyo_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6801",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Tokyo Casual",
+        "type": "Casual",
+        "lat": 35.65819629603872,
+        "lng": 139.64048519728942,
+        "img": "https://picsum.photos/seed/rest_tokyo_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6667",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Tokyo Family",
+        "type": "Family Style",
+        "lat": 35.67872578840763,
+        "lng": 139.63316654086825,
+        "img": "https://picsum.photos/seed/rest_tokyo_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9186",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Tokyo Street",
+        "type": "Street Food",
+        "lat": 35.69443756827226,
+        "lng": 139.62222916950518,
+        "img": "https://picsum.photos/seed/rest_tokyo_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8453",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Tokyo Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
     ],
-    places: [
-      { name: 'Eiffel Tower', img: 'https://picsum.photos/id/750/800/600', desc: 'Iron Lady of Paris.', fee: '2500', loc: 'Champ de Mars', lat: 48.8584, lng: 2.2945, crowd: 'high', tour: '06:00 PM' }
+    "places": [
+      {
+        "name": "Tokyo National Beach",
+        "img": "https://picsum.photos/seed/place_tokyo_0/800/600",
+        "desc": "A highly recommended beach providing unique insights into Tokyo's culture and beauty.",
+        "fee": "2857",
+        "loc": "Downtown",
+        "lat": 35.66681345311651,
+        "lng": 139.66511822708583,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Bridge",
+        "img": "https://picsum.photos/seed/place_tokyo_1/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Tokyo's culture and beauty.",
+        "fee": "572",
+        "loc": "Downtown",
+        "lat": 35.66827154434753,
+        "lng": 139.63159893399387,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Lake",
+        "img": "https://picsum.photos/seed/place_tokyo_2/800/600",
+        "desc": "A highly recommended lake providing unique insights into Tokyo's culture and beauty.",
+        "fee": "1182",
+        "loc": "Downtown",
+        "lat": 35.653630746819594,
+        "lng": 139.6398404711777,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Tower",
+        "img": "https://picsum.photos/seed/place_tokyo_3/800/600",
+        "desc": "A highly recommended tower providing unique insights into Tokyo's culture and beauty.",
+        "fee": "3273",
+        "loc": "Downtown",
+        "lat": 35.7026008169224,
+        "lng": 139.66258786618647,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Palace",
+        "img": "https://picsum.photos/seed/place_tokyo_4/800/600",
+        "desc": "A highly recommended palace providing unique insights into Tokyo's culture and beauty.",
+        "fee": "3457",
+        "loc": "Downtown",
+        "lat": 35.700223850498695,
+        "lng": 139.64554244949633,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Beach",
+        "img": "https://picsum.photos/seed/place_tokyo_5/800/600",
+        "desc": "A highly recommended beach providing unique insights into Tokyo's culture and beauty.",
+        "fee": "3344",
+        "loc": "Downtown",
+        "lat": 35.64788509508526,
+        "lng": 139.64188475155484,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Beach",
+        "img": "https://picsum.photos/seed/place_tokyo_6/800/600",
+        "desc": "A highly recommended beach providing unique insights into Tokyo's culture and beauty.",
+        "fee": "2979",
+        "loc": "Downtown",
+        "lat": 35.661960013621204,
+        "lng": 139.67504971891265,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Tower",
+        "img": "https://picsum.photos/seed/place_tokyo_7/800/600",
+        "desc": "A highly recommended tower providing unique insights into Tokyo's culture and beauty.",
+        "fee": "787",
+        "loc": "Downtown",
+        "lat": 35.65231687742665,
+        "lng": 139.65722296913228,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Square",
+        "img": "https://picsum.photos/seed/place_tokyo_8/800/600",
+        "desc": "A highly recommended square providing unique insights into Tokyo's culture and beauty.",
+        "fee": "2573",
+        "loc": "Downtown",
+        "lat": 35.6822227196762,
+        "lng": 139.6331471939874,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Park",
+        "img": "https://picsum.photos/seed/place_tokyo_9/800/600",
+        "desc": "A highly recommended park providing unique insights into Tokyo's culture and beauty.",
+        "fee": "1232",
+        "loc": "Downtown",
+        "lat": 35.69991808092161,
+        "lng": 139.62386968898952,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Tower",
+        "img": "https://picsum.photos/seed/place_tokyo_10/800/600",
+        "desc": "A highly recommended tower providing unique insights into Tokyo's culture and beauty.",
+        "fee": "3157",
+        "loc": "Downtown",
+        "lat": 35.666560277943475,
+        "lng": 139.67643540880732,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Museum",
+        "img": "https://picsum.photos/seed/place_tokyo_11/800/600",
+        "desc": "A highly recommended museum providing unique insights into Tokyo's culture and beauty.",
+        "fee": "2894",
+        "loc": "Downtown",
+        "lat": 35.70464083175066,
+        "lng": 139.6678040339716,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Mountain",
+        "img": "https://picsum.photos/seed/place_tokyo_12/800/600",
+        "desc": "A highly recommended mountain providing unique insights into Tokyo's culture and beauty.",
+        "fee": "1764",
+        "loc": "Downtown",
+        "lat": 35.695016760256166,
+        "lng": 139.64134228978597,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Market",
+        "img": "https://picsum.photos/seed/place_tokyo_13/800/600",
+        "desc": "A highly recommended market providing unique insights into Tokyo's culture and beauty.",
+        "fee": "2445",
+        "loc": "Downtown",
+        "lat": 35.651567699407295,
+        "lng": 139.62954713757594,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Tokyo National Gallery",
+        "img": "https://picsum.photos/seed/place_tokyo_14/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Tokyo's culture and beauty.",
+        "fee": "661",
+        "loc": "Downtown",
+        "lat": 35.688364796882986,
+        "lng": 139.67150138616086,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "newyork": {
+    "heroImg": "https://picsum.photos/seed/hero_newyork/800/600",
+    "centerLat": 40.7128,
+    "centerLng": -74.006,
+    "currency": {
+      "from": "USD",
+      "symbol": "$",
+      "rate": 83.5,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in New York: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your New York adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "New York National Square",
+            "desc": "A highly recommended square providing unique insights into New York's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "33.58",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_newyork_0/800/600",
+            "lat": 40.68436885540447,
+            "lng": -74.02625149157578
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le New York Family",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "35.75",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_newyork_0/800/600",
+            "lat": 40.72215353614442,
+            "lng": -74.02558575244893
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz New York",
+        "price": "22453",
+        "rating": "4.9",
+        "lat": 40.73977699669917,
+        "lng": -74.02486537334511,
+        "img": "https://picsum.photos/seed/hotel_newyork_0/800/600",
+        "distance": "0.7 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand New York",
+        "price": "46760",
+        "rating": "5.0",
+        "lat": 40.69752507667131,
+        "lng": -73.98744024495487,
+        "img": "https://picsum.photos/seed/hotel_newyork_1/800/600",
+        "distance": "3.7 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons New York",
+        "price": "37404",
+        "rating": "4.5",
+        "lat": 40.68965246727634,
+        "lng": -74.02396316456982,
+        "img": "https://picsum.photos/seed/hotel_newyork_2/800/600",
+        "distance": "4.7 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis New York",
+        "price": "47459",
+        "rating": "4.5",
+        "lat": 40.70431778817488,
+        "lng": -74.0213992229866,
+        "img": "https://picsum.photos/seed/hotel_newyork_3/800/600",
+        "distance": "4.5 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria New York",
+        "price": "13688",
+        "rating": "4.6",
+        "lat": 40.69417335069651,
+        "lng": -73.99514088379946,
+        "img": "https://picsum.photos/seed/hotel_newyork_4/800/600",
+        "distance": "1.8 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt New York",
+        "price": "27121",
+        "rating": "4.4",
+        "lat": 40.72122490026262,
+        "lng": -73.98869593808806,
+        "img": "https://picsum.photos/seed/hotel_newyork_5/800/600",
+        "distance": "4.8 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood New York",
+        "price": "15827",
+        "rating": "4.6",
+        "lat": 40.70134911239083,
+        "lng": -74.03047343581277,
+        "img": "https://picsum.photos/seed/hotel_newyork_6/800/600",
+        "distance": "3.6 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman New York",
+        "price": "29845",
+        "rating": "4.6",
+        "lat": 40.69263973066709,
+        "lng": -74.01559020770307,
+        "img": "https://picsum.photos/seed/hotel_newyork_7/800/600",
+        "distance": "2.5 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari New York",
+        "price": "29133",
+        "rating": "4.6",
+        "lat": 40.69128010621596,
+        "lng": -73.97917667490387,
+        "img": "https://picsum.photos/seed/hotel_newyork_8/800/600",
+        "distance": "0.2 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont New York",
+        "price": "42648",
+        "rating": "5.0",
+        "lat": 40.732949922328515,
+        "lng": -74.0032595381518,
+        "img": "https://picsum.photos/seed/hotel_newyork_9/800/600",
+        "distance": "4.1 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La New York",
+        "price": "13382",
+        "rating": "4.5",
+        "lat": 40.694460729121936,
+        "lng": -74.02234955988682,
+        "img": "https://picsum.photos/seed/hotel_newyork_10/800/600",
+        "distance": "1.7 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental New York",
+        "price": "17235",
+        "rating": "4.1",
+        "lat": 40.70157469426379,
+        "lng": -74.03335893927638,
+        "img": "https://picsum.photos/seed/hotel_newyork_11/800/600",
+        "distance": "2.6 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski New York",
+        "price": "17074",
+        "rating": "4.3",
+        "lat": 40.74038742372354,
+        "lng": -74.02211298593976,
+        "img": "https://picsum.photos/seed/hotel_newyork_12/800/600",
+        "distance": "0.1 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree New York",
+        "price": "19763",
+        "rating": "4.4",
+        "lat": 40.684534948056715,
+        "lng": -74.01487763012358,
+        "img": "https://picsum.photos/seed/hotel_newyork_13/800/600",
+        "distance": "2.6 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental New York",
+        "price": "34260",
+        "rating": "4.3",
+        "lat": 40.69536968140658,
+        "lng": -73.97953240294287,
+        "img": "https://picsum.photos/seed/hotel_newyork_14/800/600",
+        "distance": "4.3 km to center",
+        "desc": "Luxurious stay located in the heart of New York. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_newyork_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_newyork_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_newyork_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le New York Family",
+        "type": "Family Style",
+        "lat": 40.72215353614442,
+        "lng": -74.02558575244893,
+        "img": "https://picsum.photos/seed/rest_newyork_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3575",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The New York Family",
+        "type": "Family Style",
+        "lat": 40.69969437469405,
+        "lng": -74.02503252382157,
+        "img": "https://picsum.photos/seed/rest_newyork_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7278",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro New York Seafood",
+        "type": "Seafood",
+        "lat": 40.70593686711086,
+        "lng": -74.03541917725398,
+        "img": "https://picsum.photos/seed/rest_newyork_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7964",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie New York Halal",
+        "type": "Halal",
+        "lat": 40.711065299643785,
+        "lng": -74.00486274770975,
+        "img": "https://picsum.photos/seed/rest_newyork_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10588",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria New York Steakhouse",
+        "type": "Steakhouse",
+        "lat": 40.73834427671289,
+        "lng": -74.018484115874,
+        "img": "https://picsum.photos/seed/rest_newyork_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8911",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe New York Steakhouse",
+        "type": "Steakhouse",
+        "lat": 40.73035829596407,
+        "lng": -73.98941601797814,
+        "img": "https://picsum.photos/seed/rest_newyork_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11545",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern New York Casual",
+        "type": "Casual",
+        "lat": 40.709522278592246,
+        "lng": -74.02860139035606,
+        "img": "https://picsum.photos/seed/rest_newyork_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5637",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria New York Family",
+        "type": "Family Style",
+        "lat": 40.718284373456186,
+        "lng": -73.99456920138425,
+        "img": "https://picsum.photos/seed/rest_newyork_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2831",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante New York Halal",
+        "type": "Halal",
+        "lat": 40.716664706112276,
+        "lng": -74.01719757295557,
+        "img": "https://picsum.photos/seed/rest_newyork_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8243",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya New York Steakhouse",
+        "type": "Steakhouse",
+        "lat": 40.73677733200483,
+        "lng": -74.01086998267574,
+        "img": "https://picsum.photos/seed/rest_newyork_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9060",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse New York Seafood",
+        "type": "Seafood",
+        "lat": 40.69934315117418,
+        "lng": -73.97810894570226,
+        "img": "https://picsum.photos/seed/rest_newyork_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6055",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill New York Seafood",
+        "type": "Seafood",
+        "lat": 40.715937843207705,
+        "lng": -73.99231538165333,
+        "img": "https://picsum.photos/seed/rest_newyork_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7715",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen New York Vegan",
+        "type": "Vegan",
+        "lat": 40.69619812096632,
+        "lng": -74.02253082201125,
+        "img": "https://picsum.photos/seed/rest_newyork_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6604",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar New York Steakhouse",
+        "type": "Steakhouse",
+        "lat": 40.713525502517534,
+        "lng": -74.02584290457608,
+        "img": "https://picsum.photos/seed/rest_newyork_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6812",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge New York Halal",
+        "type": "Halal",
+        "lat": 40.720932430791876,
+        "lng": -74.03523961981936,
+        "img": "https://picsum.photos/seed/rest_newyork_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6223",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature New York Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "New York National Square",
+        "img": "https://picsum.photos/seed/place_newyork_0/800/600",
+        "desc": "A highly recommended square providing unique insights into New York's culture and beauty.",
+        "fee": "3358",
+        "loc": "Downtown",
+        "lat": 40.68436885540447,
+        "lng": -74.02625149157578,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Monument",
+        "img": "https://picsum.photos/seed/place_newyork_1/800/600",
+        "desc": "A highly recommended monument providing unique insights into New York's culture and beauty.",
+        "fee": "2048",
+        "loc": "Downtown",
+        "lat": 40.71784174582793,
+        "lng": -74.0217021529539,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Beach",
+        "img": "https://picsum.photos/seed/place_newyork_2/800/600",
+        "desc": "A highly recommended beach providing unique insights into New York's culture and beauty.",
+        "fee": "2655",
+        "loc": "Downtown",
+        "lat": 40.7045327889387,
+        "lng": -74.01076495546239,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Temple",
+        "img": "https://picsum.photos/seed/place_newyork_3/800/600",
+        "desc": "A highly recommended temple providing unique insights into New York's culture and beauty.",
+        "fee": "1814",
+        "loc": "Downtown",
+        "lat": 40.73314338136914,
+        "lng": -74.02889994627637,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Monument",
+        "img": "https://picsum.photos/seed/place_newyork_4/800/600",
+        "desc": "A highly recommended monument providing unique insights into New York's culture and beauty.",
+        "fee": "1653",
+        "loc": "Downtown",
+        "lat": 40.731371069157156,
+        "lng": -74.02298096729344,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Square",
+        "img": "https://picsum.photos/seed/place_newyork_5/800/600",
+        "desc": "A highly recommended square providing unique insights into New York's culture and beauty.",
+        "fee": "2431",
+        "loc": "Downtown",
+        "lat": 40.73795062269572,
+        "lng": -73.9769565941955,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Lake",
+        "img": "https://picsum.photos/seed/place_newyork_6/800/600",
+        "desc": "A highly recommended lake providing unique insights into New York's culture and beauty.",
+        "fee": "781",
+        "loc": "Downtown",
+        "lat": 40.695272658107676,
+        "lng": -74.00147611626903,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Garden",
+        "img": "https://picsum.photos/seed/place_newyork_7/800/600",
+        "desc": "A highly recommended garden providing unique insights into New York's culture and beauty.",
+        "fee": "3466",
+        "loc": "Downtown",
+        "lat": 40.71835918530002,
+        "lng": -73.99989391937858,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Palace",
+        "img": "https://picsum.photos/seed/place_newyork_8/800/600",
+        "desc": "A highly recommended palace providing unique insights into New York's culture and beauty.",
+        "fee": "2690",
+        "loc": "Downtown",
+        "lat": 40.72854494744654,
+        "lng": -73.99776640919615,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Tower",
+        "img": "https://picsum.photos/seed/place_newyork_9/800/600",
+        "desc": "A highly recommended tower providing unique insights into New York's culture and beauty.",
+        "fee": "3114",
+        "loc": "Downtown",
+        "lat": 40.685811584233036,
+        "lng": -74.00417241599348,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Park",
+        "img": "https://picsum.photos/seed/place_newyork_10/800/600",
+        "desc": "A highly recommended park providing unique insights into New York's culture and beauty.",
+        "fee": "3191",
+        "loc": "Downtown",
+        "lat": 40.685335092575926,
+        "lng": -74.03339553599528,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Garden",
+        "img": "https://picsum.photos/seed/place_newyork_11/800/600",
+        "desc": "A highly recommended garden providing unique insights into New York's culture and beauty.",
+        "fee": "2424",
+        "loc": "Downtown",
+        "lat": 40.72818347965533,
+        "lng": -74.00924691233267,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Monument",
+        "img": "https://picsum.photos/seed/place_newyork_12/800/600",
+        "desc": "A highly recommended monument providing unique insights into New York's culture and beauty.",
+        "fee": "1954",
+        "loc": "Downtown",
+        "lat": 40.72287251660195,
+        "lng": -74.02815989302417,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Monument",
+        "img": "https://picsum.photos/seed/place_newyork_13/800/600",
+        "desc": "A highly recommended monument providing unique insights into New York's culture and beauty.",
+        "fee": "2951",
+        "loc": "Downtown",
+        "lat": 40.706540878427944,
+        "lng": -74.02883639901322,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "New York National Viewpoint",
+        "img": "https://picsum.photos/seed/place_newyork_14/800/600",
+        "desc": "A highly recommended viewpoint providing unique insights into New York's culture and beauty.",
+        "fee": "2483",
+        "loc": "Downtown",
+        "lat": 40.711730820062236,
+        "lng": -74.02910782423787,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "sydney": {
+    "heroImg": "https://picsum.photos/seed/hero_sydney/800/600",
+    "centerLat": -33.8688,
+    "centerLng": 151.2093,
+    "currency": {
+      "from": "AUD",
+      "symbol": "A$",
+      "rate": 54.2,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Sydney: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Sydney adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Sydney National Lake",
+            "desc": "A highly recommended lake providing unique insights into Sydney's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "21.56",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_sydney_0/800/600",
+            "lat": -33.850913874157634,
+            "lng": 151.18246684508617
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Sydney Family",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "94.36",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_sydney_0/800/600",
+            "lat": -33.86278739309811,
+            "lng": 151.208454164688
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz Sydney",
+        "price": "48370",
+        "rating": "4.5",
+        "lat": -33.88916540465823,
+        "lng": 151.2338230744458,
+        "img": "https://picsum.photos/seed/hotel_sydney_0/800/600",
+        "distance": "0.4 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Sydney",
+        "price": "32598",
+        "rating": "4.0",
+        "lat": -33.84294239302501,
+        "lng": 151.19901459861129,
+        "img": "https://picsum.photos/seed/hotel_sydney_1/800/600",
+        "distance": "1.9 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Sydney",
+        "price": "26054",
+        "rating": "4.2",
+        "lat": -33.869252109120175,
+        "lng": 151.20972538482985,
+        "img": "https://picsum.photos/seed/hotel_sydney_2/800/600",
+        "distance": "2.7 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Sydney",
+        "price": "27409",
+        "rating": "4.3",
+        "lat": -33.86357572785243,
+        "lng": 151.2251528342124,
+        "img": "https://picsum.photos/seed/hotel_sydney_3/800/600",
+        "distance": "0.8 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Sydney",
+        "price": "24212",
+        "rating": "4.0",
+        "lat": -33.86737142026977,
+        "lng": 151.1857941696807,
+        "img": "https://picsum.photos/seed/hotel_sydney_4/800/600",
+        "distance": "0.5 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Sydney",
+        "price": "38552",
+        "rating": "4.3",
+        "lat": -33.85256544121017,
+        "lng": 151.20989857873585,
+        "img": "https://picsum.photos/seed/hotel_sydney_5/800/600",
+        "distance": "0.2 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Sydney",
+        "price": "48122",
+        "rating": "4.1",
+        "lat": -33.86168616102483,
+        "lng": 151.2218711785945,
+        "img": "https://picsum.photos/seed/hotel_sydney_6/800/600",
+        "distance": "0.2 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Sydney",
+        "price": "22585",
+        "rating": "4.1",
+        "lat": -33.8467076115798,
+        "lng": 151.23597375433098,
+        "img": "https://picsum.photos/seed/hotel_sydney_7/800/600",
+        "distance": "2.9 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Sydney",
+        "price": "30696",
+        "rating": "4.9",
+        "lat": -33.896742097833204,
+        "lng": 151.23470988519838,
+        "img": "https://picsum.photos/seed/hotel_sydney_8/800/600",
+        "distance": "2.7 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Sydney",
+        "price": "21718",
+        "rating": "4.2",
+        "lat": -33.87243628791697,
+        "lng": 151.22930528230185,
+        "img": "https://picsum.photos/seed/hotel_sydney_9/800/600",
+        "distance": "4.7 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Sydney",
+        "price": "29558",
+        "rating": "4.7",
+        "lat": -33.87063159359582,
+        "lng": 151.2124583126205,
+        "img": "https://picsum.photos/seed/hotel_sydney_10/800/600",
+        "distance": "1.2 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Sydney",
+        "price": "13194",
+        "rating": "4.2",
+        "lat": -33.887542549109334,
+        "lng": 151.2297175176149,
+        "img": "https://picsum.photos/seed/hotel_sydney_11/800/600",
+        "distance": "3.9 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Sydney",
+        "price": "31957",
+        "rating": "4.7",
+        "lat": -33.89621741960005,
+        "lng": 151.19379425695251,
+        "img": "https://picsum.photos/seed/hotel_sydney_12/800/600",
+        "distance": "0.3 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Sydney",
+        "price": "28044",
+        "rating": "4.2",
+        "lat": -33.8876465696628,
+        "lng": 151.22238890525605,
+        "img": "https://picsum.photos/seed/hotel_sydney_13/800/600",
+        "distance": "4.2 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Sydney",
+        "price": "17744",
+        "rating": "4.7",
+        "lat": -33.89765022661558,
+        "lng": 151.21758189218872,
+        "img": "https://picsum.photos/seed/hotel_sydney_14/800/600",
+        "distance": "1.3 km to center",
+        "desc": "Luxurious stay located in the heart of Sydney. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_sydney_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_sydney_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_sydney_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le Sydney Family",
+        "type": "Family Style",
+        "lat": -33.86278739309811,
+        "lng": 151.208454164688,
+        "img": "https://picsum.photos/seed/rest_sydney_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9436",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Sydney Halal",
+        "type": "Halal",
+        "lat": -33.87753209024413,
+        "lng": 151.2200265635889,
+        "img": "https://picsum.photos/seed/rest_sydney_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9501",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Sydney Vegan",
+        "type": "Vegan",
+        "lat": -33.88392626746353,
+        "lng": 151.1820358099687,
+        "img": "https://picsum.photos/seed/rest_sydney_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9003",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Sydney Street",
+        "type": "Street Food",
+        "lat": -33.88898956682368,
+        "lng": 151.20134203439713,
+        "img": "https://picsum.photos/seed/rest_sydney_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3547",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Sydney Family",
+        "type": "Family Style",
+        "lat": -33.84680168244336,
+        "lng": 151.21729894341416,
+        "img": "https://picsum.photos/seed/rest_sydney_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5155",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Sydney Local",
+        "type": "Local Cuisine",
+        "lat": -33.87349351025872,
+        "lng": 151.21693217645586,
+        "img": "https://picsum.photos/seed/rest_sydney_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4959",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Sydney Steakhouse",
+        "type": "Steakhouse",
+        "lat": -33.86530760485083,
+        "lng": 151.18450734661494,
+        "img": "https://picsum.photos/seed/rest_sydney_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2646",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Sydney Vegan",
+        "type": "Vegan",
+        "lat": -33.87200900403567,
+        "lng": 151.1928059119964,
+        "img": "https://picsum.photos/seed/rest_sydney_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3559",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Sydney Local",
+        "type": "Local Cuisine",
+        "lat": -33.879508901729764,
+        "lng": 151.2374069148225,
+        "img": "https://picsum.photos/seed/rest_sydney_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5207",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Sydney Seafood",
+        "type": "Seafood",
+        "lat": -33.898497163362116,
+        "lng": 151.2200411670266,
+        "img": "https://picsum.photos/seed/rest_sydney_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4971",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Sydney Local",
+        "type": "Local Cuisine",
+        "lat": -33.86129004848322,
+        "lng": 151.18715711147695,
+        "img": "https://picsum.photos/seed/rest_sydney_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9918",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Sydney Vegan",
+        "type": "Vegan",
+        "lat": -33.850691671016016,
+        "lng": 151.18778804812197,
+        "img": "https://picsum.photos/seed/rest_sydney_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2879",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Sydney Seafood",
+        "type": "Seafood",
+        "lat": -33.8479602899206,
+        "lng": 151.21349669418282,
+        "img": "https://picsum.photos/seed/rest_sydney_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4144",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Sydney Steakhouse",
+        "type": "Steakhouse",
+        "lat": -33.85621360034166,
+        "lng": 151.20322875835208,
+        "img": "https://picsum.photos/seed/rest_sydney_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2548",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Sydney Family",
+        "type": "Family Style",
+        "lat": -33.85797837745831,
+        "lng": 151.2067476087065,
+        "img": "https://picsum.photos/seed/rest_sydney_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9868",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Sydney Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "Sydney National Lake",
+        "img": "https://picsum.photos/seed/place_sydney_0/800/600",
+        "desc": "A highly recommended lake providing unique insights into Sydney's culture and beauty.",
+        "fee": "2156",
+        "loc": "Downtown",
+        "lat": -33.850913874157634,
+        "lng": 151.18246684508617,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Beach",
+        "img": "https://picsum.photos/seed/place_sydney_1/800/600",
+        "desc": "A highly recommended beach providing unique insights into Sydney's culture and beauty.",
+        "fee": "2856",
+        "loc": "Downtown",
+        "lat": -33.84645391686554,
+        "lng": 151.1910234305543,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Museum",
+        "img": "https://picsum.photos/seed/place_sydney_2/800/600",
+        "desc": "A highly recommended museum providing unique insights into Sydney's culture and beauty.",
+        "fee": "2973",
+        "loc": "Downtown",
+        "lat": -33.88998663947097,
+        "lng": 151.234213710925,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Garden",
+        "img": "https://picsum.photos/seed/place_sydney_3/800/600",
+        "desc": "A highly recommended garden providing unique insights into Sydney's culture and beauty.",
+        "fee": "998",
+        "loc": "Downtown",
+        "lat": -33.84973289361486,
+        "lng": 151.21252414357173,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Gallery",
+        "img": "https://picsum.photos/seed/place_sydney_4/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Sydney's culture and beauty.",
+        "fee": "2289",
+        "loc": "Downtown",
+        "lat": -33.897524727576936,
+        "lng": 151.18814815733845,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Market",
+        "img": "https://picsum.photos/seed/place_sydney_5/800/600",
+        "desc": "A highly recommended market providing unique insights into Sydney's culture and beauty.",
+        "fee": "3278",
+        "loc": "Downtown",
+        "lat": -33.86691488165841,
+        "lng": 151.21004984366078,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Tower",
+        "img": "https://picsum.photos/seed/place_sydney_6/800/600",
+        "desc": "A highly recommended tower providing unique insights into Sydney's culture and beauty.",
+        "fee": "3411",
+        "loc": "Downtown",
+        "lat": -33.853919694353465,
+        "lng": 151.21423054379216,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Lake",
+        "img": "https://picsum.photos/seed/place_sydney_7/800/600",
+        "desc": "A highly recommended lake providing unique insights into Sydney's culture and beauty.",
+        "fee": "817",
+        "loc": "Downtown",
+        "lat": -33.8691093330542,
+        "lng": 151.1904645326799,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Market",
+        "img": "https://picsum.photos/seed/place_sydney_8/800/600",
+        "desc": "A highly recommended market providing unique insights into Sydney's culture and beauty.",
+        "fee": "2396",
+        "loc": "Downtown",
+        "lat": -33.89824916542101,
+        "lng": 151.20684340541882,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Temple",
+        "img": "https://picsum.photos/seed/place_sydney_9/800/600",
+        "desc": "A highly recommended temple providing unique insights into Sydney's culture and beauty.",
+        "fee": "685",
+        "loc": "Downtown",
+        "lat": -33.87958678944647,
+        "lng": 151.20596593080546,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Museum",
+        "img": "https://picsum.photos/seed/place_sydney_10/800/600",
+        "desc": "A highly recommended museum providing unique insights into Sydney's culture and beauty.",
+        "fee": "2719",
+        "loc": "Downtown",
+        "lat": -33.87237175582615,
+        "lng": 151.21440289766028,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Market",
+        "img": "https://picsum.photos/seed/place_sydney_11/800/600",
+        "desc": "A highly recommended market providing unique insights into Sydney's culture and beauty.",
+        "fee": "3364",
+        "loc": "Downtown",
+        "lat": -33.86213110584849,
+        "lng": 151.23049734485,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Museum",
+        "img": "https://picsum.photos/seed/place_sydney_12/800/600",
+        "desc": "A highly recommended museum providing unique insights into Sydney's culture and beauty.",
+        "fee": "1337",
+        "loc": "Downtown",
+        "lat": -33.87921898058423,
+        "lng": 151.23688726310178,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Temple",
+        "img": "https://picsum.photos/seed/place_sydney_13/800/600",
+        "desc": "A highly recommended temple providing unique insights into Sydney's culture and beauty.",
+        "fee": "3472",
+        "loc": "Downtown",
+        "lat": -33.8722047755449,
+        "lng": 151.21070005683558,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Sydney National Museum",
+        "img": "https://picsum.photos/seed/place_sydney_14/800/600",
+        "desc": "A highly recommended museum providing unique insights into Sydney's culture and beauty.",
+        "fee": "2922",
+        "loc": "Downtown",
+        "lat": -33.86005183429611,
+        "lng": 151.1814523887504,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "capetown": {
+    "heroImg": "https://picsum.photos/seed/hero_capetown/800/600",
+    "centerLat": -33.9249,
+    "centerLng": 18.4241,
+    "currency": {
+      "from": "ZAR",
+      "symbol": "R",
+      "rate": 4.5,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Cape Town: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Cape Town adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Cape Town National Square",
+            "desc": "A highly recommended square providing unique insights into Cape Town's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "17.85",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_capetown_0/800/600",
+            "lat": -33.90694821810667,
+            "lng": 18.439425535842076
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Cape Town Casual",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "76.74",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_capetown_0/800/600",
+            "lat": -33.954157484618946,
+            "lng": 18.410449120114578
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz Cape Town",
+        "price": "23784",
+        "rating": "4.6",
+        "lat": -33.916530484223344,
+        "lng": 18.42352192804787,
+        "img": "https://picsum.photos/seed/hotel_capetown_0/800/600",
+        "distance": "4.3 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Cape Town",
+        "price": "36869",
+        "rating": "4.3",
+        "lat": -33.921617026600295,
+        "lng": 18.432666138394957,
+        "img": "https://picsum.photos/seed/hotel_capetown_1/800/600",
+        "distance": "4.8 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Cape Town",
+        "price": "26188",
+        "rating": "4.9",
+        "lat": -33.927800463476636,
+        "lng": 18.40387826602633,
+        "img": "https://picsum.photos/seed/hotel_capetown_2/800/600",
+        "distance": "0.2 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Cape Town",
+        "price": "32566",
+        "rating": "4.7",
+        "lat": -33.921520185047186,
+        "lng": 18.40832359495432,
+        "img": "https://picsum.photos/seed/hotel_capetown_3/800/600",
+        "distance": "2.6 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Cape Town",
+        "price": "14171",
+        "rating": "4.6",
+        "lat": -33.936281074487916,
+        "lng": 18.42767859804248,
+        "img": "https://picsum.photos/seed/hotel_capetown_4/800/600",
+        "distance": "4.3 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Cape Town",
+        "price": "36846",
+        "rating": "4.0",
+        "lat": -33.934674648023645,
+        "lng": 18.436399475072445,
+        "img": "https://picsum.photos/seed/hotel_capetown_5/800/600",
+        "distance": "3.1 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Cape Town",
+        "price": "48009",
+        "rating": "4.2",
+        "lat": -33.92766241146884,
+        "lng": 18.394971960542225,
+        "img": "https://picsum.photos/seed/hotel_capetown_6/800/600",
+        "distance": "1.7 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Cape Town",
+        "price": "22909",
+        "rating": "4.7",
+        "lat": -33.928485390413464,
+        "lng": 18.452354102712995,
+        "img": "https://picsum.photos/seed/hotel_capetown_7/800/600",
+        "distance": "4.3 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Cape Town",
+        "price": "32285",
+        "rating": "4.4",
+        "lat": -33.92107704466241,
+        "lng": 18.407566645098086,
+        "img": "https://picsum.photos/seed/hotel_capetown_8/800/600",
+        "distance": "1.3 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Cape Town",
+        "price": "29467",
+        "rating": "4.4",
+        "lat": -33.89935516489003,
+        "lng": 18.45146006508615,
+        "img": "https://picsum.photos/seed/hotel_capetown_9/800/600",
+        "distance": "4.1 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Cape Town",
+        "price": "49766",
+        "rating": "4.2",
+        "lat": -33.93665079513669,
+        "lng": 18.43386737654634,
+        "img": "https://picsum.photos/seed/hotel_capetown_10/800/600",
+        "distance": "4.7 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Cape Town",
+        "price": "33722",
+        "rating": "4.2",
+        "lat": -33.922238896208626,
+        "lng": 18.449908245558856,
+        "img": "https://picsum.photos/seed/hotel_capetown_11/800/600",
+        "distance": "0.4 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Cape Town",
+        "price": "46848",
+        "rating": "4.0",
+        "lat": -33.95359877679994,
+        "lng": 18.44421650866852,
+        "img": "https://picsum.photos/seed/hotel_capetown_12/800/600",
+        "distance": "1.1 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Cape Town",
+        "price": "12453",
+        "rating": "4.6",
+        "lat": -33.899652553579415,
+        "lng": 18.45005334945057,
+        "img": "https://picsum.photos/seed/hotel_capetown_13/800/600",
+        "distance": "1.3 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Cape Town",
+        "price": "43126",
+        "rating": "4.8",
+        "lat": -33.915871216122724,
+        "lng": 18.4130767983572,
+        "img": "https://picsum.photos/seed/hotel_capetown_14/800/600",
+        "distance": "4.7 km to center",
+        "desc": "Luxurious stay located in the heart of Cape Town. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_capetown_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_capetown_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_capetown_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le Cape Town Casual",
+        "type": "Casual",
+        "lat": -33.954157484618946,
+        "lng": 18.410449120114578,
+        "img": "https://picsum.photos/seed/rest_capetown_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7674",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Cape Town Family",
+        "type": "Family Style",
+        "lat": -33.92512221013245,
+        "lng": 18.405716510447267,
+        "img": "https://picsum.photos/seed/rest_capetown_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3680",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Cape Town Casual",
+        "type": "Casual",
+        "lat": -33.95344120942664,
+        "lng": 18.440055015974913,
+        "img": "https://picsum.photos/seed/rest_capetown_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4253",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Cape Town Seafood",
+        "type": "Seafood",
+        "lat": -33.94114078183829,
+        "lng": 18.41899648874585,
+        "img": "https://picsum.photos/seed/rest_capetown_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8852",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Cape Town Halal",
+        "type": "Halal",
+        "lat": -33.940241404935094,
+        "lng": 18.45032961873285,
+        "img": "https://picsum.photos/seed/rest_capetown_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9748",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Cape Town Halal",
+        "type": "Halal",
+        "lat": -33.916555233622866,
+        "lng": 18.448004029137607,
+        "img": "https://picsum.photos/seed/rest_capetown_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11018",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Cape Town Street",
+        "type": "Street Food",
+        "lat": -33.90702956675461,
+        "lng": 18.4004105024414,
+        "img": "https://picsum.photos/seed/rest_capetown_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10592",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Cape Town Steakhouse",
+        "type": "Steakhouse",
+        "lat": -33.93711050430251,
+        "lng": 18.417513388393306,
+        "img": "https://picsum.photos/seed/rest_capetown_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11994",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Cape Town Seafood",
+        "type": "Seafood",
+        "lat": -33.94775593163967,
+        "lng": 18.416808143031297,
+        "img": "https://picsum.photos/seed/rest_capetown_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2812",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Cape Town Casual",
+        "type": "Casual",
+        "lat": -33.934830417858485,
+        "lng": 18.403065547583257,
+        "img": "https://picsum.photos/seed/rest_capetown_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8437",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Cape Town Local",
+        "type": "Local Cuisine",
+        "lat": -33.908769050017966,
+        "lng": 18.43096159841779,
+        "img": "https://picsum.photos/seed/rest_capetown_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6653",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Cape Town Family",
+        "type": "Family Style",
+        "lat": -33.9025158833368,
+        "lng": 18.436891813361285,
+        "img": "https://picsum.photos/seed/rest_capetown_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6328",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Cape Town Local",
+        "type": "Local Cuisine",
+        "lat": -33.945745585459534,
+        "lng": 18.452463514117333,
+        "img": "https://picsum.photos/seed/rest_capetown_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3595",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Cape Town Local",
+        "type": "Local Cuisine",
+        "lat": -33.93011895144258,
+        "lng": 18.42521626938811,
+        "img": "https://picsum.photos/seed/rest_capetown_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10191",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Cape Town Local",
+        "type": "Local Cuisine",
+        "lat": -33.93306706572027,
+        "lng": 18.41803634736641,
+        "img": "https://picsum.photos/seed/rest_capetown_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4201",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Cape Town Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "Cape Town National Square",
+        "img": "https://picsum.photos/seed/place_capetown_0/800/600",
+        "desc": "A highly recommended square providing unique insights into Cape Town's culture and beauty.",
+        "fee": "1785",
+        "loc": "Downtown",
+        "lat": -33.90694821810667,
+        "lng": 18.439425535842076,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Garden",
+        "img": "https://picsum.photos/seed/place_capetown_1/800/600",
+        "desc": "A highly recommended garden providing unique insights into Cape Town's culture and beauty.",
+        "fee": "2980",
+        "loc": "Downtown",
+        "lat": -33.93741445750719,
+        "lng": 18.435776112560987,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Gallery",
+        "img": "https://picsum.photos/seed/place_capetown_2/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Cape Town's culture and beauty.",
+        "fee": "1064",
+        "loc": "Downtown",
+        "lat": -33.90621616529357,
+        "lng": 18.45014044681425,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Bridge",
+        "img": "https://picsum.photos/seed/place_capetown_3/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Cape Town's culture and beauty.",
+        "fee": "1793",
+        "loc": "Downtown",
+        "lat": -33.92958750475283,
+        "lng": 18.411352720640856,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Palace",
+        "img": "https://picsum.photos/seed/place_capetown_4/800/600",
+        "desc": "A highly recommended palace providing unique insights into Cape Town's culture and beauty.",
+        "fee": "2267",
+        "loc": "Downtown",
+        "lat": -33.90147912634962,
+        "lng": 18.401456512742087,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Gallery",
+        "img": "https://picsum.photos/seed/place_capetown_5/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Cape Town's culture and beauty.",
+        "fee": "1492",
+        "loc": "Downtown",
+        "lat": -33.950474157017986,
+        "lng": 18.40798385860406,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Museum",
+        "img": "https://picsum.photos/seed/place_capetown_6/800/600",
+        "desc": "A highly recommended museum providing unique insights into Cape Town's culture and beauty.",
+        "fee": "1208",
+        "loc": "Downtown",
+        "lat": -33.942627926986745,
+        "lng": 18.398225719791675,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Beach",
+        "img": "https://picsum.photos/seed/place_capetown_7/800/600",
+        "desc": "A highly recommended beach providing unique insights into Cape Town's culture and beauty.",
+        "fee": "593",
+        "loc": "Downtown",
+        "lat": -33.91363014864865,
+        "lng": 18.396363336432966,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Bridge",
+        "img": "https://picsum.photos/seed/place_capetown_8/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Cape Town's culture and beauty.",
+        "fee": "2916",
+        "loc": "Downtown",
+        "lat": -33.92311410718842,
+        "lng": 18.41701588945191,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Monument",
+        "img": "https://picsum.photos/seed/place_capetown_9/800/600",
+        "desc": "A highly recommended monument providing unique insights into Cape Town's culture and beauty.",
+        "fee": "2129",
+        "loc": "Downtown",
+        "lat": -33.90218272407483,
+        "lng": 18.42957394673826,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Mountain",
+        "img": "https://picsum.photos/seed/place_capetown_10/800/600",
+        "desc": "A highly recommended mountain providing unique insights into Cape Town's culture and beauty.",
+        "fee": "3213",
+        "loc": "Downtown",
+        "lat": -33.93634465019502,
+        "lng": 18.44736303558093,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Tower",
+        "img": "https://picsum.photos/seed/place_capetown_11/800/600",
+        "desc": "A highly recommended tower providing unique insights into Cape Town's culture and beauty.",
+        "fee": "834",
+        "loc": "Downtown",
+        "lat": -33.92523071958087,
+        "lng": 18.42666874353626,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Museum",
+        "img": "https://picsum.photos/seed/place_capetown_12/800/600",
+        "desc": "A highly recommended museum providing unique insights into Cape Town's culture and beauty.",
+        "fee": "793",
+        "loc": "Downtown",
+        "lat": -33.93042207168299,
+        "lng": 18.40561791530685,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Square",
+        "img": "https://picsum.photos/seed/place_capetown_13/800/600",
+        "desc": "A highly recommended square providing unique insights into Cape Town's culture and beauty.",
+        "fee": "785",
+        "loc": "Downtown",
+        "lat": -33.951755975147385,
+        "lng": 18.419444457559358,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Cape Town National Market",
+        "img": "https://picsum.photos/seed/place_capetown_14/800/600",
+        "desc": "A highly recommended market providing unique insights into Cape Town's culture and beauty.",
+        "fee": "3301",
+        "loc": "Downtown",
+        "lat": -33.93019400712566,
+        "lng": 18.41333091208626,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "bali": {
+    "heroImg": "https://picsum.photos/seed/hero_bali/800/600",
+    "centerLat": -8.4095,
+    "centerLng": 115.1889,
+    "currency": {
+      "from": "IDR",
+      "symbol": "Rp",
+      "rate": 0.005,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Bali: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Bali adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Bali National Museum",
+            "desc": "A highly recommended museum providing unique insights into Bali's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "10.37",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_bali_0/800/600",
+            "lat": -8.395307140091388,
+            "lng": 115.1718294689654
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Bali Vegan",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "38.48",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_bali_0/800/600",
+            "lat": -8.404599439058591,
+            "lng": 115.17840643225303
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz Bali",
+        "price": "20616",
+        "rating": "4.9",
+        "lat": -8.422658772099222,
+        "lng": 115.20415090096905,
+        "img": "https://picsum.photos/seed/hotel_bali_0/800/600",
+        "distance": "4.7 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Bali",
+        "price": "48548",
+        "rating": "4.6",
+        "lat": -8.428494402677837,
+        "lng": 115.21779686218794,
+        "img": "https://picsum.photos/seed/hotel_bali_1/800/600",
+        "distance": "3.5 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Bali",
+        "price": "18511",
+        "rating": "4.9",
+        "lat": -8.414270230224655,
+        "lng": 115.20282643248039,
+        "img": "https://picsum.photos/seed/hotel_bali_2/800/600",
+        "distance": "0.4 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Bali",
+        "price": "13769",
+        "rating": "5.0",
+        "lat": -8.40574315946025,
+        "lng": 115.19225345545392,
+        "img": "https://picsum.photos/seed/hotel_bali_3/800/600",
+        "distance": "1.7 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Bali",
+        "price": "32724",
+        "rating": "4.9",
+        "lat": -8.437715246206153,
+        "lng": 115.21862757076414,
+        "img": "https://picsum.photos/seed/hotel_bali_4/800/600",
+        "distance": "3.3 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Bali",
+        "price": "49161",
+        "rating": "4.9",
+        "lat": -8.427686997519874,
+        "lng": 115.20692658558666,
+        "img": "https://picsum.photos/seed/hotel_bali_5/800/600",
+        "distance": "4.4 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Bali",
+        "price": "23570",
+        "rating": "4.7",
+        "lat": -8.436655055608455,
+        "lng": 115.16121360120152,
+        "img": "https://picsum.photos/seed/hotel_bali_6/800/600",
+        "distance": "4.0 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Bali",
+        "price": "45886",
+        "rating": "4.6",
+        "lat": -8.39441910640683,
+        "lng": 115.1857442666255,
+        "img": "https://picsum.photos/seed/hotel_bali_7/800/600",
+        "distance": "4.1 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Bali",
+        "price": "14249",
+        "rating": "4.5",
+        "lat": -8.395387275601767,
+        "lng": 115.20400566247947,
+        "img": "https://picsum.photos/seed/hotel_bali_8/800/600",
+        "distance": "1.7 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Bali",
+        "price": "45409",
+        "rating": "4.6",
+        "lat": -8.382853804625931,
+        "lng": 115.20428346574073,
+        "img": "https://picsum.photos/seed/hotel_bali_9/800/600",
+        "distance": "3.7 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Bali",
+        "price": "49914",
+        "rating": "4.3",
+        "lat": -8.397239496103616,
+        "lng": 115.20923910416347,
+        "img": "https://picsum.photos/seed/hotel_bali_10/800/600",
+        "distance": "2.5 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Bali",
+        "price": "40730",
+        "rating": "4.9",
+        "lat": -8.425373248882654,
+        "lng": 115.1783901676177,
+        "img": "https://picsum.photos/seed/hotel_bali_11/800/600",
+        "distance": "2.0 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Bali",
+        "price": "17488",
+        "rating": "4.3",
+        "lat": -8.41163319326045,
+        "lng": 115.17473672278162,
+        "img": "https://picsum.photos/seed/hotel_bali_12/800/600",
+        "distance": "4.5 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Bali",
+        "price": "28052",
+        "rating": "4.6",
+        "lat": -8.407181719089632,
+        "lng": 115.18130285532665,
+        "img": "https://picsum.photos/seed/hotel_bali_13/800/600",
+        "distance": "2.7 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Bali",
+        "price": "39918",
+        "rating": "4.6",
+        "lat": -8.424894141137369,
+        "lng": 115.19949525563803,
+        "img": "https://picsum.photos/seed/hotel_bali_14/800/600",
+        "distance": "0.7 km to center",
+        "desc": "Luxurious stay located in the heart of Bali. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_bali_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_bali_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_bali_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le Bali Vegan",
+        "type": "Vegan",
+        "lat": -8.404599439058591,
+        "lng": 115.17840643225303,
+        "img": "https://picsum.photos/seed/rest_bali_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3848",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Bali Fine",
+        "type": "Fine Dining",
+        "lat": -8.41445871021852,
+        "lng": 115.20841081458667,
+        "img": "https://picsum.photos/seed/rest_bali_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4308",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Bali Seafood",
+        "type": "Seafood",
+        "lat": -8.419167644029004,
+        "lng": 115.19642375223941,
+        "img": "https://picsum.photos/seed/rest_bali_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7370",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Bali Steakhouse",
+        "type": "Steakhouse",
+        "lat": -8.420767877994217,
+        "lng": 115.17427930389071,
+        "img": "https://picsum.photos/seed/rest_bali_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5575",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Bali Fine",
+        "type": "Fine Dining",
+        "lat": -8.43070874390189,
+        "lng": 115.21124597418573,
+        "img": "https://picsum.photos/seed/rest_bali_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5840",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Bali Casual",
+        "type": "Casual",
+        "lat": -8.392691084926007,
+        "lng": 115.21837270162833,
+        "img": "https://picsum.photos/seed/rest_bali_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4288",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Bali Fine",
+        "type": "Fine Dining",
+        "lat": -8.40174629396222,
+        "lng": 115.19433504988902,
+        "img": "https://picsum.photos/seed/rest_bali_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10894",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Bali Vegan",
+        "type": "Vegan",
+        "lat": -8.394840443647322,
+        "lng": 115.1618467128685,
+        "img": "https://picsum.photos/seed/rest_bali_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3868",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Bali Street",
+        "type": "Street Food",
+        "lat": -8.40652186837097,
+        "lng": 115.19762159975642,
+        "img": "https://picsum.photos/seed/rest_bali_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8201",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Bali Street",
+        "type": "Street Food",
+        "lat": -8.3972232141455,
+        "lng": 115.21090909113333,
+        "img": "https://picsum.photos/seed/rest_bali_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11576",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Bali Halal",
+        "type": "Halal",
+        "lat": -8.426803062649293,
+        "lng": 115.19176220533372,
+        "img": "https://picsum.photos/seed/rest_bali_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10981",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Bali Vegan",
+        "type": "Vegan",
+        "lat": -8.381571599506763,
+        "lng": 115.19219039534926,
+        "img": "https://picsum.photos/seed/rest_bali_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8358",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Bali Family",
+        "type": "Family Style",
+        "lat": -8.390842704160695,
+        "lng": 115.16330680860412,
+        "img": "https://picsum.photos/seed/rest_bali_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4549",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Bali Street",
+        "type": "Street Food",
+        "lat": -8.389222913268663,
+        "lng": 115.17651574647161,
+        "img": "https://picsum.photos/seed/rest_bali_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2580",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Bali Street",
+        "type": "Street Food",
+        "lat": -8.41111784265342,
+        "lng": 115.17219988224818,
+        "img": "https://picsum.photos/seed/rest_bali_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4970",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Bali Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "Bali National Museum",
+        "img": "https://picsum.photos/seed/place_bali_0/800/600",
+        "desc": "A highly recommended museum providing unique insights into Bali's culture and beauty.",
+        "fee": "1037",
+        "loc": "Downtown",
+        "lat": -8.395307140091388,
+        "lng": 115.1718294689654,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Gallery",
+        "img": "https://picsum.photos/seed/place_bali_1/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Bali's culture and beauty.",
+        "fee": "2528",
+        "loc": "Downtown",
+        "lat": -8.40379959687451,
+        "lng": 115.1972878939081,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Gallery",
+        "img": "https://picsum.photos/seed/place_bali_2/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Bali's culture and beauty.",
+        "fee": "1487",
+        "loc": "Downtown",
+        "lat": -8.426224916578018,
+        "lng": 115.21855136640113,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Beach",
+        "img": "https://picsum.photos/seed/place_bali_3/800/600",
+        "desc": "A highly recommended beach providing unique insights into Bali's culture and beauty.",
+        "fee": "2355",
+        "loc": "Downtown",
+        "lat": -8.394949646430279,
+        "lng": 115.2131140561854,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Temple",
+        "img": "https://picsum.photos/seed/place_bali_4/800/600",
+        "desc": "A highly recommended temple providing unique insights into Bali's culture and beauty.",
+        "fee": "896",
+        "loc": "Downtown",
+        "lat": -8.421120851488125,
+        "lng": 115.2069654387774,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Mountain",
+        "img": "https://picsum.photos/seed/place_bali_5/800/600",
+        "desc": "A highly recommended mountain providing unique insights into Bali's culture and beauty.",
+        "fee": "2022",
+        "loc": "Downtown",
+        "lat": -8.425840291861716,
+        "lng": 115.2030314721158,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Temple",
+        "img": "https://picsum.photos/seed/place_bali_6/800/600",
+        "desc": "A highly recommended temple providing unique insights into Bali's culture and beauty.",
+        "fee": "2295",
+        "loc": "Downtown",
+        "lat": -8.380125817847608,
+        "lng": 115.19055540594434,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Monument",
+        "img": "https://picsum.photos/seed/place_bali_7/800/600",
+        "desc": "A highly recommended monument providing unique insights into Bali's culture and beauty.",
+        "fee": "1988",
+        "loc": "Downtown",
+        "lat": -8.434320825385132,
+        "lng": 115.18288419791412,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Palace",
+        "img": "https://picsum.photos/seed/place_bali_8/800/600",
+        "desc": "A highly recommended palace providing unique insights into Bali's culture and beauty.",
+        "fee": "3055",
+        "loc": "Downtown",
+        "lat": -8.421464954936097,
+        "lng": 115.19790305873136,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Monument",
+        "img": "https://picsum.photos/seed/place_bali_9/800/600",
+        "desc": "A highly recommended monument providing unique insights into Bali's culture and beauty.",
+        "fee": "3408",
+        "loc": "Downtown",
+        "lat": -8.434015388566277,
+        "lng": 115.17486027998517,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Gallery",
+        "img": "https://picsum.photos/seed/place_bali_10/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Bali's culture and beauty.",
+        "fee": "843",
+        "loc": "Downtown",
+        "lat": -8.426378308690452,
+        "lng": 115.21270214064035,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Garden",
+        "img": "https://picsum.photos/seed/place_bali_11/800/600",
+        "desc": "A highly recommended garden providing unique insights into Bali's culture and beauty.",
+        "fee": "1584",
+        "loc": "Downtown",
+        "lat": -8.421339019111835,
+        "lng": 115.19596866982425,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Bridge",
+        "img": "https://picsum.photos/seed/place_bali_12/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Bali's culture and beauty.",
+        "fee": "779",
+        "loc": "Downtown",
+        "lat": -8.431069560849284,
+        "lng": 115.17471315138427,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Square",
+        "img": "https://picsum.photos/seed/place_bali_13/800/600",
+        "desc": "A highly recommended square providing unique insights into Bali's culture and beauty.",
+        "fee": "757",
+        "loc": "Downtown",
+        "lat": -8.393479035494225,
+        "lng": 115.1852109275118,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Bali National Museum",
+        "img": "https://picsum.photos/seed/place_bali_14/800/600",
+        "desc": "A highly recommended museum providing unique insights into Bali's culture and beauty.",
+        "fee": "856",
+        "loc": "Downtown",
+        "lat": -8.420650492321146,
+        "lng": 115.21567335824625,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "rome": {
+    "heroImg": "https://picsum.photos/seed/hero_rome/800/600",
+    "centerLat": 41.9028,
+    "centerLng": 12.4964,
+    "currency": {
+      "from": "EUR",
+      "symbol": "€",
+      "rate": 90.5,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Rome: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Rome adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Rome National Market",
+            "desc": "A highly recommended market providing unique insights into Rome's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "13.35",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_rome_0/800/600",
+            "lat": 41.91890146343686,
+            "lng": 12.482792893475146
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Rome Street",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "46.7",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_rome_0/800/600",
+            "lat": 41.93137768922413,
+            "lng": 12.473918949248162
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz Rome",
+        "price": "32779",
+        "rating": "4.4",
+        "lat": 41.90470512552363,
+        "lng": 12.491259833811174,
+        "img": "https://picsum.photos/seed/hotel_rome_0/800/600",
+        "distance": "1.4 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Rome",
+        "price": "34053",
+        "rating": "4.3",
+        "lat": 41.875519696531086,
+        "lng": 12.466770661690925,
+        "img": "https://picsum.photos/seed/hotel_rome_1/800/600",
+        "distance": "2.4 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Rome",
+        "price": "47253",
+        "rating": "4.2",
+        "lat": 41.90467190815214,
+        "lng": 12.481998202236884,
+        "img": "https://picsum.photos/seed/hotel_rome_2/800/600",
+        "distance": "2.8 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Rome",
+        "price": "10253",
+        "rating": "4.7",
+        "lat": 41.88467363538739,
+        "lng": 12.480612093005488,
+        "img": "https://picsum.photos/seed/hotel_rome_3/800/600",
+        "distance": "4.3 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Rome",
+        "price": "19499",
+        "rating": "4.5",
+        "lat": 41.899751281560754,
+        "lng": 12.474435242972593,
+        "img": "https://picsum.photos/seed/hotel_rome_4/800/600",
+        "distance": "4.6 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Rome",
+        "price": "10387",
+        "rating": "4.9",
+        "lat": 41.90004542192892,
+        "lng": 12.480780385785069,
+        "img": "https://picsum.photos/seed/hotel_rome_5/800/600",
+        "distance": "2.2 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Rome",
+        "price": "30820",
+        "rating": "4.0",
+        "lat": 41.904295700400375,
+        "lng": 12.482991591987044,
+        "img": "https://picsum.photos/seed/hotel_rome_6/800/600",
+        "distance": "3.1 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Rome",
+        "price": "13685",
+        "rating": "4.5",
+        "lat": 41.92610056055549,
+        "lng": 12.525804488867168,
+        "img": "https://picsum.photos/seed/hotel_rome_7/800/600",
+        "distance": "4.1 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Rome",
+        "price": "46323",
+        "rating": "4.9",
+        "lat": 41.930470908118416,
+        "lng": 12.47686245369551,
+        "img": "https://picsum.photos/seed/hotel_rome_8/800/600",
+        "distance": "3.3 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Rome",
+        "price": "35368",
+        "rating": "4.5",
+        "lat": 41.92506944880904,
+        "lng": 12.469879944338855,
+        "img": "https://picsum.photos/seed/hotel_rome_9/800/600",
+        "distance": "3.7 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Rome",
+        "price": "10537",
+        "rating": "4.4",
+        "lat": 41.89231868846588,
+        "lng": 12.523307914577614,
+        "img": "https://picsum.photos/seed/hotel_rome_10/800/600",
+        "distance": "1.1 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Rome",
+        "price": "21153",
+        "rating": "4.7",
+        "lat": 41.923163771115874,
+        "lng": 12.487031885859407,
+        "img": "https://picsum.photos/seed/hotel_rome_11/800/600",
+        "distance": "0.3 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Rome",
+        "price": "44863",
+        "rating": "4.4",
+        "lat": 41.89996791467699,
+        "lng": 12.468312346748279,
+        "img": "https://picsum.photos/seed/hotel_rome_12/800/600",
+        "distance": "4.0 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Rome",
+        "price": "13372",
+        "rating": "4.5",
+        "lat": 41.89737297438566,
+        "lng": 12.514186589207968,
+        "img": "https://picsum.photos/seed/hotel_rome_13/800/600",
+        "distance": "3.0 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Rome",
+        "price": "24746",
+        "rating": "4.9",
+        "lat": 41.928953640598465,
+        "lng": 12.478415261206521,
+        "img": "https://picsum.photos/seed/hotel_rome_14/800/600",
+        "distance": "2.9 km to center",
+        "desc": "Luxurious stay located in the heart of Rome. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_rome_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_rome_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_rome_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le Rome Street",
+        "type": "Street Food",
+        "lat": 41.93137768922413,
+        "lng": 12.473918949248162,
+        "img": "https://picsum.photos/seed/rest_rome_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4670",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Rome Family",
+        "type": "Family Style",
+        "lat": 41.876469527281344,
+        "lng": 12.51800250134337,
+        "img": "https://picsum.photos/seed/rest_rome_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6354",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Rome Fine",
+        "type": "Fine Dining",
+        "lat": 41.89881281844304,
+        "lng": 12.486753637734573,
+        "img": "https://picsum.photos/seed/rest_rome_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10374",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Rome Vegan",
+        "type": "Vegan",
+        "lat": 41.88208419752792,
+        "lng": 12.489566343508992,
+        "img": "https://picsum.photos/seed/rest_rome_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4727",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Rome Casual",
+        "type": "Casual",
+        "lat": 41.92365093328037,
+        "lng": 12.502054640337988,
+        "img": "https://picsum.photos/seed/rest_rome_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10734",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Rome Halal",
+        "type": "Halal",
+        "lat": 41.932265833267245,
+        "lng": 12.490874250962065,
+        "img": "https://picsum.photos/seed/rest_rome_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10353",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Rome Seafood",
+        "type": "Seafood",
+        "lat": 41.87639785538788,
+        "lng": 12.513541862465377,
+        "img": "https://picsum.photos/seed/rest_rome_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10159",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Rome Local",
+        "type": "Local Cuisine",
+        "lat": 41.9319880023671,
+        "lng": 12.497111619985917,
+        "img": "https://picsum.photos/seed/rest_rome_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6769",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Rome Halal",
+        "type": "Halal",
+        "lat": 41.91956502469666,
+        "lng": 12.524273089037072,
+        "img": "https://picsum.photos/seed/rest_rome_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9589",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Rome Fine",
+        "type": "Fine Dining",
+        "lat": 41.8928303927379,
+        "lng": 12.502988313890459,
+        "img": "https://picsum.photos/seed/rest_rome_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11957",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Rome Casual",
+        "type": "Casual",
+        "lat": 41.90156109499035,
+        "lng": 12.50914655959188,
+        "img": "https://picsum.photos/seed/rest_rome_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5081",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Rome Vegan",
+        "type": "Vegan",
+        "lat": 41.91939735723536,
+        "lng": 12.502823633639224,
+        "img": "https://picsum.photos/seed/rest_rome_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7729",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Rome Fine",
+        "type": "Fine Dining",
+        "lat": 41.873699033530926,
+        "lng": 12.505965231027766,
+        "img": "https://picsum.photos/seed/rest_rome_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6540",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Rome Street",
+        "type": "Street Food",
+        "lat": 41.878953333755426,
+        "lng": 12.501683286374426,
+        "img": "https://picsum.photos/seed/rest_rome_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3954",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Rome Vegan",
+        "type": "Vegan",
+        "lat": 41.882176111295834,
+        "lng": 12.500689077751732,
+        "img": "https://picsum.photos/seed/rest_rome_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3175",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Rome Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "Rome National Market",
+        "img": "https://picsum.photos/seed/place_rome_0/800/600",
+        "desc": "A highly recommended market providing unique insights into Rome's culture and beauty.",
+        "fee": "1335",
+        "loc": "Downtown",
+        "lat": 41.91890146343686,
+        "lng": 12.482792893475146,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Lake",
+        "img": "https://picsum.photos/seed/place_rome_1/800/600",
+        "desc": "A highly recommended lake providing unique insights into Rome's culture and beauty.",
+        "fee": "1797",
+        "loc": "Downtown",
+        "lat": 41.9175628147559,
+        "lng": 12.491487124402516,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Tower",
+        "img": "https://picsum.photos/seed/place_rome_2/800/600",
+        "desc": "A highly recommended tower providing unique insights into Rome's culture and beauty.",
+        "fee": "1847",
+        "loc": "Downtown",
+        "lat": 41.90494219098138,
+        "lng": 12.467049691311361,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Palace",
+        "img": "https://picsum.photos/seed/place_rome_3/800/600",
+        "desc": "A highly recommended palace providing unique insights into Rome's culture and beauty.",
+        "fee": "3313",
+        "loc": "Downtown",
+        "lat": 41.88302429113183,
+        "lng": 12.522726153363312,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Palace",
+        "img": "https://picsum.photos/seed/place_rome_4/800/600",
+        "desc": "A highly recommended palace providing unique insights into Rome's culture and beauty.",
+        "fee": "663",
+        "loc": "Downtown",
+        "lat": 41.896750827150356,
+        "lng": 12.4903584332837,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Monument",
+        "img": "https://picsum.photos/seed/place_rome_5/800/600",
+        "desc": "A highly recommended monument providing unique insights into Rome's culture and beauty.",
+        "fee": "1924",
+        "loc": "Downtown",
+        "lat": 41.88161434750868,
+        "lng": 12.492538080241228,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Square",
+        "img": "https://picsum.photos/seed/place_rome_6/800/600",
+        "desc": "A highly recommended square providing unique insights into Rome's culture and beauty.",
+        "fee": "3099",
+        "loc": "Downtown",
+        "lat": 41.89640641944183,
+        "lng": 12.480384879679006,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Square",
+        "img": "https://picsum.photos/seed/place_rome_7/800/600",
+        "desc": "A highly recommended square providing unique insights into Rome's culture and beauty.",
+        "fee": "878",
+        "loc": "Downtown",
+        "lat": 41.932086716244505,
+        "lng": 12.519605138813748,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Lake",
+        "img": "https://picsum.photos/seed/place_rome_8/800/600",
+        "desc": "A highly recommended lake providing unique insights into Rome's culture and beauty.",
+        "fee": "3483",
+        "loc": "Downtown",
+        "lat": 41.88108942996447,
+        "lng": 12.51164499430422,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Temple",
+        "img": "https://picsum.photos/seed/place_rome_9/800/600",
+        "desc": "A highly recommended temple providing unique insights into Rome's culture and beauty.",
+        "fee": "1063",
+        "loc": "Downtown",
+        "lat": 41.916032475611,
+        "lng": 12.481802013589203,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Square",
+        "img": "https://picsum.photos/seed/place_rome_10/800/600",
+        "desc": "A highly recommended square providing unique insights into Rome's culture and beauty.",
+        "fee": "1574",
+        "loc": "Downtown",
+        "lat": 41.88017926916778,
+        "lng": 12.501022635037826,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Beach",
+        "img": "https://picsum.photos/seed/place_rome_11/800/600",
+        "desc": "A highly recommended beach providing unique insights into Rome's culture and beauty.",
+        "fee": "589",
+        "loc": "Downtown",
+        "lat": 41.93188507746488,
+        "lng": 12.511727308741673,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Viewpoint",
+        "img": "https://picsum.photos/seed/place_rome_12/800/600",
+        "desc": "A highly recommended viewpoint providing unique insights into Rome's culture and beauty.",
+        "fee": "810",
+        "loc": "Downtown",
+        "lat": 41.92901135681175,
+        "lng": 12.516264379867442,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Bridge",
+        "img": "https://picsum.photos/seed/place_rome_13/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Rome's culture and beauty.",
+        "fee": "2016",
+        "loc": "Downtown",
+        "lat": 41.91005560117086,
+        "lng": 12.47205812761573,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Rome National Market",
+        "img": "https://picsum.photos/seed/place_rome_14/800/600",
+        "desc": "A highly recommended market providing unique insights into Rome's culture and beauty.",
+        "fee": "2802",
+        "loc": "Downtown",
+        "lat": 41.904818785724665,
+        "lng": 12.525412602227284,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "dubai": {
+    "heroImg": "https://picsum.photos/seed/hero_dubai/800/600",
+    "centerLat": 25.2048,
+    "centerLng": 55.2708,
+    "currency": {
+      "from": "AED",
+      "symbol": "د.إ",
+      "rate": 22.7,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Dubai: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Dubai adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Dubai National Beach",
+            "desc": "A highly recommended beach providing unique insights into Dubai's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "23.98",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_dubai_0/800/600",
+            "lat": 25.184455398559056,
+            "lng": 55.263555652484015
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Dubai Family",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "84.22",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_dubai_0/800/600",
+            "lat": 25.203843135020712,
+            "lng": 55.292857333865186
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz Dubai",
+        "price": "49621",
+        "rating": "5.0",
+        "lat": 25.212302490493556,
+        "lng": 55.25413181481813,
+        "img": "https://picsum.photos/seed/hotel_dubai_0/800/600",
+        "distance": "1.8 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Dubai",
+        "price": "43957",
+        "rating": "4.6",
+        "lat": 25.182276451759268,
+        "lng": 55.277845690056765,
+        "img": "https://picsum.photos/seed/hotel_dubai_1/800/600",
+        "distance": "4.7 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Dubai",
+        "price": "30982",
+        "rating": "4.5",
+        "lat": 25.197356126633004,
+        "lng": 55.250326338460646,
+        "img": "https://picsum.photos/seed/hotel_dubai_2/800/600",
+        "distance": "2.5 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Dubai",
+        "price": "20297",
+        "rating": "4.2",
+        "lat": 25.187234819515545,
+        "lng": 55.2699513117803,
+        "img": "https://picsum.photos/seed/hotel_dubai_3/800/600",
+        "distance": "1.8 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Dubai",
+        "price": "19881",
+        "rating": "4.6",
+        "lat": 25.18374110663691,
+        "lng": 55.29341337957881,
+        "img": "https://picsum.photos/seed/hotel_dubai_4/800/600",
+        "distance": "2.3 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Dubai",
+        "price": "29676",
+        "rating": "4.6",
+        "lat": 25.197174456422637,
+        "lng": 55.25507683413938,
+        "img": "https://picsum.photos/seed/hotel_dubai_5/800/600",
+        "distance": "2.0 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Dubai",
+        "price": "47116",
+        "rating": "4.9",
+        "lat": 25.201071290019925,
+        "lng": 55.25484929761046,
+        "img": "https://picsum.photos/seed/hotel_dubai_6/800/600",
+        "distance": "2.4 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Dubai",
+        "price": "10661",
+        "rating": "4.7",
+        "lat": 25.220084481066394,
+        "lng": 55.26029041079278,
+        "img": "https://picsum.photos/seed/hotel_dubai_7/800/600",
+        "distance": "1.7 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Dubai",
+        "price": "45993",
+        "rating": "4.3",
+        "lat": 25.17981125334524,
+        "lng": 55.26301571529411,
+        "img": "https://picsum.photos/seed/hotel_dubai_8/800/600",
+        "distance": "0.7 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Dubai",
+        "price": "25082",
+        "rating": "4.9",
+        "lat": 25.186151825898087,
+        "lng": 55.25110312457996,
+        "img": "https://picsum.photos/seed/hotel_dubai_9/800/600",
+        "distance": "1.2 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Dubai",
+        "price": "46286",
+        "rating": "4.7",
+        "lat": 25.19633462302305,
+        "lng": 55.252085836558045,
+        "img": "https://picsum.photos/seed/hotel_dubai_10/800/600",
+        "distance": "3.8 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Dubai",
+        "price": "21792",
+        "rating": "4.0",
+        "lat": 25.211565861125468,
+        "lng": 55.24637714447373,
+        "img": "https://picsum.photos/seed/hotel_dubai_11/800/600",
+        "distance": "3.6 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Dubai",
+        "price": "37042",
+        "rating": "4.1",
+        "lat": 25.210892635261622,
+        "lng": 55.27622058500189,
+        "img": "https://picsum.photos/seed/hotel_dubai_12/800/600",
+        "distance": "0.4 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Dubai",
+        "price": "42539",
+        "rating": "4.2",
+        "lat": 25.1791928938408,
+        "lng": 55.28567733208254,
+        "img": "https://picsum.photos/seed/hotel_dubai_13/800/600",
+        "distance": "4.8 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Dubai",
+        "price": "49879",
+        "rating": "4.5",
+        "lat": 25.19628245228291,
+        "lng": 55.2711464567301,
+        "img": "https://picsum.photos/seed/hotel_dubai_14/800/600",
+        "distance": "2.1 km to center",
+        "desc": "Luxurious stay located in the heart of Dubai. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_dubai_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_dubai_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_dubai_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le Dubai Family",
+        "type": "Family Style",
+        "lat": 25.203843135020712,
+        "lng": 55.292857333865186,
+        "img": "https://picsum.photos/seed/rest_dubai_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8422",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Dubai Street",
+        "type": "Street Food",
+        "lat": 25.22260421008201,
+        "lng": 55.280987457341475,
+        "img": "https://picsum.photos/seed/rest_dubai_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7018",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Dubai Vegan",
+        "type": "Vegan",
+        "lat": 25.222167167517668,
+        "lng": 55.298281926059246,
+        "img": "https://picsum.photos/seed/rest_dubai_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9064",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Dubai Family",
+        "type": "Family Style",
+        "lat": 25.18843864527772,
+        "lng": 55.298246182852964,
+        "img": "https://picsum.photos/seed/rest_dubai_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7014",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Dubai Vegan",
+        "type": "Vegan",
+        "lat": 25.183815298289886,
+        "lng": 55.258906641194315,
+        "img": "https://picsum.photos/seed/rest_dubai_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7144",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Dubai Family",
+        "type": "Family Style",
+        "lat": 25.18747467396611,
+        "lng": 55.245837944040396,
+        "img": "https://picsum.photos/seed/rest_dubai_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8251",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Dubai Family",
+        "type": "Family Style",
+        "lat": 25.187221675132754,
+        "lng": 55.2844033715014,
+        "img": "https://picsum.photos/seed/rest_dubai_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9015",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Dubai Local",
+        "type": "Local Cuisine",
+        "lat": 25.19696124384412,
+        "lng": 55.29163179624687,
+        "img": "https://picsum.photos/seed/rest_dubai_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3759",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Dubai Local",
+        "type": "Local Cuisine",
+        "lat": 25.198816368428933,
+        "lng": 55.24777266582481,
+        "img": "https://picsum.photos/seed/rest_dubai_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3425",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Dubai Local",
+        "type": "Local Cuisine",
+        "lat": 25.202136614279475,
+        "lng": 55.24552932292956,
+        "img": "https://picsum.photos/seed/rest_dubai_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4763",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Dubai Fine",
+        "type": "Fine Dining",
+        "lat": 25.18692062033665,
+        "lng": 55.27125090405925,
+        "img": "https://picsum.photos/seed/rest_dubai_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2416",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Dubai Halal",
+        "type": "Halal",
+        "lat": 25.207899228521054,
+        "lng": 55.256569019857885,
+        "img": "https://picsum.photos/seed/rest_dubai_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9855",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Dubai Family",
+        "type": "Family Style",
+        "lat": 25.19243452315707,
+        "lng": 55.2786599892089,
+        "img": "https://picsum.photos/seed/rest_dubai_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7944",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Dubai Steakhouse",
+        "type": "Steakhouse",
+        "lat": 25.20380363637015,
+        "lng": 55.29539888251683,
+        "img": "https://picsum.photos/seed/rest_dubai_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2101",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Dubai Casual",
+        "type": "Casual",
+        "lat": 25.174983808645415,
+        "lng": 55.28684637461199,
+        "img": "https://picsum.photos/seed/rest_dubai_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7271",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Dubai Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "Dubai National Beach",
+        "img": "https://picsum.photos/seed/place_dubai_0/800/600",
+        "desc": "A highly recommended beach providing unique insights into Dubai's culture and beauty.",
+        "fee": "2398",
+        "loc": "Downtown",
+        "lat": 25.184455398559056,
+        "lng": 55.263555652484015,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Tower",
+        "img": "https://picsum.photos/seed/place_dubai_1/800/600",
+        "desc": "A highly recommended tower providing unique insights into Dubai's culture and beauty.",
+        "fee": "2586",
+        "loc": "Downtown",
+        "lat": 25.218239593687546,
+        "lng": 55.24928412683427,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Garden",
+        "img": "https://picsum.photos/seed/place_dubai_2/800/600",
+        "desc": "A highly recommended garden providing unique insights into Dubai's culture and beauty.",
+        "fee": "639",
+        "loc": "Downtown",
+        "lat": 25.187162577166127,
+        "lng": 55.2437595794187,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Market",
+        "img": "https://picsum.photos/seed/place_dubai_3/800/600",
+        "desc": "A highly recommended market providing unique insights into Dubai's culture and beauty.",
+        "fee": "2371",
+        "loc": "Downtown",
+        "lat": 25.227213019573497,
+        "lng": 55.291548450070856,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Viewpoint",
+        "img": "https://picsum.photos/seed/place_dubai_4/800/600",
+        "desc": "A highly recommended viewpoint providing unique insights into Dubai's culture and beauty.",
+        "fee": "582",
+        "loc": "Downtown",
+        "lat": 25.205953306964528,
+        "lng": 55.29972558141245,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Gallery",
+        "img": "https://picsum.photos/seed/place_dubai_5/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Dubai's culture and beauty.",
+        "fee": "2009",
+        "loc": "Downtown",
+        "lat": 25.182068487644024,
+        "lng": 55.24362441753009,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Bridge",
+        "img": "https://picsum.photos/seed/place_dubai_6/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Dubai's culture and beauty.",
+        "fee": "1381",
+        "loc": "Downtown",
+        "lat": 25.20816859969403,
+        "lng": 55.242681607834214,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Mountain",
+        "img": "https://picsum.photos/seed/place_dubai_7/800/600",
+        "desc": "A highly recommended mountain providing unique insights into Dubai's culture and beauty.",
+        "fee": "1243",
+        "loc": "Downtown",
+        "lat": 25.21907447608621,
+        "lng": 55.28189210382712,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Museum",
+        "img": "https://picsum.photos/seed/place_dubai_8/800/600",
+        "desc": "A highly recommended museum providing unique insights into Dubai's culture and beauty.",
+        "fee": "738",
+        "loc": "Downtown",
+        "lat": 25.193719237737923,
+        "lng": 55.26369727070163,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Lake",
+        "img": "https://picsum.photos/seed/place_dubai_9/800/600",
+        "desc": "A highly recommended lake providing unique insights into Dubai's culture and beauty.",
+        "fee": "1445",
+        "loc": "Downtown",
+        "lat": 25.21821752975697,
+        "lng": 55.26828756405217,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Park",
+        "img": "https://picsum.photos/seed/place_dubai_10/800/600",
+        "desc": "A highly recommended park providing unique insights into Dubai's culture and beauty.",
+        "fee": "2683",
+        "loc": "Downtown",
+        "lat": 25.218662284224266,
+        "lng": 55.28778154691415,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Square",
+        "img": "https://picsum.photos/seed/place_dubai_11/800/600",
+        "desc": "A highly recommended square providing unique insights into Dubai's culture and beauty.",
+        "fee": "1197",
+        "loc": "Downtown",
+        "lat": 25.196999524156716,
+        "lng": 55.27281013584751,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Museum",
+        "img": "https://picsum.photos/seed/place_dubai_12/800/600",
+        "desc": "A highly recommended museum providing unique insights into Dubai's culture and beauty.",
+        "fee": "1265",
+        "loc": "Downtown",
+        "lat": 25.213889507589943,
+        "lng": 55.24678948818974,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Park",
+        "img": "https://picsum.photos/seed/place_dubai_13/800/600",
+        "desc": "A highly recommended park providing unique insights into Dubai's culture and beauty.",
+        "fee": "695",
+        "loc": "Downtown",
+        "lat": 25.181666192100312,
+        "lng": 55.2600041027643,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Dubai National Temple",
+        "img": "https://picsum.photos/seed/place_dubai_14/800/600",
+        "desc": "A highly recommended temple providing unique insights into Dubai's culture and beauty.",
+        "fee": "1025",
+        "loc": "Downtown",
+        "lat": 25.21444100722819,
+        "lng": 55.29442873406835,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "singapore": {
+    "heroImg": "https://picsum.photos/seed/hero_singapore/800/600",
+    "centerLat": 1.3521,
+    "centerLng": 103.8198,
+    "currency": {
+      "from": "SGD",
+      "symbol": "S$",
+      "rate": 61.3,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Singapore: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Singapore adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Singapore National Lake",
+            "desc": "A highly recommended lake providing unique insights into Singapore's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "24.49",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_singapore_0/800/600",
+            "lat": 1.3644279264752712,
+            "lng": 103.82622890656097
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Singapore Seafood",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "36.66",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_singapore_0/800/600",
+            "lat": 1.3452000148337424,
+            "lng": 103.79955158422354
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz Singapore",
+        "price": "17486",
+        "rating": "4.1",
+        "lat": 1.3284449975422925,
+        "lng": 103.81972646189449,
+        "img": "https://picsum.photos/seed/hotel_singapore_0/800/600",
+        "distance": "1.8 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Singapore",
+        "price": "11385",
+        "rating": "5.0",
+        "lat": 1.3478259404923758,
+        "lng": 103.83907338757108,
+        "img": "https://picsum.photos/seed/hotel_singapore_1/800/600",
+        "distance": "3.4 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Singapore",
+        "price": "41855",
+        "rating": "4.3",
+        "lat": 1.3572920969797382,
+        "lng": 103.83355312686379,
+        "img": "https://picsum.photos/seed/hotel_singapore_2/800/600",
+        "distance": "1.7 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Singapore",
+        "price": "21095",
+        "rating": "4.6",
+        "lat": 1.3446750478800185,
+        "lng": 103.81799305877199,
+        "img": "https://picsum.photos/seed/hotel_singapore_3/800/600",
+        "distance": "4.2 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Singapore",
+        "price": "37693",
+        "rating": "4.1",
+        "lat": 1.3764726729063501,
+        "lng": 103.83550793832974,
+        "img": "https://picsum.photos/seed/hotel_singapore_4/800/600",
+        "distance": "3.0 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Singapore",
+        "price": "48175",
+        "rating": "4.6",
+        "lat": 1.3238450290461097,
+        "lng": 103.81453719095126,
+        "img": "https://picsum.photos/seed/hotel_singapore_5/800/600",
+        "distance": "4.6 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Singapore",
+        "price": "21160",
+        "rating": "4.6",
+        "lat": 1.3783236328719266,
+        "lng": 103.79554208099684,
+        "img": "https://picsum.photos/seed/hotel_singapore_6/800/600",
+        "distance": "0.8 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Singapore",
+        "price": "22471",
+        "rating": "4.5",
+        "lat": 1.329358462807583,
+        "lng": 103.8474200563296,
+        "img": "https://picsum.photos/seed/hotel_singapore_7/800/600",
+        "distance": "1.3 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Singapore",
+        "price": "11185",
+        "rating": "4.6",
+        "lat": 1.3764063864711307,
+        "lng": 103.84401680161062,
+        "img": "https://picsum.photos/seed/hotel_singapore_8/800/600",
+        "distance": "4.1 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Singapore",
+        "price": "22185",
+        "rating": "4.5",
+        "lat": 1.3266153119677837,
+        "lng": 103.82408123704624,
+        "img": "https://picsum.photos/seed/hotel_singapore_9/800/600",
+        "distance": "0.1 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Singapore",
+        "price": "35160",
+        "rating": "4.9",
+        "lat": 1.3409755642114292,
+        "lng": 103.81746440491071,
+        "img": "https://picsum.photos/seed/hotel_singapore_10/800/600",
+        "distance": "2.8 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Singapore",
+        "price": "13580",
+        "rating": "4.5",
+        "lat": 1.324285109015062,
+        "lng": 103.79104378328083,
+        "img": "https://picsum.photos/seed/hotel_singapore_11/800/600",
+        "distance": "2.2 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Singapore",
+        "price": "45981",
+        "rating": "4.8",
+        "lat": 1.351045846240543,
+        "lng": 103.8226982562785,
+        "img": "https://picsum.photos/seed/hotel_singapore_12/800/600",
+        "distance": "4.7 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Singapore",
+        "price": "18611",
+        "rating": "4.1",
+        "lat": 1.3641556965731758,
+        "lng": 103.79419901824305,
+        "img": "https://picsum.photos/seed/hotel_singapore_13/800/600",
+        "distance": "0.0 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Singapore",
+        "price": "10199",
+        "rating": "4.3",
+        "lat": 1.358643306548271,
+        "lng": 103.84167762212563,
+        "img": "https://picsum.photos/seed/hotel_singapore_14/800/600",
+        "distance": "0.0 km to center",
+        "desc": "Luxurious stay located in the heart of Singapore. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_singapore_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_singapore_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_singapore_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le Singapore Seafood",
+        "type": "Seafood",
+        "lat": 1.3452000148337424,
+        "lng": 103.79955158422354,
+        "img": "https://picsum.photos/seed/rest_singapore_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3666",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Singapore Halal",
+        "type": "Halal",
+        "lat": 1.3790884327203126,
+        "lng": 103.83247150236943,
+        "img": "https://picsum.photos/seed/rest_singapore_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4882",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Singapore Local",
+        "type": "Local Cuisine",
+        "lat": 1.3811348925997688,
+        "lng": 103.80096885148565,
+        "img": "https://picsum.photos/seed/rest_singapore_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3595",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Singapore Seafood",
+        "type": "Seafood",
+        "lat": 1.332357668148146,
+        "lng": 103.81636770548609,
+        "img": "https://picsum.photos/seed/rest_singapore_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11280",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Singapore Family",
+        "type": "Family Style",
+        "lat": 1.3536473833467113,
+        "lng": 103.83164808861933,
+        "img": "https://picsum.photos/seed/rest_singapore_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6411",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Singapore Halal",
+        "type": "Halal",
+        "lat": 1.3683744360780494,
+        "lng": 103.82258469260286,
+        "img": "https://picsum.photos/seed/rest_singapore_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8082",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Singapore Seafood",
+        "type": "Seafood",
+        "lat": 1.3502911856291637,
+        "lng": 103.8497482091208,
+        "img": "https://picsum.photos/seed/rest_singapore_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7237",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Singapore Halal",
+        "type": "Halal",
+        "lat": 1.3337328152934784,
+        "lng": 103.84579121581709,
+        "img": "https://picsum.photos/seed/rest_singapore_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9337",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Singapore Fine",
+        "type": "Fine Dining",
+        "lat": 1.3751440865590863,
+        "lng": 103.84309111383065,
+        "img": "https://picsum.photos/seed/rest_singapore_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10325",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Singapore Family",
+        "type": "Family Style",
+        "lat": 1.3505435370648882,
+        "lng": 103.82735822794594,
+        "img": "https://picsum.photos/seed/rest_singapore_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9688",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Singapore Family",
+        "type": "Family Style",
+        "lat": 1.3556271324391793,
+        "lng": 103.82323568638274,
+        "img": "https://picsum.photos/seed/rest_singapore_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10552",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Singapore Street",
+        "type": "Street Food",
+        "lat": 1.334734201392335,
+        "lng": 103.83191464663902,
+        "img": "https://picsum.photos/seed/rest_singapore_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4799",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Singapore Family",
+        "type": "Family Style",
+        "lat": 1.3478856372149381,
+        "lng": 103.83240431249891,
+        "img": "https://picsum.photos/seed/rest_singapore_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11213",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Singapore Local",
+        "type": "Local Cuisine",
+        "lat": 1.3710053866068939,
+        "lng": 103.80122714771588,
+        "img": "https://picsum.photos/seed/rest_singapore_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3401",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Singapore Steakhouse",
+        "type": "Steakhouse",
+        "lat": 1.3631234025488204,
+        "lng": 103.8112175665995,
+        "img": "https://picsum.photos/seed/rest_singapore_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6039",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Singapore Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "Singapore National Lake",
+        "img": "https://picsum.photos/seed/place_singapore_0/800/600",
+        "desc": "A highly recommended lake providing unique insights into Singapore's culture and beauty.",
+        "fee": "2449",
+        "loc": "Downtown",
+        "lat": 1.3644279264752712,
+        "lng": 103.82622890656097,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Garden",
+        "img": "https://picsum.photos/seed/place_singapore_1/800/600",
+        "desc": "A highly recommended garden providing unique insights into Singapore's culture and beauty.",
+        "fee": "1420",
+        "loc": "Downtown",
+        "lat": 1.3533424468974276,
+        "lng": 103.8286032364453,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Mountain",
+        "img": "https://picsum.photos/seed/place_singapore_2/800/600",
+        "desc": "A highly recommended mountain providing unique insights into Singapore's culture and beauty.",
+        "fee": "854",
+        "loc": "Downtown",
+        "lat": 1.323250643208744,
+        "lng": 103.8488424880926,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Monument",
+        "img": "https://picsum.photos/seed/place_singapore_3/800/600",
+        "desc": "A highly recommended monument providing unique insights into Singapore's culture and beauty.",
+        "fee": "2834",
+        "loc": "Downtown",
+        "lat": 1.34334263674659,
+        "lng": 103.84038749315765,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Viewpoint",
+        "img": "https://picsum.photos/seed/place_singapore_4/800/600",
+        "desc": "A highly recommended viewpoint providing unique insights into Singapore's culture and beauty.",
+        "fee": "2751",
+        "loc": "Downtown",
+        "lat": 1.3404669113701182,
+        "lng": 103.82069213197481,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Monument",
+        "img": "https://picsum.photos/seed/place_singapore_5/800/600",
+        "desc": "A highly recommended monument providing unique insights into Singapore's culture and beauty.",
+        "fee": "1628",
+        "loc": "Downtown",
+        "lat": 1.3373932125152226,
+        "lng": 103.83018053135048,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Palace",
+        "img": "https://picsum.photos/seed/place_singapore_6/800/600",
+        "desc": "A highly recommended palace providing unique insights into Singapore's culture and beauty.",
+        "fee": "3461",
+        "loc": "Downtown",
+        "lat": 1.3258678491081395,
+        "lng": 103.82005394878904,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Square",
+        "img": "https://picsum.photos/seed/place_singapore_7/800/600",
+        "desc": "A highly recommended square providing unique insights into Singapore's culture and beauty.",
+        "fee": "1351",
+        "loc": "Downtown",
+        "lat": 1.3700322259951225,
+        "lng": 103.83320957650272,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Mountain",
+        "img": "https://picsum.photos/seed/place_singapore_8/800/600",
+        "desc": "A highly recommended mountain providing unique insights into Singapore's culture and beauty.",
+        "fee": "2378",
+        "loc": "Downtown",
+        "lat": 1.3488075828219512,
+        "lng": 103.84869696663169,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Beach",
+        "img": "https://picsum.photos/seed/place_singapore_9/800/600",
+        "desc": "A highly recommended beach providing unique insights into Singapore's culture and beauty.",
+        "fee": "2811",
+        "loc": "Downtown",
+        "lat": 1.3718915606096918,
+        "lng": 103.83562606923407,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Garden",
+        "img": "https://picsum.photos/seed/place_singapore_10/800/600",
+        "desc": "A highly recommended garden providing unique insights into Singapore's culture and beauty.",
+        "fee": "2409",
+        "loc": "Downtown",
+        "lat": 1.359435863337655,
+        "lng": 103.82946133397085,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Garden",
+        "img": "https://picsum.photos/seed/place_singapore_11/800/600",
+        "desc": "A highly recommended garden providing unique insights into Singapore's culture and beauty.",
+        "fee": "1879",
+        "loc": "Downtown",
+        "lat": 1.3497880677477347,
+        "lng": 103.83081841797551,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Bridge",
+        "img": "https://picsum.photos/seed/place_singapore_12/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Singapore's culture and beauty.",
+        "fee": "3030",
+        "loc": "Downtown",
+        "lat": 1.330030353182228,
+        "lng": 103.83136758407274,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Lake",
+        "img": "https://picsum.photos/seed/place_singapore_13/800/600",
+        "desc": "A highly recommended lake providing unique insights into Singapore's culture and beauty.",
+        "fee": "3342",
+        "loc": "Downtown",
+        "lat": 1.3669388259219326,
+        "lng": 103.82297851338862,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Singapore National Temple",
+        "img": "https://picsum.photos/seed/place_singapore_14/800/600",
+        "desc": "A highly recommended temple providing unique insights into Singapore's culture and beauty.",
+        "fee": "2654",
+        "loc": "Downtown",
+        "lat": 1.3520155290695812,
+        "lng": 103.84188981667931,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "london": {
+    "heroImg": "https://picsum.photos/seed/hero_london/800/600",
+    "centerLat": 51.5074,
+    "centerLng": -0.1278,
+    "currency": {
+      "from": "GBP",
+      "symbol": "£",
+      "rate": 105.2,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in London: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your London adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "London National Gallery",
+            "desc": "A highly recommended gallery providing unique insights into London's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "17.35",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_london_0/800/600",
+            "lat": 51.535183807853244,
+            "lng": -0.1324778746715774
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le London Fine",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "54.72",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_london_0/800/600",
+            "lat": 51.52602469022377,
+            "lng": -0.15621311437975546
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz London",
+        "price": "41625",
+        "rating": "4.8",
+        "lat": 51.500096023026636,
+        "lng": -0.12142482420614485,
+        "img": "https://picsum.photos/seed/hotel_london_0/800/600",
+        "distance": "3.7 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand London",
+        "price": "24730",
+        "rating": "4.1",
+        "lat": 51.52063755853145,
+        "lng": -0.09887307673534905,
+        "img": "https://picsum.photos/seed/hotel_london_1/800/600",
+        "distance": "2.9 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons London",
+        "price": "31184",
+        "rating": "4.7",
+        "lat": 51.53098111212967,
+        "lng": -0.12963465914354672,
+        "img": "https://picsum.photos/seed/hotel_london_2/800/600",
+        "distance": "4.5 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis London",
+        "price": "15531",
+        "rating": "4.5",
+        "lat": 51.512093721119385,
+        "lng": -0.10955043765982338,
+        "img": "https://picsum.photos/seed/hotel_london_3/800/600",
+        "distance": "3.8 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria London",
+        "price": "46145",
+        "rating": "4.8",
+        "lat": 51.53100024666355,
+        "lng": -0.1331584792341661,
+        "img": "https://picsum.photos/seed/hotel_london_4/800/600",
+        "distance": "2.2 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt London",
+        "price": "10803",
+        "rating": "4.8",
+        "lat": 51.477546903802555,
+        "lng": -0.15657221735868224,
+        "img": "https://picsum.photos/seed/hotel_london_5/800/600",
+        "distance": "3.5 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood London",
+        "price": "45647",
+        "rating": "4.2",
+        "lat": 51.530146810212095,
+        "lng": -0.14144228733255895,
+        "img": "https://picsum.photos/seed/hotel_london_6/800/600",
+        "distance": "1.4 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman London",
+        "price": "16772",
+        "rating": "4.4",
+        "lat": 51.517567473583114,
+        "lng": -0.11365670206250003,
+        "img": "https://picsum.photos/seed/hotel_london_7/800/600",
+        "distance": "4.2 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari London",
+        "price": "32436",
+        "rating": "4.7",
+        "lat": 51.49491381589051,
+        "lng": -0.10492508083611717,
+        "img": "https://picsum.photos/seed/hotel_london_8/800/600",
+        "distance": "0.6 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont London",
+        "price": "40087",
+        "rating": "4.4",
+        "lat": 51.51789033467995,
+        "lng": -0.1291147488119083,
+        "img": "https://picsum.photos/seed/hotel_london_9/800/600",
+        "distance": "3.9 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La London",
+        "price": "17144",
+        "rating": "4.6",
+        "lat": 51.50831204460376,
+        "lng": -0.13649988394406493,
+        "img": "https://picsum.photos/seed/hotel_london_10/800/600",
+        "distance": "4.8 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental London",
+        "price": "25582",
+        "rating": "4.3",
+        "lat": 51.53134720936078,
+        "lng": -0.10186540644158747,
+        "img": "https://picsum.photos/seed/hotel_london_11/800/600",
+        "distance": "3.7 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski London",
+        "price": "49881",
+        "rating": "4.9",
+        "lat": 51.5341545415713,
+        "lng": -0.1558506185674036,
+        "img": "https://picsum.photos/seed/hotel_london_12/800/600",
+        "distance": "4.8 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree London",
+        "price": "42080",
+        "rating": "4.8",
+        "lat": 51.526840671249175,
+        "lng": -0.15111721380094853,
+        "img": "https://picsum.photos/seed/hotel_london_13/800/600",
+        "distance": "1.7 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental London",
+        "price": "36141",
+        "rating": "4.9",
+        "lat": 51.532937901751914,
+        "lng": -0.1550250102271093,
+        "img": "https://picsum.photos/seed/hotel_london_14/800/600",
+        "distance": "2.4 km to center",
+        "desc": "Luxurious stay located in the heart of London. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_london_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_london_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_london_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le London Fine",
+        "type": "Fine Dining",
+        "lat": 51.52602469022377,
+        "lng": -0.15621311437975546,
+        "img": "https://picsum.photos/seed/rest_london_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5472",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The London Local",
+        "type": "Local Cuisine",
+        "lat": 51.522546088234925,
+        "lng": -0.11874181362035131,
+        "img": "https://picsum.photos/seed/rest_london_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8960",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro London Family",
+        "type": "Family Style",
+        "lat": 51.48479804236402,
+        "lng": -0.12022089232521192,
+        "img": "https://picsum.photos/seed/rest_london_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8254",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie London Seafood",
+        "type": "Seafood",
+        "lat": 51.505201241534515,
+        "lng": -0.14034878559316163,
+        "img": "https://picsum.photos/seed/rest_london_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2539",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria London Family",
+        "type": "Family Style",
+        "lat": 51.50969342594753,
+        "lng": -0.11778872864954965,
+        "img": "https://picsum.photos/seed/rest_london_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4185",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe London Vegan",
+        "type": "Vegan",
+        "lat": 51.4805564605551,
+        "lng": -0.12877528513524714,
+        "img": "https://picsum.photos/seed/rest_london_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "9821",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern London Vegan",
+        "type": "Vegan",
+        "lat": 51.51345553556829,
+        "lng": -0.12621635341279383,
+        "img": "https://picsum.photos/seed/rest_london_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3228",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria London Vegan",
+        "type": "Vegan",
+        "lat": 51.48426579940472,
+        "lng": -0.12283491218011973,
+        "img": "https://picsum.photos/seed/rest_london_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11951",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante London Family",
+        "type": "Family Style",
+        "lat": 51.52736041622559,
+        "lng": -0.1421463391487818,
+        "img": "https://picsum.photos/seed/rest_london_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2473",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya London Vegan",
+        "type": "Vegan",
+        "lat": 51.48185994517504,
+        "lng": -0.11999732706481964,
+        "img": "https://picsum.photos/seed/rest_london_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4310",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse London Street",
+        "type": "Street Food",
+        "lat": 51.52572272496469,
+        "lng": -0.10254226627155091,
+        "img": "https://picsum.photos/seed/rest_london_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8858",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill London Halal",
+        "type": "Halal",
+        "lat": 51.48361291156404,
+        "lng": -0.14430977218678728,
+        "img": "https://picsum.photos/seed/rest_london_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10583",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen London Casual",
+        "type": "Casual",
+        "lat": 51.49861475660332,
+        "lng": -0.14152404265326093,
+        "img": "https://picsum.photos/seed/rest_london_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2225",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar London Local",
+        "type": "Local Cuisine",
+        "lat": 51.48281994501222,
+        "lng": -0.10434726530501809,
+        "img": "https://picsum.photos/seed/rest_london_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11271",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge London Street",
+        "type": "Street Food",
+        "lat": 51.51975679149349,
+        "lng": -0.1456580516717139,
+        "img": "https://picsum.photos/seed/rest_london_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3774",
+        "tags": [
+          "Street Food",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature London Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "London National Gallery",
+        "img": "https://picsum.photos/seed/place_london_0/800/600",
+        "desc": "A highly recommended gallery providing unique insights into London's culture and beauty.",
+        "fee": "1735",
+        "loc": "Downtown",
+        "lat": 51.535183807853244,
+        "lng": -0.1324778746715774,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Market",
+        "img": "https://picsum.photos/seed/place_london_1/800/600",
+        "desc": "A highly recommended market providing unique insights into London's culture and beauty.",
+        "fee": "1844",
+        "loc": "Downtown",
+        "lat": 51.48434660256043,
+        "lng": -0.10848999171612674,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Monument",
+        "img": "https://picsum.photos/seed/place_london_2/800/600",
+        "desc": "A highly recommended monument providing unique insights into London's culture and beauty.",
+        "fee": "1053",
+        "loc": "Downtown",
+        "lat": 51.52000088277117,
+        "lng": -0.13616961353391965,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Lake",
+        "img": "https://picsum.photos/seed/place_london_3/800/600",
+        "desc": "A highly recommended lake providing unique insights into London's culture and beauty.",
+        "fee": "1439",
+        "loc": "Downtown",
+        "lat": 51.50595206608295,
+        "lng": -0.10572070014039962,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Bridge",
+        "img": "https://picsum.photos/seed/place_london_4/800/600",
+        "desc": "A highly recommended bridge providing unique insights into London's culture and beauty.",
+        "fee": "1481",
+        "loc": "Downtown",
+        "lat": 51.480168707286985,
+        "lng": -0.14809348486183382,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Temple",
+        "img": "https://picsum.photos/seed/place_london_5/800/600",
+        "desc": "A highly recommended temple providing unique insights into London's culture and beauty.",
+        "fee": "1873",
+        "loc": "Downtown",
+        "lat": 51.511679362006326,
+        "lng": -0.14532595930918482,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Mountain",
+        "img": "https://picsum.photos/seed/place_london_6/800/600",
+        "desc": "A highly recommended mountain providing unique insights into London's culture and beauty.",
+        "fee": "3314",
+        "loc": "Downtown",
+        "lat": 51.488006602827895,
+        "lng": -0.10036239613221447,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Temple",
+        "img": "https://picsum.photos/seed/place_london_7/800/600",
+        "desc": "A highly recommended temple providing unique insights into London's culture and beauty.",
+        "fee": "1276",
+        "loc": "Downtown",
+        "lat": 51.50014681622199,
+        "lng": -0.12499688361051152,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Beach",
+        "img": "https://picsum.photos/seed/place_london_8/800/600",
+        "desc": "A highly recommended beach providing unique insights into London's culture and beauty.",
+        "fee": "2539",
+        "loc": "Downtown",
+        "lat": 51.51166366889944,
+        "lng": -0.1024238802372278,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Garden",
+        "img": "https://picsum.photos/seed/place_london_9/800/600",
+        "desc": "A highly recommended garden providing unique insights into London's culture and beauty.",
+        "fee": "1519",
+        "loc": "Downtown",
+        "lat": 51.52196419725921,
+        "lng": -0.13287074407903499,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Palace",
+        "img": "https://picsum.photos/seed/place_london_10/800/600",
+        "desc": "A highly recommended palace providing unique insights into London's culture and beauty.",
+        "fee": "2036",
+        "loc": "Downtown",
+        "lat": 51.50700010245086,
+        "lng": -0.12549255207631296,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Temple",
+        "img": "https://picsum.photos/seed/place_london_11/800/600",
+        "desc": "A highly recommended temple providing unique insights into London's culture and beauty.",
+        "fee": "2165",
+        "loc": "Downtown",
+        "lat": 51.511936061825615,
+        "lng": -0.12713199111251938,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Monument",
+        "img": "https://picsum.photos/seed/place_london_12/800/600",
+        "desc": "A highly recommended monument providing unique insights into London's culture and beauty.",
+        "fee": "2208",
+        "loc": "Downtown",
+        "lat": 51.48434127603763,
+        "lng": -0.09943657806816389,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Museum",
+        "img": "https://picsum.photos/seed/place_london_13/800/600",
+        "desc": "A highly recommended museum providing unique insights into London's culture and beauty.",
+        "fee": "3223",
+        "loc": "Downtown",
+        "lat": 51.50883971315035,
+        "lng": -0.11962653442488204,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "London National Temple",
+        "img": "https://picsum.photos/seed/place_london_14/800/600",
+        "desc": "A highly recommended temple providing unique insights into London's culture and beauty.",
+        "fee": "2199",
+        "loc": "Downtown",
+        "lat": 51.5166867204379,
+        "lng": -0.10460473862235242,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "maldives": {
+    "heroImg": "https://picsum.photos/seed/hero_maldives/800/600",
+    "centerLat": 3.2028,
+    "centerLng": 73.2207,
+    "currency": {
+      "from": "MVR",
+      "symbol": "Rf",
+      "rate": 5.4,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Maldives: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Maldives adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Maldives National Lake",
+            "desc": "A highly recommended lake providing unique insights into Maldives's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "12.53",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_maldives_0/800/600",
+            "lat": 3.204667085550766,
+            "lng": 73.19721843191125
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Maldives Local",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "104.74",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_maldives_0/800/600",
+            "lat": 3.181394400287275,
+            "lng": 73.21867831538901
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz Maldives",
+        "price": "11160",
+        "rating": "4.6",
+        "lat": 3.1936376603462437,
+        "lng": 73.21501900188704,
+        "img": "https://picsum.photos/seed/hotel_maldives_0/800/600",
+        "distance": "4.8 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Maldives",
+        "price": "31509",
+        "rating": "4.2",
+        "lat": 3.2126383567776187,
+        "lng": 73.23804581413654,
+        "img": "https://picsum.photos/seed/hotel_maldives_1/800/600",
+        "distance": "1.1 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Maldives",
+        "price": "19386",
+        "rating": "4.3",
+        "lat": 3.2000188173619555,
+        "lng": 73.19475163310103,
+        "img": "https://picsum.photos/seed/hotel_maldives_2/800/600",
+        "distance": "4.3 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Maldives",
+        "price": "12643",
+        "rating": "4.1",
+        "lat": 3.218944733101334,
+        "lng": 73.22719985444057,
+        "img": "https://picsum.photos/seed/hotel_maldives_3/800/600",
+        "distance": "2.3 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Maldives",
+        "price": "10213",
+        "rating": "5.0",
+        "lat": 3.187978608174977,
+        "lng": 73.22905830392536,
+        "img": "https://picsum.photos/seed/hotel_maldives_4/800/600",
+        "distance": "3.8 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Maldives",
+        "price": "36677",
+        "rating": "4.7",
+        "lat": 3.20748463662782,
+        "lng": 73.22226500698937,
+        "img": "https://picsum.photos/seed/hotel_maldives_5/800/600",
+        "distance": "2.5 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Maldives",
+        "price": "36812",
+        "rating": "4.5",
+        "lat": 3.225606456943525,
+        "lng": 73.19676070862033,
+        "img": "https://picsum.photos/seed/hotel_maldives_6/800/600",
+        "distance": "2.0 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Maldives",
+        "price": "48884",
+        "rating": "4.6",
+        "lat": 3.183158324795901,
+        "lng": 73.2289176225417,
+        "img": "https://picsum.photos/seed/hotel_maldives_7/800/600",
+        "distance": "4.4 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Maldives",
+        "price": "48865",
+        "rating": "4.8",
+        "lat": 3.2236395238543154,
+        "lng": 73.23401569968726,
+        "img": "https://picsum.photos/seed/hotel_maldives_8/800/600",
+        "distance": "3.3 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Maldives",
+        "price": "33024",
+        "rating": "4.3",
+        "lat": 3.2148754685978655,
+        "lng": 73.22415457512163,
+        "img": "https://picsum.photos/seed/hotel_maldives_9/800/600",
+        "distance": "3.8 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Maldives",
+        "price": "16126",
+        "rating": "4.6",
+        "lat": 3.199519857939345,
+        "lng": 73.24010069953172,
+        "img": "https://picsum.photos/seed/hotel_maldives_10/800/600",
+        "distance": "2.9 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Maldives",
+        "price": "14519",
+        "rating": "4.2",
+        "lat": 3.2251256767284286,
+        "lng": 73.23926435195408,
+        "img": "https://picsum.photos/seed/hotel_maldives_11/800/600",
+        "distance": "1.5 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Maldives",
+        "price": "23942",
+        "rating": "4.6",
+        "lat": 3.221337903030132,
+        "lng": 73.20304612019942,
+        "img": "https://picsum.photos/seed/hotel_maldives_12/800/600",
+        "distance": "1.6 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Maldives",
+        "price": "27519",
+        "rating": "4.8",
+        "lat": 3.192636513233112,
+        "lng": 73.23179509495637,
+        "img": "https://picsum.photos/seed/hotel_maldives_13/800/600",
+        "distance": "4.3 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Maldives",
+        "price": "22591",
+        "rating": "4.7",
+        "lat": 3.2200135006757233,
+        "lng": 73.2358945983739,
+        "img": "https://picsum.photos/seed/hotel_maldives_14/800/600",
+        "distance": "4.1 km to center",
+        "desc": "Luxurious stay located in the heart of Maldives. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_maldives_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_maldives_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_maldives_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le Maldives Local",
+        "type": "Local Cuisine",
+        "lat": 3.181394400287275,
+        "lng": 73.21867831538901,
+        "img": "https://picsum.photos/seed/rest_maldives_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10474",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Maldives Local",
+        "type": "Local Cuisine",
+        "lat": 3.1917036038606743,
+        "lng": 73.19514297984207,
+        "img": "https://picsum.photos/seed/rest_maldives_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "11637",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Maldives Fine",
+        "type": "Fine Dining",
+        "lat": 3.2093870948616474,
+        "lng": 73.23610212870827,
+        "img": "https://picsum.photos/seed/rest_maldives_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4920",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Maldives Casual",
+        "type": "Casual",
+        "lat": 3.2276750112725985,
+        "lng": 73.23001913157363,
+        "img": "https://picsum.photos/seed/rest_maldives_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5163",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Maldives Halal",
+        "type": "Halal",
+        "lat": 3.220064805226229,
+        "lng": 73.19564607602182,
+        "img": "https://picsum.photos/seed/rest_maldives_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8836",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Maldives Vegan",
+        "type": "Vegan",
+        "lat": 3.206257384331744,
+        "lng": 73.21988057702302,
+        "img": "https://picsum.photos/seed/rest_maldives_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5430",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Maldives Halal",
+        "type": "Halal",
+        "lat": 3.2313807237183587,
+        "lng": 73.21500270758213,
+        "img": "https://picsum.photos/seed/rest_maldives_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6182",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Maldives Halal",
+        "type": "Halal",
+        "lat": 3.2264377713925945,
+        "lng": 73.22974884453782,
+        "img": "https://picsum.photos/seed/rest_maldives_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10874",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Maldives Family",
+        "type": "Family Style",
+        "lat": 3.2308903844725188,
+        "lng": 73.19368338242761,
+        "img": "https://picsum.photos/seed/rest_maldives_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2774",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Maldives Halal",
+        "type": "Halal",
+        "lat": 3.1994180761050126,
+        "lng": 73.2292962851789,
+        "img": "https://picsum.photos/seed/rest_maldives_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4656",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Maldives Family",
+        "type": "Family Style",
+        "lat": 3.231793712121053,
+        "lng": 73.21285761352564,
+        "img": "https://picsum.photos/seed/rest_maldives_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8335",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Maldives Family",
+        "type": "Family Style",
+        "lat": 3.196351213674257,
+        "lng": 73.24685554449606,
+        "img": "https://picsum.photos/seed/rest_maldives_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7505",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Maldives Vegan",
+        "type": "Vegan",
+        "lat": 3.1763446366105024,
+        "lng": 73.2393760089245,
+        "img": "https://picsum.photos/seed/rest_maldives_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6896",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Maldives Steakhouse",
+        "type": "Steakhouse",
+        "lat": 3.2292023841113346,
+        "lng": 73.20815203098836,
+        "img": "https://picsum.photos/seed/rest_maldives_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6668",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Maldives Seafood",
+        "type": "Seafood",
+        "lat": 3.2080976561628884,
+        "lng": 73.23513321963479,
+        "img": "https://picsum.photos/seed/rest_maldives_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4873",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Maldives Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "Maldives National Lake",
+        "img": "https://picsum.photos/seed/place_maldives_0/800/600",
+        "desc": "A highly recommended lake providing unique insights into Maldives's culture and beauty.",
+        "fee": "1253",
+        "loc": "Downtown",
+        "lat": 3.204667085550766,
+        "lng": 73.19721843191125,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Palace",
+        "img": "https://picsum.photos/seed/place_maldives_1/800/600",
+        "desc": "A highly recommended palace providing unique insights into Maldives's culture and beauty.",
+        "fee": "2088",
+        "loc": "Downtown",
+        "lat": 3.216289307898232,
+        "lng": 73.22727005265801,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Viewpoint",
+        "img": "https://picsum.photos/seed/place_maldives_2/800/600",
+        "desc": "A highly recommended viewpoint providing unique insights into Maldives's culture and beauty.",
+        "fee": "3428",
+        "loc": "Downtown",
+        "lat": 3.229231154515025,
+        "lng": 73.24080358881879,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Temple",
+        "img": "https://picsum.photos/seed/place_maldives_3/800/600",
+        "desc": "A highly recommended temple providing unique insights into Maldives's culture and beauty.",
+        "fee": "799",
+        "loc": "Downtown",
+        "lat": 3.1853934054855335,
+        "lng": 73.23758336499573,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Gallery",
+        "img": "https://picsum.photos/seed/place_maldives_4/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Maldives's culture and beauty.",
+        "fee": "3399",
+        "loc": "Downtown",
+        "lat": 3.2010647085190906,
+        "lng": 73.19292280546108,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Tower",
+        "img": "https://picsum.photos/seed/place_maldives_5/800/600",
+        "desc": "A highly recommended tower providing unique insights into Maldives's culture and beauty.",
+        "fee": "2863",
+        "loc": "Downtown",
+        "lat": 3.201737196366229,
+        "lng": 73.19173274868831,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Tower",
+        "img": "https://picsum.photos/seed/place_maldives_6/800/600",
+        "desc": "A highly recommended tower providing unique insights into Maldives's culture and beauty.",
+        "fee": "548",
+        "loc": "Downtown",
+        "lat": 3.2140152301617055,
+        "lng": 73.19222572710596,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Palace",
+        "img": "https://picsum.photos/seed/place_maldives_7/800/600",
+        "desc": "A highly recommended palace providing unique insights into Maldives's culture and beauty.",
+        "fee": "655",
+        "loc": "Downtown",
+        "lat": 3.218679048038523,
+        "lng": 73.2113133592451,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Museum",
+        "img": "https://picsum.photos/seed/place_maldives_8/800/600",
+        "desc": "A highly recommended museum providing unique insights into Maldives's culture and beauty.",
+        "fee": "3371",
+        "loc": "Downtown",
+        "lat": 3.1977570879363197,
+        "lng": 73.21118912691696,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Gallery",
+        "img": "https://picsum.photos/seed/place_maldives_9/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Maldives's culture and beauty.",
+        "fee": "1880",
+        "loc": "Downtown",
+        "lat": 3.185675084127732,
+        "lng": 73.21261580465135,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Square",
+        "img": "https://picsum.photos/seed/place_maldives_10/800/600",
+        "desc": "A highly recommended square providing unique insights into Maldives's culture and beauty.",
+        "fee": "3256",
+        "loc": "Downtown",
+        "lat": 3.22667259538902,
+        "lng": 73.19999923242693,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Gallery",
+        "img": "https://picsum.photos/seed/place_maldives_11/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Maldives's culture and beauty.",
+        "fee": "964",
+        "loc": "Downtown",
+        "lat": 3.178865725824473,
+        "lng": 73.20658663300284,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Beach",
+        "img": "https://picsum.photos/seed/place_maldives_12/800/600",
+        "desc": "A highly recommended beach providing unique insights into Maldives's culture and beauty.",
+        "fee": "2775",
+        "loc": "Downtown",
+        "lat": 3.2215605368952303,
+        "lng": 73.23824272541029,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Tower",
+        "img": "https://picsum.photos/seed/place_maldives_13/800/600",
+        "desc": "A highly recommended tower providing unique insights into Maldives's culture and beauty.",
+        "fee": "1402",
+        "loc": "Downtown",
+        "lat": 3.2194330310052397,
+        "lng": 73.20092082304407,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Maldives National Gallery",
+        "img": "https://picsum.photos/seed/place_maldives_14/800/600",
+        "desc": "A highly recommended gallery providing unique insights into Maldives's culture and beauty.",
+        "fee": "1758",
+        "loc": "Downtown",
+        "lat": 3.223954023553141,
+        "lng": 73.23552459151044,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      }
+    ]
+  },
+  "switzerland": {
+    "heroImg": "https://picsum.photos/seed/hero_switzerland/800/600",
+    "centerLat": 47.3769,
+    "centerLng": 8.5417,
+    "currency": {
+      "from": "CHF",
+      "symbol": "CHF",
+      "rate": 92.1,
+      "tip": "Check local customs for tipping."
+    },
+    "weather": [
+      {
+        "day": "Mon",
+        "temp": "22°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      },
+      {
+        "day": "Tue",
+        "temp": "24°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud",
+        "state": "cloudy"
+      },
+      {
+        "day": "Wed",
+        "temp": "19°C",
+        "icon": "rainy",
+        "desc": "fa-cloud-showers-heavy",
+        "state": "rainy"
+      },
+      {
+        "day": "Thu",
+        "temp": "21°C",
+        "icon": "cloudy",
+        "desc": "fa-cloud-sun",
+        "state": "cloudy"
+      },
+      {
+        "day": "Fri",
+        "temp": "25°C",
+        "icon": "sunny",
+        "desc": "fa-sun",
+        "state": "sunny"
+      }
+    ],
+    "packing": [
+      "Comfortable Walking Shoes",
+      "Light Jacket",
+      "Power Bank",
+      "Universal Adapter",
+      "Travel Camera"
+    ],
+    "events": "Upcoming events in Switzerland: Local Festival | City Marathon | Food Tasting Week",
+    "etiquette": "Respect local customs. Keep your voice down in public transport.",
+    "flightTrend": {
+      "status": "Stable",
+      "desc": "Prices are stable for these dates.",
+      "icon": "fa-arrow-right"
+    },
+    "itinerary": [
+      {
+        "dayLabel": "Day 1: Arrival & City Highlights",
+        "subtitle": "Kick off your Switzerland adventure with iconic sights.",
+        "totalTime": "6 hrs",
+        "estCost": "50",
+        "activities": [
+          {
+            "time": "10:00 AM",
+            "place": "Switzerland National Market",
+            "desc": "A highly recommended market providing unique insights into Switzerland's culture and beauty.",
+            "duration": "2 hrs",
+            "dist": "1 km",
+            "transport": "Walk",
+            "cost": "12.3",
+            "icon": "fa-landmark",
+            "img": "https://picsum.photos/seed/place_switzerland_0/800/600",
+            "lat": 47.37280084923728,
+            "lng": 8.5707772571929
+          },
+          {
+            "time": "01:00 PM",
+            "place": "Le Switzerland Steakhouse",
+            "desc": "Lunch at local favorite.",
+            "duration": "1 hr",
+            "dist": "0.5 km",
+            "transport": "Walk",
+            "cost": "66.27",
+            "icon": "fa-utensils",
+            "img": "https://picsum.photos/seed/rest_switzerland_0/800/600",
+            "lat": 47.36109630956869,
+            "lng": 8.568205710219523
+          }
+        ]
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Ritz Switzerland",
+        "price": "15173",
+        "rating": "4.6",
+        "lat": 47.40282255052688,
+        "lng": 8.51460537846802,
+        "img": "https://picsum.photos/seed/hotel_switzerland_0/800/600",
+        "distance": "0.8 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_0_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_0_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_0_bath/800/600"
+        ]
+      },
+      {
+        "name": "Grand Switzerland",
+        "price": "16973",
+        "rating": "4.5",
+        "lat": 47.384357200214076,
+        "lng": 8.571278744953958,
+        "img": "https://picsum.photos/seed/hotel_switzerland_1/800/600",
+        "distance": "1.1 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_1_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_1_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_1_bath/800/600"
+        ]
+      },
+      {
+        "name": "Four Seasons Switzerland",
+        "price": "29395",
+        "rating": "5.0",
+        "lat": 47.34722337961842,
+        "lng": 8.512433367499607,
+        "img": "https://picsum.photos/seed/hotel_switzerland_2/800/600",
+        "distance": "3.8 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_2_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_2_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_2_bath/800/600"
+        ]
+      },
+      {
+        "name": "St. Regis Switzerland",
+        "price": "44273",
+        "rating": "4.7",
+        "lat": 47.40397613318903,
+        "lng": 8.568618612133696,
+        "img": "https://picsum.photos/seed/hotel_switzerland_3/800/600",
+        "distance": "1.6 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_3_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_3_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_3_bath/800/600"
+        ]
+      },
+      {
+        "name": "Waldorf Astoria Switzerland",
+        "price": "41418",
+        "rating": "4.1",
+        "lat": 47.39707935411814,
+        "lng": 8.515634146811204,
+        "img": "https://picsum.photos/seed/hotel_switzerland_4/800/600",
+        "distance": "3.9 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_4_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_4_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_4_bath/800/600"
+        ]
+      },
+      {
+        "name": "Park Hyatt Switzerland",
+        "price": "46212",
+        "rating": "4.7",
+        "lat": 47.367867475508675,
+        "lng": 8.570812105674557,
+        "img": "https://picsum.photos/seed/hotel_switzerland_5/800/600",
+        "distance": "1.2 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_5_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_5_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_5_bath/800/600"
+        ]
+      },
+      {
+        "name": "Rosewood Switzerland",
+        "price": "18758",
+        "rating": "4.6",
+        "lat": 47.37532544301368,
+        "lng": 8.565718742821156,
+        "img": "https://picsum.photos/seed/hotel_switzerland_6/800/600",
+        "distance": "3.5 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_6_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_6_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_6_bath/800/600"
+        ]
+      },
+      {
+        "name": "Aman Switzerland",
+        "price": "40622",
+        "rating": "4.6",
+        "lat": 47.38277797694587,
+        "lng": 8.536135476797092,
+        "img": "https://picsum.photos/seed/hotel_switzerland_7/800/600",
+        "distance": "3.4 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_7_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_7_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_7_bath/800/600"
+        ]
+      },
+      {
+        "name": "Bvlgari Switzerland",
+        "price": "13014",
+        "rating": "4.9",
+        "lat": 47.39867676122143,
+        "lng": 8.54644434781757,
+        "img": "https://picsum.photos/seed/hotel_switzerland_8/800/600",
+        "distance": "0.7 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_8_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_8_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_8_bath/800/600"
+        ]
+      },
+      {
+        "name": "Fairmont Switzerland",
+        "price": "12639",
+        "rating": "4.1",
+        "lat": 47.357280319820624,
+        "lng": 8.549927620114524,
+        "img": "https://picsum.photos/seed/hotel_switzerland_9/800/600",
+        "distance": "1.0 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_9_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_9_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_9_bath/800/600"
+        ]
+      },
+      {
+        "name": "Shangri-La Switzerland",
+        "price": "28365",
+        "rating": "4.4",
+        "lat": 47.373443028742834,
+        "lng": 8.551794675385404,
+        "img": "https://picsum.photos/seed/hotel_switzerland_10/800/600",
+        "distance": "3.4 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_10_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_10_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_10_bath/800/600"
+        ]
+      },
+      {
+        "name": "InterContinental Switzerland",
+        "price": "43386",
+        "rating": "4.2",
+        "lat": 47.356054751260146,
+        "lng": 8.54256739836293,
+        "img": "https://picsum.photos/seed/hotel_switzerland_11/800/600",
+        "distance": "2.3 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_11_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_11_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_11_bath/800/600"
+        ]
+      },
+      {
+        "name": "Kempinski Switzerland",
+        "price": "36112",
+        "rating": "4.1",
+        "lat": 47.348590122756754,
+        "lng": 8.521996452142481,
+        "img": "https://picsum.photos/seed/hotel_switzerland_12/800/600",
+        "distance": "4.6 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_12_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_12_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_12_bath/800/600"
+        ]
+      },
+      {
+        "name": "Banyan Tree Switzerland",
+        "price": "49030",
+        "rating": "5.0",
+        "lat": 47.36372264729003,
+        "lng": 8.534593639567982,
+        "img": "https://picsum.photos/seed/hotel_switzerland_13/800/600",
+        "distance": "4.6 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_13_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_13_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_13_bath/800/600"
+        ]
+      },
+      {
+        "name": "Mandarin Oriental Switzerland",
+        "price": "43822",
+        "rating": "5.0",
+        "lat": 47.352306332055946,
+        "lng": 8.562074032268278,
+        "img": "https://picsum.photos/seed/hotel_switzerland_14/800/600",
+        "distance": "0.9 km to center",
+        "desc": "Luxurious stay located in the heart of Switzerland. Features premium amenities and world-class service.",
+        "checkIn": "03:00 PM",
+        "checkOut": "12:00 PM",
+        "rooms": "Deluxe, Suite, Premium",
+        "amenities": [
+          "Free WiFi",
+          "Pool",
+          "Spa",
+          "Gym",
+          "Valet"
+        ],
+        "gallery": [
+          "https://picsum.photos/seed/hotel_switzerland_14_ext/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_14_bed/800/600",
+          "https://picsum.photos/seed/hotel_switzerland_14_bath/800/600"
+        ]
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le Switzerland Steakhouse",
+        "type": "Steakhouse",
+        "lat": 47.36109630956869,
+        "lng": 8.568205710219523,
+        "img": "https://picsum.photos/seed/rest_switzerland_0/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "6627",
+        "tags": [
+          "Steakhouse",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "The Switzerland Fine",
+        "type": "Fine Dining",
+        "lat": 47.364809488264704,
+        "lng": 8.515234108689658,
+        "img": "https://picsum.photos/seed/rest_switzerland_1/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "3315",
+        "tags": [
+          "Fine Dining",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bistro Switzerland Vegan",
+        "type": "Vegan",
+        "lat": 47.34805449581884,
+        "lng": 8.540316569322323,
+        "img": "https://picsum.photos/seed/rest_switzerland_2/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4810",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Brasserie Switzerland Vegan",
+        "type": "Vegan",
+        "lat": 47.361605637736176,
+        "lng": 8.55666637422312,
+        "img": "https://picsum.photos/seed/rest_switzerland_3/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2865",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Trattoria Switzerland Family",
+        "type": "Family Style",
+        "lat": 47.35071810960001,
+        "lng": 8.518951914235164,
+        "img": "https://picsum.photos/seed/rest_switzerland_4/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10830",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Cafe Switzerland Family",
+        "type": "Family Style",
+        "lat": 47.35196065875244,
+        "lng": 8.562241122860568,
+        "img": "https://picsum.photos/seed/rest_switzerland_5/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2565",
+        "tags": [
+          "Family Style",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Tavern Switzerland Vegan",
+        "type": "Vegan",
+        "lat": 47.360433594554515,
+        "lng": 8.55137471804157,
+        "img": "https://picsum.photos/seed/rest_switzerland_6/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "7162",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Osteria Switzerland Halal",
+        "type": "Halal",
+        "lat": 47.401753378817126,
+        "lng": 8.54334812739457,
+        "img": "https://picsum.photos/seed/rest_switzerland_7/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "5290",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Ristorante Switzerland Casual",
+        "type": "Casual",
+        "lat": 47.379023418112716,
+        "lng": 8.537219685944926,
+        "img": "https://picsum.photos/seed/rest_switzerland_8/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10086",
+        "tags": [
+          "Casual",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Izakaya Switzerland Vegan",
+        "type": "Vegan",
+        "lat": 47.36639169674181,
+        "lng": 8.552859528746456,
+        "img": "https://picsum.photos/seed/rest_switzerland_9/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2098",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Steakhouse Switzerland Seafood",
+        "type": "Seafood",
+        "lat": 47.35978031355161,
+        "lng": 8.551453532053673,
+        "img": "https://picsum.photos/seed/rest_switzerland_10/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "4260",
+        "tags": [
+          "Seafood",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Grill Switzerland Halal",
+        "type": "Halal",
+        "lat": 47.37198048942084,
+        "lng": 8.530762044719344,
+        "img": "https://picsum.photos/seed/rest_switzerland_11/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "2460",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Kitchen Switzerland Halal",
+        "type": "Halal",
+        "lat": 47.36774003349383,
+        "lng": 8.523608853404737,
+        "img": "https://picsum.photos/seed/rest_switzerland_12/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10025",
+        "tags": [
+          "Halal",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Bar Switzerland Vegan",
+        "type": "Vegan",
+        "lat": 47.35332168534976,
+        "lng": 8.552799098733919,
+        "img": "https://picsum.photos/seed/rest_switzerland_13/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "10312",
+        "tags": [
+          "Vegan",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      },
+      {
+        "name": "Lounge Switzerland Local",
+        "type": "Local Cuisine",
+        "lat": 47.40180625151031,
+        "lng": 8.566236961342115,
+        "img": "https://picsum.photos/seed/rest_switzerland_14/800/600",
+        "locText": "City Center",
+        "travel": "10 min walk",
+        "timing": "12:00 PM - 10:30 PM",
+        "cost": "8487",
+        "tags": [
+          "Local Cuisine",
+          "Popular"
+        ],
+        "menu": [
+          {
+            "name": "Signature Switzerland Dish",
+            "desc": "Chef’s special with local ingredients",
+            "price": "$45",
+            "tags": []
+          },
+          {
+            "name": "Classic Dessert",
+            "desc": "Rich and flavorful",
+            "price": "$15",
+            "tags": [
+              "Vegetarian"
+            ]
+          }
+        ],
+        "reviews": "\"Absolutely fantastic experience.\" - FoodGuide"
+      }
+    ],
+    "places": [
+      {
+        "name": "Switzerland National Market",
+        "img": "https://picsum.photos/seed/place_switzerland_0/800/600",
+        "desc": "A highly recommended market providing unique insights into Switzerland's culture and beauty.",
+        "fee": "1230",
+        "loc": "Downtown",
+        "lat": 47.37280084923728,
+        "lng": 8.5707772571929,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Bridge",
+        "img": "https://picsum.photos/seed/place_switzerland_1/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Switzerland's culture and beauty.",
+        "fee": "2505",
+        "loc": "Downtown",
+        "lat": 47.38952407474904,
+        "lng": 8.524995256459425,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Museum",
+        "img": "https://picsum.photos/seed/place_switzerland_2/800/600",
+        "desc": "A highly recommended museum providing unique insights into Switzerland's culture and beauty.",
+        "fee": "753",
+        "loc": "Downtown",
+        "lat": 47.347036364253704,
+        "lng": 8.534729566956004,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Market",
+        "img": "https://picsum.photos/seed/place_switzerland_3/800/600",
+        "desc": "A highly recommended market providing unique insights into Switzerland's culture and beauty.",
+        "fee": "2578",
+        "loc": "Downtown",
+        "lat": 47.37041493638148,
+        "lng": 8.51653712001761,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Bridge",
+        "img": "https://picsum.photos/seed/place_switzerland_4/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Switzerland's culture and beauty.",
+        "fee": "1046",
+        "loc": "Downtown",
+        "lat": 47.40529296097381,
+        "lng": 8.550549721452391,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Palace",
+        "img": "https://picsum.photos/seed/place_switzerland_5/800/600",
+        "desc": "A highly recommended palace providing unique insights into Switzerland's culture and beauty.",
+        "fee": "2535",
+        "loc": "Downtown",
+        "lat": 47.36876778186377,
+        "lng": 8.554650398206496,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Mountain",
+        "img": "https://picsum.photos/seed/place_switzerland_6/800/600",
+        "desc": "A highly recommended mountain providing unique insights into Switzerland's culture and beauty.",
+        "fee": "2964",
+        "loc": "Downtown",
+        "lat": 47.38113072207057,
+        "lng": 8.528481167254775,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Palace",
+        "img": "https://picsum.photos/seed/place_switzerland_7/800/600",
+        "desc": "A highly recommended palace providing unique insights into Switzerland's culture and beauty.",
+        "fee": "3347",
+        "loc": "Downtown",
+        "lat": 47.36922959668218,
+        "lng": 8.566879840473014,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Mountain",
+        "img": "https://picsum.photos/seed/place_switzerland_8/800/600",
+        "desc": "A highly recommended mountain providing unique insights into Switzerland's culture and beauty.",
+        "fee": "1890",
+        "loc": "Downtown",
+        "lat": 47.36918995431416,
+        "lng": 8.543942634504768,
+        "crowd": "high",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Park",
+        "img": "https://picsum.photos/seed/place_switzerland_9/800/600",
+        "desc": "A highly recommended park providing unique insights into Switzerland's culture and beauty.",
+        "fee": "579",
+        "loc": "Downtown",
+        "lat": 47.37669670736918,
+        "lng": 8.544863371231298,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Beach",
+        "img": "https://picsum.photos/seed/place_switzerland_10/800/600",
+        "desc": "A highly recommended beach providing unique insights into Switzerland's culture and beauty.",
+        "fee": "2004",
+        "loc": "Downtown",
+        "lat": 47.379108671459754,
+        "lng": 8.541911372645208,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Museum",
+        "img": "https://picsum.photos/seed/place_switzerland_11/800/600",
+        "desc": "A highly recommended museum providing unique insights into Switzerland's culture and beauty.",
+        "fee": "1369",
+        "loc": "Downtown",
+        "lat": 47.39167594925414,
+        "lng": 8.516602806170006,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Bridge",
+        "img": "https://picsum.photos/seed/place_switzerland_12/800/600",
+        "desc": "A highly recommended bridge providing unique insights into Switzerland's culture and beauty.",
+        "fee": "757",
+        "loc": "Downtown",
+        "lat": 47.363198684493454,
+        "lng": 8.562731271155464,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Lake",
+        "img": "https://picsum.photos/seed/place_switzerland_13/800/600",
+        "desc": "A highly recommended lake providing unique insights into Switzerland's culture and beauty.",
+        "fee": "1155",
+        "loc": "Downtown",
+        "lat": 47.38799913010801,
+        "lng": 8.53208319793915,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      },
+      {
+        "name": "Switzerland National Viewpoint",
+        "img": "https://picsum.photos/seed/place_switzerland_14/800/600",
+        "desc": "A highly recommended viewpoint providing unique insights into Switzerland's culture and beauty.",
+        "fee": "3488",
+        "loc": "Downtown",
+        "lat": 47.378680856948634,
+        "lng": 8.528544699330082,
+        "crowd": "medium",
+        "tour": "10:00 AM"
+      }
     ]
   }
 };
@@ -244,7 +13597,7 @@ function renderPremiumDashboard(data, destinationKey, startdate, enddate, travel
           <div style="display:flex; gap:5px; margin:10px 0;">
             <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem;" onclick="routeTo(${p.lat}, ${p.lng}, '${p.name.replace(/'/g, "\\'")}')">Route</button>
             <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem; background: var(--gold-dim); border-color: var(--gold); color: var(--gold);" onclick="showPhotoSpots(${p.lat}, ${p.lng}, '${p.name.replace(/'/g, "\\'")}')"><i class="fas fa-camera"></i> Spots</button>
-            <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem;" onclick="window.location.href='booking.html'"><i class="fas fa-ticket-alt"></i> Book</button>
+            <button class="item-btn" style="flex:1; padding:5px; font-size:0.7rem;" onclick="window.location.href='booking.html?tour=' + encodeURIComponent('${p.name.replace(/'/g, \"\\\\'\")}')"><i class="fas fa-ticket-alt"></i> Book</button>
           </div>
           <button class="item-btn" style="border-color:#6C63FF; color:#6C63FF; width:100%;" onclick="addToCustom('activities', 'Activity', '${p.name.replace(/'/g, "\\'")}', ${p.fee})"><i class="fas fa-plus"></i> Add to Itinerary</button>
         </div>
@@ -1009,7 +14362,8 @@ function routeTo(lat, lng, name) {
   if (window.photoSpotLayer) mapInstance.removeLayer(window.photoSpotLayer);
   
   document.getElementById('realMap').scrollIntoView({behavior: 'smooth', block: 'center'});
-
+  
+  mapInstance.flyTo([lat, lng], 15, { animate: true, duration: 1.5 });
   routingControl = L.Routing.control({
     waypoints: [ L.latLng(currentLocData.centerLat, currentLocData.centerLng), L.latLng(lat, lng) ],
     routeWhileDragging: false,
