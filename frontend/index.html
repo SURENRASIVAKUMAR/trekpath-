@@ -2004,7 +2004,8 @@
       }
 
       // Fetch dynamic destinations
-      fetch('http://localhost:5000/api/destinations')
+      const apiUrl = window.location.port === '5000' || window.location.port === '' ? '/api/destinations' : 'http://localhost:5000/api/destinations';
+      fetch(apiUrl)
         .then(res => res.json())
         .then(data => {
           const trendingContainer = document.getElementById('trending');
